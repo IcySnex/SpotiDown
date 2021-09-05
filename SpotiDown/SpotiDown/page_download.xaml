@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:sd="clr-namespace:SpotiDown"
+             x:Class="SpotiDown.page_download"
+             BackgroundColor="#1E1527" NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+            <Grid Opacity="0.5" MinimumHeightRequest="50" VerticalOptions="Start" BackgroundColor="#34293F" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="13" xct:ShadowEffect.OffsetY="-10">
+                <ImageButton Clicked="btn_back_click" BackgroundColor="#34293F" Source="back.png" WidthRequest="30" HeightRequest="30" HorizontalOptions="Start" VerticalOptions="Center" Margin="10"/>
+                <Frame HeightRequest="30" WidthRequest="30" CornerRadius="200" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,10,0" Padding="1" BackgroundColor="Black" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="13">
+                    <Image Source="icon.png"/>
+                </Frame>
+            </Grid>
+            <Grid VerticalOptions="FillAndExpand">
+                <Grid BackgroundColor="#8F24ED">
+                    <StackLayout Spacing="0">
+                        <Grid>
+                            <Image x:Name="img_background" Source="unknown.png" Aspect="AspectFill" HeightRequest="200" Opacity="0.7"/>
+                            <Rectangle VerticalOptions="FillAndExpand">
+                                <Rectangle.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="Transparent" Offset="0" />
+                                        <GradientStop Color="#1E1527" Offset="0.9" />
+                                    </LinearGradientBrush>
+                                </Rectangle.Background>
+                            </Rectangle>
+                        </Grid>
+                        <Rectangle BackgroundColor="#1E1527" VerticalOptions="FillAndExpand"/>
+                    </StackLayout>
+                </Grid>
+                <ScrollView>
+                    <StackLayout>
+                        <StackLayout Spacing="5" Margin="0,60,0,0" HorizontalOptions="Center">
+                            <Frame HeightRequest="140" WidthRequest="140" HorizontalOptions="Center" Padding="0" CornerRadius="22" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="30">
+                                <Image x:Name="img_image" Source="unknown.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <Label x:Name="lb_name" Text="Unknown" FontSize="25" HorizontalOptions="Center" FontAttributes="Bold" TextColor="#542F84" LineBreakMode="TailTruncation" Margin="15,0"/>
+                        </StackLayout>
+                        <Frame Margin="0,15,0,0" HeightRequest="32" WidthRequest="141" VerticalOptions="Start" HorizontalOptions="Center" Padding="0" CornerRadius="22" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="3">
+                            <Frame.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#8F24ED" Offset="0.0" />
+                                    <GradientStop Color="#650EF8" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Frame.Background>
+                            <StackLayout Margin="0" Padding="3,3,3,3">
+                                <Button Clicked="btn_download_click" HeightRequest="26" VerticalOptions="Center" BackgroundColor="#20112E" CornerRadius="22" Text="Download All" FontSize="15" Padding="3" TextColor="#8F24ED"/>
+                            </StackLayout>
+                        </Frame>
+                        <StackLayout x:Name="sl_trackcontainer" ChildRemoved="sl_trackcontainer_ChildRemoved" Spacing="0" Margin="0,20,0,0"/>
+                    </StackLayout>
+                </ScrollView>
+                <Rectangle HeightRequest="35" VerticalOptions="Start">
+                    <Rectangle.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#1E1527" Offset="0" />
+                            <GradientStop Color="Transparent" Offset="1" />
+                        </LinearGradientBrush>
+                    </Rectangle.Background>
+                </Rectangle>
+                <Rectangle HeightRequest="35" VerticalOptions="End">
+                    <Rectangle.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="Transparent" Offset="0" />
+                            <GradientStop Color="#1E1527" Offset="1" />
+                        </LinearGradientBrush>
+                    </Rectangle.Background>
+                </Rectangle>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

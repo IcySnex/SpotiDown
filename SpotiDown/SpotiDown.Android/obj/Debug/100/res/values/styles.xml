@@ -1,0 +1,4 @@
+<resources><style name="MainTheme" parent="MainTheme.Base"><item name="colorPrimary">#650EF8</item>--&gt;
+		<item name="colorPrimaryDark">#34293F</item>--&gt;
+		<item name="colorAccent">#8F24ED</item>--&gt;
+	</style><style name="MyTheme.Splash" parent="Theme.AppCompat.Light.NoActionBar"><item name="android:windowBackground">@drawable/splash_screen</item><item name="android:windowNoTitle">true</item><item name="android:windowFullscreen">true</item><item name="android:windowContentOverlay">@null</item><item name="android:windowActionBar">true</item></style></resources>

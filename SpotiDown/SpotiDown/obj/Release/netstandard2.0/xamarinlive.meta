@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XamlProjectMeta xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Files>
+    <XamlFileMeta>
+      <FilePath>C:\Users\Kevin\CleanDesktop\SpotiDown\SpotiDown\SpotiDown\App.xaml</FilePath>
+      <Hash>87-A1-66-65-D7-B6-7F-28-23-BA-8F-AF-1C-14-4F-33</Hash>
+      <Properties />
+    </XamlFileMeta>
+    <XamlFileMeta>
+      <FilePath>C:\Users\Kevin\CleanDesktop\SpotiDown\SpotiDown\SpotiDown\cw_track.xaml</FilePath>
+      <Hash>60-1F-16-A0-80-D1-88-48-FD-CE-9D-04-7A-C8-EA-3C</Hash>
+      <Properties />
+    </XamlFileMeta>
+    <XamlFileMeta>
+      <FilePath>C:\Users\Kevin\CleanDesktop\SpotiDown\SpotiDown\SpotiDown\page_download.xaml</FilePath>
+      <Hash>8B-61-58-51-DC-20-4C-BB-02-E7-F9-06-0C-98-42-1E</Hash>
+      <Properties>
+        <string>BackgroundColor</string>
+        <string>NavigationPage.HasNavigationBar</string>
+      </Properties>
+    </XamlFileMeta>
+    <XamlFileMeta>
+      <FilePath>C:\Users\Kevin\CleanDesktop\SpotiDown\SpotiDown\SpotiDown\page_loading.xaml</FilePath>
+      <Hash>23-78-33-FD-8C-4C-4F-37-64-03-AF-31-5C-9F-C6-8C</Hash>
+      <Properties>
+        <string>BackgroundColor</string>
+        <string>NavigationPage.HasNavigationBar</string>
+      </Properties>
+    </XamlFileMeta>
+    <XamlFileMeta>
+      <FilePath>C:\Users\Kevin\CleanDesktop\SpotiDown\SpotiDown\SpotiDown\page_trackinfo.xaml</FilePath>
+      <Hash>1F-06-84-6F-7A-F0-A5-38-01-B3-EA-30-9E-84-64-75</Hash>
+      <Properties>
+        <string>BackgroundColor</string>
+        <string>NavigationPage.HasNavigationBar</string>
+      </Properties>
+    </XamlFileMeta>
+    <XamlFileMeta>
+      <FilePath>C:\Users\Kevin\CleanDesktop\SpotiDown\SpotiDown\SpotiDown\tab_bar.xaml</FilePath>
+      <Hash>54-65-59-D7-8E-60-E7-D0-A3-02-40-89-6B-6D-78-DD</Hash>
+      <Properties>
+        <string>BarBackgroundColor</string>
+        <string>NavigationPage.HasNavigationBar</string>
+      </Properties>
+    </XamlFileMeta>
+    <XamlFileMeta>
+      <FilePath>C:\Users\Kevin\CleanDesktop\SpotiDown\SpotiDown\SpotiDown\tab_home.xaml</FilePath>
+      <Hash>18-34-A2-D1-98-0F-3A-B2-9A-AE-B2-AB-86-33-CE-F3</Hash>
+      <Properties>
+        <string>BackgroundColor</string>
+      </Properties>
+    </XamlFileMeta>
+    <XamlFileMeta>
+      <FilePath>C:\Users\Kevin\CleanDesktop\SpotiDown\SpotiDown\SpotiDown\tab_settings.xaml</FilePath>
+      <Hash>23-97-B2-64-03-D8-51-1B-1A-7E-86-13-AB-50-2F-29</Hash>
+      <Properties>
+        <string>BackgroundColor</string>
+      </Properties>
+    </XamlFileMeta>
+  </Files>
+</XamlProjectMeta>

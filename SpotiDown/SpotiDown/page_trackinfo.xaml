@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="SpotiDown.page_trackinfo"
+             BackgroundColor="#1E1527" NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+            <Grid Opacity="0.5" MinimumHeightRequest="50" VerticalOptions="Start" BackgroundColor="#34293F" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="13" xct:ShadowEffect.OffsetY="-10">
+                <ImageButton Clicked="btn_back_click" BackgroundColor="#34293F" Source="back.png" WidthRequest="30" HeightRequest="30" HorizontalOptions="Start" VerticalOptions="Center" Margin="10"/>
+                <Frame HeightRequest="30" WidthRequest="30" CornerRadius="200" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,10,0" Padding="1" BackgroundColor="Black" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="13">
+                    <Image Source="icon.png"/>
+                </Frame>
+            </Grid>
+            <ScrollView>
+                <StackLayout>
+                    <StackLayout Margin="12" Spacing="12">
+                        <StackLayout Spacing="5" Margin="0,18,0,0" HorizontalOptions="Center">
+                            <Frame HeightRequest="120" WidthRequest="120" HorizontalOptions="Center" Padding="0" CornerRadius="22" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="30">
+                                <Image x:Name="img_image" Source="unknown.png" Aspect="AspectFill"/>
+                            </Frame>
+                            <Label x:Name="lb_name" Text="Unknown" FontSize="25" HorizontalOptions="Center" FontAttributes="Bold" TextColor="#542F84" LineBreakMode="TailTruncation" Margin="15,0"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="15">
+                            <Frame Margin="0,15,0,0" HeightRequest="32" WidthRequest="121" Padding="0" CornerRadius="22" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="3">
+                                <Frame.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="#8F24ED" Offset="0.0" />
+                                        <GradientStop Color="#650EF8" Offset="1.0" />
+                                    </LinearGradientBrush>
+                                </Frame.Background>
+                                <StackLayout Margin="0" Padding="3,3,3,3">
+                                    <Button Clicked="btn_download_click" HeightRequest="26" VerticalOptions="Center" BackgroundColor="#20112E" CornerRadius="22" Text="Download" FontSize="15" Padding="3" TextColor="#8F24ED"/>
+                                </StackLayout>
+                            </Frame>
+                            <Frame Margin="0,15,0,0" HeightRequest="32" WidthRequest="121" Padding="0" CornerRadius="22" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="3">
+                                <Frame.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="#8F24ED" Offset="0.0" />
+                                        <GradientStop Color="#650EF8" Offset="1.0" />
+                                    </LinearGradientBrush>
+                                </Frame.Background>
+                                <StackLayout Margin="0" Padding="3,3,3,3">
+                                    <Button Clicked="btn_remove_click" HeightRequest="26" VerticalOptions="Center" BackgroundColor="#20112E" CornerRadius="22" Text="Remove" FontSize="15" Padding="3" TextColor="#8F24ED"/>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                        <Frame Margin="0,12,0,0" VerticalOptions="Start" Padding="0" CornerRadius="22" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="3">
+                            <Frame.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#8F24ED" Offset="0.0" />
+                                    <GradientStop Color="#650EF8" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Frame.Background>
+                            <Frame BackgroundColor="#20112E" Margin="3" Padding="0" CornerRadius="22">
+                                <StackLayout Spacing="0">
+                                    <Label Text="Infos" FontSize="19" TextColor="#8F24ED" HorizontalOptions="Center" Margin="0,1,0,0"/>
+                                    <Rectangle HeightRequest="2.5" WidthRequest="48" BackgroundColor="#8F24ED" HorizontalOptions="Center"/>
+                                    <Grid Margin="20,10,20,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="1" HorizontalOptions="Center" Margin="0,0,0,10">
+                                            <StackLayout Spacing="0" HorizontalOptions="Start" Margin="0,0,10,0">
+                                                <Label Text="Title:" FontSize="15.5" TextColor="#6500F8" HorizontalTextAlignment="End"/>
+                                                <Label Text="Artist(s):" FontSize="15.5" TextColor="#6500F8" HorizontalTextAlignment="End"/>
+                                                <Label Text="Lenght:" FontSize="15.5" TextColor="#6500F8" HorizontalTextAlignment="End"/>
+                                                <Label Text="Album:" FontSize="15.5" TextColor="#6500F8" HorizontalTextAlignment="End"/>
+                                                <Label Text="Release:" FontSize="15.5" TextColor="#6500F8" HorizontalTextAlignment="End"/>
+                                                <Label Text="Url:" FontSize="15.5" TextColor="#6500F8" HorizontalTextAlignment="End"/>
+                                                <Label Text="Youtube Url:" FontSize="15.5" TextColor="#6500F8" HorizontalTextAlignment="End"/>
+                                            </StackLayout>
+                                            <StackLayout Spacing="0" HorizontalOptions="Start" Margin="88,0,0,0">
+                                                <Label x:Name="lb_title" Text="Unknown" FontSize="15.5" TextColor="#542F84" LineBreakMode="TailTruncation"/>
+                                                <Label x:Name="lb_artist" Text="Unknown" FontSize="15.5" TextColor="#542F84" LineBreakMode="TailTruncation"/>
+                                                <Label x:Name="lb_lenght" Text="Unknown" FontSize="15.5" TextColor="#542F84" LineBreakMode="TailTruncation"/>
+                                                <Label x:Name="lb_album" Text="Unknown" FontSize="15.5" TextColor="#542F84" LineBreakMode="TailTruncation"/>
+                                                <Label x:Name="lb_release" Text="Unknown" FontSize="15.5" TextColor="#542F84" LineBreakMode="TailTruncation"/>
+                                                <Label x:Name="lb_url" Text="Unknown" FontSize="15.5" TextColor="#542F84" LineBreakMode="TailTruncation"/>
+                                                <Label x:Name="lb_youtube" Text="Unknown" FontSize="15.5" TextColor="#542F84" LineBreakMode="TailTruncation"/>
+                                            </StackLayout>
+                                        </Grid>
+                                    </Grid>
+                                </StackLayout>
+                            </Frame>
+                        </Frame>
+                        <Frame VerticalOptions="Start" Padding="0" CornerRadius="22" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="3">
+                            <Frame.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#8F24ED" Offset="0.0" />
+                                    <GradientStop Color="#650EF8" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Frame.Background>
+                            <Frame BackgroundColor="#20112E" Margin="3" Padding="0" CornerRadius="22">
+                                <StackLayout Spacing="0">
+                                    <Label Text="Lyrics" FontSize="19" TextColor="#8F24ED" HorizontalOptions="Center" Margin="0,1,0,0"/>
+                                    <Rectangle HeightRequest="2.5" WidthRequest="57" BackgroundColor="#8F24ED" HorizontalOptions="Center"/>
+                                    <Editor x:Name="edi_lyrics" Text="N/A" FontSize="15.5" TextColor="#542F84" Margin="10" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                        </Frame>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
