@@ -1,6 +1,8 @@
 int attr action 0x0
 int attr alpha 0x0
 int attr argType 0x0
+int attr data 0x0
+int attr dataPattern 0x0
 int attr destination 0x0
 int attr enterAnim 0x0
 int attr exitAnim 0x0
@@ -14,14 +16,17 @@ int attr fontProviderQuery 0x0
 int attr fontStyle 0x0
 int attr fontVariationSettings 0x0
 int attr fontWeight 0x0
+int attr graph 0x0
 int attr launchSingleTop 0x0
 int attr mimeType 0x0
+int attr navGraph 0x0
 int attr nullable 0x0
 int attr popEnterAnim 0x0
 int attr popExitAnim 0x0
 int attr popUpTo 0x0
 int attr popUpToInclusive 0x0
 int attr startDestination 0x0
+int attr targetPackage 0x0
 int attr ttcIndex 0x0
 int attr uri 0x0
 int color notification_action_color_filter 0x0
@@ -111,6 +116,7 @@ int id info 0x0
 int id italic 0x0
 int id line1 0x0
 int id line3 0x0
+int id nav_controller_view_tag 0x0
 int id normal 0x0
 int id notification_background 0x0
 int id notification_main_column 0x0
@@ -145,6 +151,12 @@ int style TextAppearance_Compat_Notification_Time 0x0
 int style TextAppearance_Compat_Notification_Title 0x0
 int style Widget_Compat_NotificationActionContainer 0x0
 int style Widget_Compat_NotificationActionText 0x0
+int[] styleable ActivityNavigator { 0x0, 0x1010003, 0x0, 0x0, 0x0 }
+int styleable ActivityNavigator_action 0
+int styleable ActivityNavigator_android_name 1
+int styleable ActivityNavigator_data 2
+int styleable ActivityNavigator_dataPattern 3
+int styleable ActivityNavigator_targetPackage 4
 int[] styleable ColorStateListItem { 0x0, 0x101031f, 0x10101a5 }
 int styleable ColorStateListItem_alpha 0
 int styleable ColorStateListItem_android_alpha 1
@@ -205,6 +217,10 @@ int styleable NavDeepLink_mimeType 2
 int styleable NavDeepLink_uri 3
 int[] styleable NavGraphNavigator { 0x0 }
 int styleable NavGraphNavigator_startDestination 0
+int[] styleable NavHost { 0x0 }
+int styleable NavHost_navGraph 0
+int[] styleable NavInclude { 0x0 }
+int styleable NavInclude_graph 0
 int[] styleable Navigator { 0x10100d0, 0x1010001 }
 int styleable Navigator_android_id 0
 int styleable Navigator_android_label 1

@@ -1,33 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="NavAction">
-        <attr name="android:id"/>
-        <attr format="reference" name="destination"/>
-        <attr format="boolean" name="launchSingleTop"/>
-        <attr format="reference" name="popUpTo"/>
-        <attr format="boolean" name="popUpToInclusive"/>
-        <attr format="reference" name="enterAnim"/>
-        <attr format="reference" name="exitAnim"/>
-        <attr format="reference" name="popEnterAnim"/>
-        <attr format="reference" name="popExitAnim"/>
-    </declare-styleable>
-    <declare-styleable name="NavArgument">
+    <item name="nav_controller_view_tag" type="id"/>
+    <declare-styleable name="ActivityNavigator">
         <attr name="android:name"/>
-        <attr name="android:defaultValue"/>
-        <attr format="boolean" name="nullable"/>
-        <attr format="string" name="argType"/>
-    </declare-styleable>
-    <declare-styleable name="NavDeepLink">
-        <attr format="string" name="uri"/>
         <attr format="string" name="action"/>
-        <attr format="string" name="mimeType"/>
-        <attr name="android:autoVerify"/>
+        <attr format="string" name="data"/>
+        <attr format="string" name="dataPattern"/>
+        <attr format="string" name="targetPackage"/>
     </declare-styleable>
-    <declare-styleable name="NavGraphNavigator">
-        <attr format="reference" name="startDestination"/>
+    <declare-styleable name="NavHost">
+        <attr format="reference" name="navGraph"/>
     </declare-styleable>
-    <declare-styleable name="Navigator">
-        <attr name="android:id"/>
-        <attr name="android:label"/>
+    <declare-styleable name="NavInclude">
+        <attr format="reference" name="graph"/>
     </declare-styleable>
 </resources>

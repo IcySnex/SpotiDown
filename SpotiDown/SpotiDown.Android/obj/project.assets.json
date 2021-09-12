@@ -35,19 +35,6 @@
           "lib/netstandard2.0/HtmlAgilityPack.dll": {}
         }
       },
-      "Laerdal.Xamarin.FFmpeg.Android.Full/4.4.26": {
-        "type": "package",
-        "frameworkAssemblies": [
-          "Java.Interop",
-          "Mono.Android"
-        ],
-        "compile": {
-          "lib/monoandroid10.0/Laerdal.Xamarin.FFmpeg.Android.dll": {}
-        },
-        "runtime": {
-          "lib/monoandroid10.0/Laerdal.Xamarin.FFmpeg.Android.dll": {}
-        }
-      },
       "LiveXAML/2.1.73": {
         "type": "package",
         "build": {
@@ -191,6 +178,30 @@
         },
         "runtime": {
           "lib/netstandard2.0/Swan.Lite.dll": {}
+        }
+      },
+      "Xabe.FFmpeg/5.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Xabe.FFmpeg.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Xabe.FFmpeg.dll": {}
+        }
+      },
+      "Xabe.FFmpeg.Downloader/5.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Xabe.FFmpeg": "5.0.2"
+        },
+        "compile": {
+          "lib/netstandard2.0/Xabe.FFmpeg.Downloader.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Xabe.FFmpeg.Downloader.dll": {}
         }
       },
       "Xamarin.AndroidX.Activity/1.2.0.1": {
@@ -1393,21 +1404,6 @@
         "lib/uap10.0/HtmlAgilityPack.pri"
       ]
     },
-    "Laerdal.Xamarin.FFmpeg.Android.Full/4.4.26": {
-      "sha512": "120ST465IhmiqL4oxai8kMRdH0d7EgC483bfHqTpVFA5mEQOsTVwH9sswEvVnoW7HJJIonl9Mj+vSSbOCv5e7g==",
-      "type": "package",
-      "path": "laerdal.xamarin.ffmpeg.android.full/4.4.26",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE",
-        "icon.png",
-        "laerdal.xamarin.ffmpeg.android.full.4.4.26.nupkg.sha512",
-        "laerdal.xamarin.ffmpeg.android.full.nuspec",
-        "lib/monoandroid10.0/Laerdal.Xamarin.FFmpeg.Android.dll",
-        "lib/monoandroid10.0/Laerdal.Xamarin.FFmpeg.Android.pdb"
-      ]
-    },
     "LiveXAML/2.1.73": {
       "sha512": "WuyZAgaVvGIN4MoOR5VK3X8PFiCv3swffxzMd6Nf7cJIf32zCjbTgrkasY5K8NSNZ2U4y2nFgLAZ4oeqUvueEA==",
       "type": "package",
@@ -1776,6 +1772,32 @@
         "lib/netstandard2.0/Swan.Lite.xml",
         "unosquare.swan.lite.3.0.0.nupkg.sha512",
         "unosquare.swan.lite.nuspec"
+      ]
+    },
+    "Xabe.FFmpeg/5.0.2": {
+      "sha512": "f/P/oMIX6ozn8VvLIMQHiyNSzuWr9187WKy8RXLivKcKrOeSCUuDX9xBl0Ic/odv6VxsH0MiUwnXivme2iSACg==",
+      "type": "package",
+      "path": "xabe.ffmpeg/5.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Xabe.FFmpeg.dll",
+        "lib/netstandard2.0/Xabe.FFmpeg.xml",
+        "xabe.ffmpeg.5.0.2.nupkg.sha512",
+        "xabe.ffmpeg.nuspec"
+      ]
+    },
+    "Xabe.FFmpeg.Downloader/5.0.2": {
+      "sha512": "PMf3gxVVVzEyWYl4fKw7KmouN8QKMPVN8+6FpPkKT2mG4pXawshDk+N5DPHoiO6vvnn5eNTQ8DLNY90un8wELA==",
+      "type": "package",
+      "path": "xabe.ffmpeg.downloader/5.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Xabe.FFmpeg.Downloader.dll",
+        "lib/netstandard2.0/Xabe.FFmpeg.Downloader.xml",
+        "xabe.ffmpeg.downloader.5.0.2.nupkg.sha512",
+        "xabe.ffmpeg.downloader.nuspec"
       ]
     },
     "Xamarin.AndroidX.Activity/1.2.0.1": {
@@ -3010,9 +3032,10 @@
   },
   "projectFileDependencyGroups": {
     "MonoAndroid,Version=v10.0": [
-      "Laerdal.Xamarin.FFmpeg.Android.Full >= 4.4.26",
       "SpotiDown >= 1.0.0",
       "SpotiDownVB >= 1.0.0",
+      "Xabe.FFmpeg >= 5.0.2",
+      "Xabe.FFmpeg.Downloader >= 5.0.2",
       "Xamarin.Essentials >= 1.7.0",
       "Xamarin.Forms >= 5.0.0.2083"
     ]
@@ -3067,9 +3090,13 @@
     "frameworks": {
       "monoandroid10.0": {
         "dependencies": {
-          "Laerdal.Xamarin.FFmpeg.Android.Full": {
+          "Xabe.FFmpeg": {
             "target": "Package",
-            "version": "[4.4.26, )"
+            "version": "[5.0.2, )"
+          },
+          "Xabe.FFmpeg.Downloader": {
+            "target": "Package",
+            "version": "[5.0.2, )"
           },
           "Xamarin.Essentials": {
             "target": "Package",

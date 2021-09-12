@@ -19,26 +19,26 @@
 	.section	.rodata.map_aname.3,"aMS",%progbits,1
 	.type	.L.map_aname.3, %object
 .L.map_aname.3:
-	.asciz	"Xamarin.AndroidX.ViewPager"
-	.size	.L.map_aname.3, 27
+	.asciz	"SpotiDown.Android"
+	.size	.L.map_aname.3, 18
 
 	.section	.rodata.map_aname.4,"aMS",%progbits,1
 	.type	.L.map_aname.4, %object
 .L.map_aname.4:
-	.asciz	"Xamarin.AndroidX.Lifecycle.Common"
-	.size	.L.map_aname.4, 34
+	.asciz	"Xamarin.AndroidX.ViewPager"
+	.size	.L.map_aname.4, 27
 
 	.section	.rodata.map_aname.5,"aMS",%progbits,1
 	.type	.L.map_aname.5, %object
 .L.map_aname.5:
-	.asciz	"Xamarin.AndroidX.RecyclerView"
-	.size	.L.map_aname.5, 30
+	.asciz	"Xamarin.AndroidX.Lifecycle.Common"
+	.size	.L.map_aname.5, 34
 
 	.section	.rodata.map_aname.6,"aMS",%progbits,1
 	.type	.L.map_aname.6, %object
 .L.map_aname.6:
-	.asciz	"SpotiDown.Android"
-	.size	.L.map_aname.6, 18
+	.asciz	"Xamarin.AndroidX.RecyclerView"
+	.size	.L.map_aname.6, 30
 
 	.section	.rodata.map_aname.7,"aMS",%progbits,1
 	.type	.L.map_aname.7, %object
@@ -139,30 +139,24 @@
 	.section	.rodata.map_aname.23,"aMS",%progbits,1
 	.type	.L.map_aname.23, %object
 .L.map_aname.23:
-	.asciz	"Xamarin.AndroidX.AppCompat"
-	.size	.L.map_aname.23, 27
+	.asciz	"Mono.Android"
+	.size	.L.map_aname.23, 13
 
 	.section	.rodata.map_aname.24,"aMS",%progbits,1
 	.type	.L.map_aname.24, %object
 .L.map_aname.24:
-	.asciz	"Xamarin.AndroidX.SwipeRefreshLayout"
-	.size	.L.map_aname.24, 36
+	.asciz	"Xamarin.AndroidX.AppCompat"
+	.size	.L.map_aname.24, 27
 
 	.section	.rodata.map_aname.25,"aMS",%progbits,1
 	.type	.L.map_aname.25, %object
 .L.map_aname.25:
-	.asciz	"Mono.Android"
-	.size	.L.map_aname.25, 13
+	.asciz	"Xamarin.AndroidX.SwipeRefreshLayout"
+	.size	.L.map_aname.25, 36
 
 	.section	.rodata.map_aname.26,"aMS",%progbits,1
 	.type	.L.map_aname.26, %object
 .L.map_aname.26:
 	.asciz	"Xamarin.AndroidX.CardView"
 	.size	.L.map_aname.26, 26
-
-	.section	.rodata.map_aname.27,"aMS",%progbits,1
-	.type	.L.map_aname.27, %object
-.L.map_aname.27:
-	.asciz	"Laerdal.Xamarin.FFmpeg.Android"
-	.size	.L.map_aname.27, 31
 

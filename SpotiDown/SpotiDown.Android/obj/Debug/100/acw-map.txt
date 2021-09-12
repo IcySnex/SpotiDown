@@ -4,18 +4,6 @@ SplashActivity;crc64e606690c05b2f2db.SplashActivity
 SpotiDown.Droid.MainActivity, SpotiDown.Android;crc64f1c1f60728ec3fa8.MainActivity
 SpotiDown.Droid.MainActivity;crc64f1c1f60728ec3fa8.MainActivity
 spotidown.droid.MainActivity;crc64f1c1f60728ec3fa8.MainActivity
-Laerdal.Xamarin.FFmpeg.Android.IExecuteCallback, Laerdal.Xamarin.FFmpeg.Android;com.arthenica.mobileffmpeg.ExecuteCallback
-Laerdal.Xamarin.FFmpeg.Android.IExecuteCallback;com.arthenica.mobileffmpeg.ExecuteCallback
-com.arthenica.mobileffmpeg.ExecuteCallback;com.arthenica.mobileffmpeg.ExecuteCallback
-Laerdal.Xamarin.FFmpeg.Android.IGetMediaInformationCallback, Laerdal.Xamarin.FFmpeg.Android;com.arthenica.mobileffmpeg.GetMediaInformationCallback
-Laerdal.Xamarin.FFmpeg.Android.IGetMediaInformationCallback;com.arthenica.mobileffmpeg.GetMediaInformationCallback
-com.arthenica.mobileffmpeg.GetMediaInformationCallback;com.arthenica.mobileffmpeg.GetMediaInformationCallback
-Laerdal.Xamarin.FFmpeg.Android.ILogCallback, Laerdal.Xamarin.FFmpeg.Android;com.arthenica.mobileffmpeg.LogCallback
-Laerdal.Xamarin.FFmpeg.Android.ILogCallback;com.arthenica.mobileffmpeg.LogCallback
-com.arthenica.mobileffmpeg.LogCallback;com.arthenica.mobileffmpeg.LogCallback
-Laerdal.Xamarin.FFmpeg.Android.IStatisticsCallback, Laerdal.Xamarin.FFmpeg.Android;com.arthenica.mobileffmpeg.StatisticsCallback
-Laerdal.Xamarin.FFmpeg.Android.IStatisticsCallback;com.arthenica.mobileffmpeg.StatisticsCallback
-com.arthenica.mobileffmpeg.StatisticsCallback;com.arthenica.mobileffmpeg.StatisticsCallback
 AndroidX.Activity.IOnBackPressedDispatcherOwner, Xamarin.AndroidX.Activity;androidx.activity.OnBackPressedDispatcherOwner
 AndroidX.Activity.IOnBackPressedDispatcherOwner;androidx.activity.OnBackPressedDispatcherOwner
 androidx.activity.OnBackPressedDispatcherOwner;androidx.activity.OnBackPressedDispatcherOwner

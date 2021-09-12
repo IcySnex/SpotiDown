@@ -138,9 +138,13 @@
       "frameworks": {
         "monoandroid10.0": {
           "dependencies": {
-            "Laerdal.Xamarin.FFmpeg.Android.Full": {
+            "Xabe.FFmpeg": {
               "target": "Package",
-              "version": "[4.4.26, )"
+              "version": "[5.0.2, )"
+            },
+            "Xabe.FFmpeg.Downloader": {
+              "target": "Package",
+              "version": "[5.0.2, )"
             },
             "Xamarin.Essentials": {
               "target": "Package",

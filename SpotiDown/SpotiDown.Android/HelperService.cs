@@ -6,7 +6,8 @@ using System;
 using System.Threading.Tasks;
 using System.Net;
 using SpotiDown;
-using Laerdal.Xamarin.FFmpeg.Android;
+using Xabe.FFmpeg;
+using Xabe.FFmpeg.Downloader;
 
 [assembly: Xamarin.Forms.Dependency(typeof(HelperService))]
 namespace XamarinFirebase.Droid
@@ -16,17 +17,20 @@ namespace XamarinFirebase.Droid
         [Obsolete]
         async Task IHelperService.wirteStream(string path, Stream stream)
         {
+            string ffmpeg = @"/storage/emulated/0/ffmpeg";
             string fullpath = $@"/storage/emulated/0{path}.mp3";
             string temppath = $@"/storage/emulated/0{path}.webm";
             if (!Directory.Exists(Path.GetDirectoryName(fullpath))) { Directory.CreateDirectory(Path.GetDirectoryName(fullpath)); }
-
             using (var fileStream = new FileStream(temppath, FileMode.Create, FileAccess.Write))
             {
                 await stream.CopyToAsync(fileStream);
             }
 
-            // WEBM FILE NEEDS TO GET CONVERTED TO MP3 SO TAGLIB IS ABLE TO WRITE META DATA
-            // WEBM FILE NEEDS TO GET DELETED
+            FFmpeg.SetExecutablesPath(ffmpeg);
+            await FFmpegDownloader.GetLatestVersion(FFmpegVersion.Android, ffmpeg);
+            await FFmpeg.Conversions.New().Start($"-i \"{temppath}\" -vn \"{fullpath}\"");
+
+            await App.Current.MainPage.DisplayAlert("Converted!", "webm to mp3", "OK");
         }
 
         async Task IHelperService.writeMetadata(SpotifyTrack trackinfo, string path)

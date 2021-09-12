@@ -50,135 +50,135 @@
 	.zero	3
 	.quad	compressed_assembly_data_4
 
-	/* 5: Laerdal.Xamarin.FFmpeg.Android.dll */
-	/* uncompressed_file_size */
-	.long	83968
-	/* loaded */
-	.byte	0
-	/* data */
-	.zero	3
-	.quad	compressed_assembly_data_5
-
-	/* 6: Microsoft.Bcl.AsyncInterfaces.dll */
+	/* 5: Microsoft.Bcl.AsyncInterfaces.dll */
 	/* uncompressed_file_size */
 	.long	5120
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
-	.quad	compressed_assembly_data_6
+	.quad	compressed_assembly_data_5
 
-	/* 7: Mono.Android.dll */
+	/* 6: Mono.Android.dll */
 	/* uncompressed_file_size */
-	.long	2202112
+	.long	2200064
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
-	.quad	compressed_assembly_data_7
+	.quad	compressed_assembly_data_6
 
-	/* 8: Mono.Security.dll */
+	/* 7: Mono.Security.dll */
 	/* uncompressed_file_size */
 	.long	128000
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
-	.quad	compressed_assembly_data_8
+	.quad	compressed_assembly_data_7
 
-	/* 9: Newtonsoft.Json.dll */
+	/* 8: Newtonsoft.Json.dll */
 	/* uncompressed_file_size */
 	.long	684544
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
-	.quad	compressed_assembly_data_9
+	.quad	compressed_assembly_data_8
 
-	/* 10: SpotiDown.Android.dll */
+	/* 9: SpotiDown.Android.dll */
 	/* uncompressed_file_size */
-	.long	386560
+	.long	387584
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
-	.quad	compressed_assembly_data_10
+	.quad	compressed_assembly_data_9
 
-	/* 11: SpotiDown.dll */
+	/* 10: SpotiDown.dll */
 	/* uncompressed_file_size */
 	.long	154624
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
-	.quad	compressed_assembly_data_11
+	.quad	compressed_assembly_data_10
 
-	/* 12: SpotiDownVB.dll */
+	/* 11: SpotiDownVB.dll */
 	/* uncompressed_file_size */
 	.long	31232
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
-	.quad	compressed_assembly_data_12
+	.quad	compressed_assembly_data_11
 
-	/* 13: SpotifyAPI.Web.Auth.dll */
+	/* 12: SpotifyAPI.Web.Auth.dll */
 	/* uncompressed_file_size */
 	.long	72704
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
-	.quad	compressed_assembly_data_13
+	.quad	compressed_assembly_data_12
 
-	/* 14: SpotifyAPI.Web.dll */
+	/* 13: SpotifyAPI.Web.dll */
 	/* uncompressed_file_size */
 	.long	208896
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
-	.quad	compressed_assembly_data_14
+	.quad	compressed_assembly_data_13
 
-	/* 15: Swan.Lite.dll */
+	/* 14: Swan.Lite.dll */
 	/* uncompressed_file_size */
 	.long	190976
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
-	.quad	compressed_assembly_data_15
+	.quad	compressed_assembly_data_14
 
-	/* 16: System.Buffers.dll */
+	/* 15: System.Buffers.dll */
 	/* uncompressed_file_size */
 	.long	13688
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
-	.quad	compressed_assembly_data_16
+	.quad	compressed_assembly_data_15
 
-	/* 17: System.Core.dll */
+	/* 16: System.Core.dll */
 	/* uncompressed_file_size */
 	.long	407040
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
-	.quad	compressed_assembly_data_17
+	.quad	compressed_assembly_data_16
 
-	/* 18: System.Data.dll */
+	/* 17: System.Data.dll */
 	/* uncompressed_file_size */
 	.long	748032
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
-	.quad	compressed_assembly_data_18
+	.quad	compressed_assembly_data_17
 
-	/* 19: System.Drawing.Common.dll */
+	/* 18: System.Drawing.Common.dll */
 	/* uncompressed_file_size */
 	.long	30720
+	/* loaded */
+	.byte	0
+	/* data */
+	.zero	3
+	.quad	compressed_assembly_data_18
+
+	/* 19: System.IO.Compression.FileSystem.dll */
+	/* uncompressed_file_size */
+	.long	6144
 	/* loaded */
 	.byte	0
 	/* data */
@@ -196,7 +196,7 @@
 
 	/* 21: System.Net.Http.dll */
 	/* uncompressed_file_size */
-	.long	222720
+	.long	223232
 	/* loaded */
 	.byte	0
 	/* data */
@@ -304,291 +304,309 @@
 
 	/* 33: System.dll */
 	/* uncompressed_file_size */
-	.long	1021440
+	.long	1024512
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
 	.quad	compressed_assembly_data_33
 
-	/* 34: Xamarin.AndroidX.Activity.dll */
+	/* 34: Xabe.FFmpeg.Downloader.dll */
 	/* uncompressed_file_size */
-	.long	51712
+	.long	25088
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
 	.quad	compressed_assembly_data_34
 
-	/* 35: Xamarin.AndroidX.AppCompat.AppCompatResources.dll */
+	/* 35: Xabe.FFmpeg.dll */
 	/* uncompressed_file_size */
-	.long	15872
+	.long	122880
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
 	.quad	compressed_assembly_data_35
 
-	/* 36: Xamarin.AndroidX.AppCompat.dll */
+	/* 36: Xamarin.AndroidX.Activity.dll */
 	/* uncompressed_file_size */
-	.long	459776
+	.long	51712
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
 	.quad	compressed_assembly_data_36
 
-	/* 37: Xamarin.AndroidX.Browser.dll */
-	/* uncompressed_file_size */
-	.long	30208
-	/* loaded */
-	.byte	0
-	/* data */
-	.zero	3
-	.quad	compressed_assembly_data_37
-
-	/* 38: Xamarin.AndroidX.CardView.dll */
-	/* uncompressed_file_size */
-	.long	17408
-	/* loaded */
-	.byte	0
-	/* data */
-	.zero	3
-	.quad	compressed_assembly_data_38
-
-	/* 39: Xamarin.AndroidX.CoordinatorLayout.dll */
-	/* uncompressed_file_size */
-	.long	78848
-	/* loaded */
-	.byte	0
-	/* data */
-	.zero	3
-	.quad	compressed_assembly_data_39
-
-	/* 40: Xamarin.AndroidX.Core.dll */
-	/* uncompressed_file_size */
-	.long	534016
-	/* loaded */
-	.byte	0
-	/* data */
-	.zero	3
-	.quad	compressed_assembly_data_40
-
-	/* 41: Xamarin.AndroidX.CustomView.dll */
-	/* uncompressed_file_size */
-	.long	8704
-	/* loaded */
-	.byte	0
-	/* data */
-	.zero	3
-	.quad	compressed_assembly_data_41
-
-	/* 42: Xamarin.AndroidX.DrawerLayout.dll */
-	/* uncompressed_file_size */
-	.long	43520
-	/* loaded */
-	.byte	0
-	/* data */
-	.zero	3
-	.quad	compressed_assembly_data_42
-
-	/* 43: Xamarin.AndroidX.Fragment.dll */
-	/* uncompressed_file_size */
-	.long	174080
-	/* loaded */
-	.byte	0
-	/* data */
-	.zero	3
-	.quad	compressed_assembly_data_43
-
-	/* 44: Xamarin.AndroidX.Legacy.Support.Core.UI.dll */
-	/* uncompressed_file_size */
-	.long	15360
-	/* loaded */
-	.byte	0
-	/* data */
-	.zero	3
-	.quad	compressed_assembly_data_44
-
-	/* 45: Xamarin.AndroidX.Lifecycle.Common.dll */
-	/* uncompressed_file_size */
-	.long	14848
-	/* loaded */
-	.byte	0
-	/* data */
-	.zero	3
-	.quad	compressed_assembly_data_45
-
-	/* 46: Xamarin.AndroidX.Lifecycle.LiveData.Core.dll */
+	/* 37: Xamarin.AndroidX.AppCompat.AppCompatResources.dll */
 	/* uncompressed_file_size */
 	.long	15872
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
+	.quad	compressed_assembly_data_37
+
+	/* 38: Xamarin.AndroidX.AppCompat.dll */
+	/* uncompressed_file_size */
+	.long	459776
+	/* loaded */
+	.byte	0
+	/* data */
+	.zero	3
+	.quad	compressed_assembly_data_38
+
+	/* 39: Xamarin.AndroidX.Browser.dll */
+	/* uncompressed_file_size */
+	.long	30208
+	/* loaded */
+	.byte	0
+	/* data */
+	.zero	3
+	.quad	compressed_assembly_data_39
+
+	/* 40: Xamarin.AndroidX.CardView.dll */
+	/* uncompressed_file_size */
+	.long	17408
+	/* loaded */
+	.byte	0
+	/* data */
+	.zero	3
+	.quad	compressed_assembly_data_40
+
+	/* 41: Xamarin.AndroidX.CoordinatorLayout.dll */
+	/* uncompressed_file_size */
+	.long	78848
+	/* loaded */
+	.byte	0
+	/* data */
+	.zero	3
+	.quad	compressed_assembly_data_41
+
+	/* 42: Xamarin.AndroidX.Core.dll */
+	/* uncompressed_file_size */
+	.long	534016
+	/* loaded */
+	.byte	0
+	/* data */
+	.zero	3
+	.quad	compressed_assembly_data_42
+
+	/* 43: Xamarin.AndroidX.CustomView.dll */
+	/* uncompressed_file_size */
+	.long	8704
+	/* loaded */
+	.byte	0
+	/* data */
+	.zero	3
+	.quad	compressed_assembly_data_43
+
+	/* 44: Xamarin.AndroidX.DrawerLayout.dll */
+	/* uncompressed_file_size */
+	.long	43520
+	/* loaded */
+	.byte	0
+	/* data */
+	.zero	3
+	.quad	compressed_assembly_data_44
+
+	/* 45: Xamarin.AndroidX.Fragment.dll */
+	/* uncompressed_file_size */
+	.long	174080
+	/* loaded */
+	.byte	0
+	/* data */
+	.zero	3
+	.quad	compressed_assembly_data_45
+
+	/* 46: Xamarin.AndroidX.Legacy.Support.Core.UI.dll */
+	/* uncompressed_file_size */
+	.long	15360
+	/* loaded */
+	.byte	0
+	/* data */
+	.zero	3
 	.quad	compressed_assembly_data_46
 
-	/* 47: Xamarin.AndroidX.Lifecycle.ViewModel.dll */
+	/* 47: Xamarin.AndroidX.Lifecycle.Common.dll */
 	/* uncompressed_file_size */
-	.long	16896
+	.long	14848
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
 	.quad	compressed_assembly_data_47
 
-	/* 48: Xamarin.AndroidX.Loader.dll */
+	/* 48: Xamarin.AndroidX.Lifecycle.LiveData.Core.dll */
 	/* uncompressed_file_size */
-	.long	36352
+	.long	15872
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
 	.quad	compressed_assembly_data_48
 
-	/* 49: Xamarin.AndroidX.RecyclerView.dll */
+	/* 49: Xamarin.AndroidX.Lifecycle.ViewModel.dll */
 	/* uncompressed_file_size */
-	.long	411136
+	.long	16896
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
 	.quad	compressed_assembly_data_49
 
-	/* 50: Xamarin.AndroidX.SavedState.dll */
-	/* uncompressed_file_size */
-	.long	12800
-	/* loaded */
-	.byte	0
-	/* data */
-	.zero	3
-	.quad	compressed_assembly_data_50
-
-	/* 51: Xamarin.AndroidX.SwipeRefreshLayout.dll */
-	/* uncompressed_file_size */
-	.long	39936
-	/* loaded */
-	.byte	0
-	/* data */
-	.zero	3
-	.quad	compressed_assembly_data_51
-
-	/* 52: Xamarin.AndroidX.ViewPager.dll */
-	/* uncompressed_file_size */
-	.long	57344
-	/* loaded */
-	.byte	0
-	/* data */
-	.zero	3
-	.quad	compressed_assembly_data_52
-
-	/* 53: Xamarin.CommunityToolkit.dll */
-	/* uncompressed_file_size */
-	.long	366592
-	/* loaded */
-	.byte	0
-	/* data */
-	.zero	3
-	.quad	compressed_assembly_data_53
-
-	/* 54: Xamarin.Essentials.dll */
+	/* 50: Xamarin.AndroidX.Loader.dll */
 	/* uncompressed_file_size */
 	.long	36352
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
+	.quad	compressed_assembly_data_50
+
+	/* 51: Xamarin.AndroidX.RecyclerView.dll */
+	/* uncompressed_file_size */
+	.long	411136
+	/* loaded */
+	.byte	0
+	/* data */
+	.zero	3
+	.quad	compressed_assembly_data_51
+
+	/* 52: Xamarin.AndroidX.SavedState.dll */
+	/* uncompressed_file_size */
+	.long	12800
+	/* loaded */
+	.byte	0
+	/* data */
+	.zero	3
+	.quad	compressed_assembly_data_52
+
+	/* 53: Xamarin.AndroidX.SwipeRefreshLayout.dll */
+	/* uncompressed_file_size */
+	.long	39936
+	/* loaded */
+	.byte	0
+	/* data */
+	.zero	3
+	.quad	compressed_assembly_data_53
+
+	/* 54: Xamarin.AndroidX.ViewPager.dll */
+	/* uncompressed_file_size */
+	.long	57344
+	/* loaded */
+	.byte	0
+	/* data */
+	.zero	3
 	.quad	compressed_assembly_data_54
 
-	/* 55: Xamarin.Forms.Core.dll */
+	/* 55: Xamarin.CommunityToolkit.dll */
 	/* uncompressed_file_size */
-	.long	1207296
+	.long	366592
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
 	.quad	compressed_assembly_data_55
 
-	/* 56: Xamarin.Forms.Platform.Android.dll */
+	/* 56: Xamarin.Essentials.dll */
 	/* uncompressed_file_size */
-	.long	863232
+	.long	36352
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
 	.quad	compressed_assembly_data_56
 
-	/* 57: Xamarin.Forms.Platform.dll */
+	/* 57: Xamarin.Forms.Core.dll */
 	/* uncompressed_file_size */
-	.long	191368
+	.long	1207296
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
 	.quad	compressed_assembly_data_57
 
-	/* 58: Xamarin.Forms.Xaml.dll */
+	/* 58: Xamarin.Forms.Platform.Android.dll */
 	/* uncompressed_file_size */
-	.long	103424
+	.long	863232
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
 	.quad	compressed_assembly_data_58
 
-	/* 59: Xamarin.Google.Android.Material.dll */
+	/* 59: Xamarin.Forms.Platform.dll */
 	/* uncompressed_file_size */
-	.long	232960
+	.long	191368
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
 	.quad	compressed_assembly_data_59
 
-	/* 60: Xamarin.Google.Guava.ListenableFuture.dll */
+	/* 60: Xamarin.Forms.Xaml.dll */
 	/* uncompressed_file_size */
-	.long	18072
+	.long	103424
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
 	.quad	compressed_assembly_data_60
 
-	/* 61: YoutubeExplode.dll */
+	/* 61: Xamarin.Google.Android.Material.dll */
 	/* uncompressed_file_size */
-	.long	197632
+	.long	232960
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
 	.quad	compressed_assembly_data_61
 
-	/* 62: mscorlib.dll */
+	/* 62: Xamarin.Google.Guava.ListenableFuture.dll */
 	/* uncompressed_file_size */
-	.long	2225664
+	.long	18072
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
 	.quad	compressed_assembly_data_62
 
-	/* 63: taglib-sharp.dll */
+	/* 63: YoutubeExplode.dll */
 	/* uncompressed_file_size */
-	.long	489984
+	.long	197632
 	/* loaded */
 	.byte	0
 	/* data */
 	.zero	3
 	.quad	compressed_assembly_data_63
 
-	.size	.L.compressed_assembly_descriptors, 1024
+	/* 64: mscorlib.dll */
+	/* uncompressed_file_size */
+	.long	2226688
+	/* loaded */
+	.byte	0
+	/* data */
+	.zero	3
+	.quad	compressed_assembly_data_64
+
+	/* 65: taglib-sharp.dll */
+	/* uncompressed_file_size */
+	.long	489984
+	/* loaded */
+	.byte	0
+	/* data */
+	.zero	3
+	.quad	compressed_assembly_data_65
+
+	.size	.L.compressed_assembly_descriptors, 1056
 	.section	.data.compressed_assemblies,"aw",@progbits
 	.type	compressed_assemblies, @object
 	.p2align	3
 	.global	compressed_assemblies
 compressed_assemblies:
 	/* count */
-	.long	64
+	.long	66
 	/* descriptors */
 	.zero	4
 	.quad	.L.compressed_assembly_descriptors
