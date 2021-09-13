@@ -80,6 +80,7 @@ Public Class SpotifyHelper
                 End If
             Next
             Return New DownloadPageInfo With {.name = playlist.Name, .image = playlist.Images(0).Url, .tracks = tracks}
+        Else Throw New Exception("Error", New Exception("Failed generating download page."))
         End If
     End Function
 

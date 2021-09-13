@@ -1,8 +1,11 @@
 ﻿<Window x:Class="MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:SpotiDownWin" mc:Ignorable="d"
-        Title="SpotiDown" MinHeight="600" MinWidth="390" Height="800" Width="542">
+        Title="SpotiDown" WindowStartupLocation="CenterScreen" MinHeight="600" MinWidth="390" Height="800" Width="542" Loaded="Window_Loaded">
     <Grid>
         <local:pagetransition x:Name="tbc" Margin="0,0,0,70" Background="#1C1527"/>
         <Grid Background="#34293F" Height="70" VerticalAlignment="Bottom">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="23" ShadowDepth="0"/>
+            </Grid.Effect>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -25,7 +28,7 @@
                     </EventTrigger>
                 </Button.Triggers>
                 <StackPanel>
-                    <Image Source="../res/home.png" Height="30" Margin="0,0,0,0"/>
+                    <Image Source="res/home.png" Height="30" Margin="0,0,0,0"/>
                     <TextBlock Text="Home" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="13" Foreground="#650EF8"/>
                 </StackPanel>
             </Button>
@@ -47,7 +50,7 @@
                     </EventTrigger>
                 </Button.Triggers>
                 <StackPanel>
-                    <Image Source="../res/settings.png" Height="30" Margin="0,0,0,0"/>
+                    <Image Source="/res/settings.png" Height="30" Margin="0,0,0,0"/>
                     <TextBlock Text="Settings" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="13" Foreground="#650EF8"/>
                 </StackPanel>
             </Button>

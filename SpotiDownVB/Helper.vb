@@ -71,8 +71,8 @@ Public Class Helper
 End Class
 
 Public Interface IHelperService
-    Function wirteStream(path As String, stream As Stream) As Task
-    Function writeMetadata(trackinfo As SpotifyTrack, path As String) As Task
+    Function writeStream(path As String, stream As Stream) As Task
+    Function writeMetadata(path As String, trackinfo As SpotifyTrack) As Task
     Function downloadFile(url As String, path As String) As Task
 End Interface
 

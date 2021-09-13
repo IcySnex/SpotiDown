@@ -60,8 +60,8 @@ Public Class YoutubeHelper
 
     Public Shared Async Function WriteTrack(trackinfo As SpotifyTrack) As Task(Of String)
         Dim filepath = Helper.config.prefernces.downloadpath & Helper.config.prefernces.filename.Replace("{title}", trackinfo.title).Replace("{artist}", trackinfo.artist.Split(",")(0)).Replace("{album}", trackinfo.album).Replace("{release}", trackinfo.release.Year)
-        Await Helper.ihs.wirteStream(filepath, Await DownloadAudioStream(trackinfo.youtube))
-        Await Helper.ihs.writeMetadata(trackinfo, filepath)
+        Await Helper.ihs.writeStream(filepath, Await DownloadAudioStream(trackinfo.youtube))
+        Await Helper.ihs.writeMetadata(filepath, trackinfo)
         Return filepath
     End Function
 End Class

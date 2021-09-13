@@ -1,0 +1,3397 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SpotifyAPI.Web</name>
+    </assembly>
+    <members>
+        <member name="T:SpotifyAPI.Web.AuthorizationCodeAuthenticator">
+            <summary>
+              This Authenticator requests new credentials token on demand and stores them into memory.
+              It is unable to query user specifc details.
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.AuthorizationCodeAuthenticator.#ctor(System.String,System.String,SpotifyAPI.Web.AuthorizationCodeTokenResponse)">
+            <summary>
+              Initiate a new instance. The token will be refreshed once it expires.
+              The initialToken will be updated with the new values on refresh!
+            </summary>
+        </member>
+        <member name="E:SpotifyAPI.Web.AuthorizationCodeAuthenticator.TokenRefreshed">
+            <summary>
+            This event is called once a new refreshed token was aquired
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.AuthorizationCodeAuthenticator.ClientId">
+            <summary>
+              The ClientID, defined in a spotify application in your Spotify Developer Dashboard
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.AuthorizationCodeAuthenticator.ClientSecret">
+            <summary>
+              The ClientID, defined in a spotify application in your Spotify Developer Dashboard
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.AuthorizationCodeAuthenticator.InitialToken">
+            <summary>
+              The inital token passed to the authenticator. Fields will be updated on refresh.
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:SpotifyAPI.Web.ClientCredentialsAuthenticator">
+            <summary>
+              This Authenticator requests new credentials token on demand and stores them into memory.
+              It is unable to query user specifc details.
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.ClientCredentialsAuthenticator.#ctor(System.String,System.String)">
+            <summary>
+            Initiate a new instance. The initial token will be fetched when the first API call occurs.
+            </summary>
+            <param name="clientId">
+            The ClientID, defined in a spotify application in your Spotify Developer Dashboard.
+            </param>
+            <param name="clientSecret">
+            The ClientSecret, defined in a spotify application in your Spotify Developer Dashboard.
+            </param>
+        </member>
+        <member name="M:SpotifyAPI.Web.ClientCredentialsAuthenticator.#ctor(System.String,System.String,SpotifyAPI.Web.ClientCredentialsTokenResponse)">
+            <summary>
+            Initiate a new instance. The initial token is provided and will be used if not expired
+            </summary>
+            <param name="clientId">
+            The ClientID, defined in a spotify application in your Spotify Developer Dashboard.
+            </param>
+            <param name="clientSecret">
+            The ClientSecret, defined in a spotify application in your Spotify Developer Dashboard.
+            </param>
+            <param name="token">
+            An optional inital token received earlier.
+            </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.ClientCredentialsAuthenticator.ClientId">
+            <summary>
+              The ClientID, defined in a spotify application in your Spotify Developer Dashboard
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.ClientCredentialsAuthenticator.ClientSecret">
+            <summary>
+              The ClientID, defined in a spotify application in your Spotify Developer Dashboard
+            </summary>
+        </member>
+        <member name="T:SpotifyAPI.Web.PKCEAuthenticator">
+            <summary>
+              This Authenticator requests new credentials token on demand and stores them into memory.
+              It is unable to query user specifc details.
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.PKCEAuthenticator.#ctor(System.String,SpotifyAPI.Web.PKCETokenResponse)">
+            <summary>
+              Initiate a new instance. The token will be refreshed once it expires.
+              The initialToken will be updated with the new values on refresh!
+            </summary>
+        </member>
+        <member name="E:SpotifyAPI.Web.PKCEAuthenticator.TokenRefreshed">
+            <summary>
+            This event is called once a new refreshed token was aquired
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.PKCEAuthenticator.ClientId">
+            <summary>
+              The ClientID, defined in a spotify application in your Spotify Developer Dashboard
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.PKCEAuthenticator.InitialToken">
+            <summary>
+              The inital token passed to the authenticator. Fields will be updated on refresh.
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:SpotifyAPI.Web.IAlbumsClient">
+            <summary>
+            Endpoints for retrieving information about one or more albums from the Spotify catalog.
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.IAlbumsClient.GetSeveral(SpotifyAPI.Web.AlbumsRequest)">
+            <summary>
+            Get Spotify catalog information for multiple albums identified by their Spotify IDs.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-multiple-albums
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IAlbumsClient.Get(System.String)">
+            <summary>
+            Get Spotify catalog information for a single album.
+            </summary>
+            <param name="albumId">The Spotify ID of the album.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-an-album
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IAlbumsClient.Get(System.String,SpotifyAPI.Web.AlbumRequest)">
+            <summary>
+            Get Spotify catalog information for a single album.
+            </summary>
+            <param name="albumId">The Spotify ID of the album.</param>
+            <param name="request">The request-model which contains required and optional parameters</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-an-album
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IAlbumsClient.GetTracks(System.String)">
+            <summary>
+            Get Spotify catalog information about an album’s tracks.
+            Optional parameters can be used to limit the number of tracks returned.
+            </summary>
+            <param name="albumId">The Spotify ID of the album.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-an-albums-tracks
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IAlbumsClient.GetTracks(System.String,SpotifyAPI.Web.AlbumTracksRequest)">
+            <summary>
+            Get Spotify catalog information about an album’s tracks.
+            Optional parameters can be used to limit the number of tracks returned.
+            </summary>
+            <param name="albumId">The Spotify ID of the album.</param>
+            <param name="request">The request-model which contains required and optional parameters</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-an-albums-tracks
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="T:SpotifyAPI.Web.IArtistsClient">
+            <summary>
+            Endpoints for retrieving information about one or more artists from the Spotify catalog.
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.IArtistsClient.GetSeveral(SpotifyAPI.Web.ArtistsRequest)">
+            <summary>
+            Get Spotify catalog information for several artists based on their Spotify IDs.
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-multiple-artists
+            </remarks>
+            <param name="request">The request-model which contains required and optional parameters</param>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IArtistsClient.Get(System.String)">
+            <summary>
+            Get Spotify catalog information for a single artist identified by their unique Spotify ID.
+            </summary>
+            <param name="artistId">The Spotify ID of the artist.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-an-artist
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IArtistsClient.GetAlbums(System.String)">
+            <summary>
+            Get Spotify catalog information about an artist’s albums.
+            Optional parameters can be specified in the query string to filter and sort the response.
+            </summary>
+            <param name="artistId">The Spotify ID for the artist.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-an-artists-albums
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IArtistsClient.GetAlbums(System.String,SpotifyAPI.Web.ArtistsAlbumsRequest)">
+            <summary>
+            Get Spotify catalog information about an artist’s albums.
+            Optional parameters can be specified in the query string to filter and sort the response.
+            </summary>
+            <param name="artistId">The Spotify ID for the artist.</param>
+            <param name="request">The request-model which contains required and optional parameters</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-an-artists-albums
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IArtistsClient.GetTopTracks(System.String,SpotifyAPI.Web.ArtistsTopTracksRequest)">
+            <summary>
+            Get Spotify catalog information about an artist’s top tracks by country.
+            </summary>
+            <param name="artistId">The Spotify ID for the artist</param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-an-artists-top-tracks
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IArtistsClient.GetRelatedArtists(System.String)">
+            <summary>
+            Get Spotify catalog information about artists similar to a given artist.
+            Similarity is based on analysis of the Spotify community’s listening history.
+            </summary>
+            <param name="artistId">The Spotify ID for the artist</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-an-artists-related-artists
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="T:SpotifyAPI.Web.IBrowseClient">
+            <summary>
+            Endpoints for getting playlists and new album releases featured on Spotify’s Browse tab.
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.IBrowseClient.GetCategories">
+            <summary>
+            Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-categories
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IBrowseClient.GetCategories(SpotifyAPI.Web.CategoriesRequest)">
+            <summary>
+            Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-categories
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IBrowseClient.GetCategory(System.String)">
+            <summary>
+            Get a single category used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).
+            </summary>
+            <param name="categoryId">The Spotify category ID for the category.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-a-category
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IBrowseClient.GetCategory(System.String,SpotifyAPI.Web.CategoryRequest)">
+            <summary>
+            Get a single category used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).
+            </summary>
+            <param name="categoryId">The Spotify category ID for the category.</param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-a-category
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IBrowseClient.GetCategoryPlaylists(System.String)">
+            <summary>
+            Get a list of Spotify playlists tagged with a particular category.
+            </summary>
+            <param name="categoryId">The Spotify category ID for the category.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-a-categories-playlists
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IBrowseClient.GetCategoryPlaylists(System.String,SpotifyAPI.Web.CategoriesPlaylistsRequest)">
+            <summary>
+            Get a list of Spotify playlists tagged with a particular category.
+            </summary>
+            <param name="categoryId">The Spotify category ID for the category.</param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-a-categories-playlists
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IBrowseClient.GetRecommendations(SpotifyAPI.Web.RecommendationsRequest)">
+            <summary>
+            Recommendations are generated based on the available information for a given seed entity and matched against
+            similar artists and tracks. If there is sufficient information about the provided seeds,
+            a list of tracks will be returned together with pool size details.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-recommendations
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IBrowseClient.GetRecommendationGenres">
+            <summary>
+            Retrieve a list of available genres seed parameter values for recommendations.
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-recommendation-genres
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IBrowseClient.GetNewReleases">
+            <summary>
+            Get a list of new album releases featured in Spotify (shown, for example, on a Spotify player’s “Browse” tab).
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-new-releases
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IBrowseClient.GetNewReleases(SpotifyAPI.Web.NewReleasesRequest)">
+            <summary>
+            Get a list of new album releases featured in Spotify (shown, for example, on a Spotify player’s “Browse” tab).
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-new-releases
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IBrowseClient.GetFeaturedPlaylists">
+            <summary>
+            Get a list of Spotify featured playlists (shown, for example, on a Spotify player’s ‘Browse’ tab).
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-featured-playlists
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IBrowseClient.GetFeaturedPlaylists(SpotifyAPI.Web.FeaturedPlaylistsRequest)">
+            <summary>
+            Get a list of Spotify featured playlists (shown, for example, on a Spotify player’s ‘Browse’ tab).
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-featured-playlists
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="T:SpotifyAPI.Web.IEpisodesClient">
+            <summary>
+            Endpoints for retrieving information about one or more episodes from the Spotify catalog.
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.IEpisodesClient.Get(System.String)">
+            <summary>
+            Get Spotify catalog information for a single episode identified by its unique Spotify ID.
+            </summary>
+            <param name="episodeId">The Spotify ID for the episode.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-an-episode
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IEpisodesClient.Get(System.String,SpotifyAPI.Web.EpisodeRequest)">
+            <summary>
+            Get Spotify catalog information for a single episode identified by its unique Spotify ID.
+            </summary>
+            <param name="episodeId">The Spotify ID for the episode.</param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-an-episode
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IEpisodesClient.GetSeveral(SpotifyAPI.Web.EpisodesRequest)">
+            <summary>
+            Get Spotify catalog information for several episodes based on their Spotify IDs.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-multiple-episodes
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="T:SpotifyAPI.Web.IFollowClient">
+            <summary>
+            Endpoints for managing the artists, users, and playlists that a Spotify user follows.
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.IFollowClient.CheckCurrentUser(SpotifyAPI.Web.FollowCheckCurrentUserRequest)">
+            <summary>
+            Check to see if the current user is following one or more artists or other Spotify users.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-check-current-user-follows
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IFollowClient.CheckPlaylist(System.String,SpotifyAPI.Web.FollowCheckPlaylistRequest)">
+            <summary>
+            Check to see if one or more Spotify users are following a specified playlist.
+            </summary>
+            <param name="playlistId">The Spotify ID of the playlist.</param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-check-if-user-follows-playlist
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IFollowClient.Follow(SpotifyAPI.Web.FollowRequest)">
+            <summary>
+            Add the current user as a follower of one or more artists or other Spotify users.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-follow-artists-users
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IFollowClient.FollowPlaylist(System.String)">
+            <summary>
+            Add the current user as a follower of a playlist.
+            </summary>
+            <param name="playlistId">
+            The Spotify ID of the playlist.
+            Any playlist can be followed, regardless of its public/private status,
+            as long as you know its playlist ID.
+            </param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-follow-playlist
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IFollowClient.FollowPlaylist(System.String,SpotifyAPI.Web.FollowPlaylistRequest)">
+            <summary>
+            Add the current user as a follower of a playlist.
+            </summary>
+            <param name="playlistId">
+            The Spotify ID of the playlist.
+            Any playlist can be followed, regardless of its public/private status,
+            as long as you know its playlist ID.
+            </param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-follow-playlist
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IFollowClient.OfCurrentUser">
+            <summary>
+            Get the current user’s followed artists.
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-followed
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IFollowClient.OfCurrentUser(SpotifyAPI.Web.FollowOfCurrentUserRequest)">
+            <summary>
+            Get the current user’s followed artists.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-followed
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IFollowClient.Unfollow(SpotifyAPI.Web.UnfollowRequest)">
+            <summary>
+            Remove the current user as a follower of one or more artists or other Spotify users.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-unfollow-artists-users
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IFollowClient.UnfollowPlaylist(System.String)">
+            <summary>
+            Remove the current user as a follower of a playlist.
+            </summary>
+            <param name="playlistId">The Spotify ID of the playlist that is to be no longer followed.</param>
+            <returns></returns>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-unfollow-playlist
+            </remarks>
+        </member>
+        <member name="T:SpotifyAPI.Web.ILibraryClient">
+            <summary>
+            Endpoints for retrieving information about,
+            and managing, tracks that the current user has saved in their “Your Music” library.
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.RemoveAlbums(SpotifyAPI.Web.LibraryRemoveAlbumsRequest)">
+            <summary>
+            Remove one or more albums from the current user’s ‘Your Music’ library.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-remove-albums-user
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.RemoveTracks(SpotifyAPI.Web.LibraryRemoveTracksRequest)">
+            <summary>
+            Remove one or more tracks from the current user’s ‘Your Music’ library.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-remove-tracks-user
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.RemoveShows(SpotifyAPI.Web.LibraryRemoveShowsRequest)">
+            <summary>
+            Delete one or more shows from current Spotify user’s library.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-remove-shows-user
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.RemoveEpisodes(SpotifyAPI.Web.LibraryRemoveEpisodesRequest)">
+            <summary>
+            Delete one or more episodes from current Spotify user’s library.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference/#endpoint-remove-episodes-user
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.SaveTracks(SpotifyAPI.Web.LibrarySaveTracksRequest)">
+            <summary>
+            Save one or more tracks to the current user’s ‘Your Music’ library.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-save-tracks-user
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.SaveAlbums(SpotifyAPI.Web.LibrarySaveAlbumsRequest)">
+            <summary>
+            Save one or more albums to the current user’s ‘Your Music’ library.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-save-albums-user
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.SaveShows(SpotifyAPI.Web.LibrarySaveShowsRequest)">
+            <summary>
+            Save one or more shows to current Spotify user’s library.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-save-shows-user
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.SaveEpisodes(SpotifyAPI.Web.LibrarySaveEpisodesRequest)">
+            <summary>
+            Save one or more episodes to current Spotify user’s library.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference/#endpoint-save-episodes-user
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.CheckTracks(SpotifyAPI.Web.LibraryCheckTracksRequest)">
+            <summary>
+            Check if one or more tracks is already saved in the current Spotify user’s ‘Your Music’ library.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-check-users-saved-tracks
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.CheckAlbums(SpotifyAPI.Web.LibraryCheckAlbumsRequest)">
+            <summary>
+            Check if one or more albums is already saved in the current Spotify user’s ‘Your Music’ library.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-check-users-saved-albums
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.CheckShows(SpotifyAPI.Web.LibraryCheckShowsRequest)">
+            <summary>
+            Check if one or more shows is already saved in the current Spotify user’s library.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-check-users-saved-shows
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.CheckEpisodes(SpotifyAPI.Web.LibraryCheckEpisodesRequest)">
+            <summary>
+            Check if one or more episodes is already saved in the current Spotify user’s library.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference/#endpoint-check-users-saved-episodes
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.GetTracks">
+            <summary>
+            Get a list of the songs saved in the current Spotify user’s ‘Your Music’ library.
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-users-saved-tracks
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.GetTracks(SpotifyAPI.Web.LibraryTracksRequest)">
+            <summary>
+            Get a list of the songs saved in the current Spotify user’s ‘Your Music’ library.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-users-saved-tracks
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.GetAlbums">
+            <summary>
+            Get a list of the albums saved in the current Spotify user’s ‘Your Music’ library.
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-users-saved-albums
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.GetAlbums(SpotifyAPI.Web.LibraryAlbumsRequest)">
+            <summary>
+            Get a list of the albums saved in the current Spotify user’s ‘Your Music’ library.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-users-saved-albums
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.GetShows">
+            <summary>
+            Get a list of shows saved in the current Spotify user’s library.
+            Optional parameters can be used to limit the number of shows returned.
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-users-saved-shows
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.GetShows(SpotifyAPI.Web.LibraryShowsRequest)">
+            <summary>
+            Get a list of shows saved in the current Spotify user’s library.
+            Optional parameters can be used to limit the number of shows returned.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-users-saved-shows
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.GetEpisodes">
+            <summary>
+            Get a list of episodes saved in the current Spotify user’s library.
+            Optional parameters can be used to limit the number of shows returned.
+            </summary>
+            <remarks>
+             https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-users-saved-episodes
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ILibraryClient.GetEpisodes(SpotifyAPI.Web.LibraryEpisodesRequest)">
+            <summary>
+            Get a list of episodes saved in the current Spotify user’s library.
+            Optional parameters can be used to limit the number of shows returned.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-users-saved-episodes
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="T:SpotifyAPI.Web.IOAuthClient">
+            <summary>
+            An OAuth Client, which allows to get inital and updated tokens from the Spotify Service
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.IOAuthClient.RequestToken(SpotifyAPI.Web.ClientCredentialsRequest)">
+            <summary>
+            Requests a new token using client_ids and client_secrets.
+            If the token is expired, simply call the funtion again to get a new token
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IOAuthClient.RequestToken(SpotifyAPI.Web.AuthorizationCodeRefreshRequest)">
+            <summary>
+            Refresh an already received token via Authorization Code Auth
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IOAuthClient.RequestToken(SpotifyAPI.Web.AuthorizationCodeTokenRequest)">
+            <summary>
+            Reequest an initial token via Authorization Code Auth
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IOAuthClient.RequestToken(SpotifyAPI.Web.TokenSwapTokenRequest)">
+            <summary>
+            Swaps out a received code with a access token using a remote server
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/ios/guides/token-swap-and-refresh/
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IOAuthClient.RequestToken(SpotifyAPI.Web.TokenSwapRefreshRequest)">
+            <summary>
+            Gets a refreshed access token using an already received refresh token using a remote server
+            </summary>
+            <param name="request"></param>
+            <remarks>
+            https://developer.spotify.com/documentation/ios/guides/token-swap-and-refresh/
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="T:SpotifyAPI.Web.IPaginator">
+            <summary>
+            A paginator allows to cycle through all resources of the spotify API
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPaginator.PaginateAll``1(SpotifyAPI.Web.IPaginatable{``0},SpotifyAPI.Web.Http.IAPIConnector)">
+            <summary>
+            Fetches all pages and returns them grouped in a list
+            </summary>
+            <param name="firstPage">The first page. Will be included in the result list!</param>
+            <param name="connector">An API Connector to make requests to spotify</param>
+            <typeparam name="T">Paging Type</typeparam>
+            <returns>A list containing all pages, including the firstPage</returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPaginator.PaginateAll``2(SpotifyAPI.Web.IPaginatable{``0,``1},System.Func{``1,SpotifyAPI.Web.IPaginatable{``0,``1}},SpotifyAPI.Web.Http.IAPIConnector)">
+            <summary>
+            Fetches all pages and returns them grouped in a list.
+            Supports a mapping method which takes care of JSON mapping problems.
+            To give an example, the Search method always returns the paging objects nested in a key. The mapper functions
+            tells the paginate function where to find the actual paging object in the response.
+            </summary>
+            <param name="firstPage">The first page. Will be included in the result list!</param>
+            <param name="mapper">A function which returns the actual paging object in another response object</param>
+            <param name="connector">An API Connector to make requests to spotify</param>
+            <typeparam name="T">Paging Type</typeparam>
+            <typeparam name="TNext">Outer response Type</typeparam>
+            <returns>A list containing all pages, including the firstPage</returns>
+        </member>
+        <member name="T:SpotifyAPI.Web.IPersonalizationClient">
+            <summary>
+            Endpoints for retrieving information about the user’s listening habits.
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPersonalizationClient.GetTopTracks">
+            <summary>
+            Get the current user’s top tracks based on calculated affinity.
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-users-top-artists-and-tracks
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPersonalizationClient.GetTopTracks(SpotifyAPI.Web.PersonalizationTopRequest)">
+            <summary>
+            Get the current user’s top tracks based on calculated affinity.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-users-top-artists-and-tracks
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPersonalizationClient.GetTopArtists">
+            <summary>
+            Get the current user’s top artists based on calculated affinity.
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-users-top-artists-and-tracks
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPersonalizationClient.GetTopArtists(SpotifyAPI.Web.PersonalizationTopRequest)">
+            <summary>
+            Get the current user’s top artists based on calculated affinity.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-users-top-artists-and-tracks
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="T:SpotifyAPI.Web.IPlayerClient">
+            <summary>
+            Player Endpoints.
+            These endpoints are in beta.
+            While we encourage you to build with them, a situation may arise
+            where we need to disable some or all of the functionality and/or change how
+            they work without prior notice. Please report any issues via our developer community forum.
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.SkipNext">
+            <summary>
+            Skips to next track in the user’s queue.
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-skip-users-playback-to-next-track
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.SkipNext(SpotifyAPI.Web.PlayerSkipNextRequest)">
+            <summary>
+            Skips to next track in the user’s queue.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-skip-users-playback-to-next-track
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.SetRepeat(SpotifyAPI.Web.PlayerSetRepeatRequest)">
+            <summary>
+            Set the repeat mode for the user’s playback. Options are repeat-track, repeat-context, and off.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-set-repeat-mode-on-users-playback
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.TransferPlayback(SpotifyAPI.Web.PlayerTransferPlaybackRequest)">
+            <summary>
+            Transfer playback to a new device and determine if it should start playing.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-transfer-a-users-playback
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.GetCurrentlyPlaying(SpotifyAPI.Web.PlayerCurrentlyPlayingRequest)">
+            <summary>
+            Get the object currently being played on the user’s Spotify account.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-the-users-currently-playing-track
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.GetCurrentPlayback">
+            <summary>
+            Get information about the user’s current playback state, including track or episode, progress, and active device.
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-information-about-the-users-current-playback
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.GetCurrentPlayback(SpotifyAPI.Web.PlayerCurrentPlaybackRequest)">
+            <summary>
+            Get information about the user’s current playback state, including track or episode, progress, and active device.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-information-about-the-users-current-playback
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.SeekTo(SpotifyAPI.Web.PlayerSeekToRequest)">
+            <summary>
+            Seeks to the given position in the user’s currently playing track.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-seek-to-position-in-currently-playing-track
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.SkipPrevious">
+            <summary>
+            Skips to previous track in the user’s queue.
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-skip-users-playback-to-previous-track
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.SkipPrevious(SpotifyAPI.Web.PlayerSkipPreviousRequest)">
+            <summary>
+            Skips to previous track in the user’s queue.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-skip-users-playback-to-previous-track
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.ResumePlayback">
+            <summary>
+            Start a new context or resume current playback on the user’s active device.
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-start-a-users-playback
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.ResumePlayback(SpotifyAPI.Web.PlayerResumePlaybackRequest)">
+            <summary>
+            Start a new context or resume current playback on the user’s active device.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-start-a-users-playback
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.PausePlayback">
+            <summary>
+            Pause playback on the user’s account.
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-pause-a-users-playback
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.PausePlayback(SpotifyAPI.Web.PlayerPausePlaybackRequest)">
+            <summary>
+            Pause playback on the user’s account.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-pause-a-users-playback
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.SetVolume(SpotifyAPI.Web.PlayerVolumeRequest)">
+            <summary>
+            Set the volume for the user’s current playback device.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-set-volume-for-users-playback
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.GetRecentlyPlayed">
+            <summary>
+            Get tracks from the current user’s recently played tracks. Note: Currently doesn’t support podcast episodes.
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-recently-played
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.GetRecentlyPlayed(SpotifyAPI.Web.PlayerRecentlyPlayedRequest)">
+            <summary>
+            Get tracks from the current user’s recently played tracks. Note: Currently doesn’t support podcast episodes.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-recently-played
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.GetAvailableDevices">
+            <summary>
+            Get information about a user’s available devices.
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-a-users-available-devices
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.SetShuffle(SpotifyAPI.Web.PlayerShuffleRequest)">
+            <summary>
+            Toggle shuffle on or off for user’s playback.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-toggle-shuffle-for-users-playback
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlayerClient.AddToQueue(SpotifyAPI.Web.PlayerAddToQueueRequest)">
+            <summary>
+            Add an item to the end of the user’s current playback queue.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-add-to-queue
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="T:SpotifyAPI.Web.IPlaylistsClient">
+            <summary>
+            Endpoints for retrieving information about a user’s playlists and for managing a user’s playlists.
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlaylistsClient.RemoveItems(System.String,SpotifyAPI.Web.PlaylistRemoveItemsRequest)">
+            <summary>
+            Remove one or more items from a user’s playlist.
+            </summary>
+            <param name="playlistId">The Spotify ID for the playlist.</param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-remove-tracks-playlist
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlaylistsClient.AddItems(System.String,SpotifyAPI.Web.PlaylistAddItemsRequest)">
+            <summary>
+            Add one or more items to a user’s playlist.
+            </summary>
+            <param name="playlistId">The Spotify ID for the playlist.</param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-add-tracks-to-playlist
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlaylistsClient.GetItems(System.String)">
+            <summary>
+            Get full details of the items of a playlist owned by a Spotify user.
+            </summary>
+            <param name="playlistId">The Spotify ID for the playlist.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-playlists-tracks
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlaylistsClient.GetItems(System.String,SpotifyAPI.Web.PlaylistGetItemsRequest)">
+            <summary>
+            Get full details of the items of a playlist owned by a Spotify user.
+            </summary>
+            <param name="playlistId">The Spotify ID for the playlist.</param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-playlists-tracks
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlaylistsClient.Create(System.String,SpotifyAPI.Web.PlaylistCreateRequest)">
+            <summary>
+            Create a playlist for a Spotify user. (The playlist will be empty until you add tracks.)
+            </summary>
+            <param name="userId">The user’s Spotify user ID.</param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-create-playlist
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlaylistsClient.UploadCover(System.String,System.String)">
+            <summary>
+            Replace the image used to represent a specific playlist.
+            </summary>
+            <param name="playlistId">The Spotify ID for the playlist.</param>
+            <param name="base64JpgData">Base64 encoded JPEG image data, maximum payload size is 256 KB.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-upload-custom-playlist-cover
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlaylistsClient.GetCovers(System.String)">
+            <summary>
+            Get the current image associated with a specific playlist.
+            </summary>
+            <param name="playlistId">The Spotify ID for the playlist.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-playlist-cover
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlaylistsClient.GetUsers(System.String)">
+            <summary>
+            Get a list of the playlists owned or followed by a Spotify user.
+            </summary>
+            <param name="userId">The user’s Spotify user ID.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-list-users-playlists
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlaylistsClient.GetUsers(System.String,SpotifyAPI.Web.PlaylistGetUsersRequest)">
+            <summary>
+            Get a list of the playlists owned or followed by a Spotify user.
+            </summary>
+            <param name="userId">The user’s Spotify user ID.</param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-list-users-playlists
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlaylistsClient.Get(System.String)">
+            <summary>
+            Get a playlist owned by a Spotify user.
+            </summary>
+            <param name="playlistId">The Spotify ID for the playlist.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-playlist
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlaylistsClient.Get(System.String,SpotifyAPI.Web.PlaylistGetRequest)">
+            <summary>
+            Get a playlist owned by a Spotify user.
+            </summary>
+            <param name="playlistId">The Spotify ID for the playlist.</param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-playlist
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlaylistsClient.ReplaceItems(System.String,SpotifyAPI.Web.PlaylistReplaceItemsRequest)">
+            <summary>
+            Replace all the items in a playlist, overwriting its existing items.
+            This powerful request can be useful for replacing items, re-ordering existing items, or clearing the playlist.
+            </summary>
+            <param name="playlistId">The Spotify ID for the playlist.</param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-replace-playlists-tracks
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlaylistsClient.CurrentUsers">
+            <summary>
+            Get a list of the playlists owned or followed by the current Spotify user.
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-a-list-of-current-users-playlists
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlaylistsClient.CurrentUsers(SpotifyAPI.Web.PlaylistCurrentUsersRequest)">
+            <summary>
+            Get a list of the playlists owned or followed by the current Spotify user.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-a-list-of-current-users-playlists
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlaylistsClient.ChangeDetails(System.String,SpotifyAPI.Web.PlaylistChangeDetailsRequest)">
+            <summary>
+            Change a playlist’s name and public/private state. (The user must, of course, own the playlist.)
+            </summary>
+            <param name="playlistId">The Spotify ID for the playlist.</param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-change-playlist-details
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IPlaylistsClient.ReorderItems(System.String,SpotifyAPI.Web.PlaylistReorderItemsRequest)">
+            <summary>
+            Reorder an item or a group of items in a playlist.
+            </summary>
+            <param name="playlistId">The Spotify ID for the playlist.</param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-reorder-playlists-tracks
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="T:SpotifyAPI.Web.ISearchClient">
+            <summary>
+            Search Endpoints
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.ISearchClient.Item(SpotifyAPI.Web.SearchRequest)">
+            <summary>
+            Get Spotify Catalog information about albums, artists, playlists,
+            tracks, shows or episodes that match a keyword string.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-search
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="T:SpotifyAPI.Web.IShowsClient">
+            <summary>
+            Endpoints for retrieving information about one or more shows from the Spotify catalog.
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.IShowsClient.Get(System.String)">
+            <summary>
+            Get Spotify catalog information for a single show identified by its unique Spotify ID.
+            </summary>
+            <param name="showId">The Spotify ID for the show.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-a-show
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IShowsClient.Get(System.String,SpotifyAPI.Web.ShowRequest)">
+            <summary>
+            Get Spotify catalog information for a single show identified by its unique Spotify ID.
+            </summary>
+            <param name="showId">The Spotify ID for the show.</param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-a-show
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IShowsClient.GetSeveral(SpotifyAPI.Web.ShowsRequest)">
+            <summary>
+            Get Spotify catalog information for several shows based on their Spotify IDs.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-multiple-shows
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IShowsClient.GetEpisodes(System.String)">
+            <summary>
+            Get Spotify catalog information about an show’s episodes.
+            Optional parameters can be used to limit the number of episodes returned.
+            </summary>
+            <param name="showId">The Spotify ID for the show.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-a-shows-episodes
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.IShowsClient.GetEpisodes(System.String,SpotifyAPI.Web.ShowEpisodesRequest)">
+            <summary>
+            Get Spotify catalog information about an show’s episodes.
+            Optional parameters can be used to limit the number of episodes returned.
+            </summary>
+            <param name="showId">The Spotify ID for the show.</param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-a-shows-episodes
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="P:SpotifyAPI.Web.ISpotifyClient.DefaultPaginator">
+            <summary>
+            The default paginator used by the Paginator methods
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ISpotifyClient.UserProfile">
+            <summary>
+            Operations related to Spotify User Profiles
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ISpotifyClient.Browse">
+            <summary>
+            Operations related to Spotify Browse Endpoints
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ISpotifyClient.Shows">
+            <summary>
+            Operations related to Spotify Shows
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ISpotifyClient.Playlists">
+            <summary>
+            Operations related to Spotify Playlists
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ISpotifyClient.Search">
+            <summary>
+            Operations related to Spotify Search
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ISpotifyClient.Follow">
+            <summary>
+            Operations related to Spotify Follows
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ISpotifyClient.Tracks">
+            <summary>
+            Operations related to Spotify Tracks
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ISpotifyClient.Player">
+            <summary>
+            Operations related to Spotify Player Endpoints
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ISpotifyClient.Albums">
+            <summary>
+            Operations related to Spotify Albums
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ISpotifyClient.Artists">
+            <summary>
+            Operations related to Spotify Artists
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ISpotifyClient.Personalization">
+            <summary>
+            Operations related to Spotify Personalization Endpoints
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ISpotifyClient.Episodes">
+            <summary>
+            Operations related to Spotify Podcast Episodes
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ISpotifyClient.Library">
+            <summary>
+            Operations related to Spotify User Library
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ISpotifyClient.LastResponse">
+            <summary>
+            Returns the last response received by an API call.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.ISpotifyClient.PaginateAll``1(SpotifyAPI.Web.IPaginatable{``0},SpotifyAPI.Web.IPaginator)">
+            <summary>
+            Fetches all pages and returns them grouped in a list.
+            The default paginator will fetch all available resources without a delay between requests.
+            This can drain your request limit quite fast, so consider using a custom paginator with delays.
+            </summary>
+            <param name="firstPage">The first page, will be included in the output list!</param>
+            <param name="paginator">Optional. If not supplied, DefaultPaginator will be used</param>
+            <typeparam name="T">The Paging-Type</typeparam>
+            <returns>A list containing all fetched pages</returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ISpotifyClient.PaginateAll``2(SpotifyAPI.Web.IPaginatable{``0,``1},System.Func{``1,SpotifyAPI.Web.IPaginatable{``0,``1}},SpotifyAPI.Web.IPaginator)">
+            <summary>
+            Fetches all pages and returns them grouped in a list.
+            Some responses (e.g search response) have the pagination nested in a JSON Property.
+            To workaround this limitation, the mapper is required and needs to point to the correct next pagination.
+            The default paginator will fetch all available resources without a delay between requests.
+            This can drain your request limit quite fast, so consider using a custom paginator with delays.
+            </summary>
+            <param name="firstPage">A first page, will be included in the output list!</param>
+            <param name="mapper">A function which maps response objects to the next paging object</param>
+            <param name="paginator">Optional. If not supplied, DefaultPaginator will be used</param>
+            <typeparam name="T">The Paging-Type</typeparam>
+            <typeparam name="TNext">The Response-Type</typeparam>
+            <returns>A list containing all fetched pages</returns>
+        </member>
+        <member name="T:SpotifyAPI.Web.ITracksClient">
+            <summary>
+            Endpoints for retrieving information about one or more tracks from the Spotify catalog.
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.ITracksClient.GetSeveral(SpotifyAPI.Web.TracksRequest)">
+            <summary>
+            Get Spotify catalog information for multiple tracks based on their Spotify IDs.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-several-tracks
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ITracksClient.GetAudioAnalysis(System.String)">
+            <summary>
+            Get a detailed audio analysis for a single track identified by its unique Spotify ID.
+            </summary>
+            <param name="trackId">The Spotify ID for the track.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-audio-analysis
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ITracksClient.GetAudioFeatures(System.String)">
+            <summary>
+            Get audio feature information for a single track identified by its unique Spotify ID.
+            </summary>
+            <param name="trackId">The Spotify ID for the track.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-audio-features
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ITracksClient.Get(System.String)">
+            <summary>
+            Get Spotify catalog information for a single track identified by its unique Spotify ID.
+            </summary>
+            <param name="trackId">The Spotify ID for the track.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-track
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ITracksClient.Get(System.String,SpotifyAPI.Web.TrackRequest)">
+            <summary>
+            Get Spotify catalog information for a single track identified by its unique Spotify ID.
+            </summary>
+            <param name="trackId">The Spotify ID for the track.</param>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.ITracksClient.GetSeveralAudioFeatures(SpotifyAPI.Web.TracksAudioFeaturesRequest)">
+            <summary>
+            Get audio features for multiple tracks based on their Spotify IDs.
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-several-audio-features
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="T:SpotifyAPI.Web.IUserProfileClient">
+            <summary>
+              Endpoints for retrieving information about a user’s profile.
+            </summary>
+            <remarks>https://developer.spotify.com/documentation/web-api/reference-beta/#category-user-profile</remarks>
+        </member>
+        <member name="M:SpotifyAPI.Web.IUserProfileClient.Current">
+            <summary>
+              Get detailed profile information about the current user (including the current user’s username).
+            </summary>
+            <remarks>
+            https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-current-users-profile
+            </remarks>
+            <exception cref="T:SpotifyAPI.Web.APIUnauthorizedException">Thrown if the client is not authenticated.</exception>
+        </member>
+        <member name="M:SpotifyAPI.Web.IUserProfileClient.Get(System.String)">
+            <summary>
+              Get public profile information about a Spotify user.
+            </summary>
+            <remarks>https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-get-users-profile</remarks>
+            <exception cref="T:SpotifyAPI.Web.APIUnauthorizedException">Thrown if the client is not authenticated.</exception>
+        </member>
+        <member name="M:SpotifyAPI.Web.OAuthClient.RequestToken(SpotifyAPI.Web.PKCETokenRequest)">
+            <summary>
+            Requests a new token using pkce flow
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow-with-proof-key-for-code-exchange-pkce
+            </remarks>
+            <returns></returns>1
+        </member>
+        <member name="M:SpotifyAPI.Web.OAuthClient.RequestToken(SpotifyAPI.Web.PKCETokenRefreshRequest)">
+            <summary>
+            Refreshes a token using pkce flow
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow-with-proof-key-for-code-exchange-pkce
+            </remarks>
+            <returns></returns>1
+        </member>
+        <member name="M:SpotifyAPI.Web.OAuthClient.RequestToken(SpotifyAPI.Web.ClientCredentialsRequest)">
+            <summary>
+            Requests a new token using client_ids and client_secrets.
+            If the token is expired, simply call the funtion again to get a new token
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow
+            </remarks>
+            <returns></returns>1
+        </member>
+        <member name="M:SpotifyAPI.Web.OAuthClient.RequestToken(SpotifyAPI.Web.AuthorizationCodeRefreshRequest)">
+            <summary>
+            Refresh an already received token via Authorization Code Auth
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.OAuthClient.RequestToken(SpotifyAPI.Web.AuthorizationCodeTokenRequest)">
+            <summary>
+            Reequest an initial token via Authorization Code Auth
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.OAuthClient.RequestToken(SpotifyAPI.Web.TokenSwapTokenRequest)">
+            <summary>
+            Swaps out a received code with a access token using a remote server
+            </summary>
+            <param name="request">The request-model which contains required and optional parameters.</param>
+            <remarks>
+            https://developer.spotify.com/documentation/ios/guides/token-swap-and-refresh/
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.OAuthClient.RequestToken(SpotifyAPI.Web.TokenSwapRefreshRequest)">
+            <summary>
+            Gets a refreshed access token using an already received refresh token using a remote server
+            </summary>
+            <param name="request"></param>
+            <remarks>
+            https://developer.spotify.com/documentation/ios/guides/token-swap-and-refresh/
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.SpotifyClient.PaginateAll``1(SpotifyAPI.Web.IPaginatable{``0},SpotifyAPI.Web.IPaginator)">
+            <summary>
+            Fetches all pages and returns them grouped in a list.
+            The default paginator will fetch all available resources without a delay between requests.
+            This can drain your request limit quite fast, so consider using a custom paginator with delays.
+            </summary>
+            <param name="firstPage">The first page, will be included in the output list!</param>
+            <param name="paginator">Optional. If not supplied, DefaultPaginator will be used</param>
+            <typeparam name="T">The Paging-Type</typeparam>
+            <returns>A list containing all fetched pages</returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.SpotifyClient.PaginateAll``2(SpotifyAPI.Web.IPaginatable{``0,``1},System.Func{``1,SpotifyAPI.Web.IPaginatable{``0,``1}},SpotifyAPI.Web.IPaginator)">
+            <summary>
+            Fetches all pages and returns them grouped in a list.
+            Some responses (e.g search response) have the pagination nested in a JSON Property.
+            To workaround this limitation, the mapper is required and needs to point to the correct next pagination.
+            The default paginator will fetch all available resources without a delay between requests.
+            This can drain your request limit quite fast, so consider using a custom paginator with delays.
+            </summary>
+            <param name="firstPage">A first page, will be included in the output list!</param>
+            <param name="mapper">A function which maps response objects to the next paging object</param>
+            <param name="paginator">Optional. If not supplied, DefaultPaginator will be used</param>
+            <typeparam name="T">The Paging-Type</typeparam>
+            <typeparam name="TNext">The Response-Type</typeparam>
+            <returns>A list containing all fetched pages</returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.SpotifyClient.NextPage``1(SpotifyAPI.Web.Paging{``0})">
+            <summary>
+            Fetches the next page of the paging object
+            </summary>
+            <param name="paging">A paging object which has a next page</param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.SpotifyClient.NextPage``1(SpotifyAPI.Web.CursorPaging{``0})">
+            <summary>
+            Fetches the next page of the cursor paging object
+            </summary>
+            <param name="cursorPaging">A cursor paging object which has a next page</param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.SpotifyClient.NextPage``2(SpotifyAPI.Web.IPaginatable{``0,``1})">
+            <summary>
+            Fetches the next page of the complex IPaginatable object.
+            </summary>
+            <param name="paginatable">A complex IPaginatable object with a next page</param>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TNext">The type of the next page</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.SpotifyClient.PreviousPage``1(SpotifyAPI.Web.Paging{``0})">
+            <summary>
+            Fetches the previous page of the paging object.
+            </summary>
+            <param name="paging">A paging object with a previous page</param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.SpotifyClient.PreviousPage``2(SpotifyAPI.Web.Paging{``0,``1})">
+            <summary>
+            Fetches the previous page of the complex paging object.
+            </summary>
+            <param name="paging">A complex paging object with a previous page</param>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TNext">The type of the next page</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.SpotifyClientConfig.#ctor(System.Uri,SpotifyAPI.Web.IAuthenticator,SpotifyAPI.Web.Http.IJSONSerializer,SpotifyAPI.Web.Http.IHTTPClient,SpotifyAPI.Web.Http.IRetryHandler,SpotifyAPI.Web.Http.IHTTPLogger,SpotifyAPI.Web.IPaginator,SpotifyAPI.Web.Http.IAPIConnector)">
+            <summary>
+              This config spefies the internal parts of the SpotifyClient.
+            </summary>
+            <param name="baseAddress"></param>
+            <param name="authenticator"></param>
+            <param name="jsonSerializer"></param>
+            <param name="httpClient"></param>
+            <param name="retryHandler"></param>
+            <param name="httpLogger"></param>
+            <param name="defaultPaginator"></param>
+            <param name="apiConnector"></param>
+        </member>
+        <member name="T:SpotifyAPI.Web.Http.IRetryHandler">
+            <summary>
+              The Retry Handler will be directly called after the response is retrived and before errors and body are processed.
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.IProxyConfig.BypassProxyOnLocal">
+            <summary>
+              Whether to bypass the proxy server for local addresses.
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.AlbumRequest.Market">
+            <summary>
+            The market you’d like to request. Synonym for country.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.AlbumsRequest.#ctor(System.Collections.Generic.IList{System.String})">
+            <summary>
+            AlbumsRequest
+            </summary>
+            <param name="ids">A comma-separated list of the Spotify IDs for the albums. Maximum: 20 IDs.</param>
+        </member>
+        <member name="P:SpotifyAPI.Web.AlbumsRequest.Ids">
+            <summary>
+            A comma-separated list of the Spotify IDs for the albums. Maximum: 20 IDs.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.AlbumsRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code or the string from_token.
+            Provide this parameter if you want to apply Track Relinking.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.AlbumTracksRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code or the string from_token.
+            Provide this parameter if you want to apply Track Relinking.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.AlbumTracksRequest.Limit">
+            <summary>
+            The maximum number of tracks to return. Default: 20. Minimum: 1. Maximum: 50.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.AlbumTracksRequest.Offset">
+            <summary>
+            The index of the first track to return. Default: 0 (the first object).
+            Use with limit to get the next set of tracks.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ArtistsAlbumsRequest.IncludeGroupsParam">
+            <summary>
+            A comma-separated list of keywords that will be used to filter the response.
+            If not supplied, all album types will be returned.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ArtistsAlbumsRequest.Market">
+            <summary>
+            Synonym for country. An ISO 3166-1 alpha-2 country code or the string from_token.
+            Supply this parameter to limit the response to one particular geographical market.
+            For example, for albums available in Sweden: market=SE.
+            If not given, results will be returned for all markets and you are likely to get duplicate results per album,
+            one for each market in which the album is available!
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ArtistsAlbumsRequest.Limit">
+            <summary>
+            The number of album objects to return. Default: 20. Minimum: 1. Maximum: 50. For example: limit=2
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ArtistsAlbumsRequest.Offset">
+            <summary>
+            The index of the first album to return. Default: 0 (i.e., the first album). Use with limit to get the next set of albums.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.ArtistsRequest.#ctor(System.Collections.Generic.IList{System.String})">
+            <summary>
+            ArtistsRequest
+            </summary>
+            <param name="ids">A comma-separated list of the Spotify IDs for the artists. Maximum: 50 IDs.</param>
+        </member>
+        <member name="P:SpotifyAPI.Web.ArtistsRequest.Ids">
+            <summary>
+            A comma-separated list of the Spotify IDs for the artists. Maximum: 50 IDs.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.ArtistsTopTracksRequest.#ctor(System.String)">
+            <summary>
+            An ISO 3166-1 alpha-2 country code or the string from_token. Synonym for country.
+            </summary>
+            <param name="market"></param>
+        </member>
+        <member name="P:SpotifyAPI.Web.ArtistsTopTracksRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code or the string from_token. Synonym for country.
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:SpotifyAPI.Web.AuthorizationCodeRefreshRequest">
+            <summary>
+              Used when requesting a refreshed token from spotify oauth services (Authorization Code Auth)
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.AuthorizationCodeRefreshRequest.#ctor(System.String,System.String,System.String)">
+             <summary>
+            
+             </summary>
+             <param name="clientId">The Client ID of your Spotify Application (See Spotify Dev Dashboard)</param>
+             <param name="clientSecret">The Client Secret of your Spotify Application (See Spotify Dev Dashboard)</param>
+             <param name="refreshToken">The refresh token received from an earlier authorization code grant</param>
+        </member>
+        <member name="P:SpotifyAPI.Web.AuthorizationCodeRefreshRequest.RefreshToken">
+            <summary>
+            The refresh token received from an earlier authorization code grant
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.AuthorizationCodeRefreshRequest.ClientId">
+            <summary>
+            The Client ID of your Spotify Application (See Spotify Dev Dashboard)
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.AuthorizationCodeRefreshRequest.ClientSecret">
+            <summary>
+            The Client Secret of your Spotify Application (See Spotify Dev Dashboard)
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:SpotifyAPI.Web.AuthorizationCodeTokenRequest">
+            <summary>
+              Used when requesting a token from spotify oauth services (Authorization Code Auth)
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.AuthorizationCodeTokenRequest.#ctor(System.String,System.String,System.String,System.Uri)">
+             <summary>
+            
+             </summary>
+             <param name="clientId">The Client ID of your Spotify Application (See Spotify Dev Dashboard).</param>
+             <param name="clientSecret">The Client Secret of your Spotify Application (See Spotify Dev Dashboard).</param>
+             <param name="code">The code received from the spotify response.</param>
+             <param name="redirectUri">The redirectUri which was used to initiate the authentication.</param>
+        </member>
+        <member name="P:SpotifyAPI.Web.AuthorizationCodeTokenRequest.ClientId">
+            <summary>
+            The Client ID of your Spotify Application (See Spotify Dev Dashboard).
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.AuthorizationCodeTokenRequest.ClientSecret">
+            <summary>
+            The Client Secret of your Spotify Application (See Spotify Dev Dashboard).
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.AuthorizationCodeTokenRequest.Code">
+            <summary>
+            The code received from the spotify response.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.AuthorizationCodeTokenRequest.RedirectUri">
+            <summary>
+            The redirectUri which was used to initiate the authentication.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.CategoriesRequest.Country">
+            <summary>
+            A country: an ISO 3166-1 alpha-2 country code.
+            Provide this parameter if you want to narrow the list of returned categories to those relevant to a particular country.
+            If omitted, the returned items will be globally relevant.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.CategoriesRequest.Locale">
+            <summary>
+            The desired language, consisting of an ISO 639-1 language code and an ISO 3166-1 alpha-2 country code,
+            joined by an underscore. For example: es_MX, meaning “Spanish (Mexico)”. Provide this parameter if
+            you want the category metadata returned in a particular language.
+            Note that, if locale is not supplied, or if the specified language is not available, all strings will
+            be returned in the Spotify default language (American English).
+            The locale parameter, combined with the country parameter, may give odd results if not carefully matched.
+            For example country=SE&amp;locale=de_DE will return a list of categories relevant to Sweden but as German language strings.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.CategoriesRequest.Limit">
+            <summary>
+            The maximum number of categories to return. Default: 20. Minimum: 1. Maximum: 50.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.CategoriesRequest.Offset">
+            <summary>
+            The index of the first item to return. Default: 0 (the first object). Use with limit to get the next set of categories.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.CategoriesPlaylistsRequest.Country">
+            <summary>
+            A country: an ISO 3166-1 alpha-2 country code.
+            Provide this parameter to ensure that the category exists for a particular country.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.CategoriesPlaylistsRequest.Limit">
+            <summary>
+            The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.CategoriesPlaylistsRequest.Offset">
+            <summary>
+            The index of the first item to return. Default: 0 (the first object). Use with limit to get the next set of items.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.CategoryRequest.Country">
+            <summary>
+            A country: an ISO 3166-1 alpha-2 country code.
+            Provide this parameter to ensure that the category exists for a particular country.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.CategoryRequest.Locale">
+            <summary>
+            The desired language, consisting of an ISO 639-1 language code and an ISO 3166-1 alpha-2 country code,
+            joined by an underscore. For example: es_MX, meaning "Spanish (Mexico)".
+            Provide this parameter if you want the category strings returned in a particular language.
+            Note that, if locale is not supplied, or if the specified language is not available,
+            the category strings returned will be in the Spotify default language (American English).
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:SpotifyAPI.Web.ClientCredentialsRequest">
+            <summary>
+              Used when requesting a token from spotify oauth services (Client Credentials Auth)
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.ClientCredentialsRequest.#ctor(System.String,System.String)">
+             <summary>
+            
+             </summary>
+             <param name="clientId">The Client ID of your Spotify Application (See Spotify Dev Dashboard)</param>
+             <param name="clientSecret">The Client Secret of your Spotify Application (See Spotify Dev Dashboard)</param>
+        </member>
+        <member name="P:SpotifyAPI.Web.ClientCredentialsRequest.ClientId">
+            <summary>
+            The Client ID of your Spotify Application (See Spotify Dev Dashboard)
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ClientCredentialsRequest.ClientSecret">
+            <summary>
+            The Client Secret of your Spotify Application (See Spotify Dev Dashboard)
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.EpisodeRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code. If a country code is specified,
+            only shows and episodes that are available in that market will be returned.
+            If a valid user access token is specified in the request header, the country
+            associated with the user account will take priority over this parameter.
+            Note: If neither market or user country are provided, the content is considered unavailable for the client.
+            Users can view the country that is associated with their account in the account settings.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.EpisodesRequest.#ctor(System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="ids">A comma-separated list of the Spotify IDs for the episodes. Maximum: 50 IDs.</param>
+        </member>
+        <member name="P:SpotifyAPI.Web.EpisodesRequest.Ids">
+            <summary>
+            A comma-separated list of the Spotify IDs for the episodes. Maximum: 50 IDs.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.EpisodesRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code. If a country code is specified, only shows and episodes
+            that are available in that market will be returned.If a valid user access token is specified
+            in the request header, the country associated with the user account will take priority over
+            this parameter.Note: If neither market or user country are provided, the content is considered
+            unavailable for the client.Users can view the country that is associated with their account
+            in the account settings.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.FeaturedPlaylistsRequest.Country">
+            <summary>
+            A country: an ISO 3166-1 alpha-2 country code.
+            Provide this parameter if you want the list of returned items to be relevant to a particular country.
+            If omitted, the returned items will be relevant to all countries.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.FeaturedPlaylistsRequest.Locale">
+            <summary>
+            The desired language, consisting of a lowercase ISO 639-1 language code and an uppercase ISO 3166-1
+            alpha-2 country code, joined by an underscore. For example: es_MX, meaning “Spanish (Mexico)”. Provide
+            this parameter if you want the results returned in a particular language (where available). Note that,
+            if locale is not supplied, or if the specified language is not available, all strings will be returned
+            in the Spotify default language (American English). The locale parameter, combined with the country
+            parameter, may give odd results if not carefully matched.
+            For example country=SE&amp;locale=de_DE will return a list of categories relevant to Sweden but as German language strings.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.FeaturedPlaylistsRequest.Limit">
+            <summary>
+            The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.FeaturedPlaylistsRequest.Offset">
+            <summary>
+            The index of the first item to return. Default: 0 (the first object). Use with limit to get the next set of items.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.FeaturedPlaylistsRequest.Timestamp">
+            <summary>
+            A timestamp in ISO 8601 format: yyyy-MM-ddTHH:mm:ss. Use this parameter to specify the user’s
+            local time to get results tailored for that specific date and time in the day. If not provided,
+            the response defaults to the current UTC time. Example: “2014-10-23T09:00:00” for a user whose local
+            time is 9AM. If there were no featured playlists (or there is no data) at the specified time,
+            the response will revert to the current UTC time.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.FollowCheckCurrentUserRequest.#ctor(SpotifyAPI.Web.FollowCheckCurrentUserRequest.Type,System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="type">The ID type: either artist or user.</param>
+             <param name="ids">
+             A list of the artist or the user Spotify IDs to check.
+             For example: ids=74ASZWbe4lXaubB36ztrGX,08td7MxkoHQkXnWAYD8d6Q.
+             A maximum of 50 IDs can be sent in one request.
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.FollowCheckCurrentUserRequest.TypeParam">
+            <summary>
+            The ID type: either artist or user.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.FollowCheckCurrentUserRequest.Ids">
+            <summary>
+            A list of the artist or the user Spotify IDs to check.
+            For example: ids=74ASZWbe4lXaubB36ztrGX,08td7MxkoHQkXnWAYD8d6Q.
+            A maximum of 50 IDs can be sent in one request.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.FollowCheckPlaylistRequest.#ctor(System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="ids">
+             A comma-separated list of Spotify User IDs ;
+             the ids of the users that you want to check to see if they follow the playlist.
+             Maximum: 5 ids.
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.FollowCheckPlaylistRequest.Ids">
+            <summary>
+            A comma-separated list of Spotify User IDs ;
+            the ids of the users that you want to check to see if they follow the playlist.
+            Maximum: 5 ids.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.FollowOfCurrentUserRequest.#ctor(SpotifyAPI.Web.FollowOfCurrentUserRequest.Type)">
+            <summary>
+            The ID type: currently only artist is supported.
+            </summary>
+            <param name="type"></param>
+        </member>
+        <member name="P:SpotifyAPI.Web.FollowOfCurrentUserRequest.TypeParam">
+            <summary>
+            The ID type: currently only artist is supported.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.FollowOfCurrentUserRequest.Limit">
+            <summary>
+            The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.FollowOfCurrentUserRequest.After">
+            <summary>
+            The last artist ID retrieved from the previous request.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.FollowPlaylistRequest.Public">
+            <summary>
+            Defaults to true. If true the playlist will be included in user’s public playlists,
+            if false it will remain private. To be able to follow playlists privately,
+            the user must have granted the playlist-modify-private scope.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.FollowRequest.#ctor(SpotifyAPI.Web.FollowRequest.Type,System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="type">The ID type: either artist or user.</param>
+             <param name="ids">
+             A comma-separated list of the artist or the user Spotify IDs.
+             For example: ids=74ASZWbe4lXaubB36ztrGX,08td7MxkoHQkXnWAYD8d6Q.
+             A maximum of 50 IDs can be sent in one request.
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.FollowRequest.TypeParam">
+            <summary>
+            The ID type: either artist or user.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.FollowRequest.Ids">
+            <summary>
+            A comma-separated list of the artist or the user Spotify IDs.
+            For example: ids=74ASZWbe4lXaubB36ztrGX,08td7MxkoHQkXnWAYD8d6Q.
+            A maximum of 50 IDs can be sent in one request.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryAlbumsRequest.Limit">
+            <summary>
+            The maximum number of objects to return. Default: 20. Minimum: 1. Maximum: 50.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryAlbumsRequest.Offset">
+            <summary>
+            The index of the first object to return. Default: 0 (i.e., the first object).
+            Use with limit to get the next set of objects.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryAlbumsRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code or the string from_token. Provide this parameter
+            if you want to apply Track Relinking.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.LibraryCheckAlbumsRequest.#ctor(System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="ids">
+             A comma-separated list of the Spotify IDs for the albums. Maximum: 50 IDs.
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryCheckAlbumsRequest.Ids">
+            <summary>
+            A comma-separated list of the Spotify IDs for the albums. Maximum: 50 IDs.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.LibraryCheckEpisodesRequest.#ctor(System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="ids">A comma-separated list of the Spotify IDs for the shows. Maximum: 50 ids.</param>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryCheckEpisodesRequest.Ids">
+            <summary>
+            A comma-separated list of the Spotify IDs for the shows. Maximum: 50 ids.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.LibraryCheckShowsRequest.#ctor(System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="ids">A comma-separated list of the Spotify IDs for the shows. Maximum: 50 ids.</param>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryCheckShowsRequest.Ids">
+            <summary>
+            A comma-separated list of the Spotify IDs for the shows. Maximum: 50 ids.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.LibraryCheckTracksRequest.#ctor(System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="ids">
+             A comma-separated list of the Spotify IDs for the tracks. Maximum: 50 IDs.
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryCheckTracksRequest.Ids">
+            <summary>
+            A comma-separated list of the Spotify IDs for the tracks. Maximum: 50 IDs.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryEpisodesRequest.Limit">
+            <summary>
+            The maximum number of episodes to return. Default: 20. Minimum: 1. Maximum: 50
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryEpisodesRequest.Offset">
+            <summary>
+            The index of the first episode to return. Default: 0 (the first object).
+            Use with limit to get the next set of episodes.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryEpisodesRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code or the string from_token.
+            Provide this parameter if you want to apply Track Relinking.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.LibraryRemoveAlbumsRequest.#ctor(System.Collections.Generic.IList{System.String})">
+            <summary>
+            </summary>
+            <param name="ids">
+            A comma-separated list of the Spotify IDs.
+            For example: ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M. Maximum: 50 IDs.
+            </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryRemoveAlbumsRequest.Ids">
+            <summary>
+            A comma-separated list of the Spotify IDs.
+            For example: ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M. Maximum: 50 IDs.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.LibraryRemoveEpisodesRequest.#ctor(System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="ids">
+             A comma-separated list of Spotify IDs for the shows to be deleted from the user’s library.
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryRemoveEpisodesRequest.Ids">
+            <summary>
+            A comma-separated list of Spotify IDs for the shows to be deleted from the user’s library.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.LibraryRemoveShowsRequest.#ctor(System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="ids">
+             A comma-separated list of Spotify IDs for the shows to be deleted from the user’s library.
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryRemoveShowsRequest.Ids">
+            <summary>
+            A comma-separated list of Spotify IDs for the shows to be deleted from the user’s library.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.LibraryRemoveTracksRequest.#ctor(System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="ids">
+             A comma-separated list of the Spotify IDs. For example: ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M.
+             Maximum: 50 IDs.
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryRemoveTracksRequest.Ids">
+            <summary>
+            A comma-separated list of the Spotify IDs. For example: ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M.
+            Maximum: 50 IDs.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.LibrarySaveAlbumsRequest.#ctor(System.Collections.Generic.IList{System.String})">
+            <summary>
+            </summary>
+            <param name="ids">
+            A comma-separated list of the Spotify IDs.
+            For example: ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M. Maximum: 50 IDs.
+            </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibrarySaveAlbumsRequest.Ids">
+            <summary>
+            A comma-separated list of the Spotify IDs.
+            For example: ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M. Maximum: 50 IDs.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.LibrarySaveEpisodesRequest.#ctor(System.Collections.Generic.IList{System.String})">
+            <summary>
+            Request for SaveEpisodes.
+            </summary>
+            <param name="ids"></param>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibrarySaveEpisodesRequest.Ids">
+            <summary>
+            A comma-separated list of the Spotify IDs. 
+            Maximum: 50 IDs.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.LibrarySaveShowsRequest.#ctor(System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="ids">A comma-separated list of Spotify IDs for the shows to be added to the user’s library.</param>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibrarySaveShowsRequest.Ids">
+            <summary>
+            A comma-separated list of Spotify IDs for the shows to be added to the user’s library.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.LibrarySaveTracksRequest.#ctor(System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="ids">
+             A comma-separated list of the Spotify IDs.
+             For example: ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M. Maximum: 50 IDs.
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibrarySaveTracksRequest.Ids">
+            <summary>
+            A comma-separated list of the Spotify IDs.
+            For example: ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M. Maximum: 50 IDs.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryShowsRequest.Limit">
+            <summary>
+            The maximum number of shows to return. Default: 20. Minimum: 1. Maximum: 50
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryShowsRequest.Offset">
+            <summary>
+            The index of the first show to return. Default: 0 (the first object).
+            Use with limit to get the next set of shows.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryTracksRequest.Limit">
+            <summary>
+            The maximum number of objects to return. Default: 20. Minimum: 1. Maximum: 50.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryTracksRequest.Offset">
+            <summary>
+            The index of the first object to return.
+            Default: 0 (i.e., the first object). Use with limit to get the next set of objects.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.LibraryTracksRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code or the string from_token.
+            Provide this parameter if you want to apply Track Relinking.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.NewReleasesRequest.Country">
+            <summary>
+            A country: an ISO 3166-1 alpha-2 country code.
+            Provide this parameter if you want the list of returned items to be relevant to a particular country.
+            If omitted, the returned items will be relevant to all countries.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.NewReleasesRequest.Limit">
+            <summary>
+            The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.NewReleasesRequest.Offset">
+            <summary>
+            The index of the first item to return. Default: 0 (the first object).
+            Use with limit to get the next set of items.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PersonalizationTopRequest.Limit">
+            <summary>
+            The number of entities to return. Default: 20. Minimum: 1. Maximum: 50. For example: limit=2
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PersonalizationTopRequest.Offset">
+            <summary>
+            The index of the first entity to return. Default: 0 (i.e., the first track). Use with limit to get the next set of entities.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PersonalizationTopRequest.TimeRangeParam">
+            <summary>
+            Over what time frame the affinities are computed. Valid values: long_term
+            (calculated from several years of data and including all new data as it becomes available),
+            medium_term (approximately last 6 months), short_term (approximately last 4 weeks). Default: medium_term
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.PKCETokenRefreshRequest.#ctor(System.String,System.String)">
+            <summary>
+            Request model for refreshing a access token via PKCE Token
+            </summary>
+            <param name="clientId">The Client ID of your Spotify Application (See Spotify Dev Dashboard).</param>
+            <param name="refreshToken">The received refresh token. Expires after one refresh</param>
+        </member>
+        <member name="P:SpotifyAPI.Web.PKCETokenRefreshRequest.ClientId">
+            <summary>
+            The Client ID of your Spotify Application (See Spotify Dev Dashboard).
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PKCETokenRefreshRequest.RefreshToken">
+            <summary>
+            The received refresh token.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.PKCETokenRequest.#ctor(System.String,System.String,System.Uri,System.String)">
+             <summary>
+            
+             </summary>
+             <param name="clientId">The Client ID of your Spotify Application (See Spotify Dev Dashboard).</param>
+             <param name="code">The code received from the spotify response.</param>
+             <param name="redirectUri">The redirectUri which was used to initiate the authentication.</param>
+             <param name="codeVerifier">
+             The value of this parameter must match the value of the code_verifier
+             that your app generated in step 1.
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.PKCETokenRequest.ClientId">
+            <summary>
+            The Client ID of your Spotify Application (See Spotify Dev Dashboard).
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PKCETokenRequest.CodeVerifier">
+            <summary>
+            The value of this parameter must match the value of the code_verifier
+            that your app generated in step 1.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PKCETokenRequest.Code">
+            <summary>
+            The code received from the spotify response.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PKCETokenRequest.RedirectUri">
+            <summary>
+            The redirectUri which was used to initiate the authentication.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.PlayerAddToQueueRequest.#ctor(System.String)">
+             <summary>
+            
+             </summary>
+             <param name="uri">The uri of the item to add to the queue. Must be a track or an episode uri.</param>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerAddToQueueRequest.Uri">
+            <summary>
+            The uri of the item to add to the queue. Must be a track or an episode uri.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerAddToQueueRequest.DeviceId">
+            <summary>
+            The id of the device this command is targeting.
+            If not supplied, the user’s currently active device is the target.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.PlayerCurrentlyPlayingRequest.#ctor(SpotifyAPI.Web.PlayerCurrentlyPlayingRequest.AdditionalTypes)">
+            <summary>
+            A comma-separated list of item types that your client supports besides the default track type.
+            Valid types are: track and episode. An unsupported type in the response is expected to be represented
+            as null value in the item field. Note: This parameter was introduced to allow existing clients to
+            maintain their current behaviour and might be deprecated in the future. In addition to providing
+            this parameter, make sure that your client properly handles cases of new types in the future by
+            checking against the currently_playing_type field. Defaults to AdditionalTypes.All
+            </summary>
+            <param name="types"></param>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerCurrentlyPlayingRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code or the string from_token.
+            Provide this parameter if you want to apply Track Relinking.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerCurrentlyPlayingRequest.AdditionalTypesParam">
+            <summary>
+            A comma-separated list of item types that your client supports besides the default track type.
+            Valid types are: track and episode. An unsupported type in the response is expected to be represented
+            as null value in the item field. Note: This parameter was introduced to allow existing clients to
+            maintain their current behaviour and might be deprecated in the future. In addition to providing
+            this parameter, make sure that your client properly handles cases of new types in the future by
+            checking against the currently_playing_type field. Defaults to AdditionalTypes.All
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.PlayerCurrentPlaybackRequest.#ctor(SpotifyAPI.Web.PlayerCurrentPlaybackRequest.AdditionalTypes)">
+             <summary>
+            
+             </summary>
+             <param name="types">
+             A comma-separated list of item types that your client supports besides the default track type.
+             Valid types are: track and episode. An unsupported type in the response is expected to be represented
+             as null value in the item field. Note: This parameter was introduced to allow existing clients to
+             maintain their current behaviour and might be deprecated in the future. In addition to providing
+             this parameter, make sure that your client properly handles cases of new types in the future by
+             checking against the currently_playing_type field.
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerCurrentPlaybackRequest.AdditionalTypesParam">
+            <summary>
+              This is set to `"track", "episode"` by default.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerPausePlaybackRequest.DeviceId">
+            <summary>
+            The id of the device this command is targeting. If not supplied, the user’s currently active device is the target.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerRecentlyPlayedRequest.Limit">
+            <summary>
+            The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerRecentlyPlayedRequest.After">
+            <summary>
+            A Unix timestamp in milliseconds. Returns all items after (but not including) this cursor position.
+            If after is specified, before must not be specified.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerRecentlyPlayedRequest.Before">
+            <summary>
+            A Unix timestamp in milliseconds. Returns all items before (but not including) this cursor position.
+            If before is specified, after must not be specified.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerResumePlaybackRequest.DeviceId">
+            <summary>
+            The id of the device this command is targeting. If not supplied, the user’s currently active device is the target.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerResumePlaybackRequest.ContextUri">
+            <summary>
+            Undocumented by Spotify Beta Docs
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerResumePlaybackRequest.Uris">
+            <summary>
+            Undocumented by Spotify Beta Docs
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerResumePlaybackRequest.OffsetParam">
+            <summary>
+            Undocumented by Spotify Beta Docs
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerResumePlaybackRequest.PositionMs">
+            <summary>
+            Undocumented by Spotify Beta Docs
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerResumePlaybackRequest.Offset.Uri">
+            <summary>
+            Undocumented by Spotify Beta Docs
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerResumePlaybackRequest.Offset.Position">
+            <summary>
+            Undocumented by Spotify Beta Docs
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.PlayerSeekToRequest.#ctor(System.Int64)">
+             <summary>
+            
+             </summary>
+             <param name="positionMs">
+             The position in milliseconds to seek to. Must be a positive number.
+             Passing in a position that is greater than the length of the track will
+             cause the player to start playing the next song.
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerSeekToRequest.PositonMs">
+            <summary>
+            The position in milliseconds to seek to. Must be a positive number.
+            Passing in a position that is greater than the length of the track will cause
+            the player to start playing the next song.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerSeekToRequest.DeviceId">
+            <summary>
+            The id of the device this command is targeting. If not supplied, the user’s currently active device is the target.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.PlayerSetRepeatRequest.#ctor(SpotifyAPI.Web.PlayerSetRepeatRequest.State)">
+            <summary></summary>
+            <param name="state">
+            track, context or off. track will repeat the current track. context will repeat the current context.
+            off will turn repeat off.
+            </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerSetRepeatRequest.DeviceId">
+            <summary>
+            The id of the device this command is targeting. If not supplied, the user’s currently active device is the target.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerSetRepeatRequest.StateParam">
+            <summary>
+            track, context or off. track will repeat the current track. context will repeat the current context.
+            off will turn repeat off.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.PlayerShuffleRequest.#ctor(System.Boolean)">
+             <summary>
+            
+             </summary>
+             <param name="state">true : Shuffle user’s playback false : Do not shuffle user’s playback.</param>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerShuffleRequest.State">
+            <summary>
+            true : Shuffle user’s playback false : Do not shuffle user’s playback.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerShuffleRequest.DeviceId">
+            <summary>
+            The id of the device this command is targeting. If not supplied,
+            the user’s currently active device is the target.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerSkipNextRequest.DeviceId">
+            <summary>
+            The id of the device this command is targeting. If not supplied, the user’s currently active device is the target.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerSkipPreviousRequest.DeviceId">
+            <summary>
+            The id of the device this command is targeting.
+            If not supplied, the user’s currently active device is the target.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.PlayerTransferPlaybackRequest.#ctor(System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="deviceIds">
+             A JSON array containing the ID of the device on which playback should be started/transferred.
+             For example:{device_ids:["74ASZWbe4lXaubB36ztrGX"]}
+             Note: Although an array is accepted, only a single device_id is currently supported.
+             Supplying more than one will return 400 Bad Request
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerTransferPlaybackRequest.DeviceIds">
+            <summary>
+            A JSON array containing the ID of the device on which playback should be started/transferred.
+            For example:{device_ids:["74ASZWbe4lXaubB36ztrGX"]}
+            Note: Although an array is accepted, only a single device_id is currently supported.
+            Supplying more than one will return 400 Bad Request
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerTransferPlaybackRequest.Play">
+            <summary>
+            true: ensure playback happens on new device. false or not provided: keep the current playback state.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.PlayerVolumeRequest.#ctor(System.Int32)">
+             <summary>
+            
+             </summary>
+             <param name="volumePercent">The volume to set. Must be a value from 0 to 100 inclusive.</param>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerVolumeRequest.VolumePercent">
+            <summary>
+            The volume to set. Must be a value from 0 to 100 inclusive.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlayerVolumeRequest.DeviceId">
+            <summary>
+            The id of the device this command is targeting. If not supplied, the user’s currently active device is the target.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.PlaylistAddItemsRequest.#ctor(System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="uris">
+             A JSON array of the Spotify URIs to add.
+             For example: {"uris": ["spotify:track:4iV5W9uYEdYUVa79Axb7Rh",
+             "spotify:track:1301WleyT98MSxVHPZCA6M", "spotify:episode:512ojhOuo1ktJprKbVcKyQ"]}
+             A maximum of 100 items can be added in one request.
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistAddItemsRequest.Uris">
+            <summary>
+            A JSON array of the Spotify URIs to add.
+            For example: {"uris": ["spotify:track:4iV5W9uYEdYUVa79Axb7Rh",
+            "spotify:track:1301WleyT98MSxVHPZCA6M", "spotify:episode:512ojhOuo1ktJprKbVcKyQ"]}
+            A maximum of 100 items can be added in one request.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistAddItemsRequest.Position">
+            <summary>
+            The position to insert the items, a zero-based index.
+            For example, to insert the items in the first position: position=0 ;
+             to insert the items in the third position: position=2. If omitted, the items will be appended to the playlist.
+            Items are added in the order they appear in the uris array.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistChangeDetailsRequest.Name">
+            <summary>
+            The new name for the playlist, for example "My New Playlist Title"
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistChangeDetailsRequest.Public">
+            <summary>
+            If true the playlist will be public, if false it will be private.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistChangeDetailsRequest.Collaborative">
+            <summary>
+            If true , the playlist will become collaborative and other users will be able to modify the
+            playlist in their Spotify client. Note: You can only set collaborative to true on non-public playlists.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistChangeDetailsRequest.Description">
+            <summary>
+            Value for playlist description as displayed in Spotify Clients and in the Web API.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.PlaylistCreateRequest.#ctor(System.String)">
+            <summary>
+            </summary>
+            <param name="name">
+            The name for the new playlist, for example "Your Coolest Playlist" .
+            This name does not need to be unique; a user may have several playlists with the same name.
+            </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistCreateRequest.Name">
+            <summary>
+            The name for the new playlist, for example "Your Coolest Playlist" .
+            This name does not need to be unique; a user may have several playlists with the same name.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistCreateRequest.Public">
+            <summary>
+            Defaults to true . If true the playlist will be public, if false it will be private.
+            To be able to create private playlists, the user must have granted the playlist-modify-private scope
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistCreateRequest.Collaborative">
+            <summary>
+            Defaults to false . If true the playlist will be collaborative.
+            Note that to create a collaborative playlist you must also set public to false .
+            To create collaborative playlists you must have
+            granted playlist-modify-private and playlist-modify-public scopes .
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistCreateRequest.Description">
+            <summary>
+            value for playlist description as displayed in Spotify Clients and in the Web API.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistCurrentUsersRequest.Limit">
+            <summary>
+            The maximum number of playlists to return. Default: 20. Minimum: 1. Maximum: 50.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistCurrentUsersRequest.Offset">
+            <summary>
+            The index of the first playlist to return.
+            Default: 0 (the first object). Maximum offset: 100.000. Use with limit to get the next set of playlists.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.PlaylistGetItemsRequest.#ctor(SpotifyAPI.Web.PlaylistGetItemsRequest.AdditionalTypes)">
+             <summary>
+            
+             </summary>
+             <param name="types">
+             A comma-separated list of item types that your client supports
+             besides the default track type. Valid types are: track and episode.
+             Note: This parameter was introduced to allow existing clients to maintain
+             their current behaviour and might be deprecated in the future. In addition to
+             providing this parameter, make sure that your client properly handles cases of new types in the
+              future by checking against the type field of each object. Defaults to ALL
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistGetItemsRequest.Fields">
+            <summary>
+            Filters for the query: a comma-separated list of the fields to return.
+            If omitted, all fields are returned. For example, to get just the total number of items and the request limit:
+            fields=total,limit
+            A dot separator can be used to specify non-reoccurring fields, while parentheses can be used to specify
+            reoccurring fields within objects. For example, to get just the added date and user ID of the adder:
+            fields=items(added_at,added_by.id)
+            Use multiple parentheses to drill down into nested objects, for example:
+            fields=items(track(name,href,album(name,href)))
+            Fields can be excluded by prefixing them with an exclamation mark, for example:
+            fields=items.track.album(!external_urls,images)
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistGetItemsRequest.Limit">
+            <summary>
+            The maximum number of items to return. Default: 100. Minimum: 1. Maximum: 100.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistGetItemsRequest.Offset">
+            <summary>
+            The index of the first item to return. Default: 0 (the first object).
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistGetItemsRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code or the string from_token.
+            Provide this parameter if you want to apply Track Relinking. For episodes, if a valid user access token is
+            specified in the request header, the country associated with the user account will take priority over this
+            parameter. Note: If neither market or user country are provided,
+            the episode is considered unavailable for the client.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistGetItemsRequest.AdditionalTypesParam">
+            <summary>
+              This is set to `"track", "episode"` by default.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistGetRequest.Fields">
+            <summary>
+            Filters for the query: a comma-separated list of the fields to return.
+            If omitted, all fields are returned. For example, to get just the playlist’s description and URI: fields=description,uri.
+            A dot separator can be used to specify non-reoccurring fields,
+            while parentheses can be used to specify reoccurring fields within objects.
+            For example, to get just the added date and user ID of the adder:
+            fields=tracks.items(added_at,added_by.id). Use multiple parentheses to drill down into nested objects, for example:
+            fields=tracks.items(track(name,href,album(name,href))).
+            Fields can be excluded by prefixing them with an exclamation mark, for example:
+            fields=tracks.items(track(name,href,album(!name,href)))
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistGetRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code or the string from_token.
+            Provide this parameter if you want to apply Track Relinking.
+            For episodes, if a valid user access token is specified in the request header,
+            the country associated with the user account will take priority over this parameter.
+            Note: If neither market or user country are provided, the episode is considered unavailable for the client.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistGetRequest.AdditionalTypesParam">
+            <summary>
+              This is set to `"track", "episode"` by default.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistGetUsersRequest.Limit">
+            <summary>
+            The maximum number of playlists to return. Default: 20. Minimum: 1. Maximum: 50.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistGetUsersRequest.Offset">
+            <summary>
+            The index of the first playlist to return. Default: 0 (the first object).
+            Maximum offset: 100.000. Use with limit to get the next set of playlists.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistRemoveItemsRequest.Tracks">
+            <summary>
+            An array of objects containing Spotify URIs of the tracks or episodes to remove.
+            For example: { "tracks": [{ "uri": "spotify:track:4iV5W9uYEdYUVa79Axb7Rh" },
+            { "uri": "spotify:track:1301WleyT98MSxVHPZCA6M" }] }.
+            A maximum of 100 objects can be sent at once.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistRemoveItemsRequest.Positions">
+            <summary>
+            An array of positions to delete. This also supports local tracks.
+            SnapshotId MUST be supplied when using this parameter
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistRemoveItemsRequest.SnapshotId">
+            <summary>
+            The playlist’s snapshot ID against which you want to make the changes.
+            The API will validate that the specified items exist and in the specified positions and make the changes,
+            even if more recent changes have been made to the playlist.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.PlaylistReorderItemsRequest.#ctor(System.Int32,System.Int32)">
+             <summary>
+            
+             </summary>
+             <param name="rangeStart">
+             The position of the first item to be reordered.
+             </param>
+             <param name="insertBefore">
+             The position where the items should be inserted.
+             To reorder the items to the end of the playlist,
+             simply set insert_before to the position after the last item.
+             Examples: To reorder the first item to the last position in a playlist with 10 items,
+             set range_start to 0, and insert_before to 10. To reorder the last item in a playlist
+             with 10 items to the start of the playlist, set range_start to 9, and insert_before to 0.
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistReorderItemsRequest.RangeStart">
+            <summary>
+            The position of the first item to be reordered.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistReorderItemsRequest.InsertBefore">
+            <summary>
+            The position where the items should be inserted.
+            To reorder the items to the end of the playlist,
+            simply set insert_before to the position after the last item.
+            Examples: To reorder the first item to the last position in a playlist with 10 items,
+            set range_start to 0, and insert_before to 10. To reorder the last item in a playlist
+            with 10 items to the start of the playlist, set range_start to 9, and insert_before to 0.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistReorderItemsRequest.RangeLength">
+            <summary>
+            The amount of items to be reordered. Defaults to 1 if not set.
+            The range of items to be reordered begins from the range_start position, and
+            includes the range_length subsequent items.
+            Example: To move the items at index 9-10 to the start of the playlist,
+            range_start is set to 9, and range_length is set to 2.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistReorderItemsRequest.SnapshotId">
+            <summary>
+            The playlist’s snapshot ID against which you want to make the changes.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.PlaylistReplaceItemsRequest.#ctor(System.Collections.Generic.List{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="uris">
+             A comma-separated list of Spotify URIs to set, can be track or episode URIs.
+             A maximum of 100 items can be set in one request.
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.PlaylistReplaceItemsRequest.Uris">
+            <summary>
+            A comma-separated list of Spotify URIs to set, can be track or episode URIs.
+            A maximum of 100 items can be set in one request.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.RecommendationsRequest.SeedArtists">
+            <summary>
+            A comma separated list of Spotify IDs for seed artists.
+            Up to 5 seed values may be provided in any combination of seed_artists, seed_tracks and seed_genres.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.RecommendationsRequest.SeedGenres">
+            <summary>
+            A comma separated list of any genres in the set of available genre seeds.
+            Up to 5 seed values may be provided in any combination of seed_artists, seed_tracks and seed_genres.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.RecommendationsRequest.SeedTracks">
+            <summary>
+            A comma separated list of Spotify IDs for a seed track.
+            Up to 5 seed values may be provided in any combination of seed_artists, seed_tracks and seed_genres.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.RecommendationsRequest.Limit">
+            <summary>
+            The target size of the list of recommended tracks.
+            For seeds with unusually small pools or when highly restrictive filtering is applied,
+             it may be impossible to generate the requested number of recommended tracks.
+            Debugging information for such cases is available in the response. Default: 20. Minimum: 1. Maximum: 100.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.RecommendationsRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code or the string from_token.
+            Provide this parameter if you want to apply Track Relinking.
+            Because min_*, max_* and target_* are applied to pools before relinking, the generated results
+             may not precisely match the filters applied. Original,
+            non-relinked tracks are available via the linked_from attribute of the relinked track response.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.RecommendationsRequest.Min">
+            <summary>
+            Multiple values. For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided.
+            See tunable track attributes below for the list of available options.
+            For example, min_tempo=140 would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
+            DO NOT INCLUDE min_ IN THE KEY
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.RecommendationsRequest.Max">
+            <summary>
+            Multiple values. For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided.
+            See tunable track attributes below for the list of available options.
+            For example, max_instrumentalness=0.35 would filter out most tracks that are likely to be instrumental.
+            DO NOT INCLUDE max_ IN THE KEY
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.RecommendationsRequest.Target">
+            <summary>
+            Multiple values. For each of the tunable track attributes (below) a target value may be provided.
+            Tracks with the attribute values nearest to the target values will be preferred.
+            For example, you might request target_energy=0.6 and target_danceability=0.8.
+            All target values will be weighed equally in ranking results.
+            DO NOT INCLUDE target_ IN THE KEY
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.SearchRequest.#ctor(SpotifyAPI.Web.SearchRequest.Types,System.String)">
+             <summary>
+            
+             </summary>
+             <param name="type">
+             A comma-separated list of item types to search across.
+             Valid types are: album , artist, playlist, track, show and episode.
+             Search results include hits from all the specified item types.
+             </param>
+             <param name="query">
+             Search query keywords and optional field filters and operators.
+             </param>
+             <remarks>
+             https://developer.spotify.com/documentation/web-api/reference/search/search/
+             </remarks>
+        </member>
+        <member name="P:SpotifyAPI.Web.SearchRequest.Type">
+            <summary>
+            A comma-separated list of item types to search across.
+            Valid types are: album , artist, playlist, track, show and episode.
+            Search results include hits from all the specified item types.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.SearchRequest.Query">
+            <summary>
+            Search query keywords and optional field filters and operators.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.SearchRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code or the string from_token.
+            If a country code is specified, only content that is playable in that market is returned.
+            Note:
+            - Playlist results are not affected by the market parameter.
+            - If market is set to from_token, and a valid access token is
+             specified in the request header, only content playable in the country
+            associated with the user account, is returned.
+            - Users can view the country that is associated with their account in the
+            account settings. A user must grant access to the user-read-private scope
+            prior to when the access token is issued.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.SearchRequest.Limit">
+            <summary>
+            Maximum number of results to return.
+            Default: 20
+            Minimum: 1
+            Maximum: 50
+            Note: The limit is applied within each type, not on the total response.
+            For example, if the limit value is 3 and the type is artist,album,
+            the response contains 3 artists and 3 albums.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.SearchRequest.Offset">
+            <summary>
+            The index of the first result to return.
+            Default: 0 (the first result). Maximum offset (including limit): 2,000.
+            Use with limit to get the next page of search results.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.SearchRequest.IncludeExternal">
+            <summary>
+            Possible values: audio
+            If include_external = audio is specified the response
+            will include any relevant audio content that is hosted externally.
+            By default external content is filtered out from responses.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ShowEpisodesRequest.Limit">
+            <summary>
+            The maximum number of episodes to return. Default: 20. Minimum: 1. Maximum: 50.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ShowEpisodesRequest.Offset">
+            <summary>
+            The index of the first episode to return.
+            Default: 0 (the first object). Use with limit to get the next set of episodes.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ShowEpisodesRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code. If a country code is specified, only shows and episodes
+            that are available in that market will be returned.
+            If a valid user access token is specified in the request header,
+            the country associated with the user account will take priority over this parameter.
+            Note: If neither market or user country are provided, the content is considered unavailable for the client.
+            Users can view the country that is associated with their account in the account settings.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ShowRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code. If a country code is specified,
+            only shows and episodes that are available in that market will be returned.
+            If a valid user access token is specified in the request header,
+            the country associated with the user account will take priority over this parameter.
+            Note: If neither market or user country are provided, the content
+            is considered unavailable for the client.
+            Users can view the country that is associated with their account in the account settings.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.ShowsRequest.#ctor(System.Collections.Generic.IList{System.String})">
+            <summary>
+            Get Spotify catalog information for several shows based on their Spotify IDs.
+            </summary>
+            <param name="ids">
+            A comma-separated list of the Spotify IDs for the shows. Maximum: 50 IDs.
+            </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.ShowsRequest.Ids">
+            <summary>
+            A comma-separated list of the Spotify IDs for the shows. Maximum: 50 IDs.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ShowsRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code. If a country code is specified, only shows and episodes
+            that are available in that market will be returned.
+            If a valid user access token is specified in the request header,
+            the country associated with the user account will take priority over this parameter.
+            Note: If neither market or user country are provided,
+            the content is considered unavailable for the client.
+            Users can view the country that is associated with their account in the account settings.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.TrackRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code or the string from_token.
+            Provide this parameter if you want to apply Track Relinking.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.TracksAudioFeaturesRequest.#ctor(System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="ids">A comma-separated list of the Spotify IDs for the tracks. Maximum: 100 IDs.</param>
+        </member>
+        <member name="P:SpotifyAPI.Web.TracksAudioFeaturesRequest.Ids">
+            <summary>
+            A comma-separated list of the Spotify IDs for the tracks. Maximum: 100 IDs.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.TracksRequest.#ctor(System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="ids">A comma-separated list of the Spotify IDs for the tracks. Maximum: 50 IDs.</param>
+        </member>
+        <member name="P:SpotifyAPI.Web.TracksRequest.Ids">
+            <summary>
+            A comma-separated list of the Spotify IDs for the tracks. Maximum: 50 IDs.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.TracksRequest.Market">
+            <summary>
+            An ISO 3166-1 alpha-2 country code or the string from_token.
+            Provide this parameter if you want to apply Track Relinking.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:SpotifyAPI.Web.UnfollowRequest.#ctor(SpotifyAPI.Web.UnfollowRequest.Type,System.Collections.Generic.IList{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="type">The ID type: either artist or user.</param>
+             <param name="ids">
+             A comma-separated list of the artist or the user Spotify IDs. F
+             or example: ids=74ASZWbe4lXaubB36ztrGX,08td7MxkoHQkXnWAYD8d6Q.
+             A maximum of 50 IDs can be sent in one request.
+             </param>
+        </member>
+        <member name="P:SpotifyAPI.Web.UnfollowRequest.TypeParam">
+            <summary>
+            The ID type: either artist or user.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.UnfollowRequest.Ids">
+            <summary>
+            A comma-separated list of the artist or the user Spotify IDs. F
+            or example: ids=74ASZWbe4lXaubB36ztrGX,08td7MxkoHQkXnWAYD8d6Q.
+            A maximum of 50 IDs can be sent in one request.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.AuthorizationCodeRefreshResponse.CreatedAt">
+            <summary>
+              Auto-Initalized to UTC Now
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.AuthorizationCodeTokenResponse.CreatedAt">
+            <summary>
+              Auto-Initalized to UTC Now
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.ClientCredentialsTokenResponse.CreatedAt">
+            <summary>
+              Auto-Initalized to UTC Now
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.CurrentlyPlaying.Item">
+            <summary>
+            Can be a FullTrack or FullEpisode
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.CurrentlyPlayingContext.Item">
+            <summary>
+            Can be a FullTrack or FullEpisode
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.FullPlaylist.Tracks">
+            <summary>
+            A list of PlaylistTracks, which items can be a FullTrack or FullEpisode
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:SpotifyAPI.Web.IRefreshableToken">
+            <summary>
+            An user token, which can be refreshed
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.IRefreshableToken.RefreshToken">
+            <summary>
+            Refresh token
+            </summary>
+        </member>
+        <member name="T:SpotifyAPI.Web.IToken">
+            <summary>
+            A token to access the Spotify API
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.IToken.AccessToken">
+            <summary>
+            Access token string
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.IToken.TokenType">
+            <summary>
+            Type of this token (eg. Bearer)
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.IToken.CreatedAt">
+            <summary>
+            Auto-Initalized to UTC Now
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.IToken.IsExpired">
+            <summary>
+            Is the token still valid?
+            </summary>
+        </member>
+        <member name="T:SpotifyAPI.Web.IUserToken">
+            <summary>
+            A token which allows you to access the API as user
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.IUserToken.Scope">
+            <summary>
+            Comma-Seperated list of scopes
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.PKCETokenResponse.CreatedAt">
+            <summary>
+              Auto-Initalized to UTC Now
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:SpotifyAPI.Web.SimplePlaylist">
+            <summary>
+              <a href="https://developer.spotify.com/documentation/web-api/reference/object-model/#playlist-object-simplified">Docs</a>
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.SimplePlaylist.Tracks">
+            <summary>
+            A list of PlaylistTracks, which items can be a FullTrack or FullEpisode
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SpotifyAPI.Web.SimpleRetryHandler.RetryAfter">
+            <summary>
+                Specifies after how many miliseconds should a failed request be retried.
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.SimpleRetryHandler.RetryTimes">
+            <summary>
+                Maximum number of tries for one failed request.
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.SimpleRetryHandler.TooManyRequestsConsumesARetry">
+            <summary>
+                Whether a failure of type "Too Many Requests" should use up one of the allocated retry attempts.
+            </summary>
+        </member>
+        <member name="P:SpotifyAPI.Web.SimpleRetryHandler.RetryErrorCodes">
+            <summary>
+                Error codes that will trigger auto-retry
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.SimpleRetryHandler.#ctor">
+            <summary>
+              A simple retry handler which retries a request based on status codes with a fixed sleep interval.
+              It also supports Retry-After headers sent by spotify. The execution will be delayed by the amount in
+              the Retry-After header
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SpotifyAPI.Web.Ensure">
+            <summary>
+              Ensure input parameters
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.Web.Ensure.ArgumentNotNull(System.Object,System.String)">
+            <summary>
+              Checks an argument to ensure it isn't null.
+            </summary>
+            <param name = "value">The argument value to check</param>
+            <param name = "name">The name of the argument</param>
+        </member>
+        <member name="M:SpotifyAPI.Web.Ensure.ArgumentNotNullOrEmptyString(System.String,System.String)">
+            <summary>
+              Checks an argument to ensure it isn't null or an empty string
+            </summary>
+            <param name = "value">The argument value to check</param>
+            <param name = "name">The name of the argument</param>
+        </member>
+        <member name="M:SpotifyAPI.Web.PKCEUtil.GenerateCodes(System.Int32)">
+            <summary>
+              Generate a verifier and challenge pair using RNGCryptoServiceProvider
+            </summary>
+            <param name="length">The length of the generated verifier</param>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.Web.PKCEUtil.GenerateCodes(System.String)">
+            <summary>
+            Return the paseed verifier and its challenge
+            </summary>
+            <param name="verifier">A secure random generated verifier</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -11,10 +11,10 @@ Imports System.Windows
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("SpotiDownWin")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("SpotiDownWin")>
+<Assembly: AssemblyTitle("SpotiDown")>
+<Assembly: AssemblyDescription("SpotiDown is an app that is designed to download music from Spotify directly to the internal storage.")>
+<Assembly: AssemblyCompany("IcySnex")>
+<Assembly: AssemblyProduct("SpotiDown (Windows)")>
 <Assembly: AssemblyCopyright("Copyright ©  2021")>
 <Assembly: AssemblyTrademark("")>
 <Assembly: ComVisible(false)>

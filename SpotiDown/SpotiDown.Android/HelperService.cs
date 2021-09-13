@@ -15,7 +15,7 @@ namespace XamarinFirebase.Droid
     public class HelperService : IHelperService
     {
         [Obsolete]
-        async Task IHelperService.wirteStream(string path, Stream stream)
+        async Task IHelperService.writeStream(string path, Stream stream)
         {
             string ffmpeg = @"/storage/emulated/0/ffmpeg";
             string fullpath = $@"/storage/emulated/0{path}.mp3";
@@ -33,7 +33,7 @@ namespace XamarinFirebase.Droid
             await App.Current.MainPage.DisplayAlert("Converted!", "webm to mp3", "OK");
         }
 
-        async Task IHelperService.writeMetadata(SpotifyTrack trackinfo, string path)
+        async Task IHelperService.writeMetadata(string path, SpotifyTrack trackinfo)
         {
             Tag.DefaultVersion = 3;
             Tag.ForceDefaultVersion = true;
