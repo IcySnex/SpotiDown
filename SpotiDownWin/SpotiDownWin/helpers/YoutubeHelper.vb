@@ -58,9 +58,9 @@ Public Class YoutubeHelper
     End Function
 
     Public Shared Async Function WriteTrack(trackinfo As SpotifyTrack) As Task(Of String)
-        Dim filepath = Helper.config.prefernces.downloadpath & Helper.config.prefernces.filename.Replace("{title}", trackinfo.title).Replace("{artist}", trackinfo.artist.Split(",")(0)).Replace("{album}", trackinfo.album).Replace("{release}", trackinfo.release.Year)
-        Await Helper.writeStream(filepath, Await DownloadAudioStream(trackinfo.youtube))
-        Await Helper.writeMetadata(filepath, trackinfo)
+        Dim filepath = Helper.config.prefernces.downloadpath & Helper.config.prefernces.filename.Replace("{title}", trackinfo.title).Replace("{artist}", trackinfo.artist.Split(",")(0)).Replace("{album}", trackinfo.album).Replace("{release}", trackinfo.release.Year) & ".mp3"
+        If Directory.Exists(Path.GetDirectoryName(filepath)) = False Then Directory.CreateDirectory(Path.GetDirectoryName(filepath))
+        If Await Helper.writeStream(filepath, Await DownloadAudioStream(trackinfo.youtube)) Then Await Helper.writeMetadata(filepath, trackinfo)
         Return filepath
     End Function
 End Class

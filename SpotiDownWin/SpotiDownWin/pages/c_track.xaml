@@ -28,7 +28,7 @@
                 <Button Click="btn_info" Style="{StaticResource cbutton}" Cursor="Hand" Margin="0,0,40,0" Height="40" Width="40" HorizontalAlignment="Right">
                     <Image Source="../res/info.png"/>
                 </Button>
-                <Button Click="btn_download" Style="{StaticResource cbutton}" Cursor="Hand" Height="40" Width="40" HorizontalAlignment="Right">
+                <Button Name="btndownload" Click="btn_download" Style="{StaticResource cbutton}" Cursor="Hand" Margin="0,0,4,0" Height="40" Width="40" HorizontalAlignment="Right">
                     <Image Source="../res/download.png"/>
                 </Button>
             </Grid>

@@ -29,7 +29,7 @@
                     <TextBlock x:Name="lb_name" Text="Unknown" FontSize="25" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#542F84" TextWrapping="WrapWithOverflow" VerticalAlignment="Bottom"/>
                 </Grid>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Template="{StaticResource sButton}" Content="DOWNLOAD" Click="btn_download" Margin="5,15,5,10" Height="35" Width="150"/>
+                    <Button Template="{StaticResource sButton}" Content="DOWNLOAD" Name="btndownload" Click="btn_download" Margin="5,15,5,10" Height="35" Width="150"/>
                     <Button Template="{StaticResource sButton}" Content="REMOVE" Click="btn_remove" Margin="5,15,5,10" Height="35" Width="150"/>
                 </StackPanel>
                 <Border CornerRadius="23" Margin="10,5">

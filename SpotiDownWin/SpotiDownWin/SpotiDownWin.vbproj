@@ -106,6 +106,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="TagLibSharp, Version=2.2.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
+      <HintPath>..\packages\TagLibSharp.2.2.0\lib\net45\TagLibSharp.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -277,6 +280,29 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ico.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="dll\AngleSharp.dll" />
+    <EmbeddedResource Include="dll\HtmlAgilityPack.dll" />
+    <EmbeddedResource Include="dll\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <EmbeddedResource Include="dll\Newtonsoft.Json.dll" />
+    <EmbeddedResource Include="dll\SpotifyAPI.Web.dll" />
+    <EmbeddedResource Include="dll\System.Buffers.dll" />
+    <EmbeddedResource Include="dll\System.Memory.dll" />
+    <EmbeddedResource Include="dll\System.Numerics.Vectors.dll" />
+    <EmbeddedResource Include="dll\System.Runtime.CompilerServices.Unsafe.dll" />
+    <EmbeddedResource Include="dll\System.Text.Encodings.Web.dll" />
+    <EmbeddedResource Include="dll\System.Text.Json.dll" />
+    <EmbeddedResource Include="dll\System.Threading.Tasks.Extensions.dll" />
+    <EmbeddedResource Include="dll\System.ValueTuple.dll" />
+    <EmbeddedResource Include="dll\WpfAnimatedGif.dll" />
+    <EmbeddedResource Include="dll\YoutubeExplode.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="dll\TagLibSharp.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="dll\System.Text.Encoding.CodePages.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

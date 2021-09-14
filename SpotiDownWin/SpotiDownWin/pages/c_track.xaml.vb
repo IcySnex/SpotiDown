@@ -17,6 +17,24 @@
         frm.ShowDialog()
     End Sub
     Private Async Sub btn_download(sender As Object, e As RoutedEventArgs)
-        Await YoutubeHelper.WriteTrack(trackinfo)
+        Dim btn As Button = CType(CType(Parent, StackPanel).Parent, StackPanel).Children(1)
+        Try
+            btndownload.IsEnabled = False
+            btndownload.Effect = New Effects.BlurEffect With {.Radius = 13}
+            btn.IsEnabled = False
+            btn.Effect = New Effects.BlurEffect With {.Radius = 13}
+            MsgBox($"Song sucessfully downloaded! (""{Await YoutubeHelper.WriteTrack(trackinfo)}"")", MsgBoxStyle.Information, "Done!")
+            btn.IsEnabled = True
+            btn.Effect = Nothing
+            Dim container As StackPanel = Parent
+            container.Children.Remove(Me)
+            If container.Children.Count = 0 Then Helper.GetMain.tbc.ShowPage(Helper.p_home)
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Something went wrong - Error")
+            btndownload.IsEnabled = False
+            btndownload.Effect = New Effects.BlurEffect With {.Radius = 13}
+            btn.IsEnabled = True
+            btn.Effect = Nothing
+        End Try
     End Sub
 End Class

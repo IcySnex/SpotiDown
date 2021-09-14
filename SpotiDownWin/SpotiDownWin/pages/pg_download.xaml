@@ -19,7 +19,11 @@
             <StackPanel>
                 <Grid Height="323">
                     <Grid VerticalAlignment="Top" Height="250">
-                        <Image x:Name="img_backgground" Source="../res/unknown.png" Stretch="UniformToFill" VerticalAlignment="Center"/>
+                        <Image x:Name="img_backgground" Source="../res/unknown.png" Stretch="UniformToFill" VerticalAlignment="Center">
+                            <Image.Effect>
+                                <BlurEffect Radius="15"/>
+                            </Image.Effect>
+                        </Image>
                         <Grid.OpacityMask>
                             <LinearGradientBrush EndPoint="0,1">
                                 <GradientStop Color="Black" Offset="-0.3"/>
@@ -37,7 +41,7 @@
                     </Border>
                     <TextBlock x:Name="lb_name" Text="Unknown" FontSize="25" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#542F84" TextWrapping="WrapWithOverflow" VerticalAlignment="Bottom"/>
                 </Grid>
-                <Button Template="{StaticResource sButton}" Content="DOWNLOAD ALL" Click="btn_download" Margin="0,15,0,10" Height="35" Width="170"/>
+                <Button Template="{StaticResource sButton}" Content="DOWNLOAD ALL" Name="btndownload" Click="btn_download" Margin="0,15,0,10" Height="35" Width="170"/>
                 <StackPanel x:Name="sl_container">
                     
                 </StackPanel>

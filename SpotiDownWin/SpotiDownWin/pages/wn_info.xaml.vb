@@ -20,7 +20,14 @@
         Close()
     End Sub
     Private Async Sub btn_download(sender As Object, e As RoutedEventArgs)
-        Await YoutubeHelper.WriteTrack(tracksender.trackinfo)
+        Try
+            btndownload.IsEnabled = False
+            btndownload.Effect = New Effects.BlurEffect With {.Radius = 13}
+            MsgBox($"Song sucessfully downloaded! (""{Await YoutubeHelper.WriteTrack(tracksender.trackinfo)}"")", MsgBoxStyle.Information, "Done!")
+            btn_remove(sender, e)
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Something went wrong - Error")
+        End Try
     End Sub
     Private Sub btn_remove(sender As Object, e As RoutedEventArgs)
         Dim container As StackPanel = tracksender.Parent

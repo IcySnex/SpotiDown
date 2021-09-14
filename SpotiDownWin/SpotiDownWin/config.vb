@@ -1,6 +1,7 @@
 ﻿Public Class config
     Public Property metadata As New config_metadata
     Public Property prefernces As New config_preferences
+    Public Property ffmpegpath As String = ""
     Public Property oauth As New config_oauth
 End Class
 
@@ -11,8 +12,8 @@ End Class
 
 Public Class config_preferences
     Public Property quality As Integer = 3
-    Public Property downloadpath As String = "/SpotiDown"
-    Public Property filename As String = "/{artist}/{title}"
+    Public Property downloadpath As String = "SpotiDown\"
+    Public Property filename As String = "{artist}\{title}"
 End Class
 
 Public Class config_oauth
