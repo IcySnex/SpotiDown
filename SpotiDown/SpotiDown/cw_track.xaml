@@ -24,7 +24,7 @@
                                 <Label x:Name="lb_lenght" Text="Unknown" FontSize="15" VerticalOptions="End" HorizontalOptions="End" TextColor="#650EF8" LineBreakMode="TailTruncation"/>
                             </Grid>
                             <ImageButton Clicked="btn_info_click" Source="info.png" HeightRequest="50" WidthRequest="50" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="#20112E" CornerRadius="32" Margin="0,0,-1,0"/>
-                            <ImageButton Clicked="btn_download_click" Source="download.png" HeightRequest="50" WidthRequest="50" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="#20112E" CornerRadius="32" Margin="0,0,5,0"/>
+                            <ImageButton x:FieldModifier="public" x:Name="btn_download" Clicked="btn_download_click" Source="download.png" HeightRequest="50" WidthRequest="50" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="#20112E" CornerRadius="32" Margin="0,0,5,0"/>
                         </StackLayout>
                     </Frame>
                 </Frame>

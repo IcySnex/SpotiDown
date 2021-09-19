@@ -5,9 +5,6 @@ using TagLib.Id3v2;
 using System;
 using System.Threading.Tasks;
 using System.Net;
-using SpotiDown;
-using Xabe.FFmpeg;
-using Xabe.FFmpeg.Downloader;
 
 [assembly: Xamarin.Forms.Dependency(typeof(HelperService))]
 namespace XamarinFirebase.Droid
@@ -15,9 +12,8 @@ namespace XamarinFirebase.Droid
     public class HelperService : IHelperService
     {
         [Obsolete]
-        async Task IHelperService.writeStream(string path, Stream stream)
+        async Task<bool> IHelperService.writeStream(string path, Stream stream)
         {
-            string ffmpeg = @"/storage/emulated/0/ffmpeg";
             string fullpath = $@"/storage/emulated/0{path}.mp3";
             string temppath = $@"/storage/emulated/0{path}.webm";
             if (!Directory.Exists(Path.GetDirectoryName(fullpath))) { Directory.CreateDirectory(Path.GetDirectoryName(fullpath)); }
@@ -25,19 +21,14 @@ namespace XamarinFirebase.Droid
             {
                 await stream.CopyToAsync(fileStream);
             }
-
-            FFmpeg.SetExecutablesPath(ffmpeg);
-            await FFmpegDownloader.GetLatestVersion(FFmpegVersion.Android, ffmpeg);
-            await FFmpeg.Conversions.New().Start($"-i \"{temppath}\" -vn \"{fullpath}\"");
-
-            await App.Current.MainPage.DisplayAlert("Converted!", "webm to mp3", "OK");
+            return true;
         }
 
         async Task IHelperService.writeMetadata(string path, SpotifyTrack trackinfo)
         {
             Tag.DefaultVersion = 3;
             Tag.ForceDefaultVersion = true;
-            TagLib.File file = TagLib.File.Create($@"/storage/emulated/0{path}.mp3");
+            TagLib.File file = TagLib.File.Create($@"/storage/emulated/0{path}.webm", "video/webm", TagLib.ReadStyle.None);
             file.Tag.AlbumArtists = new[] { trackinfo.artist.Split(",")[0] };
             file.Tag.Performers = trackinfo.artist.Split(",");
             file.Tag.Composers = trackinfo.artist.Split(",");
@@ -61,7 +52,6 @@ Spotify URL: {trackinfo.url}
 YouTube URL: https://www.youtube.com/watch?v={trackinfo.youtube}";
             file.Tag.Pictures = new[] { new TagLib.Picture(await new WebClient().DownloadDataTaskAsync(trackinfo.artwork)) };
             file.Save();
-            await App.Current.MainPage.DisplayAlert("Song sucessfully downloaded!", $@"/storage/emulated/0{path}", file.Writeable.ToString());
         }
 
         async Task IHelperService.downloadFile(string url, string path) => await new WebClient().DownloadFileTaskAsync(url, Helper.GetPath(path));

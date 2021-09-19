@@ -34,7 +34,16 @@ namespace SpotiDown
         {
             if (await Permissions.CheckStatusAsync<Permissions.StorageWrite>() == PermissionStatus.Granted)
             {
-                string path = await YoutubeHelper.WriteTrack(track_sender.trackinfo);
+                try
+                {
+                    btn_download.IsEnabled = false;
+                    await DisplayAlert("Done!", $"Song sucessfully downloaded! ('{await YoutubeHelper.WriteTrack(track_sender.trackinfo)}')", "OK");
+                    btn_remove_click(sender, e);
+                }
+                catch (Exception ex)
+                {
+                    await DisplayAlert("Something went wrong - Error", ex.Message, "OK");
+                }
             }
             else
             {

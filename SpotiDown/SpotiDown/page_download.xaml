@@ -46,7 +46,7 @@
                                 </LinearGradientBrush>
                             </Frame.Background>
                             <StackLayout Margin="0" Padding="3,3,3,3">
-                                <Button Clicked="btn_download_click" HeightRequest="26" VerticalOptions="Center" BackgroundColor="#20112E" CornerRadius="22" Text="Download All" FontSize="15" Padding="3" TextColor="#8F24ED"/>
+                                <Button x:Name="btn_download" Clicked="btn_download_click" HeightRequest="26" VerticalOptions="Center" BackgroundColor="#20112E" CornerRadius="22" Text="Download All" FontSize="15" Padding="3" TextColor="#8F24ED"/>
                             </StackLayout>
                         </Frame>
                         <StackLayout x:Name="sl_trackcontainer" ChildRemoved="sl_trackcontainer_ChildRemoved" Spacing="0" Margin="0,20,0,0"/>
