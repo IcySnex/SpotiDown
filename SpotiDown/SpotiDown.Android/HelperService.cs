@@ -33,7 +33,7 @@ namespace XamarinFirebase.Droid
             file.Tag.Performers = trackinfo.artist.Split(",");
             file.Tag.Composers = trackinfo.artist.Split(",");
             file.Tag.Copyright = "Spotify";
-            file.Tag.Lyrics = trackinfo.lyrics;
+            if (Helper.config.metadata.lyrics) { file.Tag.Lyrics = trackinfo.lyrics; }
             file.Tag.Title = trackinfo.title;
             file.Tag.Genres = new[] { "Music" };
             file.Tag.Album = trackinfo.album;
@@ -50,7 +50,7 @@ Track meta data fetched from Spotify, Track downloaded from YouTube, Lyrics fetc
 
 Spotify URL: {trackinfo.url}
 YouTube URL: https://www.youtube.com/watch?v={trackinfo.youtube}";
-            file.Tag.Pictures = new[] { new TagLib.Picture(await new WebClient().DownloadDataTaskAsync(trackinfo.artwork)) };
+            if (Helper.config.metadata.artwork) { file.Tag.Pictures = new[] { new TagLib.Picture(await new WebClient().DownloadDataTaskAsync(trackinfo.artwork)) }; }
             file.Save();
         }
 
