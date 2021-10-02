@@ -1,8 +1,8 @@
 ![ad](https://github.com/IcySnex/SpotiDown/raw/main/other/ad.png)
 
 # Download
-[Android (APK)](https://github.com/IcySnex/SpotiDown/releases/download/1.0/spotidown-android-1.0.apk) / 
-[Windows (EXE)](https://github.com/IcySnex/SpotiDown/releases/download/1.0/spotidown-windows-1.0.exe)
+[Android (APK)](https://github.com/IcySnex/SpotiDown/releases/download/1.0.1/spotidown-android-1.0.1.apk) / 
+[Windows (EXE)](https://github.com/IcySnex/SpotiDown/releases/download/1.0.1/spotidown-windows-1.0.1.exe)
 
 # Links
 [YouTube](https://www.youtube.com/channel/UCkAQG8OkLKgi_WAR526pd9w) / 
