@@ -62,10 +62,13 @@ Public Class SpotifyHelper
             Dim album = Await client.Albums.Get(GetIdByUrl(url))
             Dim total = Await client.PaginateAll(album.Tracks)
             For Each simpletrack In total
-                Dim track = Await client.Tracks.Get(simpletrack.Id)
-                tracks.Add(Await GetSpotifytrackByFulltrack(track))
-                progress.Report(total.IndexOf(simpletrack) / total.Count * 100)
-                cancel.ThrowIfCancellationRequested()
+                Try
+                    Dim track = Await client.Tracks.Get(simpletrack.Id)
+                    tracks.Add(Await GetSpotifytrackByFulltrack(track))
+                    progress.Report(total.IndexOf(simpletrack) / total.Count * 100)
+                    cancel.ThrowIfCancellationRequested()
+                Catch ex As Exception
+                End Try
             Next
             Return New DownloadPageInfo With {.name = album.Name, .Image = album.Images(0).Url, .tracks = tracks}
         ElseIf type = SpotifyUrlType.Playlist Then
@@ -73,10 +76,13 @@ Public Class SpotifyHelper
             Dim total = Await client.PaginateAll(playlist.Tracks)
             For Each playableitem In total
                 If playableitem.Track.Type = ItemType.Track Then
-                    Dim track = Await client.Tracks.Get(CType(playableitem.Track, FullTrack).Id)
-                    tracks.Add(Await GetSpotifytrackByFulltrack(track))
-                    progress.Report(total.IndexOf(playableitem) / total.Count * 100)
-                    cancel.ThrowIfCancellationRequested()
+                    Try
+                        Dim track = Await client.Tracks.Get(CType(playableitem.Track, FullTrack).Id)
+                        tracks.Add(Await GetSpotifytrackByFulltrack(track))
+                        progress.Report(total.IndexOf(playableitem) / total.Count * 100)
+                        cancel.ThrowIfCancellationRequested()
+                    Catch ex As Exception
+                    End Try
                 End If
             Next
             Return New DownloadPageInfo With {.name = playlist.Name, .Image = playlist.Images(0).Url, .tracks = tracks}
