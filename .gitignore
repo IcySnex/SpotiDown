@@ -9,3 +9,9 @@ SpotiDownVB/bin/
 SpotiDownWin/.vs/
 SpotiDownWin/SpotiDownWin/obj/
 SpotiDownWin/SpotiDownWin/bin/
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages

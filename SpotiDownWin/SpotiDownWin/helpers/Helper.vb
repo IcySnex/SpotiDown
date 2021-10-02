@@ -122,7 +122,7 @@ Public Class Helper
         file.Tag.Performers = trackinfo.artist.Split(",")
         file.Tag.Composers = trackinfo.artist.Split(",")
         file.Tag.Copyright = "Spotify"
-        file.Tag.Lyrics = trackinfo.lyrics
+        If config.metadata.lyrics Then file.Tag.Lyrics = trackinfo.lyrics
         file.Tag.Title = trackinfo.title
         file.Tag.Genres = {"Music"}
         file.Tag.Album = trackinfo.album
@@ -139,7 +139,7 @@ Track meta data fetched from Spotify, Track downloaded from YouTube, Lyrics fetc
 
 Spotify URL: {trackinfo.url}
 YouTube URL: https://www.youtube.com/watch?v={trackinfo.youtube}"
-        file.Tag.Pictures = {New TagLib.Picture(Await New WebClient().DownloadDataTaskAsync(trackinfo.artwork))}
+        If config.metadata.artwork Then file.Tag.Pictures = {New TagLib.Picture(Await New WebClient().DownloadDataTaskAsync(trackinfo.artwork))}
         file.Save()
     End Function
 End Class

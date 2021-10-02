@@ -1,6 +1,115 @@
 ﻿<UserControl x:Class="pg_settings" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  xmlns:local="clr-namespace:SpotiDownWin"  mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="542">
-    <Grid Background="Red">
-            
-    </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="3">
+        <StackPanel Background="#1C1527">
+            <Border CornerRadius="23" Margin="10,5">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#8F24ED" Offset="0"/>
+                        <GradientStop Color="#650EF8" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="13" ShadowDepth="0"/>
+                </Border.Effect>
+                <Border Background="#20112E" Margin="3" CornerRadius="23">
+                    <StackPanel>
+                        <TextBlock Text="Meta Data" Margin="0,2,0,0" Foreground="#8F24ED" FontSize="23" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" Margin="10,2" HorizontalAlignment="Center">
+                            <TextBlock Text="Save Lyrics:" FontSize="15.5" Foreground="#542F84" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <ToggleButton IsChecked="True" Style="{StaticResource switch}" Click="switch_meta_lyrics_Toggled" x:Name="switch_meta_lyrics"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10,2,10,10" HorizontalAlignment="Center">
+                            <TextBlock Text="Save Artwork Image:" FontSize="15.5" Foreground="#542F84" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <ToggleButton IsChecked="True" Style="{StaticResource switch}" Click="switch_meta_artwork_Toggled" x:Name="switch_meta_artwork"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Border>
+            <Border CornerRadius="23" Margin="10,5">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#8F24ED" Offset="0"/>
+                        <GradientStop Color="#650EF8" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="13" ShadowDepth="0"/>
+                </Border.Effect>
+                <Border Background="#20112E" Margin="3" CornerRadius="23">
+                    <StackPanel>
+                        <TextBlock Text="Preferences" Margin="0,2,0,0" Foreground="#8F24ED" FontSize="23" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" Margin="10,2" HorizontalAlignment="Center">
+                            <TextBlock Text="Preffered Audio Quality:" FontSize="15.5" Foreground="#542F84" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <ComboBox Name="cb_pref_quality" SelectionChanged="cb_pref_quality_SelectedChanged" Width="150" SelectedIndex="3" Template="{StaticResource combobox}">
+                                <ComboBoxItem Content="32 KBPS"/>
+                                <ComboBoxItem Content="64 KBPS"/>
+                                <ComboBoxItem Content="128 KBPS"/>
+                                <ComboBoxItem Content="160 KBPS"/>
+                                <ComboBoxItem Content="256 KBPS"/>
+                                <ComboBoxItem Content="320 KBPS"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10,2,10,10" HorizontalAlignment="Center">
+                            <TextBlock Text="Download Path:" FontSize="15.5" Foreground="#542F84" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <TextBox LostFocus="tb_pref_downloadpath_unfocused" Name="tb_pref_downloadpath" Template="{StaticResource textbox}" Width="200">SpotiDown\</TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10,2,10,10" HorizontalAlignment="Center">
+                            <TextBlock Text="File Name:" FontSize="15.5" Foreground="#542F84" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <TextBox LostFocus="tb_pref_filename_unfocused" Name="tb_pref_filename" Template="{StaticResource textbox}" Width="200">{artist}\{title}</TextBox>
+                            <Image Cursor="Hand" MouseUp="tb_pref_filename_info" Source="/res/info.png" Height="26" Margin="5,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Border>
+            <Border CornerRadius="23" Margin="10,5">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#8F24ED" Offset="0"/>
+                        <GradientStop Color="#650EF8" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="13" ShadowDepth="0"/>
+                </Border.Effect>
+                <Border Background="#20112E" Margin="3" CornerRadius="23">
+                    <StackPanel>
+                        <TextBlock Text="FFMPEG (Advanced)" Margin="0,2,0,0" Foreground="#8F24ED" FontSize="23" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" Margin="10,2,10,10" HorizontalAlignment="Center">
+                            <TextBlock Text="FFMPEG Path:" FontSize="15.5" Foreground="#542F84" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <TextBox LostFocus="tb_ffmpeg_unfocused" Name="tb_ffmpeg" Template="{StaticResource textbox}" Width="200"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Border>
+            <Border CornerRadius="23" Margin="10,5">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#8F24ED" Offset="0"/>
+                        <GradientStop Color="#650EF8" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="13" ShadowDepth="0"/>
+                </Border.Effect>
+                <Border Background="#20112E" Margin="3" CornerRadius="23">
+                    <StackPanel>
+                        <TextBlock Text="OAuth (Advanced)" Margin="0,2,0,0" Foreground="#8F24ED" FontSize="23" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" Margin="10,2,10,10" HorizontalAlignment="Center">
+                            <TextBlock Text="Client ID:" FontSize="15.5" Foreground="#542F84" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <TextBox LostFocus="tb_oauth_clientid_unfocused" Name="tb_oauth_clientid" Template="{StaticResource textbox}" Width="200">bd6035158be648b695451636f2e311f2</TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10,2,10,10" HorizontalAlignment="Center">
+                            <TextBlock Text="Client Secret:" FontSize="15.5" Foreground="#542F84" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <TextBox LostFocus="tb_oauth_clientsecret_unfocused" Name="tb_oauth_clientsecret" Template="{StaticResource textbox}" Width="200">0dd522b08dc646559e5fc7ef092fa9d7</TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Border>
+            <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                <Button Template="{StaticResource sButton}" Content="RESET CONFIG" Click="btn_reset" Height="35" Width="150" VerticalAlignment="Top" />
+                <Button Template="{StaticResource sButton}" Content="SHOW CONFIG" Click="btn_show" Margin="10,0,0,0" Height="35" Width="150" VerticalAlignment="Top" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

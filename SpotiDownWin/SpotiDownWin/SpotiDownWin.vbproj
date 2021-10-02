@@ -304,5 +304,8 @@
   <ItemGroup>
     <EmbeddedResource Include="dll\System.Text.Encoding.CodePages.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\dropdown.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -197,5 +197,168 @@
                 </Border>
             </Border>
         </ControlTemplate>
+        <Style x:Key="switch" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Width" Value="42"/>
+            <Setter Property="Height" Value="19"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Grid>
+                            <Border Background="#20112E" BorderBrush="#542F84" CornerRadius="8" BorderThickness="2">
+                                <Ellipse Name="EL_ifduzgdiu" Fill="#542F84" Height="12" Width="12" HorizontalAlignment="Left" Margin="1.5,0,0,0" VerticalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ThicknessAnimation Storyboard.TargetName="EL_ifduzgdiu" Storyboard.TargetProperty="Margin" From="1.5,0,0,0" To="24.5,0,0,0" Duration="0:0:0.15"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ThicknessAnimation Storyboard.TargetName="EL_ifduzgdiu" Storyboard.TargetProperty="Margin" From="24.5,0,0,0" To="1.5,0,0,0" Duration="0:0:0.15"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="EmtyToggleButton" TargetType="{x:Type ToggleButton}" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="combobox" TargetType="ComboBox">
+            <Grid Height="27">
+                <Border Background="#20112E" CornerRadius="12"/>
+                <Border BorderThickness="3" BorderBrush="#542F84" CornerRadius="11"/>
+
+                <Grid Margin="6,0,0,0" Background="Transparent">
+                    <Grid.OpacityMask>
+                        <LinearGradientBrush StartPoint="1,0" EndPoint="0,0">
+                            <GradientStop Color="#000000" Offset="0.3"/>
+                            <GradientStop Color="#00000000" Offset="0.2"/>
+                        </LinearGradientBrush>
+                    </Grid.OpacityMask>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="22"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{TemplateBinding Text}" Foreground="#542F84" FontSize="14" FontWeight="Medium" MaxWidth="{TemplateBinding Width}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <ToggleButton Style="{StaticResource EmtyToggleButton}" Cursor="Hand" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" Margin="0,3,6,3" Width="{TemplateBinding Width}" HorizontalAlignment="Right" Background="Transparent">
+                    <Grid Width="{TemplateBinding Width}" HorizontalAlignment="Right" Background="Transparent" Height="18">
+                        <Rectangle Fill="#542F84"  Grid.RowSpan="1" VerticalAlignment="Center" HorizontalAlignment="Right" Height="18" Width="18">
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="/res/dropdown.png"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </Grid>
+                </ToggleButton>
+
+                <Popup Placement="Bottom" Focusable="False" AllowsTransparency="True" IsOpen="{TemplateBinding IsDropDownOpen}" PopupAnimation="Fade">
+                    <Grid MaxHeight="147" Width="{TemplateBinding Width}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{TemplateBinding Width}"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Row="1" Background="#20112E" BorderThickness="3" BorderBrush="#542F84" CornerRadius="11"/>
+
+                        <Grid Grid.Row="1" Margin="4" Background="Transparent">
+                            <Grid.OpacityMask>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Color="#00000000" Offset="0"/>
+                                    <GradientStop Color="#000000" Offset="0.15"/>
+                                    <GradientStop Color="#000000" Offset="0.85"/>
+                                    <GradientStop Color="#00000000" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Grid.OpacityMask>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" CanContentScroll="False" Margin="0,1,0,1">
+                                <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </Popup>
+            </Grid>
+        </ControlTemplate>
+        <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="Foreground" Value="#542F84"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border Margin="2" CornerRadius="8" Padding="0,2,0,2" Background="#00b984e8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Border.Triggers>
+                                <EventTrigger RoutedEvent="Border.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="#20FFFFFF" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="Border.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="#00FFFFFF" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Border.Triggers>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="textbox" TargetType="TextBox">
+            <Grid Height="27">
+                <Border VerticalAlignment="Bottom" Background="#542F84" Height="2" Width="{TemplateBinding Width}"/>
+                <Grid Background="Transparent">
+                    <Grid.OpacityMask>
+                        <LinearGradientBrush StartPoint="1,0" EndPoint="0,0">
+                            <GradientStop Color="#00000000" Offset="1"/>
+                            <GradientStop Color="#000000" Offset="0.97"/>
+                            <GradientStop Color="#000000" Offset="0.03"/>
+                            <GradientStop Color="#00000000" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Grid.OpacityMask>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{TemplateBinding Tag}" Opacity="0.8" Foreground="#542F84" FontSize="18" TextAlignment="Center" VerticalAlignment="Top">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=text_notplaceholder_s}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBox Name="text_notplaceholder_s" CaretBrush="#542F84" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}" Foreground="#542F84" FontSize="18" Width="{Binding Width, RelativeSource={RelativeSource TemplatedParent}}" TextAlignment="Center" VerticalAlignment="Top"/>
+                </Grid>
+            </Grid>
+        </ControlTemplate>
     </Application.Resources>
 </Application>
