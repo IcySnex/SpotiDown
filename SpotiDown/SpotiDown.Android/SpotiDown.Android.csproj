@@ -83,10 +83,6 @@
     <AndroidResource Include="Resources\mipmap-anydpi-v26\icon_round.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SpotiDownVB\SpotiDownVB.vbproj">
-      <Project>{2d64c7e4-596f-4ced-bdd9-acfefecb4a17}</Project>
-      <Name>SpotiDownVB</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SpotiDown\SpotiDown.csproj">
       <Project>{81a06cc1-695d-4a2c-b5ee-119d85251b30}</Project>
       <Name>SpotiDown</Name>

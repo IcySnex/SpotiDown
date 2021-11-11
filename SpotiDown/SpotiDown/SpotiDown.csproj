@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.38" />
     <PackageReference Include="LiveXAML" Version="2.1.73" />
     <PackageReference Include="SpotifyAPI.Web" Version="6.2.1" />
     <PackageReference Include="SpotifyAPI.Web.Auth" Version="6.2.1" />
@@ -18,10 +19,7 @@
     <PackageReference Include="Xamarin.CommunityToolkit" Version="1.2.0" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2125" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\SpotiDownVB\SpotiDownVB.vbproj" />
+    <PackageReference Include="YoutubeExplode" Version="6.0.5" />
   </ItemGroup>
 
   <ItemGroup>

@@ -52,6 +52,15 @@
                                 </Picker>
                             </StackLayout>
                             <StackLayout Spacing="10" Orientation="Horizontal" Margin="10,2" HorizontalOptions="Center">
+                                <Label Text="Preffered File Format:" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                                <Picker SelectedIndexChanged="pck_pref_format_SelectedIndexChanged" x:Name="pck_pref_format" SelectedIndex="3" WidthRequest="150" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center">
+                                    <Picker.Items>
+                                        <x:String>WEBM</x:String>
+                                        <x:String>MP3 (Requires Web API [needs to be hosted on own server!])</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </StackLayout>
+                            <StackLayout Spacing="10" Orientation="Horizontal" Margin="10,2" HorizontalOptions="Center">
                                 <Label Text="Download Path:" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
                                 <Entry Unfocused="entry_pref_downloadpath_Unfocused" IsTextPredictionEnabled="False" x:Name="entry_pref_downloadpath" WidthRequest="200" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" Text="/SpotiDown"/>
                             </StackLayout>
@@ -80,6 +89,10 @@
                             <StackLayout x:Name="sl_oath_clientsecret" Spacing="10" Orientation="Horizontal" Margin="10,2" HorizontalOptions="Center">
                                 <Label Text="Client Secret:" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
                                 <Entry Unfocused="entry_oath_clientsecret_Unfocused" IsTextPredictionEnabled="False" x:Name="entry_oath_clientsecret" WidthRequest="200" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" Text="0dd522b08dc646559e5fc7ef092fa9d7"/>
+                            </StackLayout>
+                            <StackLayout x:Name="sl_oath_webapi" Spacing="10" Orientation="Horizontal" Margin="10,2" HorizontalOptions="Center">
+                                <Label Text="Web API:" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                                <Entry Unfocused="entry_oath_webapi_Unfocused" IsTextPredictionEnabled="False" x:Name="entry_oath_webapi" WidthRequest="200" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" Text="https://localhost:20000"/>
                             </StackLayout>
                         </StackLayout>
                     </Frame>
