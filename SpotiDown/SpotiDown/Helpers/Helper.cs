@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Net;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace SpotiDown.Helpers
 {
@@ -50,6 +51,8 @@ namespace SpotiDown.Helpers
         public static async Task<string> DownloadHtmlUTF8(string url) => await new WebClient() { Encoding = Encoding.UTF8 }.DownloadStringTaskAsync(url);
 
         public static async Task<bool> IsValidWebAPI(string url) => await new WebClient().DownloadStringTaskAsync(url) == "{SpotiDown Valid Web API}" ? true : false;
+
+       
     }
 
     public partial interface IHelperService
@@ -57,6 +60,10 @@ namespace SpotiDown.Helpers
         Task<bool> writeStream(string path, Stream stream);
         Task writeMetadata(string path, SpotifyTrack trackinfo);
         Task downloadFile(string url, string path);
+        string getArch();
+        Task<bool> writeFfmpeg(string path, Stream stream);
+        Task<bool> chmod(string path);
+        Task<string> runFFMPEG(string command);
     }
 
     public partial class DownloadPageInfo

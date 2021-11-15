@@ -18,7 +18,6 @@ namespace SpotiDown.API.Controllers
         {
             if (string.IsNullOrWhiteSpace(id)) return "Failed: [ No Youtube Video ID is given! ]"; if (kbps < 1) kbps = 160;
             Stream s = ConvertToMp3(await DownloadAudioStream(id, kbps), kbps);
-            s.Position = 0;
             return new FileStreamResult(s, "audio/mpeg") { FileDownloadName = $"{id}.mp3" };
         }
 
@@ -53,6 +52,7 @@ namespace SpotiDown.API.Controllers
             { ffmpeg.StandardOutput.BaseStream.CopyTo(opt); });
             Task.WaitAll(inputTask, outputTask);
             ffmpeg.WaitForExit();
+            opt.Position = 0;
             return opt;
         }
     }

@@ -94,11 +94,13 @@
                                 </LinearGradientBrush>
                             </Frame.Background>
                             <Frame BackgroundColor="#20112E" Margin="3" Padding="0" CornerRadius="22">
-                                <StackLayout Spacing="0">
-                                    <Label Text="Lyrics" FontSize="19" TextColor="#8F24ED" HorizontalOptions="Center" Margin="0,1,0,0"/>
-                                    <Rectangle HeightRequest="2.5" WidthRequest="57" BackgroundColor="#8F24ED" HorizontalOptions="Center"/>
-                                    <Editor x:Name="edi_lyrics" Text="N/A" FontSize="15.5" TextColor="#542F84" Margin="10" HorizontalOptions="Center"/>
-                                </StackLayout>
+                                <ScrollView>
+                                    <StackLayout Spacing="0">
+                                        <Label Text="Lyrics" FontSize="19" TextColor="#8F24ED" HorizontalOptions="Center" Margin="0,1,0,0"/>
+                                        <Rectangle HeightRequest="2.5" WidthRequest="57" BackgroundColor="#8F24ED" HorizontalOptions="Center"/>
+                                        <Editor x:Name="edi_lyrics" Text="N/A" FontSize="15.5" TextColor="#542F84" Margin="10" HorizontalOptions="Center"/>
+                                    </StackLayout>
+                                </ScrollView>
                             </Frame>
                         </Frame>
                     </StackLayout>

@@ -53,17 +53,27 @@ namespace SpotiDown.Helpers
 
         public static async Task<string> WriteTrack(SpotifyTrack trackinfo)
         {
-            var filepath = Helper.config.prefernces.downloadpath + Helper.config.prefernces.filename.Replace("{title}", trackinfo.title).Replace("{artist}", trackinfo.artist.Split(',')[0]).Replace("{album}", trackinfo.album).Replace("{release}", trackinfo.release.Year.ToString());
-            
-            if (Helper.config.prefernces.format == 0)
-            {
-                if (await Helper.ihs.writeStream(filepath, await DownloadAudioStream(trackinfo.youtube)) == true)
-                    await Helper.ihs.writeMetadata(filepath, trackinfo);
-            } else
-            {
-                
+            try {
+                var filepath = Helper.config.prefernces.downloadpath + Helper.config.prefernces.filename.Replace("{title}", trackinfo.title).Replace("{artist}", trackinfo.artist.Split(',')[0]).Replace("{album}", trackinfo.album).Replace("{release}", trackinfo.release.Year.ToString());
+                if (Helper.config.prefernces.format == 6)
+                {
+                    if (await Helper.ihs.writeStream(filepath + ".webm", await DownloadAudioStream(trackinfo.youtube)))
+                    {
+                        await Helper.ihs.writeMetadata(filepath + ".webm", trackinfo);
+                        return $"Song sucessfully downloaded! ('{filepath}.webm')";
+                    }
+                }
+                else
+                {
+                    if (await Helper.ihs.writeFfmpeg(filepath + GetFormatConfig(), await DownloadAudioStream(trackinfo.youtube)))
+                    {
+                        await Helper.ihs.writeMetadata(filepath + GetFormatConfig(), trackinfo);
+                        return $"Song sucessfully downloaded! ('{filepath}{GetFormatConfig()}')";
+                    }
+                }
+                return $"Song failed to download - '{trackinfo.title}'! ('Could not write file')";
             }
-            return filepath;
+            catch (Exception ex) { return $"Song failed to download - '{trackinfo.title}'! ('{ex.Message}')"; }
         }
 
         public static int GetKbpsConfig()
@@ -77,6 +87,20 @@ namespace SpotiDown.Helpers
                 case 4: return 256;
                 case 5: return 320;
                 default: return 160;
+            }
+        }
+        public static string GetFormatConfig()
+        {
+            switch (Helper.config.prefernces.format)
+            {
+                case 0: return ".mp3";
+                case 1: return ".wav";
+                case 2: return ".m4a";
+                case 3: return ".aac";
+                case 4: return ".ogg";
+                case 5: return ".flac";
+                case 6: return ".webm";
+                default: return ".mp3";
             }
         }
     }

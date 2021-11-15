@@ -4,6 +4,7 @@ using Xamarin.Forms.Xaml;
 using SpotiDown.Helpers;
 using Xamarin.Essentials;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace SpotiDown
 {
@@ -31,20 +32,24 @@ namespace SpotiDown
         {
             if (await Permissions.CheckStatusAsync<Permissions.StorageWrite>() == PermissionStatus.Granted)
             {
-                Button btn = (Button)((StackLayout)((Frame)((StackLayout)((StackLayout)Parent).Parent).Children[1]).Content).Children[0];
                 try
                 {
+                    Button btn = (Button)((StackLayout)((Frame)((StackLayout)((StackLayout)Parent).Parent).Children[1]).Content).Children[0];
+                    if (Helper.config.prefernces.format != 6 && !File.Exists(Helper.GetPath("ffmpeg")))
+                    {
+                        string arch = Helper.ihs.getArch();
+                        if (!await App.Current.MainPage.DisplayAlert("Something went wrong - Error", $"FFMPEG is not installed. Do you want to download the binary ({arch})?", "YES", "NO")) return;
+                        await Helper.ihs.downloadFile($"https://github.com/IcySnex/SpotiDown/raw/main/other/ffmpeg-{arch}", "ffmpeg");
+                        await App.Current.MainPage.DisplayAlert("Finished FFMPEG Download", $"Successfully downloaded ffmpeg binary ({arch}). Processing command now...", "OK");
+                    }
                     btn_download.IsEnabled = false;
                     btn.IsEnabled = false;
-                    await App.Current.MainPage.DisplayAlert("Done!", $"Song sucessfully downloaded! ('{await YoutubeHelper.WriteTrack(trackinfo)}')", "OK");
+                    await Downloadtrack(trackinfo);
                     btn.IsEnabled = true;
                     StackLayout container = (StackLayout)Parent;
                     container.Children.Remove(this);
                 }
-                catch (Exception ex)
-                {
-                    await App.Current.MainPage.DisplayAlert("Something went wrong - Error", ex.Message, "OK");
-                }
+                catch (Exception ex) { await App.Current.MainPage.DisplayAlert("Something went wrong - Error", ex.Message, "OK"); }
             }
             else
             {
@@ -54,6 +59,19 @@ namespace SpotiDown
                     btn_download_click(sender, e);
                 }
             }
+        }
+
+        private async Task<bool> Downloadtrack(SpotifyTrack trackinfo)
+        {
+            try
+            {
+                string res = await YoutubeHelper.WriteTrack(trackinfo);
+                if (res.Contains("Song failed to download"))
+                    if (await App.Current.MainPage.DisplayAlert("Something went wrong - Error", res + " Do you want to retry?", "YES", "NO")) return await Downloadtrack(trackinfo); else return false;
+                await App.Current.MainPage.DisplayAlert("Done!", res, "OK");
+                return true;
+            }
+            catch (Exception ex) { if (await App.Current.MainPage.DisplayAlert("Something went wrong - Error", $"Song failed to download! ('{ex.Message}') Do you want to retry?", "YES", "NO")) return await Downloadtrack(trackinfo); else return false; }
         }
     }
 }

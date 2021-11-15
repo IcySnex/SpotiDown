@@ -23,6 +23,5 @@
     {
         public string id { get; set; } = "bd6035158be648b695451636f2e311f2";
         public string secret { get; set; } = "0dd522b08dc646559e5fc7ef092fa9d7";
-        public string webapi { get; set; } = "https://localhost:44315/";
     }
 }
