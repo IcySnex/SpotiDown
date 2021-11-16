@@ -135,6 +135,9 @@
     <Compile Include="pages\pg_download.xaml.vb">
       <DependentUpon>pg_download.xaml</DependentUpon>
     </Compile>
+    <Compile Include="pages\pg_ffmpeg.xaml.vb">
+      <DependentUpon>pg_ffmpeg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\pg_home.xaml.vb">
       <DependentUpon>pg_home.xaml</DependentUpon>
     </Compile>
@@ -169,6 +172,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="pages\pg_download.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\pg_ffmpeg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

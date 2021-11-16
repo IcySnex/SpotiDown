@@ -11,6 +11,7 @@ Public Class Helper
 
     Public Shared p_home As New pg_home
     Public Shared p_settings As New pg_settings
+    Public Shared p_ffmpeg As New pg_ffmpeg
     Public Shared Function GetMain() As MainWindow
         Return Application.Current.MainWindow
     End Function
@@ -103,7 +104,7 @@ Public Class Helper
         If File.Exists(filepath) Then Await FileDeleteAsync(filepath)
         Dim ffmpeg As New Process With {.StartInfo = New ProcessStartInfo With {
                 .FileName = $"{config.ffmpegpath}ffmpeg",
-                .Arguments = $"-hide_banner -loglevel quiet -i - -q:a 0 ""{filepath}""",
+                .Arguments = $"-i - -b:a {YoutubeHelper.GetKbpsConfig}k ""{filepath}""",
                 .UseShellExecute = False, .CreateNoWindow = True, .RedirectStandardInput = True}}
         ffmpeg.Start()
         Dim input = ffmpeg.StandardInput.BaseStream

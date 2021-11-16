@@ -2,14 +2,10 @@
         Title="SpotiDown" WindowStartupLocation="CenterScreen" MinHeight="600" MinWidth="390" Height="800" Width="542" Loaded="Window_Loaded">
     <Grid>
         <local:pagetransition x:Name="tbc" Margin="0,0,0,70" Background="#1C1527"/>
-        <Grid Background="#34293F" Height="70" VerticalAlignment="Bottom">
-            <Grid.Effect>
+        <UniformGrid Rows="1" Background="#34293F" Height="70" VerticalAlignment="Bottom">
+            <UniformGrid.Effect>
                 <DropShadowEffect BlurRadius="23" ShadowDepth="0"/>
-            </Grid.Effect>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+            </UniformGrid.Effect>
             <Button Click="btn_home" Background="Transparent" BorderThickness="0" Style="{StaticResource cbutton}">
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Button.MouseEnter">
@@ -54,6 +50,25 @@
                     <TextBlock Text="Settings" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="13" Foreground="#650EF8"/>
                 </StackPanel>
             </Button>
-        </Grid>
+            <Button Visibility="Collapsed" Name="btn_ffmpeg" Click="btn_ffmpeg_" Grid.Column="2" Background="Transparent" BorderThickness="0" Style="{StaticResource cbutton}">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" From="#34293F" To="#1b1521" Duration="0:0:0.2"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Button.MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="#34293F" Duration="0:0:0.2"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+                <TextBlock Text="FFMPEG" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="13" Foreground="#650EF8"/>
+            </Button>
+        </UniformGrid>
     </Grid>
 </Window>

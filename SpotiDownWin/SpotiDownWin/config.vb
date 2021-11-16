@@ -3,6 +3,7 @@
     Public Property prefernces As New config_preferences
     Public Property ffmpegpath As String = ""
     Public Property oauth As New config_oauth
+    Public Property debug As Boolean
 End Class
 
 Public Class config_metadata
@@ -12,6 +13,7 @@ End Class
 
 Public Class config_preferences
     Public Property quality As Integer = 3
+    Public Property format As Integer = 0
     Public Property downloadpath As String = "SpotiDown\"
     Public Property filename As String = "{artist}\{title}"
 End Class

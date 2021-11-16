@@ -57,8 +57,30 @@ Public Class YoutubeHelper
         End If
     End Function
 
+    Public Shared Function GetFormatConfig() As String
+        If Helper.config.prefernces.format = 0 Then
+            Return ".mp3"
+        ElseIf Helper.config.prefernces.format = 1 Then
+            Return ".wav"
+        ElseIf Helper.config.prefernces.format = 2 Then
+            Return ".m4a"
+        ElseIf Helper.config.prefernces.format = 3 Then
+            Return ".aac"
+        ElseIf Helper.config.prefernces.format = 4 Then
+            Return ".ogg"
+        ElseIf Helper.config.prefernces.format = 5 Then
+            Return ".pcm"
+        ElseIf Helper.config.prefernces.format = 6 Then
+            Return ".flac"
+        ElseIf Helper.config.prefernces.format = 7 Then
+            Return ".webm"
+        Else
+            Return ".mp3"
+        End If
+    End Function
+
     Public Shared Async Function WriteTrack(trackinfo As SpotifyTrack) As Task(Of String)
-        Dim filepath = Helper.config.prefernces.downloadpath & Helper.config.prefernces.filename.Replace("{title}", trackinfo.title).Replace("{artist}", trackinfo.artist.Split(",")(0)).Replace("{album}", trackinfo.album).Replace("{release}", trackinfo.release.Year) & ".mp3"
+        Dim filepath = Helper.config.prefernces.downloadpath & Helper.config.prefernces.filename.Replace("{title}", trackinfo.title).Replace("{artist}", trackinfo.artist.Split(",")(0)).Replace("{album}", trackinfo.album).Replace("{release}", trackinfo.release.Year) & GetFormatConfig()
         If Directory.Exists(Path.GetDirectoryName(filepath)) = False Then Directory.CreateDirectory(Path.GetDirectoryName(filepath))
         If Await Helper.writeStream(filepath, Await DownloadAudioStream(trackinfo.youtube)) Then Await Helper.writeMetadata(filepath, trackinfo)
         Return filepath

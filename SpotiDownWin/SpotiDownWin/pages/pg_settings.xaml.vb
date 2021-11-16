@@ -8,6 +8,8 @@
         switch_meta_artwork.IsChecked = Helper.config.metadata.artwork
 
         cb_pref_quality.SelectedIndex = Helper.config.prefernces.quality
+
+        cb_pref_format.SelectedIndex = Helper.config.prefernces.format
         tb_pref_downloadpath.Text = Helper.config.prefernces.downloadpath
         tb_pref_filename.Text = Helper.config.prefernces.filename
 
@@ -15,6 +17,9 @@
 
         tb_oauth_clientid.Text = Helper.config.oauth.id
         tb_oauth_clientsecret.Text = Helper.config.oauth.secret
+
+        switch_debug.IsChecked = Helper.config.debug
+        bd_auth.Visibility = If(Helper.config.debug, Visibility.Visible, Visibility.Collapsed)
     End Sub
 
     Private Sub switch_meta_lyrics_Toggled(sender As Object, e As RoutedEventArgs)
@@ -28,6 +33,10 @@
 
     Private Sub cb_pref_quality_SelectedChanged(sender As Object, e As SelectionChangedEventArgs)
         Helper.config.prefernces.quality = cb_pref_quality.SelectedIndex
+        Helper.SaveConfig()
+    End Sub
+    Private Sub cb_pref_format_SelectedChanged(sender As Object, e As SelectionChangedEventArgs)
+        Helper.config.prefernces.format = cb_pref_format.SelectedIndex
         Helper.SaveConfig()
     End Sub
     Private Sub tb_pref_downloadpath_unfocused(sender As Object, e As RoutedEventArgs)
@@ -69,5 +78,11 @@
     End Sub
     Private Sub btn_show(sender As Object, e As RoutedEventArgs)
         Process.Start("config.json")
+    End Sub
+    Private Sub switch_debug_Toggled(sender As Object, e As RoutedEventArgs)
+        Helper.config.debug = switch_debug.IsChecked
+        Helper.SaveConfig()
+        bd_auth.Visibility = If(switch_debug.IsChecked, Visibility.Visible, Visibility.Collapsed)
+        Helper.GetMain().SetDebugMode()
     End Sub
 End Class

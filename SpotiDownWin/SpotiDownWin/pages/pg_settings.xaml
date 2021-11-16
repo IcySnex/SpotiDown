@@ -50,6 +50,19 @@
                                 <ComboBoxItem Content="320 KBPS"/>
                             </ComboBox>
                         </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10,2" HorizontalAlignment="Center">
+                            <TextBlock Text="Preffered File Quality:" FontSize="15.5" Foreground="#542F84" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <ComboBox Name="cb_pref_format" SelectionChanged="cb_pref_format_SelectedChanged" Width="150" SelectedIndex="3" Template="{StaticResource combobox}">
+                                <ComboBoxItem Content="MP3"/>
+                                <ComboBoxItem Content="WAV"/>
+                                <ComboBoxItem Content="M4a"/>
+                                <ComboBoxItem Content="AAC"/>
+                                <ComboBoxItem Content="OGG"/>
+                                <ComboBoxItem Content="PCM"/>
+                                <ComboBoxItem Content="FLAC"/>
+                                <ComboBoxItem Content="WEBM"/>
+                            </ComboBox>
+                        </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10,2,10,10" HorizontalAlignment="Center">
                             <TextBlock Text="Download Path:" FontSize="15.5" Foreground="#542F84" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,10,0"/>
                             <TextBox LostFocus="tb_pref_downloadpath_unfocused" Name="tb_pref_downloadpath" Template="{StaticResource textbox}" Width="200">SpotiDown\</TextBox>
@@ -82,7 +95,7 @@
                     </StackPanel>
                 </Border>
             </Border>
-            <Border CornerRadius="23" Margin="10,5">
+            <Border Visibility="Collapsed" Name="bd_auth" CornerRadius="23" Margin="10,5">
                 <Border.Background>
                     <LinearGradientBrush>
                         <GradientStop Color="#8F24ED" Offset="0"/>
@@ -109,6 +122,10 @@
             <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
                 <Button Template="{StaticResource sButton}" Content="RESET CONFIG" Click="btn_reset" Height="35" Width="150" VerticalAlignment="Top" />
                 <Button Template="{StaticResource sButton}" Content="SHOW CONFIG" Click="btn_show" Margin="10,0,0,0" Height="35" Width="150" VerticalAlignment="Top" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10,2" HorizontalAlignment="Center">
+                <TextBlock Text="Debug mode:" FontSize="15.5" Foreground="#542F84" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <ToggleButton IsChecked="True" Style="{StaticResource switch}" Click="switch_debug_Toggled" x:Name="switch_debug"/>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
