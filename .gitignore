@@ -4,9 +4,9 @@ SpotiDown.Android/obj/
 SpotiDown.Android/bin/
 SpotiDown/obj/
 SpotiDown/bin/
-SpotiDownVB/obj/
-SpotiDownVB/bin/
 SpotiDownWin/.vs/
+SpotiDownWin/packages/
+SpotiDownWin/SpotiDownWin/My Project/
 SpotiDownWin/SpotiDownWin/obj/
 SpotiDownWin/SpotiDownWin/bin/
 *.suo

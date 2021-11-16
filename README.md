@@ -1,8 +1,8 @@
 ![ad](https://github.com/IcySnex/SpotiDown/raw/main/other/ad.png)
 
 # Download
-[Android (APK)](https://github.com/IcySnex/SpotiDown/releases/download/1.0.1/spotidown-android-1.0.1.apk) / 
-[Windows (EXE)](https://github.com/IcySnex/SpotiDown/releases/download/1.0.1/spotidown-windows-1.0.1.exe)
+[Android (APK)](https://github.com/IcySnex/SpotiDown/releases/download/1.1/spotidown-android-1.1.apk) / 
+[Windows (EXE)](https://github.com/IcySnex/SpotiDown/releases/download/1.1/spotidown-windows-1.1.exe)
 
 # Links
 [YouTube](https://www.youtube.com/channel/UCkAQG8OkLKgi_WAR526pd9w) / 
@@ -25,6 +25,6 @@ SpotiDown is an app that is designed to download music from Spotify directly to 
 
 `5. Download a single song in the list or press "Download All"`
 
-# Currently supports:
-- Android (songs only downloadable as .webm)
+# Currently supports (.mp3, .wav, .m4a, .aac, .ogg, .pcm, .flac, .webm):
+- Android
 - Windows
