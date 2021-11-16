@@ -78,7 +78,7 @@
                         </StackLayout>
                     </Frame>
                 </Frame>
-                <Frame VerticalOptions="Start" Padding="0" CornerRadius="22" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="3">
+                <Frame x:Name="fr_auth" VerticalOptions="Start" Padding="0" CornerRadius="22" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="3">
                     <Frame.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                             <GradientStop Color="#8F24ED" Offset="0.0" />
@@ -88,11 +88,11 @@
                     <Frame BackgroundColor="#20112E" Margin="3" Padding="0" CornerRadius="22">
                         <StackLayout Spacing="0">
                             <Label Text="OAuth (Advanced)" FontSize="17" TextColor="#8F24ED" HorizontalOptions="Center" Margin="0,1,0,0"/>
-                            <StackLayout x:Name="sl_oath_clientid" Spacing="10" Orientation="Horizontal" Margin="10,2" HorizontalOptions="Center">
+                            <StackLayout Spacing="10" Orientation="Horizontal" Margin="10,2" HorizontalOptions="Center">
                                 <Label Text="Client ID:" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
                                 <Entry Unfocused="entry_oath_clientid_Unfocused" IsTextPredictionEnabled="False" x:Name="entry_oath_clientid" WidthRequest="200" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" Text="bd6035158be648b695451636f2e311f2"/>
                             </StackLayout>
-                            <StackLayout x:Name="sl_oath_clientsecret" Spacing="10" Orientation="Horizontal" Margin="10,2" HorizontalOptions="Center">
+                            <StackLayout Spacing="10" Orientation="Horizontal" Margin="10,2" HorizontalOptions="Center">
                                 <Label Text="Client Secret:" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
                                 <Entry Unfocused="entry_oath_clientsecret_Unfocused" IsTextPredictionEnabled="False" x:Name="entry_oath_clientsecret" WidthRequest="200" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" Text="0dd522b08dc646559e5fc7ef092fa9d7"/>
                             </StackLayout>
@@ -122,6 +122,10 @@
                             <Button Clicked="btn_show_clicked" HeightRequest="26" VerticalOptions="Center" BackgroundColor="#20112E" CornerRadius="22" Text="Show Config" FontSize="15" Padding="3" TextColor="#8F24ED"/>
                         </StackLayout>
                     </Frame>
+                </StackLayout>
+                <StackLayout Spacing="10" Orientation="Horizontal" Margin="10,2" HorizontalOptions="Center">
+                    <Label Text="Debug mode:" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                    <Switch Toggled="switch_debug_Toggled" x:Name="switch_debug" Opacity="0.5"/>
                 </StackLayout>
             </StackLayout>
         </ScrollView>

@@ -8,5 +8,4 @@
             BarBackgroundColor="#34293F" NavigationPage.HasNavigationBar="False">
     <sd:tab_home Title="Home" IconImageSource="home.png"/>
     <sd:tab_settings Title="Settings" IconImageSource="settings.png" />
-    <sd1:tab_ffmpeg Title="FFMPEG" />
 </TabbedPage>

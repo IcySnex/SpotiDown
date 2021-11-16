@@ -4,10 +4,11 @@ namespace SpotiDown
 {
     public partial class App : Application
     {
+        public static tab_bar tb = new tab_bar();
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new tab_bar());
+            MainPage = new NavigationPage(tb);
         }
 
         protected override void OnStart() { }

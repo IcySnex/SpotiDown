@@ -5,6 +5,7 @@
         public config_metadata metadata { get; set; } = new config_metadata();
         public config_preferences prefernces { get; set; } = new config_preferences();
         public config_auth oauth { get; set; } = new config_auth();
+        public bool debug { get; set; }
     }
 
     public class config_metadata

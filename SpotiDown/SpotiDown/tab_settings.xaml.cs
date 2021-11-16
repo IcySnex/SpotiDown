@@ -23,6 +23,9 @@ namespace SpotiDown
 
             entry_oath_clientid.Text = Helper.config.oauth.id;
             entry_oath_clientsecret.Text = Helper.config.oauth.secret;
+
+            switch_debug.IsToggled = Helper.config.debug;
+            fr_auth.IsVisible = Helper.config.debug;
         }
 
         #region meta
@@ -45,5 +48,6 @@ namespace SpotiDown
 
         private void btn_reset_clicked(object sender, EventArgs e) { Helper.config = new config(); Helper.SaveConfig(); updateui(); }
         private async void btn_show_clicked(object sender, EventArgs e) { await DisplayAlert("Current Config (JSON)", JsonConvert.SerializeObject(Helper.config), "OK"); ; }
+        private void switch_debug_Toggled(object sender, ToggledEventArgs e) { Helper.config.debug = switch_debug.IsToggled; Helper.SaveConfig(); fr_auth.IsVisible = switch_debug.IsToggled; if (App.tb != null) App.tb.SetDebugmode(); }
     }
 }
