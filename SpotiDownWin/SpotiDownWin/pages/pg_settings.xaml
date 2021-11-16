@@ -52,7 +52,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10,2" HorizontalAlignment="Center">
                             <TextBlock Text="Preffered File Quality:" FontSize="15.5" Foreground="#542F84" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                            <ComboBox Name="cb_pref_format" SelectionChanged="cb_pref_format_SelectedChanged" Width="150" SelectedIndex="3" Template="{StaticResource combobox}">
+                            <ComboBox Name="cb_pref_format" SelectionChanged="cb_pref_format_SelectedChanged" Width="150" Template="{StaticResource combobox}">
                                 <ComboBoxItem Content="MP3"/>
                                 <ComboBoxItem Content="WAV"/>
                                 <ComboBoxItem Content="M4a"/>
