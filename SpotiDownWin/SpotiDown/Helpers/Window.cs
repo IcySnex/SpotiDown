@@ -1,7 +1,8 @@
-﻿using PInvoke;
+﻿using Microsoft.UI.Xaml.Controls;
+using PInvoke;
 using System;
-using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using WinRT.Interop;
 
 namespace SpotiDown.Helpers;
@@ -70,5 +71,21 @@ public class Window
                   User32.ImageType.IMAGE_ICON, 16, 16, User32.LoadImageFlags.LR_LOADFROMFILE);
 
         User32.SendMessage(hwnd, User32.WindowMessage.WM_SETICON, (IntPtr)0, hIcon);
+    }
+
+    public static async Task<ContentDialogResult> Alert(Page Root, string Title, string Description, string CloseText, string PrimaryText = null, string SecondaryText = null)
+    {
+        var cd = new ContentDialog
+        {
+            Title = Title,
+            Content = Description,
+            CloseButtonText = CloseText,
+            XamlRoot = Root.Content.XamlRoot
+        };
+        if (PrimaryText != null)
+            cd.PrimaryButtonText = PrimaryText;
+        if (SecondaryText != null)
+            cd.SecondaryButtonText = SecondaryText;
+        return await cd.ShowAsync();
     }
 }

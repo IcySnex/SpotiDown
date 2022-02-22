@@ -30,7 +30,7 @@ public sealed partial class MainWindow : Window
             return;
 
         NavigationFrame.Navigate(Type.GetType(item.Tag.ToString()), item.Content);
-        Navigation.Header = item.Content;
+        Navigation.Header = item.Content.ToString() == "Home" ? "" : item.Content;
         Navigation.SelectedItem = item;
     }
 }
