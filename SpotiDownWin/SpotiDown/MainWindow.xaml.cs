@@ -26,11 +26,10 @@ public sealed partial class MainWindow : Window
 
     public void SetCurrentNavigationViewItem(NavigationViewItem item)
     {
-        if (item is null | item.Tag is null)
+        if (item is null || item.Tag is null)
             return;
 
-        NavigationFrame.Navigate(Type.GetType(item.Tag.ToString()), item.Content);
-        Navigation.Header = item.Content.ToString() == "Home" ? "" : item.Content;
+        NavigationFrame.Navigate(Type.GetType(item.Tag.ToString()!), item.Content);
         Navigation.SelectedItem = item;
     }
 }

@@ -1,0 +1,49 @@
+﻿<Page
+    x:Class="SpotiDown.Pages.YouTube"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:UC="using:SpotiDown.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:SpotiDown.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel Margin="20,0,20,0" Spacing="10">
+            <TextBlock
+                Margin="0,32,0,0"
+                Style="{StaticResource TitleTextBlockStyle}"
+                Text="YouTube" />
+
+            <Grid VerticalAlignment="Top" CornerRadius="8">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStopCollection>
+                            <GradientStop Offset="0" Color="#50ff1100" />
+                            <GradientStop Offset="1" Color="#00ff1100" />
+                        </GradientStopCollection>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid Margin="20,20,20,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="100" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"
+                        PlaceholderText="Search for music on YouTube..." />
+                    <Button
+                        Grid.Column="2"
+                        HorizontalAlignment="Stretch"
+                        Click="Search"
+                        Content="Search" />
+                </Grid>
+            </Grid>
+
+            <ListView Name="Container" SelectionMode="Extended" />
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

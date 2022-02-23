@@ -27,7 +27,7 @@
             <NavigationViewItem
                 Content="Youtube"
                 Icon="Video"
-                Tag="Youtube" />
+                Tag="SpotiDown.Pages.YouTube" />
             <NavigationViewItem
                 Content="SoundCloud"
                 Icon="MusicInfo"

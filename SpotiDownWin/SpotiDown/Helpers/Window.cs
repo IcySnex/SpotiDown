@@ -10,7 +10,7 @@ namespace SpotiDown.Helpers;
 public class Window
 {
     private delegate IntPtr WinProc(IntPtr hWnd, User32.WindowMessage Msg, IntPtr wParam, IntPtr lParam);
-    private static WinProc newWndProc = null;
+    private static WinProc? newWndProc = null;
     private static IntPtr oldWndProc = IntPtr.Zero;
     [DllImport("user32")]
     private static extern IntPtr SetWindowLong(IntPtr hWnd, User32.WindowLongIndexFlags nIndex, WinProc newProc);
@@ -73,12 +73,12 @@ public class Window
         User32.SendMessage(hwnd, User32.WindowMessage.WM_SETICON, (IntPtr)0, hIcon);
     }
 
-    public static async Task<ContentDialogResult> Alert(Page Root, string Title, string Description, string CloseText, string PrimaryText = null, string SecondaryText = null)
+    public static async Task<ContentDialogResult> Alert(Page Root, string Title, object Content, string CloseText, string? PrimaryText = null, string? SecondaryText = null)
     {
         var cd = new ContentDialog
         {
             Title = Title,
-            Content = Description,
+            Content = Content,
             CloseButtonText = CloseText,
             XamlRoot = Root.Content.XamlRoot
         };

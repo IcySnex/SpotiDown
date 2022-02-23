@@ -6,7 +6,10 @@ namespace SpotiDown.Pages;
 public sealed partial class Home : Page
 {
     public Home()
-        => InitializeComponent();
+    {
+        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
+        InitializeComponent();
+    }
 
     private async void Github_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         => await Helpers.Local.AskUrl(this, "View Source Code", "https://github.com/IcySnex/SpotiDown");

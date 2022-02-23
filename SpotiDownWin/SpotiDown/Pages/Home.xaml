@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Grid>
-        <Grid Margin="0,-85,0,0">
+        <Grid Margin="0,0,0,0">
             <ScrollViewer VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled">
                 <StackPanel Margin="20,10">
                     <Grid Margin="0,85,0,0">
@@ -68,10 +68,10 @@
                         </Grid.ColumnDefinitions>
 
                         <Button
-                            Click="Github_Click"
                             Grid.Column="0"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
+                            Click="Github_Click"
                             CornerRadius="8">
                             <StackPanel Spacing="10">
                                 <Image Height="50" Source="/Assets/github.png" />
@@ -82,10 +82,10 @@
                             </StackPanel>
                         </Button>
                         <Button
-                            Click="Share_Click"
                             Grid.Column="2"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
+                            Click="Share_Click"
                             CornerRadius="8">
                             <StackPanel Spacing="10">
                                 <Image Height="50" Source="/Assets/share.png" />
@@ -96,10 +96,10 @@
                             </StackPanel>
                         </Button>
                         <Button
-                            Click="Discord_Click"
                             Grid.Column="4"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
+                            Click="Discord_Click"
                             CornerRadius="8">
                             <StackPanel Spacing="10">
                                 <Image Height="50" Source="/Assets/discord.png" />
@@ -110,10 +110,10 @@
                             </StackPanel>
                         </Button>
                         <Button
-                            Click="Youtube_Click"
                             Grid.Column="6"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
+                            Click="Youtube_Click"
                             CornerRadius="8">
                             <StackPanel Spacing="10">
                                 <Image Height="50" Source="/Assets/youtube.png" />

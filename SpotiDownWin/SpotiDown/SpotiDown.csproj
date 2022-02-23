@@ -12,6 +12,7 @@
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
 		<WindowsPackageType>None</WindowsPackageType>
 		<ApplicationIcon>ico.ico</ApplicationIcon>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="Assets\discord.png" />
@@ -19,8 +20,10 @@
 	  <None Remove="Assets\icon.png" />
 	  <None Remove="Assets\share.png" />
 	  <None Remove="Assets\youtube.png" />
+	  <None Remove="Controls\YoutubeEntry.xaml" />
 	  <None Remove="Pages\Home.xaml" />
 	  <None Remove="Pages\Spotify.xaml" />
+	  <None Remove="Pages\YouTube.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -50,11 +53,20 @@
 		<ProjectCapability Include="Msix" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Page Update="Pages\YouTube.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
 	  <Page Update="Pages\Spotify.xaml">
 	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 	    <SubType>Designer</SubType>
 	  </Page>
 	  <Page Update="Pages\Home.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="Controls\YoutubeEntry.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </Page>
 	</ItemGroup>
