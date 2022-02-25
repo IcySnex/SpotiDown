@@ -2,48 +2,93 @@
     x:Class="SpotiDown.Pages.YouTube"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:UC="using:SpotiDown.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="using:SpotiDown.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <ScrollViewer>
-        <StackPanel Margin="20,0,20,0" Spacing="10">
-            <TextBlock
-                Margin="0,32,0,0"
-                Style="{StaticResource TitleTextBlockStyle}"
-                Text="YouTube" />
+    <Grid>
+        <Grid Margin="30,0" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-            <Grid VerticalAlignment="Top" CornerRadius="8">
-                <Grid.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStopCollection>
-                            <GradientStop Offset="0" Color="#50ff1100" />
-                            <GradientStop Offset="1" Color="#00ff1100" />
-                        </GradientStopCollection>
-                    </LinearGradientBrush>
-                </Grid.Background>
-                <Grid Margin="20,20,20,20">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="5" />
-                        <ColumnDefinition Width="100" />
-                    </Grid.ColumnDefinitions>
-                    <TextBox
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Center"
-                        PlaceholderText="Search for music on YouTube..." />
-                    <Button
-                        Grid.Column="2"
-                        HorizontalAlignment="Stretch"
-                        Click="Search"
-                        Content="Search" />
-                </Grid>
-            </Grid>
+            <ScrollViewer
+                Name="ScrollContainer"
+                Margin="0,110,0,0"
+                CanContentRenderOutsideBounds="True"
+                VerticalScrollBarVisibility="Auto"
+                VerticalScrollMode="Auto">
 
-            <ListView Name="Container" SelectionMode="Extended" />
+                <ListView
+                    Name="Container"
+                    Margin="5"
+                    SelectionChanged="Container_SelectionChanged"
+                    SelectionMode="Extended" />
+            </ScrollViewer>
+        </Grid>
 
-        </StackPanel>
-    </ScrollViewer>
+        <Grid
+            Height="80"
+            Margin="20"
+            Padding="20,0"
+            VerticalAlignment="Top"
+            Background="{ThemeResource AcrylicBrush}"
+            CornerRadius="8">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="110" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox
+                Name="Query"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                PlaceholderText="Search for music on YouTube..." />
+            <Button
+                Grid.Column="2"
+                HorizontalAlignment="Stretch"
+                Click="Search_Click"
+                Content="Search" />
+            <ComboBox
+                Grid.Column="4"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                SelectedIndex="0">
+
+                <ComboBoxItem Content="Newest" />
+                <ComboBoxItem Content="Lastest" />
+                <ComboBoxItem Content="Title" />
+                <ComboBoxItem Content="Artist" />
+                <ComboBoxItem Content="Album" />
+                <ComboBoxItem Content="Duration" />
+            </ComboBox>
+        </Grid>
+
+        <Grid
+            Name="DownloadBar"
+            Height="80"
+            Margin="20"
+            VerticalAlignment="Bottom"
+            Background="{ThemeResource AcrylicBrush}"
+            CornerRadius="12"
+            Visibility="Collapsed">
+            <Grid.Resources>
+                <Storyboard x:Name="DownloadBar_FadeIn">
+                    <FadeInThemeAnimation SpeedRatio="2" Storyboard.TargetName="DownloadBar" />
+                </Storyboard>
+                <Storyboard x:Name="DownloadBar_FadeOut">
+                    <FadeOutThemeAnimation
+                        Completed="DownloadBar_FadeOut_Completed"
+                        SpeedRatio="2"
+                        Storyboard.TargetName="DownloadBar" />
+                </Storyboard>
+            </Grid.Resources>
+
+            <Button Click="Button_Click" Content="Click" />
+        </Grid>
+    </Grid>
 </Page>
