@@ -9,6 +9,8 @@
 
     <NavigationView
         x:Name="Navigation"
+        BackRequested="Navigation_BackRequested"
+        IsBackEnabled="{Binding ElementName=NavigationFrame, Path=CanGoBack, Mode=TwoWay}"
         OpenPaneLength="200"
         SelectionChanged="Navigation_SelectionChanged">
         <NavigationView.MenuItems>
@@ -27,7 +29,7 @@
             <NavigationViewItem
                 Content="Youtube"
                 Icon="Video"
-                Tag="SpotiDown.Pages.YouTube" />
+                Tag="SpotiDown.Pages.Youtube" />
             <NavigationViewItem
                 Content="SoundCloud"
                 Icon="MusicInfo"

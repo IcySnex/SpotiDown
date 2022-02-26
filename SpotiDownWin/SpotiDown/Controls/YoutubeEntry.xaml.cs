@@ -7,14 +7,14 @@ namespace SpotiDown.Controls;
 
 public sealed partial class YoutubeEntry : UserControl
 {
-    public YoutubeEntry(SongModel Song)
+    public YoutubeEntry(YoutubeSongModel Song)
     {
         InitializeComponent();
         this.Song = Song;
         UpdateUI();
     }
     
-    public SongModel Song;
+    public YoutubeSongModel Song;
 
     public void UpdateUI()
     {

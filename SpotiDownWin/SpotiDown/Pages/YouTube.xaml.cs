@@ -5,13 +5,12 @@ using SpotiDown.Controls;
 using SpotiDown.Enums;
 using SpotiDown.Models;
 using System;
-using System.Threading.Tasks;
 
 namespace SpotiDown.Pages;
 
-public sealed partial class YouTube : Page
+public sealed partial class Youtube : Page
 {
-    public YouTube()
+    public Youtube()
     {
         NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         InitializeComponent();
@@ -40,35 +39,25 @@ public sealed partial class YouTube : Page
 
     private void Search_Click(object sender, RoutedEventArgs e)
     {
-        SongModel Song = new(
-            SongType.YouTube,
+        YoutubeSongModel Song = new(
             "https://www.youtube.com/watch?v=-Mdkbg0nyWA&ab_channel=1nonly",
             "HeyHo song",
             "Fortniter187",
             new(1, 32, 41),
-            "SexSounds",
             DateTime.UtcNow,
-            "Hey,\nThis\nis some random ass lyrics\nFUCKKKK\nHelp me\nIM being kidnapped LOOOL\n\n Anyways\nHIIIIII",
-            "https://img.youtube.com/vi/-Mdkbg0nyWA/maxresdefault.jpg",
-            1,
-            34);
-        SongModel Song1 = new(
-            SongType.YouTube,
+            "https://img.youtube.com/vi/-Mdkbg0nyWA/maxresdefault.jpg");
+        YoutubeSongModel Song1 = new(
             "https://www.youtube.com/watch?v=-Mdkbg0nyWA&ab_channel=1nonly",
             "TheseHoes",
             "SexyMexy",
             new(0, 2, 21),
-            "HIIII",
             DateTime.UtcNow,
-            "Hey,\nThis\nis some random ass lyrics\nFUCKKKK\nHelp me\nIM being kidnapped LOOOL\n\n Anyways\nHIIIIII",
-            "https://img.youtube.com/vi/-Mdkbg0nyWA/maxresdefault.jpg",
-            1,
-            34);
+            "https://img.youtube.com/vi/-Mdkbg0nyWA/maxresdefault.jpg");
         Container.Items.Add(new YoutubeEntry(Song));
         Container.Items.Add(new YoutubeEntry(Song1));
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
+    private void Download_Click(object sender, RoutedEventArgs e)
     {
     }
 }

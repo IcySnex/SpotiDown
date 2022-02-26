@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="SpotiDown.Pages.YouTube"
+    x:Class="SpotiDown.Pages.Youtube"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -63,7 +63,6 @@
                 <ComboBoxItem Content="Lastest" />
                 <ComboBoxItem Content="Title" />
                 <ComboBoxItem Content="Artist" />
-                <ComboBoxItem Content="Album" />
                 <ComboBoxItem Content="Duration" />
             </ComboBox>
         </Grid>
@@ -72,23 +71,92 @@
             Name="DownloadBar"
             Height="80"
             Margin="20"
+            Padding="20,0"
             VerticalAlignment="Bottom"
             Background="{ThemeResource AcrylicBrush}"
             CornerRadius="12"
+            Opacity="0"
             Visibility="Collapsed">
             <Grid.Resources>
                 <Storyboard x:Name="DownloadBar_FadeIn">
-                    <FadeInThemeAnimation SpeedRatio="2" Storyboard.TargetName="DownloadBar" />
+                    <DoubleAnimation
+                        Storyboard.TargetName="DownloadBar"
+                        Storyboard.TargetProperty="Opacity"
+                        To="1"
+                        Duration="0:0:0.1" />
                 </Storyboard>
                 <Storyboard x:Name="DownloadBar_FadeOut">
-                    <FadeOutThemeAnimation
+                    <DoubleAnimation
                         Completed="DownloadBar_FadeOut_Completed"
-                        SpeedRatio="2"
-                        Storyboard.TargetName="DownloadBar" />
+                        Storyboard.TargetName="DownloadBar"
+                        Storyboard.TargetProperty="Opacity"
+                        To="0"
+                        Duration="0:0:0.1" />
                 </Storyboard>
             </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="86" />
+            </Grid.ColumnDefinitions>
 
-            <Button Click="Button_Click" Content="Click" />
+            <ContentControl Tag="Quality" Template="{ThemeResource WithHeader}">
+                <ComboBox HorizontalAlignment="Stretch" SelectedIndex="3">
+                    <ComboBoxItem Content="32 kbps" />
+                    <ComboBoxItem Content="64 kbps" />
+                    <ComboBoxItem Content="128 kbps" />
+                    <ComboBoxItem Content="160 kbps" />
+                    <ComboBoxItem Content="256 kbps" />
+                    <ComboBoxItem Content="320 kbps" />
+                </ComboBox>
+            </ContentControl>
+            <ContentControl
+                Grid.Column="1"
+                Margin="5,0,0,0"
+                Tag="Format"
+                Template="{ThemeResource WithHeader}">
+                <ComboBox HorizontalAlignment="Stretch" SelectedIndex="0">
+                    <ComboBoxItem Content="mp3" />
+                    <ComboBoxItem Content="wav" />
+                    <ComboBoxItem Content="m4a" />
+                    <ComboBoxItem Content="aac" />
+                    <ComboBoxItem Content="ogg" />
+                    <ComboBoxItem Content="pcm" />
+                    <ComboBoxItem Content="flac" />
+                    <ComboBoxItem Content="webm" />
+                </ComboBox>
+            </ContentControl>
+
+            <Line
+                Grid.Column="2"
+                Margin="6,0,0,0"
+                Style="{StaticResource Spliter}" />
+
+            <ContentControl
+                Grid.Column="3"
+                Margin="5,0,0,0"
+                Tag="Meta Data"
+                Template="{ThemeResource WithHeader}">
+                <Grid>
+                    <CheckBox Content="Artwork" IsChecked="True" />
+                    <CheckBox Margin="90,0,0,0" Content="Description" />
+                </Grid>
+            </ContentControl>
+
+            <Line
+                Grid.Column="4"
+                Margin="0,0,7,0"
+                Style="{StaticResource Spliter}" />
+
+            <Button
+                Grid.Column="5"
+                HorizontalAlignment="Stretch"
+                Background="{ThemeResource SystemAccentColorLight2}"
+                Click="Download_Click"
+                Content="Download" />
         </Grid>
     </Grid>
 </Page>

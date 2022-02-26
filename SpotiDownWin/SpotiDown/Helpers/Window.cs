@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using PInvoke;
 using System;
 using System.Runtime.InteropServices;
@@ -73,14 +74,14 @@ public class Window
         User32.SendMessage(hwnd, User32.WindowMessage.WM_SETICON, (IntPtr)0, hIcon);
     }
 
-    public static async Task<ContentDialogResult> Alert(Page Root, string Title, object Content, string CloseText, string? PrimaryText = null, string? SecondaryText = null)
+    public static async Task<ContentDialogResult> Alert(XamlRoot Root, string Title, object Content, string CloseText = "Cancel", string? PrimaryText = null, string? SecondaryText = null)
     {
         var cd = new ContentDialog
         {
             Title = Title,
             Content = Content,
             CloseButtonText = CloseText,
-            XamlRoot = Root.Content.XamlRoot
+            XamlRoot = Root
         };
         if (PrimaryText != null)
             cd.PrimaryButtonText = PrimaryText;

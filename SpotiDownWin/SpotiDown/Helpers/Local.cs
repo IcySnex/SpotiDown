@@ -1,4 +1,6 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using SpotiDown.Models;
 using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
@@ -8,6 +10,8 @@ namespace SpotiDown.Helpers;
 
 public class Local
 {
+    public static ConfigModel Config = ConfigModel.Load();
+
     public static void SetClipboard(string Text)
     {
         var dp = new DataPackage();
@@ -15,7 +19,7 @@ public class Local
         Clipboard.SetContent(dp);
     }
 
-    public static async Task<bool> AskUrl(Page Root, string Title, string Url)
+    public static async Task<bool> AskUrl(XamlRoot Root, string Title, string Url)
     {
         if (await Window.Alert(Root, Title, $"Do you want to open the Url ({Url}) in the default browser?", "No", "Yes") == ContentDialogResult.Primary)
             return await Launcher.LaunchUriAsync(new Uri(Url));
