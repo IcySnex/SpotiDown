@@ -5,10 +5,10 @@ using System.IO;
 
 namespace SpotiDown.Models;
 
-public class ConfigModel
+public class Config
 {
-    public static ConfigModel Load() =>
-        File.Exists("config.json") ? Text.Deserialize<ConfigModel>("config") : new();
+    public static Config Load() =>
+        File.Exists("config.json") ? Text.Deserialize<Config>("config") : new();
 
     public void Save() =>
        File.WriteAllText("config.json", Text.Serialize(this));

@@ -3,9 +3,9 @@ using System;
 
 namespace SpotiDown.Models;
 
-public class SongModel
+public class Song
 {
-    public SongModel(SongType Type, string Url, string Title, string Artist, TimeSpan Duration, string Album, DateTime Release, string Lyrics, string Artwork, int Track, int Disc)
+    public Song(SongType Type, string Url, string Title, string Artist, TimeSpan Duration, string Album, DateTime Release, string Lyrics, string Artwork, int Track, int Disc)
     {
         this.Type = Type;
         this.Url = Url;

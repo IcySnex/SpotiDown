@@ -44,6 +44,7 @@
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.194" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="PInvoke.User32" Version="0.7.104" />
+		<PackageReference Include="YoutubeExplode" Version="6.1.0" />
 		<Manifest Include="$(ApplicationManifest)" />
 	</ItemGroup>
 

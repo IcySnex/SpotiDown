@@ -34,9 +34,10 @@
             VerticalAlignment="Top"
             Background="{ThemeResource AcrylicBrush}"
             CornerRadius="8">
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="80" />
                 <ColumnDefinition Width="5" />
@@ -48,19 +49,28 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
                 PlaceholderText="Search for music on YouTube..." />
-            <Button
+            <NumberBox
+                Name="ResultCount"
                 Grid.Column="2"
+                VerticalAlignment="Center"
+                Maximum="500"
+                Minimum="1"
+                SpinButtonPlacementMode="Compact"
+                Value="50" />
+            <Button
+                Grid.Column="4"
                 HorizontalAlignment="Stretch"
                 Click="Search_Click"
                 Content="Search" />
             <ComboBox
-                Grid.Column="4"
+                Name="Sorting"
+                Grid.Column="6"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
-                SelectedIndex="0">
+                SelectedIndex="0"
+                SelectionChanged="Sorting_SelectionChanged">
 
-                <ComboBoxItem Content="Newest" />
-                <ComboBoxItem Content="Lastest" />
+                <ComboBoxItem Content="Default" />
                 <ComboBoxItem Content="Title" />
                 <ComboBoxItem Content="Artist" />
                 <ComboBoxItem Content="Duration" />
@@ -157,6 +167,56 @@
                 Background="{ThemeResource SystemAccentColorLight2}"
                 Click="Download_Click"
                 Content="Download" />
+        </Grid>
+
+        <TextBlock
+            Name="Nothing"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="{ThemeResource SystemChromeDisabledHighColor}"
+            Style="{ThemeResource SubtitleTextBlockStyle}"
+            Text="Type in a search query or paste an URL in to start downloading..."
+            TextAlignment="Center" />
+
+        <Grid
+            Name="Loading"
+            Background="{ThemeResource SystemChromeBlackLowColor}"
+            Opacity="0"
+            Visibility="Collapsed">
+            <Grid.Resources>
+                <Storyboard x:Name="Loading_FadeIn">
+                    <DoubleAnimation
+                        Storyboard.TargetName="Loading"
+                        Storyboard.TargetProperty="Opacity"
+                        To="1"
+                        Duration="0:0:0.1" />
+                </Storyboard>
+                <Storyboard x:Name="Loading_FadeOut">
+                    <DoubleAnimation
+                        Completed="Loading_FadeOut_Completed"
+                        Storyboard.TargetName="Loading"
+                        Storyboard.TargetProperty="Opacity"
+                        To="0"
+                        Duration="0:0:0.1" />
+                </Storyboard>
+            </Grid.Resources>
+
+            <StackPanel
+                Width="300"
+                Padding="20"
+                VerticalAlignment="Center"
+                Background="{ThemeResource AcrylicBrush}"
+                CornerRadius="8"
+                Spacing="12">
+
+                <ProgressRing IsActive="True" />
+
+                <Button
+                    Grid.Column="2"
+                    HorizontalAlignment="Stretch"
+                    Click="Cancel_Click"
+                    Content="Cancel Search" />
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

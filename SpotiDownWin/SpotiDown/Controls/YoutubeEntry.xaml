@@ -20,9 +20,10 @@
             Height="50"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Background="{ThemeResource SystemChromeAltLowColor}"
             CornerRadius="8">
-            <Image Name="Artwork" />
+            <Grid.Background>
+                <ImageBrush x:Name="Artwork" Stretch="UniformToFill" />
+            </Grid.Background>
         </Grid>
         <TextBlock
             Name="Title"

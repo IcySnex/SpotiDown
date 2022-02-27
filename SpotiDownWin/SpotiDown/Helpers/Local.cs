@@ -10,7 +10,7 @@ namespace SpotiDown.Helpers;
 
 public class Local
 {
-    public static ConfigModel Config = ConfigModel.Load();
+    public static Config Config = Config.Load();
 
     public static void SetClipboard(string Text)
     {

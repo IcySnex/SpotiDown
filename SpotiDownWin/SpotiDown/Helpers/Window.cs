@@ -74,7 +74,7 @@ public class Window
         User32.SendMessage(hwnd, User32.WindowMessage.WM_SETICON, (IntPtr)0, hIcon);
     }
 
-    public static async Task<ContentDialogResult> Alert(XamlRoot Root, string Title, object Content, string CloseText = "Cancel", string? PrimaryText = null, string? SecondaryText = null)
+    public static async Task<ContentDialogResult> Alert(XamlRoot Root, string Title, object Content, string CloseText = "Ok", string? PrimaryText = null, string? SecondaryText = null)
     {
         var cd = new ContentDialog
         {
