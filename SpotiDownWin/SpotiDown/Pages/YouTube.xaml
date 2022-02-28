@@ -2,6 +2,7 @@
     x:Class="SpotiDown.Pages.Youtube"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Helpers="using:SpotiDown.Helpers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -48,6 +49,7 @@
                 Name="Query"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
+                KeyDown="Query_KeyDown"
                 PlaceholderText="Search for music on YouTube..." />
             <NumberBox
                 Name="ResultCount"
@@ -67,10 +69,11 @@
                 Grid.Column="6"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
-                SelectedIndex="0"
+                SelectedIndex="{x:Bind Helpers:Local.Config.YoutubePreferences.Sorting}"
                 SelectionChanged="Sorting_SelectionChanged">
 
                 <ComboBoxItem Content="Default" />
+                <ComboBoxItem Content="Default ▲" />
                 <ComboBoxItem Content="Title" />
                 <ComboBoxItem Content="Artist" />
                 <ComboBoxItem Content="Duration" />
@@ -114,7 +117,7 @@
             </Grid.ColumnDefinitions>
 
             <ContentControl Tag="Quality" Template="{ThemeResource WithHeader}">
-                <ComboBox HorizontalAlignment="Stretch" SelectedIndex="3">
+                <ComboBox HorizontalAlignment="Stretch" SelectedIndex="{x:Bind Helpers:Local.Config.SpotifyPrefernces.Quality, Mode=TwoWay}">
                     <ComboBoxItem Content="32 kbps" />
                     <ComboBoxItem Content="64 kbps" />
                     <ComboBoxItem Content="128 kbps" />
@@ -128,7 +131,7 @@
                 Margin="5,0,0,0"
                 Tag="Format"
                 Template="{ThemeResource WithHeader}">
-                <ComboBox HorizontalAlignment="Stretch" SelectedIndex="0">
+                <ComboBox HorizontalAlignment="Stretch" SelectedIndex="{x:Bind Helpers:Local.Config.SpotifyPrefernces.Format, Mode=TwoWay}">
                     <ComboBoxItem Content="mp3" />
                     <ComboBoxItem Content="wav" />
                     <ComboBoxItem Content="m4a" />
@@ -151,8 +154,11 @@
                 Tag="Meta Data"
                 Template="{ThemeResource WithHeader}">
                 <Grid>
-                    <CheckBox Content="Artwork" IsChecked="True" />
-                    <CheckBox Margin="90,0,0,0" Content="Description" />
+                    <CheckBox Content="Artwork" IsChecked="{x:Bind Helpers:Local.Config.SpotifyPrefernces.Artwork, Mode=TwoWay}" />
+                    <CheckBox
+                        Margin="90,0,0,0"
+                        Content="Description"
+                        IsChecked="{x:Bind Helpers:Local.Config.SpotifyPrefernces.Lyrics, Mode=TwoWay}" />
                 </Grid>
             </ContentControl>
 
@@ -179,14 +185,14 @@
             TextAlignment="Center" />
 
         <Grid
-            Name="Loading"
+            Name="LoadingBox"
             Background="{ThemeResource SystemChromeBlackLowColor}"
             Opacity="0"
             Visibility="Collapsed">
             <Grid.Resources>
                 <Storyboard x:Name="Loading_FadeIn">
                     <DoubleAnimation
-                        Storyboard.TargetName="Loading"
+                        Storyboard.TargetName="LoadingBox"
                         Storyboard.TargetProperty="Opacity"
                         To="1"
                         Duration="0:0:0.1" />
@@ -194,7 +200,7 @@
                 <Storyboard x:Name="Loading_FadeOut">
                     <DoubleAnimation
                         Completed="Loading_FadeOut_Completed"
-                        Storyboard.TargetName="Loading"
+                        Storyboard.TargetName="LoadingBox"
                         Storyboard.TargetProperty="Opacity"
                         To="0"
                         Duration="0:0:0.1" />

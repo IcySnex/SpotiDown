@@ -7,9 +7,5 @@ public enum QualityType
     _128kbps,
     _160kbps,
     _256kbps,
-    _320kbps,
-
-    Lowest,
-    Medium,
-    Highest
+    _320kbps
 }

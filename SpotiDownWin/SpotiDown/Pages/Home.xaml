@@ -43,8 +43,8 @@
                         Orientation="Horizontal"
                         Spacing="5">
                         <Button Content="URL" />
-                        <Button Content="YouTube" />
                         <Button Content="Spotify" />
+                        <Button Content="YouTube" />
                         <Button Content="SoundCloud" />
                     </StackPanel>
                 </StackPanel>

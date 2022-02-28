@@ -6,10 +6,8 @@ using SpotiDown.Enums;
 using SpotiDown.Models;
 using System;
 using System.Threading;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using Microsoft.UI.Xaml.Data;
+using System.Threading.Tasks;
 
 namespace SpotiDown.Pages;
 
@@ -21,8 +19,6 @@ public sealed partial class Youtube : Page
         InitializeComponent();
     }
 
-    #region Update
-    #region DownloadBar
     private void UpdateDownloadBar(bool Enabled)
     {
         if (Enabled)
@@ -30,67 +26,73 @@ public sealed partial class Youtube : Page
             DownloadBar.Visibility = Visibility.Visible;
             DownloadBar_FadeIn.Begin();
             ScrollContainer.Margin = new(0, 110, 0, 110);
-        }
+        } 
         else
         {
             DownloadBar_FadeOut.Begin();
             ScrollContainer.Margin = new(0, 110, 0, 0);
         }
     }
-    private void DownloadBar_FadeOut_Completed(object sender, object e) =>
+    private void DownloadBar_FadeOut_Completed(object sender, object e)
+    {
+        if (DownloadBar.Opacity == 0)
             DownloadBar.Visibility = Visibility.Collapsed;
-    #endregion
-    #region Loading
+    }
+
     private void UpdateLoading(bool Enabled)
     {
         if (Enabled)
         {
-            Loading.Visibility = Visibility.Visible;
+            LoadingBox.Visibility = Visibility.Visible;
             Loading_FadeIn.Begin();
         }
         else
             Loading_FadeOut.Begin();
     }
     private void Loading_FadeOut_Completed(object sender, object e) =>
-            Loading.Visibility = Visibility.Collapsed;
-    #endregion
-    #endregion
+            LoadingBox.Visibility = Visibility.Collapsed;
 
-    private void Container_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
+
+    private void Container_SelectionChanged(object sender, SelectionChangedEventArgs? e) =>
         UpdateDownloadBar(Container.SelectedItems.Count > 0 ? true : false);
 
     private void Sorting_SelectionChanged(object sender, SelectionChangedEventArgs? e)
     {
+        if (Result.Count() == 0)
+            return;
+
         Container.Items.Clear();
-        switch (Sorting.SelectedIndex)
+        switch ((SortingType)Sorting.SelectedIndex)
         {
-            case 0:
-                Container.Items.Clear();
+            case SortingType.Default:
                 foreach (YoutubeEntry Entry in Result.Select(Song => new YoutubeEntry(Song)))
                     Container.Items.Add(Entry);
                 break;
-            case 1:
-                Container.Items.Clear();
+            case SortingType.Default_Rev:
+                foreach (YoutubeEntry Entry in Result.Reverse().Select(Song => new YoutubeEntry(Song)))
+                    Container.Items.Add(Entry);
+                break;
+            case SortingType.Title:
                 foreach (YoutubeEntry Entry in Result.OrderBy(r => r.Title).Select(Song => new YoutubeEntry(Song)))
                     Container.Items.Add(Entry);
                 break;
-            case 2:
-                Container.Items.Clear();
+            case SortingType.Artist:
                 foreach (YoutubeEntry Entry in Result.OrderBy(r => r.Artist).Select(Song => new YoutubeEntry(Song)))
                     Container.Items.Add(Entry);
                 break;
-            case 3:
-                Container.Items.Clear();
+            case SortingType.Duration:
                 foreach (YoutubeEntry Entry in Result.OrderBy(r => r.Duration).Select(Song => new YoutubeEntry(Song)))
                     Container.Items.Add(Entry);
                 break;
         }
     }
 
+
     CancellationTokenSource cts = new();
     IEnumerable<YoutubeSong> Result = Enumerable.Empty<YoutubeSong>();
 
-    private async void Search_Click(object sender, RoutedEventArgs e)
+
+    private async void Search_Click(object sender, RoutedEventArgs? e)
     {
         if (string.IsNullOrWhiteSpace(Query.Text))
         {
@@ -111,8 +113,8 @@ public sealed partial class Youtube : Page
 
             if (Result.Count() == 0)
             {
-                Loading.Opacity = 0;
-                Loading.Visibility = Visibility.Collapsed;
+                LoadingBox.Opacity = 0;
+                LoadingBox.Visibility = Visibility.Collapsed;
                 await Helpers.Window.Alert(Content.XamlRoot, "Search failed!", "Could not find any songs based on the given query.");
                 return;
             }
@@ -120,12 +122,7 @@ public sealed partial class Youtube : Page
             Sorting_SelectionChanged(this, null);
 
             if (Type != YoutubeSearchType.Query)
-            {
                 Container.SelectAll();
-                DownloadBar.Visibility = Visibility.Visible;
-                DownloadBar.Opacity = 1;
-                ScrollContainer.Margin = new(0, 110, 0, 110);
-            }
 
             Nothing.Visibility = Visibility.Collapsed;
             UpdateLoading(false);
@@ -138,9 +135,16 @@ public sealed partial class Youtube : Page
                 await Helpers.Window.Alert(Content.XamlRoot, "Search failed!", ex.Message);
         }
     }
+    private void Query_KeyDown(object sender, Microsoft.UI.Xaml.Input.KeyRoutedEventArgs e)
+    {
+        if (e.Key == Windows.System.VirtualKey.Enter)
+            Search_Click(sender, null);
+    }
+
 
     private void Cancel_Click(object sender, RoutedEventArgs e) =>
         cts.Cancel();
+
 
     private void Download_Click(object sender, RoutedEventArgs e)
     {

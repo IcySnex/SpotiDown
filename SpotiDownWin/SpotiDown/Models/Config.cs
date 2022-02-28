@@ -8,26 +8,33 @@ namespace SpotiDown.Models;
 public class Config
 {
     public static Config Load() =>
-        File.Exists("config.json") ? Text.Deserialize<Config>("config") : new();
+        File.Exists("Config.json") ? Text.Deserialize<Config>("Config") : new();
 
     public void Save() =>
-       File.WriteAllText("config.json", Text.Serialize(this));
+       File.WriteAllText("Config.json", Text.Serialize(this));
 
-    public ConfigModel_MetaData MetaData { get; set; } = new();
-    public ConfigModel_Preferences Preferences { get; set; } = new();
+    public ConfigModel_Preferences SpotifyPrefernces { get; set; } = new();
+    public ConfigModel_Preferences YoutubePreferences { get; set; } = new();
+    public ConfigModel_Preferences SoundCloudPrefernces { get; set; } = new();
+    public ConfigModel_DownloadSettings DownloadSettings { get; set; } = new();
     public ConfigModel_Paths Paths { get; set; } = new();
-}
-
-public class ConfigModel_MetaData
-{
-    public bool Lyrics { get; set; } = true;
-    public bool Artwork { get; set; } = true;
 }
 
 public class ConfigModel_Preferences
 {
-    public QualityType Quality { get; set; } = QualityType.Medium;
-    public FormatType Format { get; set; } = FormatType.mp3;
+    public int Quality { get; set; } = (int)QualityType._160kbps;
+    public int Format { get; set; } = (int)FormatType.mp3;
+    public bool Lyrics { get; set; } = true;
+    public bool Artwork { get; set; } = true;
+    public int Sorting { get; set; } = (int)SortingType.Default;
+}
+
+public class ConfigModel_DownloadSettings
+{
+    public bool ShowSpotify { get; set; } = true;
+    public bool ShowYoutube { get; set; } = true;
+    public bool ShowSoundcloud { get; set; } = true;
+    public int MaxDownloads { get; set; } = 1;
 }
 
 public class ConfigModel_Paths

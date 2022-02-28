@@ -4,7 +4,7 @@ namespace SpotiDown.Models;
 
 public class YoutubeSong
 {
-    public YoutubeSong(string Id, string Title, string Artist, TimeSpan Duration, string? Artwork)
+    public YoutubeSong(string Id, string Title, string Artist, TimeSpan Duration, string Artwork)
     {
         this.Id = Id;
         this.Title = Title;
@@ -17,5 +17,5 @@ public class YoutubeSong
     public string Title { get; set; }
     public string Artist { get; set; }
     public TimeSpan Duration { get; set; }
-    public string? Artwork { get; set; }
+    public string Artwork { get; set; }
 }

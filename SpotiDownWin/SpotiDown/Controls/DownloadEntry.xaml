@@ -1,0 +1,85 @@
+﻿<UserControl
+    x:Class="SpotiDown.Controls.DownloadEntry"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Helpers="using:SpotiDown.Helpers"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+
+    <Grid
+        Height="80"
+        Padding="12"
+        Background="{ThemeResource SystemControlAltHighAcrylicElementBrush}"
+        CornerRadius="4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition
+                Width="*"
+                MinWidth="40"
+                MaxWidth="85" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="35" />
+        </Grid.ColumnDefinitions>
+        <Grid
+            Width="50"
+            Height="50"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            CornerRadius="8">
+            <Grid.Background>
+                <ImageBrush ImageSource="{x:Bind Helpers:Imaging.FromUrl(Song.Artwork)}" />
+            </Grid.Background>
+        </Grid>
+        <TextBlock
+            Grid.Column="2"
+            VerticalAlignment="Center"
+            FontSize="24"
+            Style="{StaticResource BodyTextBlockStyle}"
+            Text="{x:Bind Song.Title}"
+            TextWrapping="WrapWholeWords" />
+        <TextBlock
+            Grid.Column="4"
+            VerticalAlignment="Center"
+            Style="{StaticResource BodyTextBlockStyle}"
+            Text="{x:Bind Song.Artist}"
+            TextWrapping="WrapWholeWords" />
+        <TextBlock
+            Grid.Column="6"
+            VerticalAlignment="Center"
+            Style="{StaticResource BodyTextBlockStyle}"
+            Text="{x:Bind Song.Album}"
+            TextWrapping="WrapWholeWords" />
+        <TextBlock
+            Grid.Column="8"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Style="{StaticResource BodyTextBlockStyle}"
+            Text="{x:Bind Helpers:Text.FormatTime(Song.Duration, '{hh}h, {mm}m, {ss}s')}"
+            TextAlignment="Center"
+            TextWrapping="WrapWholeWords" />
+
+        <Button
+            Grid.Column="11"
+            Height="35"
+            Padding="0"
+            HorizontalAlignment="Stretch"
+            Flyout="{x:Bind Flyout}">
+            <SymbolIcon Symbol="More" />
+        </Button>
+        <ProgressBar
+            Grid.ColumnSpan="12"
+            Margin="-12,0,-12,-12"
+            VerticalAlignment="Bottom"
+            Background="Transparent"
+            IsIndeterminate="True" />
+    </Grid>
+</UserControl>

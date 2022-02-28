@@ -44,4 +44,9 @@ public sealed partial class MainWindow : Window
         }
         catch { }
     }
+
+    private void Window_Closed(object sender, WindowEventArgs args)
+    {
+        Helpers.Local.Config.Save();
+    }
 }

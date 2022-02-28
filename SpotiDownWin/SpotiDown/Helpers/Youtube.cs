@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using YoutubeExplode;
 using YoutubeExplode.Common;
-using YoutubeExplode.Search;
 using YoutubeExplode.Videos;
 using SpotiDown.Enums;
 using YoutubeExplode.Playlists;

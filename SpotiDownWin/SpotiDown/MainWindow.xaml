@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:SpotiDown"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Closed="Window_Closed"
     mc:Ignorable="d">
 
     <NavigationView
@@ -38,13 +39,17 @@
             <NavigationViewItemHeader Content="Local" />
 
             <NavigationViewItem
-                Content="FFMPEG"
-                Icon="Admin"
-                Tag="FFMPEG" />
+                Content="Downloads"
+                Icon="Download"
+                Tag="SpotiDown.Pages.Downloads" />
             <NavigationViewItem
                 Content="Libary"
                 Icon="Library"
                 Tag="Libary" />
+            <NavigationViewItem
+                Content="FFMPEG"
+                Icon="Admin"
+                Tag="FFMPEG" />
 
         </NavigationView.MenuItems>
 
