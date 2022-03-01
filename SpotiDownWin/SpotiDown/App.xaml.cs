@@ -15,6 +15,7 @@ namespace SpotiDown
             m_window.Activate();
         }
 
-        private Window? m_window;
+        private static Window? m_window;
+        public static Window Window { get { return m_window!; } }
     }
 }

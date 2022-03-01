@@ -2,6 +2,7 @@
 using Microsoft.UI.Xaml.Controls;
 using PInvoke;
 using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using WinRT.Interop;
@@ -88,5 +89,14 @@ public class Window
         if (SecondaryText != null)
             cd.SecondaryButtonText = SecondaryText;
         return await cd.ShowAsync();
+    }
+
+    public static void Navigate(string Item, object? Parameter = null)
+    {
+        MainWindow MainWindow = ((MainWindow)App.Window);
+        NavigationViewItem Nav = (NavigationViewItem)MainWindow.Navigation.MenuItems.First(n => n is NavigationViewItem && ((NavigationViewItem)n).Content.ToString() == Item);
+
+        MainWindow.NavigationFrame.Navigate(Type.GetType(Nav.Tag.ToString()!), Parameter);
+        MainWindow.Navigation.SelectedItem = Nav;
     }
 }

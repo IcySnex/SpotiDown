@@ -10,6 +10,7 @@
 
     <NavigationView
         x:Name="Navigation"
+        x:FieldModifier="public"
         BackRequested="Navigation_BackRequested"
         IsBackEnabled="{Binding ElementName=NavigationFrame, Path=CanGoBack, Mode=TwoWay}"
         OpenPaneLength="200"
@@ -53,7 +54,7 @@
 
         </NavigationView.MenuItems>
 
-        <Frame x:Name="NavigationFrame" />
+        <Frame x:Name="NavigationFrame" x:FieldModifier="public" />
 
     </NavigationView>
 </Window>

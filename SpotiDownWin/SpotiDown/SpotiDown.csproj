@@ -21,6 +21,7 @@
 	  <None Remove="Assets\share.png" />
 	  <None Remove="Assets\youtube.png" />
 	  <None Remove="Controls\DownloadEntry.xaml" />
+	  <None Remove="Controls\TrackInfo.xaml" />
 	  <None Remove="Controls\YoutubeEntry.xaml" />
 	  <None Remove="Pages\Downloads.xaml" />
 	  <None Remove="Pages\Home.xaml" />
@@ -55,6 +56,11 @@
        package has not yet been restored -->
 	<ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnablePreviewMsixTooling)'=='true'">
 		<ProjectCapability Include="Msix" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="Controls\TrackInfo.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
 	</ItemGroup>
 	<ItemGroup>
 	  <Page Update="Controls\DownloadEntry.xaml">

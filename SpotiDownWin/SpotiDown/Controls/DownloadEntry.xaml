@@ -7,11 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-
     <Grid
         Height="80"
+        Margin="0,0,0,4"
         Padding="12"
-        Background="{ThemeResource SystemControlAltHighAcrylicElementBrush}"
+        Background="{ThemeResource SystemControlBackgroundListLowBrush}"
         CornerRadius="4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
@@ -36,10 +36,11 @@
             VerticalAlignment="Center"
             CornerRadius="8">
             <Grid.Background>
-                <ImageBrush ImageSource="{x:Bind Helpers:Imaging.FromUrl(Song.Artwork)}" />
+                <ImageBrush x:Name="Artwork" ImageSource="{x:Bind Helpers:Imaging.FromUrl(Song.Artwork)}" />
             </Grid.Background>
         </Grid>
         <TextBlock
+            Name="Title"
             Grid.Column="2"
             VerticalAlignment="Center"
             FontSize="24"
@@ -47,18 +48,21 @@
             Text="{x:Bind Song.Title}"
             TextWrapping="WrapWholeWords" />
         <TextBlock
+            Name="Artist"
             Grid.Column="4"
             VerticalAlignment="Center"
             Style="{StaticResource BodyTextBlockStyle}"
             Text="{x:Bind Song.Artist}"
             TextWrapping="WrapWholeWords" />
         <TextBlock
+            Name="Album"
             Grid.Column="6"
             VerticalAlignment="Center"
             Style="{StaticResource BodyTextBlockStyle}"
             Text="{x:Bind Song.Album}"
             TextWrapping="WrapWholeWords" />
         <TextBlock
+            Name="Duration"
             Grid.Column="8"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
@@ -76,6 +80,7 @@
             <SymbolIcon Symbol="More" />
         </Button>
         <ProgressBar
+            Name="Progress"
             Grid.ColumnSpan="12"
             Margin="-12,0,-12,-12"
             VerticalAlignment="Bottom"
