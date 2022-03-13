@@ -1,7 +1,9 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media.Imaging;
 using SpotiDown.Models;
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.System;
@@ -11,6 +13,7 @@ namespace SpotiDown.Helpers;
 public class Local
 {
     public static Config Config = Config.Load();
+    public static HttpClient Client = new();
 
     public static void SetClipboard(string Text)
     {
@@ -25,4 +28,10 @@ public class Local
             return await Launcher.LaunchUriAsync(new Uri(Url));
         return false;
     }
+
+    public static async Task<string> DownloadString(string Url) =>
+        await Client.GetStringAsync(Url);
+
+    public static BitmapImage DownloadImage(string? Url) =>
+        new(new Uri(Url is null ? "ms-appx:///Assets/NoImage.png" : Url));
 }

@@ -22,7 +22,7 @@
             <Grid.Background>
                 <ImageBrush
                     x:Name="Artwork"
-                    ImageSource="{x:Bind Helpers:Imaging.FromUrl(YoutubeSong.Artwork)}"
+                    ImageSource="{x:Bind Helpers:Local.DownloadImage(YoutubeSong.Thumbnail)}"
                     Stretch="UniformToFill" />
             </Grid.Background>
         </Grid>
@@ -37,7 +37,7 @@
             Margin="98,25,0,0"
             VerticalAlignment="Center"
             Style="{StaticResource BodyTextBlockStyle}"
-            Text="{x:Bind YoutubeSong.Artist}"
+            Text="{x:Bind YoutubeSong.Channel}"
             TextWrapping="WrapWholeWords" />
         <TextBlock
             Grid.Column="2"

@@ -7,6 +7,8 @@ using SpotiDown.Models;
 using System;
 using System.Threading;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using SpotiDown.Helpers;
 
 namespace SpotiDown.Pages;
 
@@ -38,10 +40,11 @@ public sealed partial class Youtube : Page
             DownloadBar.Visibility = Visibility.Collapsed;
     }
 
-    private void UpdateLoading(bool Enabled)
+    private void UpdateLoading(bool Enabled, string Type = "Searching on YouTube...")
     {
         if (Enabled)
         {
+            Loading_Type.Text = Type;
             LoadingBox.Visibility = Visibility.Visible;
             Loading_FadeIn.Begin();
         }
@@ -76,7 +79,7 @@ public sealed partial class Youtube : Page
                     Container.Items.Add(Entry);
                 break;
             case SortingType.Artist:
-                foreach (YoutubeEntry Entry in Result.OrderBy(r => r.Artist).Select(Song => new YoutubeEntry(Song)))
+                foreach (YoutubeEntry Entry in Result.OrderBy(r => r.Channel).Select(Song => new YoutubeEntry(Song)))
                     Container.Items.Add(Entry);
                 break;
             case SortingType.Duration:
@@ -89,7 +92,6 @@ public sealed partial class Youtube : Page
 
     CancellationTokenSource cts = new();
     IEnumerable<YoutubeSong> Result = Enumerable.Empty<YoutubeSong>();
-
 
     private async void Search_Click(object sender, RoutedEventArgs? e)
     {
@@ -141,12 +143,39 @@ public sealed partial class Youtube : Page
     }
 
 
-    private void Cancel_Click(object sender, RoutedEventArgs e) =>
-        cts.Cancel();
+    CancellationTokenSource ctsdl = new();
 
-
-    private void Download_Click(object sender, RoutedEventArgs e)
+    private async void Download_Click(object sender, RoutedEventArgs e)
     {
-        Query.Text = Container.Items.Count.ToString();
+        ctsdl.Dispose();
+        ctsdl = new CancellationTokenSource();
+
+        UpdateLoading(true, "Preparing Download...");
+
+        try
+        {
+            var Parameter = await Task.WhenAll(Container.SelectedItems.WithCancellation(ctsdl.Token).Select(async Entry => await Helpers.Youtube.Convert(((YoutubeEntry)Entry).YoutubeSong, SaveLyrics.IsChecked.HasValue ? SaveLyrics.IsChecked.Value : false, SaveArtwork.IsChecked.HasValue ? SaveArtwork.IsChecked.Value : false, ctsdl.Token)));
+
+            UpdateLoading(false);
+
+            if (!ctsdl.IsCancellationRequested)
+                Helpers.Window.Navigate("Downloads", Parameter);
+        }
+        catch (Exception ex)
+        {
+            UpdateLoading(false);
+
+            if (!(ex is OperationCanceledException))
+                await Helpers.Window.Alert(Content.XamlRoot, "Preparing Downloads failed!", ex.Message);
+        }
+    }
+
+
+    private void Cancel_Click(object sender, RoutedEventArgs e)
+    {
+        if (Loading_Type.Text == "Searching on YouTube...")
+            cts.Cancel();
+        else
+            ctsdl.Cancel();
     }
 }

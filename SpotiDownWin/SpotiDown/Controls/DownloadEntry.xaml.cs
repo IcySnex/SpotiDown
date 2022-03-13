@@ -20,25 +20,25 @@ public sealed partial class DownloadEntry : UserControl
             var cd = new ContentDialog
             {
                 Title = "Track Info",
-                Content = new TrackInfo(this.Song),
+                Content = new TrackInfo((Song)this.Song.Clone()),
                 CloseButtonText = "Cancel",
                 PrimaryButtonText = "Save",
                 XamlRoot = Content.XamlRoot
             };
-            cd.PrimaryButtonClick += (s, e) => 
+            cd.PrimaryButtonClick += (s, e) =>
             {
                 this.Song = ((TrackInfo)cd.Content).Song;
-                Title.Text = Song.Title;
-                Artist.Text = Song.Artist;
-                Album.Text = Song.Album;
-                Artwork.ImageSource = Helpers.Imaging.FromUrl(Song.Artwork);
+                Title.Text = this.Song.Title;
+                Artist.Text = this.Song.Artist;
+                Album.Text = Helpers.Text.NaIfEmpty(this.Song.Album);
+                Artwork.ImageSource = Helpers.Local.DownloadImage(this.Song.Artwork);
             };
             await cd.ShowAsync();
         };
         Delete.Click += async (s, e) =>
         {
             if (await Helpers.Window.Alert(Content.XamlRoot, "Delete Track", "Do you really want to delete this track from the download queue?", "No", "Yes") == ContentDialogResult.Primary)
-                Pages.Downloads.RootDownloadsPage!.Container.Items.Remove(this);
+                ((ItemsControl)Parent).Items.Remove(this);
         };
 
         UpdateFlyout(false);

@@ -1,6 +1,9 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using SpotiDown.Controls;
+using SpotiDown.Models;
+using System.Collections.Generic;
 
 namespace SpotiDown.Pages;
 
@@ -9,10 +12,13 @@ public sealed partial class Downloads : Page
     public Downloads()
     {
         InitializeComponent();
-        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
-        RootDownloadsPage = this;
-        RootDownloadsPage.Container.Items.Add(new DownloadEntry(Helpers.Download.Song));
+        NavigationCacheMode = NavigationCacheMode.Required;
     }
 
-    public static Downloads? RootDownloadsPage { get; private set; }
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        if (e.Parameter is Song[] Songs)
+            foreach (Song Song in Songs)
+                Container.Items.Add(new DownloadEntry(Song));
+    }
 }

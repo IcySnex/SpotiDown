@@ -23,4 +23,7 @@ public class Text
         Format = Format.Replace("{hh}h, ", "").Replace("{mm}m, ", "").Replace("{ss}s", "");
         return Format;
     }
+
+    public static string NaIfEmpty(string? Input) =>
+        string.IsNullOrEmpty(Input) ? "N/A" : Input;
 }

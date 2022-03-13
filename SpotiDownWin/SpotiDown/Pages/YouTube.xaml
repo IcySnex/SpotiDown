@@ -75,7 +75,7 @@
                 <ComboBoxItem Content="Default" />
                 <ComboBoxItem Content="Default ▲" />
                 <ComboBoxItem Content="Title" />
-                <ComboBoxItem Content="Artist" />
+                <ComboBoxItem Content="Channel" />
                 <ComboBoxItem Content="Duration" />
             </ComboBox>
         </Grid>
@@ -154,8 +154,12 @@
                 Tag="Meta Data"
                 Template="{ThemeResource WithHeader}">
                 <Grid>
-                    <CheckBox Content="Artwork" IsChecked="{x:Bind Helpers:Local.Config.SpotifyPrefernces.Artwork, Mode=TwoWay}" />
                     <CheckBox
+                        Name="SaveArtwork"
+                        Content="Artwork"
+                        IsChecked="{x:Bind Helpers:Local.Config.SpotifyPrefernces.Artwork, Mode=TwoWay}" />
+                    <CheckBox
+                        Name="SaveLyrics"
                         Margin="90,0,0,0"
                         Content="Description"
                         IsChecked="{x:Bind Helpers:Local.Config.SpotifyPrefernces.Lyrics, Mode=TwoWay}" />
@@ -215,13 +219,15 @@
                 CornerRadius="8"
                 Spacing="12">
 
+                <TextBlock Name="Loading_Type" Style="{ThemeResource BodyTextBlockStyle}" TextAlignment="Center"/>
+
                 <ProgressRing IsActive="True" />
 
                 <Button
                     Grid.Column="2"
                     HorizontalAlignment="Stretch"
                     Click="Cancel_Click"
-                    Content="Cancel Search" />
+                    Content="Cancel" />
             </StackPanel>
         </Grid>
     </Grid>
