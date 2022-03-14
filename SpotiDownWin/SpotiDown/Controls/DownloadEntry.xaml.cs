@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml;
 using SpotiDown.Models;
 using System;
 using System.Threading;
@@ -27,9 +28,12 @@ public sealed partial class DownloadEntry : UserControl
             };
             cd.PrimaryButtonClick += (s, e) =>
             {
-                this.Song = ((TrackInfo)cd.Content).Song;
+                Song Song = ((TrackInfo)cd.Content).Song;
+                if (string.IsNullOrWhiteSpace(Song.Title))
+                    Song.Title = this.Song.Title;
+                this.Song = Song;
                 Title.Text = this.Song.Title;
-                Artist.Text = this.Song.Artist;
+                Artist.Text = Helpers.Text.NaIfEmpty(this.Song.Artist);
                 Album.Text = Helpers.Text.NaIfEmpty(this.Song.Album);
                 Artwork.ImageSource = Helpers.Local.DownloadImage(this.Song.Artwork);
             };
@@ -38,7 +42,11 @@ public sealed partial class DownloadEntry : UserControl
         Delete.Click += async (s, e) =>
         {
             if (await Helpers.Window.Alert(Content.XamlRoot, "Delete Track", "Do you really want to delete this track from the download queue?", "No", "Yes") == ContentDialogResult.Primary)
-                ((ItemsControl)Parent).Items.Remove(this);
+            {
+                var Container = (ItemsControl)Parent;
+                Container.Items.Remove(this);
+                ((TextBlock)((Grid)((Grid)((ScrollViewer)Container.Parent).Parent).Parent).Children[1]).Visibility = Container.Items.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+            }
         };
 
         UpdateFlyout(false);

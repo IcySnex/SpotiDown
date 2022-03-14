@@ -26,4 +26,7 @@ public class Text
 
     public static string NaIfEmpty(string? Input) =>
         string.IsNullOrEmpty(Input) ? "N/A" : Input;
+
+    public static bool GetBool(bool? Input) =>
+        Input.HasValue ? Input.Value : false;
 }

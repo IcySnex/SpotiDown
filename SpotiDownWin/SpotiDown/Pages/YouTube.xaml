@@ -219,9 +219,36 @@
                 CornerRadius="8"
                 Spacing="12">
 
-                <TextBlock Name="Loading_Type" Style="{ThemeResource BodyTextBlockStyle}" TextAlignment="Center"/>
+                <TextBlock
+                    Name="Loading_Type"
+                    Style="{ThemeResource BodyTextBlockStyle}"
+                    TextAlignment="Center" />
 
-                <ProgressRing IsActive="True" />
+                <Ellipse
+                    Width="30"
+                    Height="30"
+                    RenderTransformOrigin="0.5, 0.5"
+                    Stroke="{ThemeResource SystemAccentColorDark1}"
+                    StrokeDashArray="20, 11"
+                    StrokeThickness="3">
+                    <Ellipse.RenderTransform>
+                        <RotateTransform x:Name="Loading_Transform" Angle="10" />
+                    </Ellipse.RenderTransform>
+                    <Ellipse.Triggers>
+                        <EventTrigger>
+                            <BeginStoryboard>
+                                <Storyboard RepeatBehavior="Forever">
+                                    <DoubleAnimation
+                                        EnableDependentAnimation="True"
+                                        Storyboard.TargetName="Loading_Transform"
+                                        Storyboard.TargetProperty="Angle"
+                                        From="0"
+                                        To="360" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Ellipse.Triggers>
+                </Ellipse>
 
                 <Button
                     Grid.Column="2"

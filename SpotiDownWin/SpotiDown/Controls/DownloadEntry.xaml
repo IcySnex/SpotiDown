@@ -11,7 +11,7 @@
         Height="80"
         Margin="0,0,0,4"
         Padding="12"
-        Background="{ThemeResource SystemControlBackgroundListLowBrush}"
+        Background="{ThemeResource SystemChromeLowColor}"
         CornerRadius="4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
@@ -36,7 +36,10 @@
             VerticalAlignment="Center"
             CornerRadius="8">
             <Grid.Background>
-                <ImageBrush x:Name="Artwork" ImageSource="{x:Bind Helpers:Local.DownloadImage(Song.Artwork)}" />
+                <ImageBrush
+                    x:Name="Artwork"
+                    ImageSource="{x:Bind Helpers:Local.DownloadImage(Song.Artwork)}"
+                    Stretch="UniformToFill" />
             </Grid.Background>
         </Grid>
         <TextBlock
@@ -52,7 +55,7 @@
             Grid.Column="4"
             VerticalAlignment="Center"
             Style="{StaticResource BodyTextBlockStyle}"
-            Text="{x:Bind Song.Artist}"
+            Text="{x:Bind Helpers:Text.NaIfEmpty(Song.Artist)}"
             TextWrapping="WrapWholeWords" />
         <TextBlock
             Name="Album"

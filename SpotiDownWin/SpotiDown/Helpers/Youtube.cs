@@ -10,6 +10,7 @@ using YoutubeExplode.Videos;
 using SpotiDown.Enums;
 using YoutubeExplode.Playlists;
 using YoutubeExplode.Channels;
+using SpotiDown.Controls;
 
 namespace SpotiDown.Helpers;
 
@@ -34,22 +35,23 @@ public class Youtube
         {
             case YoutubeSearchType.Video:
                 var Result = await Client.Videos.GetAsync(Query, CancellationToken);
-                return new List<YoutubeSong> { new(Result.Id, Result.Title, Result.Author.Title, null, Result.Duration is TimeSpan d ? d : new(0), Result.Thumbnails[0].Url) };
+                return new List<YoutubeSong> { new(Result.Id, Result.Title, Result.Author.Title, null, Result.Duration is TimeSpan d ? d : new(0), Result.Thumbnails.IndexIfExists(1)) };
             case YoutubeSearchType.Playlist:
                 string PlaylistName = (await Client.Playlists.GetAsync(Query, CancellationToken)).Title;
-                return (await Client.Playlists.GetVideosAsync(Query, CancellationToken).CollectAsync(ResultCount)).Select(Video => new YoutubeSong(Video.Id, Video.Title, Video.Author.Title, PlaylistName, Video.Duration is TimeSpan d ? d : new(0), Video.Thumbnails[0].Url));
+                return (await Client.Playlists.GetVideosAsync(Query, CancellationToken).CollectAsync(ResultCount)).Select(Video => new YoutubeSong(Video.Id, Video.Title, Video.Author.Title, PlaylistName, Video.Duration is TimeSpan d ? d : new(0), Video.Thumbnails.IndexIfExists(1)));
             case YoutubeSearchType.Channel:
-                return (await Client.Channels.GetUploadsAsync(Query, CancellationToken).CollectAsync(ResultCount)).Select(Video => new YoutubeSong(Video.Id, Video.Title, Video.Author.Title, Video.Author.Title, Video.Duration is TimeSpan d ? d : new(0), Video.Thumbnails[0].Url));
+                return (await Client.Channels.GetUploadsAsync(Query, CancellationToken).CollectAsync(ResultCount)).Select(Video => new YoutubeSong(Video.Id, Video.Title, Video.Author.Title, Video.Author.Title, Video.Duration is TimeSpan d ? d : new(0), Video.Thumbnails.IndexIfExists(1)));
             default:
-                return (await Client.Search.GetVideosAsync(Query, CancellationToken).CollectAsync(ResultCount)).Select(Video => new YoutubeSong(Video.Id, Video.Title, Video.Author.Title, null, Video.Duration is TimeSpan d ? d : new(0), Video.Thumbnails[0].Url));
+                return (await Client.Search.GetVideosAsync(Query, CancellationToken).CollectAsync(ResultCount)).Select(Video => new YoutubeSong(Video.Id, Video.Title, Video.Author.Title, null, Video.Duration is TimeSpan d ? d : new(0), Video.Thumbnails.IndexIfExists(1)));
         }
     }
 
-    public static async Task<Models.Song> Convert(YoutubeSong Song, bool Lyrics, bool Artwork, CancellationToken CancellationToken = default)
+    public static async Task<DownloadEntry> Convert(YoutubeSong Song, bool Lyrics, bool Artwork, CancellationToken CancellationToken = default)
     {
         Video Video = await Client.Videos.GetAsync(Song.Id, CancellationToken);
 
-        return new Models.Song(SongType.YouTube,
+        return new(new(
+            SongType.YouTube,
             $"https://www.youtube.com/watch?v={Song.Id}",
             Song.Title,
             Song.Channel,
@@ -59,7 +61,6 @@ public class Youtube
             Lyrics ? Video.Description : null,
             Artwork ? Song.Thumbnail : null,
             0,
-            0,
-            await Client.Videos.Streams.GetManifestAsync(Song.Id, CancellationToken)); ;
+            0));
     }
 }

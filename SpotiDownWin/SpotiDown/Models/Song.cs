@@ -1,12 +1,11 @@
 ﻿using SpotiDown.Enums;
 using System;
-using YoutubeExplode.Videos.Streams;
 
 namespace SpotiDown.Models;
 
 public class Song : ICloneable
 {
-    public Song(SongType Type, string Url, string Title, string Artist, TimeSpan Duration, string? Album, DateTime Release, string? Lyrics, string? Artwork, int Track, int Disc, StreamManifest Streams)
+    public Song(SongType Type, string Url, string Title, string? Artist, TimeSpan Duration, string? Album, DateTime Release, string? Lyrics, string? Artwork, int Track, int Disc)
     {
         this.Type = Type;
         this.Url = Url;
@@ -19,13 +18,12 @@ public class Song : ICloneable
         this.Artwork = Artwork;
         this.Track = Track;
         this.Disc = Disc;
-        this.Streams = Streams;
     }
 
     public SongType Type { get; set; }
     public string Url { get; set; }
     public string Title { get; set; }
-    public string Artist { get; set; }
+    public string? Artist { get; set; }
     public TimeSpan Duration { get; set; }
     public string? Album { get; set; }
     public DateTime Release { get; set; }
@@ -33,7 +31,6 @@ public class Song : ICloneable
     public string? Artwork { get; set; }
     public int Track { get; set; }
     public int Disc { get; set; }
-    public StreamManifest Streams { get; set; }
 
     public object Clone() =>
         MemberwiseClone();

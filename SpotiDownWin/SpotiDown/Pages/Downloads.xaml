@@ -28,6 +28,15 @@
             </ScrollViewer>
         </Grid>
 
+        <TextBlock
+            Name="Nothing"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="{ThemeResource SystemChromeDisabledHighColor}"
+            Style="{ThemeResource SubtitleTextBlockStyle}"
+            Text="No downloads currently in queue..."
+            TextAlignment="Center" />
+
         <Grid
             Height="80"
             Margin="20"
@@ -37,32 +46,76 @@
             CornerRadius="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="2" />
+                <ColumnDefinition Width="90" />
+                <ColumnDefinition Width="26" />
                 <ColumnDefinition Width="292" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="35" />
             </Grid.ColumnDefinitions>
 
             <TextBox
                 Name="Search"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
-                PlaceholderText="Search for downloads..." />
+                PlaceholderText="Search for downloads..."
+                TextChanged="Search_TextChanged" />
+            <ComboBox
+                Name="SearchBy"
+                Grid.Column="2"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                SelectedIndex="0">
+                <ComboBoxItem Content="Title" />
+                <ComboBoxItem Content="Artist" />
+                <ComboBoxItem Content="Album" />
+            </ComboBox>
+
+            <Line Grid.Column="3" Style="{StaticResource Spliter}" />
+
             <ContentControl
-                Grid.Column="3"
-                Margin="5,0,0,0"
+                Grid.Column="4"
                 Tag="Sources"
                 Template="{ThemeResource WithHeader}">
                 <Grid>
-                    <CheckBox Content="Spotify" IsChecked="{x:Bind Helpers:Local.Config.DownloadSettings.ShowSpotify, Mode=TwoWay}" />
                     <CheckBox
+                        Name="ShowSpotify"
+                        Checked="Show_Changed"
+                        Content="Spotify"
+                        IsChecked="{x:Bind Helpers:Local.Config.DownloadSettings.ShowSpotify, Mode=TwoWay}"
+                        Unchecked="Show_Changed" />
+                    <CheckBox
+                        Name="ShowYoutube"
                         Margin="87,0,0,0"
+                        Checked="Show_Changed"
                         Content="YouTube"
-                        IsChecked="{x:Bind Helpers:Local.Config.DownloadSettings.ShowYoutube, Mode=TwoWay}" />
+                        IsChecked="{x:Bind Helpers:Local.Config.DownloadSettings.ShowYoutube, Mode=TwoWay}"
+                        Unchecked="Show_Changed" />
                     <CheckBox
+                        Name="ShowSoundcloud"
                         Margin="184,0,0,0"
+                        Checked="Show_Changed"
                         Content="SoundCloud"
-                        IsChecked="{x:Bind Helpers:Local.Config.DownloadSettings.ShowSoundcloud, Mode=TwoWay}" />
+                        IsChecked="{x:Bind Helpers:Local.Config.DownloadSettings.ShowSoundcloud, Mode=TwoWay}"
+                        Unchecked="Show_Changed" />
                 </Grid>
             </ContentControl>
+
+            <Line
+                Grid.Column="5"
+                Margin="0,0,5,0"
+                Style="{StaticResource Spliter}" />
+
+            <Button
+                Grid.Column="6"
+                Width="35"
+                Height="35"
+                Padding="0"
+                VerticalAlignment="Center"
+                Background="{ThemeResource SystemAccentColorLight2}"
+                Click="Clear_Click">
+                <SymbolIcon Symbol="Delete" />
+            </Button>
         </Grid>
     </Grid>
 </Page>
