@@ -58,7 +58,7 @@
                 Maximum="500"
                 Minimum="1"
                 SpinButtonPlacementMode="Compact"
-                Value="50" />
+                Value="{x:Bind Helpers:Local.Config.YoutubePreferences.ResultCount}" />
             <Button
                 Grid.Column="4"
                 HorizontalAlignment="Stretch"
@@ -117,7 +117,7 @@
             </Grid.ColumnDefinitions>
 
             <ContentControl Tag="Quality" Template="{ThemeResource WithHeader}">
-                <ComboBox HorizontalAlignment="Stretch" SelectedIndex="{x:Bind Helpers:Local.Config.SpotifyPrefernces.Quality, Mode=TwoWay}">
+                <ComboBox HorizontalAlignment="Stretch" SelectedIndex="{x:Bind Helpers:Local.Config.YoutubePreferences.Quality, Mode=TwoWay}">
                     <ComboBoxItem Content="32 kbps" />
                     <ComboBoxItem Content="64 kbps" />
                     <ComboBoxItem Content="128 kbps" />
@@ -131,7 +131,7 @@
                 Margin="5,0,0,0"
                 Tag="Format"
                 Template="{ThemeResource WithHeader}">
-                <ComboBox HorizontalAlignment="Stretch" SelectedIndex="{x:Bind Helpers:Local.Config.SpotifyPrefernces.Format, Mode=TwoWay}">
+                <ComboBox HorizontalAlignment="Stretch" SelectedIndex="{x:Bind Helpers:Local.Config.YoutubePreferences.Format, Mode=TwoWay}">
                     <ComboBoxItem Content="mp3" />
                     <ComboBoxItem Content="wav" />
                     <ComboBoxItem Content="m4a" />
@@ -157,12 +157,12 @@
                     <CheckBox
                         Name="SaveArtwork"
                         Content="Artwork"
-                        IsChecked="{x:Bind Helpers:Local.Config.SpotifyPrefernces.Artwork, Mode=TwoWay}" />
+                        IsChecked="{x:Bind Helpers:Local.Config.YoutubePreferences.Artwork, Mode=TwoWay}" />
                     <CheckBox
                         Name="SaveLyrics"
                         Margin="90,0,0,0"
                         Content="Description"
-                        IsChecked="{x:Bind Helpers:Local.Config.SpotifyPrefernces.Lyrics, Mode=TwoWay}" />
+                        IsChecked="{x:Bind Helpers:Local.Config.YoutubePreferences.Lyrics, Mode=TwoWay}" />
                 </Grid>
             </ContentControl>
 

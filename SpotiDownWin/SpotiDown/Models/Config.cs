@@ -27,6 +27,7 @@ public class ConfigModel_Preferences
     public bool Lyrics { get; set; } = true;
     public bool Artwork { get; set; } = true;
     public int Sorting { get; set; } = (int)SortingType.Default;
+    public int ResultCount { get; set; } = 50;
 }
 
 public class ConfigModel_DownloadSettings
@@ -39,7 +40,7 @@ public class ConfigModel_DownloadSettings
 
 public class ConfigModel_Paths
 {
-    public string Download { get; set; } = "\\SpotiDown";
+    public string Download { get; set; } = "SpotiDown";
     public string FileName { get; set; } = "{title} ({artist})";
-    public string FFMPEG { get; set; } = "\\FFMPEG.exe";
+    public string FFMPEG { get; set; } = "FFMPEG.exe";
 }

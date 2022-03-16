@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,8 +22,6 @@ static class Extention
     public static string? IndexIfExists(this IEnumerable<Thumbnail> en, int Index)
     {
         int C = en.Count();
-        if (en is null || C == 0)
-            return default;
         if (C >= Index)
             return en.ElementAt(1).Url;
         else 

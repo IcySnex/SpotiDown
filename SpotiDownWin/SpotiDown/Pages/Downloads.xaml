@@ -117,5 +117,56 @@
                 <SymbolIcon Symbol="Delete" />
             </Button>
         </Grid>
+
+        <Grid
+            Name="LoadingBox"
+            Background="{ThemeResource SystemChromeBlackLowColor}"
+            Opacity="0"
+            Visibility="Collapsed">
+            <Grid.Resources>
+                <Storyboard x:Name="Loading_FadeIn">
+                    <DoubleAnimation
+                        Storyboard.TargetName="LoadingBox"
+                        Storyboard.TargetProperty="Opacity"
+                        To="1"
+                        Duration="0:0:0.1" />
+                </Storyboard>
+                <Storyboard x:Name="Loading_FadeOut">
+                    <DoubleAnimation
+                        Completed="Loading_FadeOut_Completed"
+                        Storyboard.TargetName="LoadingBox"
+                        Storyboard.TargetProperty="Opacity"
+                        To="0"
+                        Duration="0:0:0.1" />
+                </Storyboard>
+            </Grid.Resources>
+
+            <StackPanel
+                Width="300"
+                Padding="20"
+                VerticalAlignment="Center"
+                Background="{ThemeResource AcrylicBrush}"
+                CornerRadius="8"
+                Spacing="12">
+
+                <TextBlock
+                    Name="Loading_Type"
+                    Style="{ThemeResource BodyTextBlockStyle}"
+                    TextAlignment="Center" />
+
+                <ProgressRing
+                    Name="Progress"
+                    Width="30"
+                    Height="30"
+                    BorderThickness="3"
+                    IsIndeterminate="True" />
+
+                <Button
+                    Grid.Column="2"
+                    HorizontalAlignment="Stretch"
+                    Click="Cancel_Click"
+                    Content="Cancel" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

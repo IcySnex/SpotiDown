@@ -157,7 +157,6 @@ public sealed partial class Youtube : Page
         ctsdl = new CancellationTokenSource();
 
         UpdateLoading(true, "Preparing Download...");
-        await Task.Delay(500);
 
         try
         {

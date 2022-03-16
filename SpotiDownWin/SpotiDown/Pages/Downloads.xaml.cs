@@ -5,7 +5,11 @@ using SpotiDown.Controls;
 using SpotiDown.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SpotiDown.Pages;
 
@@ -16,6 +20,22 @@ public sealed partial class Downloads : Page
         InitializeComponent();
         NavigationCacheMode = NavigationCacheMode.Required;
     }
+
+    private void UpdateLoading(bool Enabled, string Type = "Downloading FFMPEG...")
+    {
+        if (Enabled)
+        {
+            Progress.IsIndeterminate = true;
+            Progress.Value = 0;
+            Loading_Type.Text = Type;
+            LoadingBox.Visibility = Visibility.Visible;
+            Loading_FadeIn.Begin();
+        }
+        else
+            Loading_FadeOut.Begin();
+    }
+    private void Loading_FadeOut_Completed(object sender, object e) =>
+        LoadingBox.Visibility = Visibility.Collapsed;
 
     private void UpdateList(bool Performance = true)
     {
@@ -71,7 +91,6 @@ public sealed partial class Downloads : Page
         UpdateList();
 
 
-
     DownloadEntry[] Queue = Array.Empty<DownloadEntry>();
 
 
@@ -84,5 +103,40 @@ public sealed partial class Downloads : Page
             Nothing.Visibility = Visibility.Visible;
 
         }
+    }
+
+    public async Task<bool> DownloadFFMPEG()
+    {
+        cts.Dispose();
+        cts = new CancellationTokenSource();
+
+        try
+        {
+            UpdateLoading(true);
+            Progress.IsIndeterminate = false;
+
+            var Progres = new Progress<double>(value => Progress.Value = value * 100);
+            await Helpers.Local.DownloadFile("https://github.com/IcySnex/SpotiDown/raw/main/other/ffmpeg.exe", Helpers.Local.Config.Paths.FFMPEG, Progres, cts.Token);
+
+            UpdateLoading(false);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            UpdateLoading(false);
+
+            if (!(ex is OperationCanceledException))
+                await Helpers.Window.Alert(Content.XamlRoot, "Preparing Downloads failed!", $"{ex.Message}{(ex.InnerException != null ? $"\nInner: {ex.InnerException.Message}" : "")}");
+
+            return false;
+        }
+    }
+
+    CancellationTokenSource cts = new();
+
+    private void Cancel_Click(object sender, RoutedEventArgs e)
+    {
+        cts.Cancel();
+        //File.Delete(Helpers.Local.Config.Paths.FFMPEG);
     }
 }

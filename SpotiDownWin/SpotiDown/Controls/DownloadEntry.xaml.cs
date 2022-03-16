@@ -3,6 +3,8 @@ using Microsoft.UI.Xaml;
 using SpotiDown.Models;
 using System;
 using System.Threading;
+using System.IO;
+using SpotiDown.Pages;
 
 namespace SpotiDown.Controls;
 
@@ -52,9 +54,39 @@ public sealed partial class DownloadEntry : UserControl
         UpdateFlyout(false);
     }
 
-    public void Download()
+    public async void Download()
     {
-        UpdateFlyout(true);
+        if (!File.Exists(Helpers.Local.Config.Paths.FFMPEG))
+        {
+            if (await Helpers.Window.Alert(Content.XamlRoot, "Download failed!", $"It looks like FFMPEG is not installed in the config path ({Helpers.Local.Config.Paths.FFMPEG}). Do you want to download it?", "No", "Yes") != ContentDialogResult.Primary)
+                return;
+;
+            var Page = (Downloads)((Grid)((Grid)((ScrollViewer)((ItemsControl)Parent).Parent).Parent).Parent).Parent;
+            if (!(await Page.DownloadFFMPEG()))
+                return;
+        }
+
+        cts.Dispose();
+        cts = new CancellationTokenSource();
+
+        try
+        {
+            UpdateFlyout(true);
+
+            await Helpers.Youtube.Download(Song, new Progress<double>(value => Progress.Value = value * 100), cts.Token);
+
+            //REMOVE SONG AND ADD TO LIBARY
+            UpdateFlyout(false);
+        }
+        catch (Exception ex)
+        {
+            UpdateFlyout(false);
+
+            if (!(ex is OperationCanceledException))
+                await Helpers.Window.Alert(Content.XamlRoot, "Search failed!", ex.Message);
+        }
+
+
     }
     public void Cancel()
     {
@@ -84,6 +116,7 @@ public sealed partial class DownloadEntry : UserControl
             Flyout.Items.Add(DownloadNow);
             Flyout.Items.Add(TrackInfo);
             Flyout.Items.Add(Delete);
+            Progress.Value = 0;
         }
     }
 }
