@@ -65,7 +65,7 @@ public class Local
         }
     }
 
-    public Bitmap MakeSquarePhoto(Bitmap bmp, int size)
+    public static Bitmap MakeSquarePhoto(Bitmap bmp, int size)
     {
         Bitmap res = new Bitmap(size, size);
         using (Graphics g = Graphics.FromImage(res))
@@ -79,5 +79,23 @@ public class Local
             g.DrawImage(bmp, new Rectangle(0, 0, size, size), new Rectangle(l, t, bmp.Width - l * 2, bmp.Height - t * 2), GraphicsUnit.Pixel);
         };
         return res;
+    }
+
+    public static bool IsFileLocked(string FilePath)
+    {
+        try
+        {
+            FileStream fs = new(FilePath, FileMode.Open, FileAccess.Write);
+            fs.Close();
+            return false;
+        }
+        catch (IOException)
+        {
+            return true;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 }

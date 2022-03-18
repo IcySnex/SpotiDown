@@ -92,6 +92,7 @@ public sealed partial class Downloads : Page
 
 
     DownloadEntry[] Queue = Array.Empty<DownloadEntry>();
+    CancellationTokenSource cts = new();
 
 
     private async void Clear_Click(object sender, RoutedEventArgs e)
@@ -132,11 +133,17 @@ public sealed partial class Downloads : Page
         }
     }
 
-    CancellationTokenSource cts = new();
-
-    private void Cancel_Click(object sender, RoutedEventArgs e)
+    private async void Cancel_Click(object sender, RoutedEventArgs e)
     {
         cts.Cancel();
-        //File.Delete(Helpers.Local.Config.Paths.FFMPEG);
+        int timeout = 0;
+        while (Helpers.Local.IsFileLocked(Helpers.Local.Config.Paths.FFMPEG))
+        {
+            if (timeout >= 12)
+                return;
+            timeout += 1;
+            await Task.Delay(5000);
+        }
+        File.Delete(Helpers.Local.Config.Paths.FFMPEG);
     }
 }
