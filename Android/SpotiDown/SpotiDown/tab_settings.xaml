@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="SpotiDown.tab_settings"
+             BackgroundColor="#1E1527">
+    <ContentPage.Content>
+        <ScrollView Margin="12">
+            <StackLayout Spacing="12">
+                <Frame VerticalOptions="Start" Padding="0" CornerRadius="22" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="3">
+                    <Frame.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#8F24ED" Offset="0.0" />
+                            <GradientStop Color="#650EF8" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Frame.Background>
+                    <Frame BackgroundColor="#20112E" Margin="3" Padding="0" CornerRadius="22">
+                        <StackLayout Spacing="0">
+                            <Label Text="Meta Data" FontSize="17" TextColor="#8F24ED" HorizontalOptions="Center" Margin="0,1,0,0"/>
+                            <StackLayout Spacing="10" Orientation="Horizontal" Margin="10,2" HorizontalOptions="Center">
+                                <Label Text="Save Lyrics:" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                                <Switch Toggled="switch_meta_lyrics_Toggled" x:Name="switch_meta_lyrics" Opacity="0.5"/>
+                            </StackLayout>
+                            <StackLayout Spacing="10" Orientation="Horizontal" Margin="10,2,10,9" HorizontalOptions="Center">
+                                <Label Text="Save Artwork Image:" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                                <Switch Toggled="switch_meta_artwork_Toggled" x:Name="switch_meta_artwork" Opacity="0.5"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </Frame>
+                <Frame VerticalOptions="Start" Padding="0" CornerRadius="22" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="3">
+                    <Frame.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#8F24ED" Offset="0.0" />
+                            <GradientStop Color="#650EF8" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Frame.Background>
+                    <Frame BackgroundColor="#20112E" Margin="3" Padding="0" CornerRadius="22">
+                        <StackLayout Spacing="0">
+                            <Label Text="Preferences" FontSize="17" TextColor="#8F24ED" HorizontalOptions="Center" Margin="0,1,0,0"/>
+                            <StackLayout Spacing="10" Orientation="Horizontal" Margin="10,2" HorizontalOptions="Center">
+                                <Label Text="Preffered Audio Quality:" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                                <Picker SelectedIndexChanged="pck_pref_quality_SelectedIndexChanged" x:Name="pck_pref_quality" SelectedIndex="3" WidthRequest="150" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center">
+                                    <Picker.Items>
+                                        <x:String>32 KBPS</x:String>
+                                        <x:String>64 KBPS</x:String>
+                                        <x:String>128 KBPS</x:String>
+                                        <x:String>160 KBPS</x:String>
+                                        <x:String>256 KBPS</x:String>
+                                        <x:String>320 KBPS</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </StackLayout>
+                            <StackLayout Spacing="10" Orientation="Horizontal" Margin="10,2" HorizontalOptions="Center">
+                                <Label Text="Preffered File Format:" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                                <Picker SelectedIndexChanged="pck_pref_format_SelectedIndexChanged" x:Name="pck_pref_format" SelectedIndex="3" WidthRequest="150" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center">
+                                    <Picker.Items>
+                                        <x:String>MP3</x:String>
+                                        <x:String>WAV</x:String>
+                                        <x:String>M4A</x:String>
+                                        <x:String>AAC</x:String>
+                                        <x:String>OGG</x:String>
+                                        <x:String>PCM</x:String>
+                                        <x:String>FLAC</x:String>
+                                        <x:String>WEBM (native)</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </StackLayout>
+                            <StackLayout Spacing="10" Orientation="Horizontal" Margin="10,2" HorizontalOptions="Center">
+                                <Label Text="Download Path:" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                                <Entry Unfocused="entry_pref_downloadpath_Unfocused" IsTextPredictionEnabled="False" x:Name="entry_pref_downloadpath" WidthRequest="200" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" Text="/SpotiDown"/>
+                            </StackLayout>
+                            <StackLayout Spacing="10" Orientation="Horizontal" Margin="10,2" HorizontalOptions="Center">
+                                <Label Text="File Name:" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                                <Entry Unfocused="entry_pref_filename_Unfocused" IsTextPredictionEnabled="False" x:Name="entry_pref_filename" WidthRequest="200" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" Text="/{artists}/{songname}"/>
+                                <ImageButton Clicked="btn_filenameinfo_clicked" HeightRequest="30" WidthRequest="30" Source="info.png" BackgroundColor="#20112E"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </Frame>
+                <Frame x:Name="fr_auth" VerticalOptions="Start" Padding="0" CornerRadius="22" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="3">
+                    <Frame.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#8F24ED" Offset="0.0" />
+                            <GradientStop Color="#650EF8" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Frame.Background>
+                    <Frame BackgroundColor="#20112E" Margin="3" Padding="0" CornerRadius="22">
+                        <StackLayout Spacing="0">
+                            <Label Text="OAuth (Advanced)" FontSize="17" TextColor="#8F24ED" HorizontalOptions="Center" Margin="0,1,0,0"/>
+                            <StackLayout Spacing="10" Orientation="Horizontal" Margin="10,2" HorizontalOptions="Center">
+                                <Label Text="Client ID:" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                                <Entry Unfocused="entry_oath_clientid_Unfocused" IsTextPredictionEnabled="False" x:Name="entry_oath_clientid" WidthRequest="200" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" Text="bd6035158be648b695451636f2e311f2"/>
+                            </StackLayout>
+                            <StackLayout Spacing="10" Orientation="Horizontal" Margin="10,2" HorizontalOptions="Center">
+                                <Label Text="Client Secret:" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                                <Entry Unfocused="entry_oath_clientsecret_Unfocused" IsTextPredictionEnabled="False" x:Name="entry_oath_clientsecret" WidthRequest="200" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" Text="0dd522b08dc646559e5fc7ef092fa9d7"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </Frame>
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                    <Frame HeightRequest="32" WidthRequest="141" VerticalOptions="Start" HorizontalOptions="Center" Padding="0" CornerRadius="22" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="3">
+                        <Frame.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#8F24ED" Offset="0.0" />
+                                <GradientStop Color="#650EF8" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Frame.Background>
+                        <StackLayout Margin="0" Padding="3,3,3,3">
+                            <Button Clicked="btn_reset_clicked" HeightRequest="26" VerticalOptions="Center" BackgroundColor="#20112E" CornerRadius="22" Text="Reset Config" FontSize="15" Padding="3" TextColor="#8F24ED"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame HeightRequest="32" WidthRequest="141" VerticalOptions="Start" HorizontalOptions="Center" Padding="0" CornerRadius="22" xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="3">
+                        <Frame.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#8F24ED" Offset="0.0" />
+                                <GradientStop Color="#650EF8" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Frame.Background>
+                        <StackLayout Margin="0" Padding="3,3,3,3">
+                            <Button Clicked="btn_show_clicked" HeightRequest="26" VerticalOptions="Center" BackgroundColor="#20112E" CornerRadius="22" Text="Show Config" FontSize="15" Padding="3" TextColor="#8F24ED"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+                <StackLayout Spacing="10" Orientation="Horizontal" Margin="10,2" HorizontalOptions="Center">
+                    <Label Text="Debug mode:" FontSize="15.5" TextColor="#542F84" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                    <Switch Toggled="switch_debug_Toggled" x:Name="switch_debug" Opacity="0.5"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

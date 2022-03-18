@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SpotiDown (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "SpotiDown (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

@@ -1,14 +1,11 @@
 .vs/
-res/
-SpotiDown.Android/obj/
-SpotiDown.Android/bin/
-SpotiDown/obj/
+Android/.vs/
+Resources/
 SpotiDown/bin/
-SpotiDownWin/.vs/
-SpotiDownWin/packages/
-SpotiDownWin/SpotiDownWin/My Project/
-SpotiDownWin/SpotiDownWin/obj/
-SpotiDownWin/SpotiDownWin/bin/
+Android/SpotiDown/bin/
+Android/SpotiDown/obj/
+Android/SpotiDown.Android/bin/
+Android/SpotiDown.Android/obj/
 *.suo
 *.user
 _ReSharper.*
