@@ -79,7 +79,8 @@
             Height="35"
             Padding="0"
             HorizontalAlignment="Stretch"
-            Flyout="{x:Bind Flyout}">
+            Flyout="{x:Bind Flyout}"
+            ToolTipService.ToolTip="Show more options">
             <SymbolIcon Symbol="More" />
         </Button>
         <ProgressBar

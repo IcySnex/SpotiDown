@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using PInvoke;
 using System;
 using System.Linq;
@@ -93,10 +94,31 @@ public class Window
 
     public static void Navigate(string Item, object? Parameter = null)
     {
-        MainWindow MainWindow = ((MainWindow)App.Window);
+        MainWindow MainWindow = (MainWindow)App.Window;
         NavigationViewItem Nav = (NavigationViewItem)MainWindow.Navigation.MenuItems.First(n => n is NavigationViewItem && ((NavigationViewItem)n).Content.ToString() == Item);
 
         MainWindow.NavigationFrame.Navigate(Type.GetType(Nav.Tag.ToString()!), Parameter);
         MainWindow.Navigation.SelectedItem = Nav;
+    }
+
+    public static async Task Notify(string Title, string Body, string? Artwork = null, int HideAfter = 4000)
+    {
+        MainWindow MainWindow = (MainWindow)App.Window;
+
+        while (((CompositeTransform)MainWindow.Notification.RenderTransform).TranslateY != 80)
+            await Task.Delay(1000);
+
+        MainWindow.Notification_Title.Text = Title;
+        MainWindow.Notification_Body.Text = Body;
+        MainWindow.Notification_Image.ImageSource = Local.DownloadImage(Artwork);
+
+        MainWindow.Notification_FadeIn.Begin();
+
+        if (HideAfter > 0)
+        {
+            await Task.Delay(HideAfter);
+            if (((CompositeTransform)MainWindow.Notification.RenderTransform).TranslateY != 80)
+                MainWindow.Notification_FadeOut.Begin();
+        }
     }
 }

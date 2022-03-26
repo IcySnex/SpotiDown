@@ -74,18 +74,17 @@ public class Youtube
         return await Client.Videos.Streams.GetAsync(Info, CancellationToken);
     }
 
-    public static async Task Download(Models.Song Song, Progress<double> Progress, CancellationToken CancellationToken = default)
+    public static async Task Download(Models.Song Song, string Filepath, Progress<double> Progress, CancellationToken CancellationToken = default)
     {
         double Quality = Helpers.Song.GetQuality(Local.Config.YoutubePreferences.Quality);
-        string FilePath = Text.MakeSafe(Path.Combine(Local.Config.Paths.Download, Local.Config.Paths.FileName.Replace("{title}", Song.Title).Replace("{artist}", Song.Artist).Replace("{album}", Song.Album).Replace("{release}", Song.Release.Year.ToString())) + Helpers.Song.GetFormat(Local.Config.YoutubePreferences.Format));
         
-        if (Path.GetDirectoryName(FilePath) is string Director)
+        if (Path.GetDirectoryName(Filepath) is string Director)
             Directory.CreateDirectory(Director);
 
         var Avaiable = (await Client.Videos.Streams.GetManifestAsync(Song.Url, CancellationToken)).GetAudioOnlyStreams();
         var Info = new IStreamInfo[] { Avaiable.First(n => Math.Abs(Quality - n.Bitrate.KiloBitsPerSecond) == Avaiable.Min(n => Math.Abs(Quality - n.Bitrate.KiloBitsPerSecond))) };
 
-        await Client.Videos.DownloadAsync(Info, new ConversionRequestBuilder(FilePath).SetFFmpegPath(Local.Config.Paths.FFMPEG).Build(), Progress, CancellationToken);
+        await Client.Videos.DownloadAsync(Info, new ConversionRequestBuilder(Filepath).SetFFmpegPath(Local.Config.Paths.FFMPEG).Build(), Progress, CancellationToken);
 
         //META TAGS
     }

@@ -44,11 +44,7 @@ public sealed partial class DownloadEntry : UserControl
         Delete.Click += async (s, e) =>
         {
             if (await Helpers.Window.Alert(Content.XamlRoot, "Delete Track", "Do you really want to delete this track from the download queue?", "No", "Yes") == ContentDialogResult.Primary)
-            {
-                var Container = (ItemsControl)Parent;
-                Container.Items.Remove(this);
-                ((TextBlock)((Grid)((Grid)((ScrollViewer)Container.Parent).Parent).Parent).Children[1]).Visibility = Container.Items.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
-            }
+                Remove();
         };
 
         UpdateFlyout(false);
@@ -61,10 +57,13 @@ public sealed partial class DownloadEntry : UserControl
             if (await Helpers.Window.Alert(Content.XamlRoot, "Download failed!", $"It looks like FFMPEG is not installed in the config path ({Helpers.Local.Config.Paths.FFMPEG}). Do you want to download it?", "No", "Yes") != ContentDialogResult.Primary)
                 return;
 ;
-            var Page = (Downloads)((Grid)((Grid)((ScrollViewer)((ItemsControl)Parent).Parent).Parent).Parent).Parent;
-            if (!(await Page.DownloadFFMPEG()))
+            if (!await Downloads.Instance!.DownloadFFMPEG())
                 return;
         }
+
+        string Filepath = Helpers.Song.GetFilepath(Song);
+        if (File.Exists(Filepath) && await Helpers.Window.Alert(Content.XamlRoot, "Song already downloaded!", $"It looks like a song with the same filename already exists in the download path ({Helpers.Local.Config.Paths.Download}). Do you want to overwrite it or cancel the download?", "Cancel", "Overwrite") == ContentDialogResult.None)
+            return;
 
         cts.Dispose();
         cts = new CancellationTokenSource();
@@ -73,10 +72,10 @@ public sealed partial class DownloadEntry : UserControl
         {
             UpdateFlyout(true);
 
-            await Helpers.Youtube.Download(Song, new Progress<double>(value => Progress.Value = value * 100), cts.Token);
+            await Helpers.Youtube.Download(Song, Filepath, new Progress<double>(value => Progress.Value = value * 100), cts.Token);
 
-            //REMOVE SONG AND ADD TO LIBARY
-            UpdateFlyout(false);
+            Remove();
+            await Helpers.Window.Notify("Song download finished!", $"{Song.Title}, by {Song.Artist}", Song.Artwork);
         }
         catch (Exception ex)
         {
@@ -85,13 +84,20 @@ public sealed partial class DownloadEntry : UserControl
             if (!(ex is OperationCanceledException))
                 await Helpers.Window.Alert(Content.XamlRoot, "Search failed!", ex.Message);
         }
-
-
     }
     public void Cancel()
     {
         cts.Cancel();
         UpdateFlyout(false);
+    }
+    public void Remove()
+    {
+        try
+        {
+            Downloads.Instance!.Container.Items.Remove(this);
+        } catch { }
+        Downloads.Instance!.Nothing.Visibility = Downloads.Instance!.Container.Items.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+        Downloads.Instance!.Queue.Remove(this);
     }
 
     public Song Song;

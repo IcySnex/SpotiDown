@@ -36,7 +36,7 @@ public class Local
         await Client.GetStringAsync(Url);
 
     public static BitmapImage DownloadImage(string? Url) =>
-        new(new Uri(Url is null ? "ms-appx:///Assets/NoImage.png" : Url));
+        new(new Uri(string.IsNullOrWhiteSpace(Url) ? "ms-appx:///Assets/NoImage.png" : Url));
 
     public static async Task DownloadFile(string Url, string FileName, IProgress<double> Progress, CancellationToken CancellationToken)
     {
@@ -81,11 +81,11 @@ public class Local
         return res;
     }
 
-    public static bool IsFileLocked(string FilePath)
+    public static bool IsFileLocked(string Filepath)
     {
         try
         {
-            FileStream fs = new(FilePath, FileMode.Open, FileAccess.Write);
+            FileStream fs = new(Filepath, FileMode.Open, FileAccess.Write);
             fs.Close();
             return false;
         }
@@ -96,6 +96,31 @@ public class Local
         catch (Exception)
         {
             throw;
+        }
+    }
+
+    public async static Task DeleteFile(string Filepath)
+    {
+        if (IsFileLocked(Filepath))
+            throw new("Could not delete file", new("File is locked"));
+
+        using (var fw = new FileSystemWatcher(Filepath))
+        {
+            bool done = false;
+            int timeout = 0;
+
+            fw.EnableRaisingEvents = true;
+            fw.Deleted += (object sender, FileSystemEventArgs e) => done = true;
+
+            File.Delete(Filepath);
+            
+            while (!done)
+            {
+                if (timeout >= 12)
+                    throw new("Could not delete file", new("Timeout has been exceeded"));
+                timeout += 1;
+                await Task.Delay(5000);
+            }
         }
     }
 }

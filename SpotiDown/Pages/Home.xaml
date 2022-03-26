@@ -33,7 +33,10 @@
                 </Grid>
 
                 <StackPanel Margin="50,50,50,0" Spacing="5">
-                    <TextBox Margin="50,0,50,0" PlaceholderText="Query here..." />
+                    <TextBox
+                        Margin="50,0,50,0"
+                        PlaceholderText="Query here..."
+                        ToolTipService.ToolTip="Input a song, artist, album etc. and search for it on any platform" />
                     <TextBlock
                         Margin="0,10,0,0"
                         HorizontalAlignment="Center"
@@ -42,10 +45,10 @@
                         HorizontalAlignment="Center"
                         Orientation="Horizontal"
                         Spacing="5">
-                        <Button Content="URL" />
-                        <Button Content="Spotify" />
-                        <Button Content="YouTube" />
-                        <Button Content="SoundCloud" />
+                        <Button Content="URL" ToolTipService.ToolTip="Search by URL" />
+                        <Button Content="Spotify" ToolTipService.ToolTip="Search on Spotify" />
+                        <Button Content="YouTube" ToolTipService.ToolTip="Search on YouTube" />
+                        <Button Content="SoundCloud" ToolTipService.ToolTip="Search on SoundCloud" />
                     </StackPanel>
                 </StackPanel>
             </Grid>
@@ -70,7 +73,8 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     Click="Github_Click"
-                    CornerRadius="8">
+                    CornerRadius="8"
+                    ToolTipService.ToolTip="Open the GitHub project in the default browser">
                     <StackPanel Spacing="10">
                         <Image Height="50" Source="/Assets/github.png" />
                         <TextBlock
@@ -84,7 +88,8 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     Click="Share_Click"
-                    CornerRadius="8">
+                    CornerRadius="8"
+                    ToolTipService.ToolTip="Copy the GitHub project url to your clipboard">
                     <StackPanel Spacing="10">
                         <Image Height="50" Source="/Assets/share.png" />
                         <TextBlock
@@ -98,7 +103,8 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     Click="Discord_Click"
-                    CornerRadius="8">
+                    CornerRadius="8"
+                    ToolTipService.ToolTip="Join the offical IcyCord Discord server">
                     <StackPanel Spacing="10">
                         <Image Height="50" Source="/Assets/discord.png" />
                         <TextBlock
@@ -112,7 +118,8 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     Click="Youtube_Click"
-                    CornerRadius="8">
+                    CornerRadius="8"
+                    ToolTipService.ToolTip="Open my YouTube channel in the default browser">
                     <StackPanel Spacing="10">
                         <Image Height="50" Source="/Assets/youtube.png" />
                         <TextBlock

@@ -60,6 +60,8 @@ public class Song
         Enum.GetName(Format) is string Result ? "." + Result : ".mp3";
     public static string GetFormat(int Format) =>
         GetFormat((FormatType)Format);
+    public static string GetFilepath(Models.Song Song) =>
+        Text.MakeSafe(Path.Combine(Local.Config.Paths.Download, Local.Config.Paths.FileName.Replace("{title}", Song.Title).Replace("{artist}", Song.Artist).Replace("{album}", Song.Album).Replace("{release}", Song.Release.Year.ToString())) + GetFormat(Local.Config.YoutubePreferences.Format));
 
     public static async Task Write(Models.Song Song, IProgress<long> Progress, CancellationToken CancellationToken)
     {

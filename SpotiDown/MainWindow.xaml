@@ -2,59 +2,166 @@
     x:Class="SpotiDown.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Helpers="using:SpotiDown.Helpers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:SpotiDown"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:media="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     Closed="Window_Closed"
     mc:Ignorable="d">
 
-    <NavigationView
-        x:Name="Navigation"
-        x:FieldModifier="public"
-        BackRequested="Navigation_BackRequested"
-        IsBackEnabled="{Binding ElementName=NavigationFrame, Path=CanGoBack, Mode=TwoWay}"
-        OpenPaneLength="200"
-        SelectionChanged="Navigation_SelectionChanged">
-        <NavigationView.MenuItems>
+    <Grid>
+        <NavigationView
+            x:Name="Navigation"
+            x:FieldModifier="public"
+            BackRequested="Navigation_BackRequested"
+            IsBackEnabled="{Binding ElementName=NavigationFrame, Path=CanGoBack, Mode=TwoWay}"
+            OpenPaneLength="200"
+            SelectionChanged="Navigation_SelectionChanged">
+            <NavigationView.MenuItems>
 
-            <NavigationViewItem
-                Content="Home"
-                Icon="Home"
-                Tag="SpotiDown.Pages.Home" />
+                <NavigationViewItem
+                    Content="Home"
+                    Icon="Home"
+                    Tag="SpotiDown.Pages.Home"
+                    ToolTipService.ToolTip="Return to the Home page" />
 
-            <NavigationViewItemHeader Content="Sources" />
+                <NavigationViewItemHeader Content="Sources" />
 
-            <NavigationViewItem
-                Content="Spotify"
-                Icon="Audio"
-                Tag="SpotiDown.Pages.Spotify" />
-            <NavigationViewItem
-                Content="Youtube"
-                Icon="Video"
-                Tag="SpotiDown.Pages.Youtube" />
-            <NavigationViewItem
-                Content="SoundCloud"
-                Icon="MusicInfo"
-                Tag="SoundCloud" />
+                <NavigationViewItem
+                    Content="Spotify"
+                    Icon="Audio"
+                    Tag="SpotiDown.Pages.Spotify"
+                    ToolTipService.ToolTip="Search on Spotify" />
+                <NavigationViewItem
+                    Content="Youtube"
+                    Icon="Video"
+                    Tag="SpotiDown.Pages.Youtube"
+                    ToolTipService.ToolTip="Search on YouTube" />
+                <NavigationViewItem
+                    Content="SoundCloud"
+                    Icon="MusicInfo"
+                    Tag="SoundCloud"
+                    ToolTipService.ToolTip="Search on SoundCloud" />
 
-            <NavigationViewItemHeader Content="Local" />
+                <NavigationViewItemHeader Content="Local" />
 
-            <NavigationViewItem
-                Content="Downloads"
-                Icon="Download"
-                Tag="SpotiDown.Pages.Downloads" />
-            <NavigationViewItem
-                Content="Libary"
-                Icon="Library"
-                Tag="Libary" />
-            <NavigationViewItem
-                Content="FFMPEG"
-                Icon="Admin"
-                Tag="FFMPEG" />
+                <NavigationViewItem
+                    Content="Downloads"
+                    Icon="Download"
+                    Tag="SpotiDown.Pages.Downloads"
+                    ToolTipService.ToolTip="View the download queue" />
+                <NavigationViewItem
+                    Content="Libary"
+                    Icon="Library"
+                    Tag="Libary"
+                    ToolTipService.ToolTip="View downloaded songs" />
+                <NavigationViewItem
+                    Content="FFMPEG"
+                    Icon="Admin"
+                    Tag="FFMPEG"
+                    ToolTipService.ToolTip="(DEBUG) Input FFMPEG commands" />
 
-        </NavigationView.MenuItems>
+            </NavigationView.MenuItems>
 
-        <Frame x:Name="NavigationFrame" x:FieldModifier="public" />
+            <Frame x:Name="NavigationFrame" x:FieldModifier="public" />
 
-    </NavigationView>
+        </NavigationView>
+
+        <Grid
+            x:Name="Notification"
+            Width="504"
+            Height="70"
+            Margin="10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            x:FieldModifier="public"
+            CornerRadius="8">
+            <Grid.Background>
+                <media:AcrylicBrush TintColor="{ThemeResource SystemBaseLowColor}" TintOpacity="0.4" />
+            </Grid.Background>
+            <Grid.RenderTransform>
+                <CompositeTransform
+                    x:Name="Notification_Transform"
+                    x:FieldModifier="public"
+                    TranslateY="80" />
+            </Grid.RenderTransform>
+            <Grid.Resources>
+                <Storyboard x:Name="Notification_FadeIn" x:FieldModifier="public">
+                    <DoubleAnimation
+                        Storyboard.TargetName="Notification"
+                        Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                        From="80"
+                        To="0">
+                        <DoubleAnimation.EasingFunction>
+                            <ExponentialEase EasingMode="EaseOut" Exponent="4" />
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                </Storyboard>
+                <Storyboard x:Name="Notification_FadeOut" x:FieldModifier="public">
+                    <DoubleAnimation
+                        Storyboard.TargetName="Notification"
+                        Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                        To="80">
+                        <DoubleAnimation.EasingFunction>
+                            <ExponentialEase EasingMode="EaseOut" Exponent="4" />
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                </Storyboard>
+            </Grid.Resources>
+
+            <Grid
+                Width="50"
+                Height="50"
+                Margin="10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                CornerRadius="8">
+                <Grid.Background>
+                    <ImageBrush
+                        x:Name="Notification_Image"
+                        x:FieldModifier="public"
+                        ImageSource="ms-appx:///Assets/NoImage.png"
+                        Stretch="UniformToFill" />
+                </Grid.Background>
+            </Grid>
+            <Grid
+                Width="390"
+                Height="50"
+                Margin="15,0,0,0"
+                VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Name="Notification_Title"
+                    x:FieldModifier="public"
+                    FontSize="20"
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Text="Song successfully downloaded!"
+                    TextWrapping="WrapWholeWords" />
+                <TextBlock
+                    Name="Notification_Body"
+                    Grid.Row="1"
+                    x:FieldModifier="public"
+                    FontSize="16"
+                    Style="{StaticResource BodyTextBlockStyle}"
+                    Text="Title - Artist"
+                    TextWrapping="WrapWholeWords" />
+            </Grid>
+            <Button
+                Width="31"
+                Height="33"
+                Margin="5"
+                Padding="0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Click="Notifcation_Close"
+                ToolTipService.ToolTip="Close this notification">
+                <SymbolIcon Symbol="Cancel" />
+            </Button>
+
+        </Grid>
+    </Grid>
 </Window>

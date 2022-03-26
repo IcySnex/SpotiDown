@@ -42,7 +42,7 @@
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="80" />
                 <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="119" />
             </Grid.ColumnDefinitions>
 
             <TextBox
@@ -50,7 +50,8 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
                 KeyDown="Query_KeyDown"
-                PlaceholderText="Search for music on YouTube..." />
+                PlaceholderText="Search for music on YouTube..."
+                ToolTipService.ToolTip="Input a Query to start searching" />
             <NumberBox
                 Name="ResultCount"
                 Grid.Column="2"
@@ -58,22 +59,25 @@
                 Maximum="500"
                 Minimum="1"
                 SpinButtonPlacementMode="Compact"
+                ToolTipService.ToolTip="Results count"
                 Value="{x:Bind Helpers:Local.Config.YoutubePreferences.ResultCount}" />
             <Button
                 Grid.Column="4"
                 HorizontalAlignment="Stretch"
                 Click="Search_Click"
-                Content="Search" />
+                Content="Search"
+                ToolTipService.ToolTip="Search on YouTube" />
             <ComboBox
                 Name="Sorting"
                 Grid.Column="6"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
                 SelectedIndex="{x:Bind Helpers:Local.Config.YoutubePreferences.Sorting}"
-                SelectionChanged="Sorting_SelectionChanged">
+                SelectionChanged="Sorting_SelectionChanged"
+                ToolTipService.ToolTip="Sort the results">
 
                 <ComboBoxItem Content="Default" />
-                <ComboBoxItem Content="Default ▲" />
+                <ComboBoxItem Content="Default Inv." />
                 <ComboBoxItem Content="Title" />
                 <ComboBoxItem Content="Channel" />
                 <ComboBoxItem Content="Duration" />
@@ -117,7 +121,10 @@
             </Grid.ColumnDefinitions>
 
             <ContentControl Tag="Quality" Template="{ThemeResource WithHeader}">
-                <ComboBox HorizontalAlignment="Stretch" SelectedIndex="{x:Bind Helpers:Local.Config.YoutubePreferences.Quality, Mode=TwoWay}">
+                <ComboBox
+                    HorizontalAlignment="Stretch"
+                    SelectedIndex="{x:Bind Helpers:Local.Config.YoutubePreferences.Quality, Mode=TwoWay}"
+                    ToolTipService.ToolTip="Set the quality of all YouTube songs">
                     <ComboBoxItem Content="32 kbps" />
                     <ComboBoxItem Content="64 kbps" />
                     <ComboBoxItem Content="128 kbps" />
@@ -131,7 +138,10 @@
                 Margin="5,0,0,0"
                 Tag="Format"
                 Template="{ThemeResource WithHeader}">
-                <ComboBox HorizontalAlignment="Stretch" SelectedIndex="{x:Bind Helpers:Local.Config.YoutubePreferences.Format, Mode=TwoWay}">
+                <ComboBox
+                    HorizontalAlignment="Stretch"
+                    SelectedIndex="{x:Bind Helpers:Local.Config.YoutubePreferences.Format, Mode=TwoWay}"
+                    ToolTipService.ToolTip="Set the format of all YouTube songs">
                     <ComboBoxItem Content="mp3" />
                     <ComboBoxItem Content="wav" />
                     <ComboBoxItem Content="m4a" />
@@ -157,12 +167,14 @@
                     <CheckBox
                         Name="SaveArtwork"
                         Content="Artwork"
-                        IsChecked="{x:Bind Helpers:Local.Config.YoutubePreferences.Artwork, Mode=TwoWay}" />
+                        IsChecked="{x:Bind Helpers:Local.Config.YoutubePreferences.Artwork, Mode=TwoWay}"
+                        ToolTipService.ToolTip="Save the artwork (thumbnail) of all YouTube songs" />
                     <CheckBox
                         Name="SaveLyrics"
                         Margin="90,0,0,0"
                         Content="Description"
-                        IsChecked="{x:Bind Helpers:Local.Config.YoutubePreferences.Lyrics, Mode=TwoWay}" />
+                        IsChecked="{x:Bind Helpers:Local.Config.YoutubePreferences.Lyrics, Mode=TwoWay}"
+                        ToolTipService.ToolTip="Save the lyrics (description) of all YouTube songs" />
                 </Grid>
             </ContentControl>
 
@@ -176,7 +188,9 @@
                 HorizontalAlignment="Stretch"
                 Background="{ThemeResource SystemAccentColorLight2}"
                 Click="Download_Click"
-                Content="Download" />
+                Content="Download"
+                Foreground="White"
+                ToolTipService.ToolTip="Add selected songs to download queue" />
         </Grid>
 
         <TextBlock
@@ -254,7 +268,8 @@
                     Grid.Column="2"
                     HorizontalAlignment="Stretch"
                     Click="Cancel_Click"
-                    Content="Cancel" />
+                    Content="Cancel"
+                    ToolTipService.ToolTip="Cancel loading" />
             </StackPanel>
         </Grid>
     </Grid>

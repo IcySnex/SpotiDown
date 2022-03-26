@@ -15,10 +15,12 @@ namespace SpotiDown.Pages;
 
 public sealed partial class Downloads : Page
 {
+    public static Downloads? Instance { get; private set; }
     public Downloads()
     {
         InitializeComponent();
         NavigationCacheMode = NavigationCacheMode.Required;
+        Instance = this;
     }
 
     private void UpdateLoading(bool Enabled, string Type = "Downloading FFMPEG...")
@@ -39,7 +41,7 @@ public sealed partial class Downloads : Page
 
     private void UpdateList(bool Performance = true)
     {
-        if (Queue.Length == 0)
+        if (Queue.Count == 0)
             return;
 
         IEnumerable<DownloadEntry> Filtered;
@@ -78,7 +80,7 @@ public sealed partial class Downloads : Page
     {
         if (e.Parameter is DownloadEntry[] Songs)
         {
-            Queue = Songs;
+            Queue = Songs.ToList();
             UpdateList(false);
         }
     }
@@ -91,7 +93,7 @@ public sealed partial class Downloads : Page
         UpdateList();
 
 
-    DownloadEntry[] Queue = Array.Empty<DownloadEntry>();
+    public List<DownloadEntry> Queue = new();
     CancellationTokenSource cts = new();
 
 
@@ -99,7 +101,7 @@ public sealed partial class Downloads : Page
     {
         if (await Helpers.Window.Alert(Content.XamlRoot, "Delete All Track", "Do you really want to delete all tracks from the download queue?", "No", "Yes") == ContentDialogResult.Primary)
         {
-            Queue = Array.Empty<DownloadEntry>();
+            Queue.Clear();
             Container.Items.Clear();
             Nothing.Visibility = Visibility.Visible;
 

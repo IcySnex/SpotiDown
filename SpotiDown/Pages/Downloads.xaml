@@ -32,6 +32,7 @@
             Name="Nothing"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
+            x:FieldModifier="public"
             Foreground="{ThemeResource SystemChromeDisabledHighColor}"
             Style="{ThemeResource SubtitleTextBlockStyle}"
             Text="No downloads currently in queue..."
@@ -59,13 +60,15 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
                 PlaceholderText="Search for downloads..."
-                TextChanged="Search_TextChanged" />
+                TextChanged="Search_TextChanged"
+                ToolTipService.ToolTip="Search downloads in queue" />
             <ComboBox
                 Name="SearchBy"
                 Grid.Column="2"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
-                SelectedIndex="0">
+                SelectedIndex="0"
+                ToolTipService.ToolTip="Search by">
                 <ComboBoxItem Content="Title" />
                 <ComboBoxItem Content="Artist" />
                 <ComboBoxItem Content="Album" />
@@ -83,6 +86,7 @@
                         Checked="Show_Changed"
                         Content="Spotify"
                         IsChecked="{x:Bind Helpers:Local.Config.DownloadSettings.ShowSpotify, Mode=TwoWay}"
+                        ToolTipService.ToolTip="Show Spotify songs"
                         Unchecked="Show_Changed" />
                     <CheckBox
                         Name="ShowYoutube"
@@ -90,6 +94,7 @@
                         Checked="Show_Changed"
                         Content="YouTube"
                         IsChecked="{x:Bind Helpers:Local.Config.DownloadSettings.ShowYoutube, Mode=TwoWay}"
+                        ToolTipService.ToolTip="Show YouTube songs"
                         Unchecked="Show_Changed" />
                     <CheckBox
                         Name="ShowSoundcloud"
@@ -97,6 +102,7 @@
                         Checked="Show_Changed"
                         Content="SoundCloud"
                         IsChecked="{x:Bind Helpers:Local.Config.DownloadSettings.ShowSoundcloud, Mode=TwoWay}"
+                        ToolTipService.ToolTip="Show SoundCloud songs"
                         Unchecked="Show_Changed" />
                 </Grid>
             </ContentControl>
@@ -113,7 +119,9 @@
                 Padding="0"
                 VerticalAlignment="Center"
                 Background="{ThemeResource SystemAccentColorLight2}"
-                Click="Clear_Click">
+                Click="Clear_Click"
+                Foreground="White"
+                ToolTipService.ToolTip="Clear download queue">
                 <SymbolIcon Symbol="Delete" />
             </Button>
         </Grid>
@@ -165,7 +173,8 @@
                     Grid.Column="2"
                     HorizontalAlignment="Stretch"
                     Click="Cancel_Click"
-                    Content="Cancel" />
+                    Content="Cancel"
+                    ToolTipService.ToolTip="Cancel loading" />
             </StackPanel>
         </Grid>
     </Grid>

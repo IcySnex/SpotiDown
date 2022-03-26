@@ -5,28 +5,95 @@
     xmlns:Helpers="using:SpotiDown.Helpers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="400"
+    Width="450"
     mc:Ignorable="d">
 
-    <StackPanel Spacing="10">
-        <ContentControl Tag="Title" Template="{ThemeResource WithHeader}">
-            <TextBox Text="{x:Bind Song.Title, Mode=TwoWay}" />
-        </ContentControl>
+    <StackPanel Orientation="Horizontal" Spacing="10">
+
+        <Grid
+            Width="110"
+            Height="110"
+            VerticalAlignment="Center"
+            CornerRadius="8">
+            <Grid.Background>
+                <ImageBrush
+                    x:Name="Artwork"
+                    ImageSource="{x:Bind Helpers:Local.DownloadImage(Song.Artwork)}"
+                    Stretch="UniformToFill" />
+            </Grid.Background>
+
+            <Grid
+                x:Name="Image"
+                Background="{ThemeResource SystemAltMediumHighColor}"
+                Opacity="0"
+                PointerEntered="Image_PointerEntered"
+                PointerExited="Image_PointerExited">
+                <Grid.Resources>
+                    <Storyboard x:Name="Image_FadeIn">
+                        <DoubleAnimation
+                            Storyboard.TargetName="Image"
+                            Storyboard.TargetProperty="Opacity"
+                            To="1"
+                            Duration="0:0:0.2" />
+                    </Storyboard>
+                    <Storyboard x:Name="Image_FadeOut">
+                        <DoubleAnimation
+                            Storyboard.TargetName="Image"
+                            Storyboard.TargetProperty="Opacity"
+                            To="0"
+                            Duration="0:0:0.2" />
+                    </Storyboard>
+                </Grid.Resources>
+
+                <Button
+                    Width="50"
+                    Height="50"
+                    Padding="0"
+                    HorizontalAlignment="Center"
+                    CornerRadius="100"
+                    ToolTipService.ToolTip="Set local image as artwork">
+                    <SymbolIcon Symbol="Edit" />
+                </Button>
+            </Grid>
+        </Grid>
+
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="10" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <ContentControl Tag="Artist" Template="{ThemeResource WithHeader}">
-                <TextBox Text="{x:Bind Song.Artist, Mode=TwoWay}" />
-            </ContentControl>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
             <ContentControl
-                Grid.Column="2"
-                Tag="Album"
+                Width="330"
+                Tag="Title"
                 Template="{ThemeResource WithHeader}">
-                <TextBox Text="{x:Bind Song.Album, Mode=TwoWay}" />
+                <TextBox
+                    HorizontalAlignment="Stretch"
+                    Text="{x:Bind Song.Title, Mode=TwoWay}"
+                    ToolTipService.ToolTip="Set Title" />
             </ContentControl>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <ContentControl Tag="Artist" Template="{ThemeResource WithHeader}">
+                    <TextBox Text="{x:Bind Song.Artist, Mode=TwoWay}" ToolTipService.ToolTip="Set Artist" />
+                </ContentControl>
+
+                <ContentControl
+                    Grid.Column="2"
+                    HorizontalAlignment="Stretch"
+                    Tag="Album"
+                    Template="{ThemeResource WithHeader}">
+                    <TextBox Text="{x:Bind Song.Album, Mode=TwoWay}" ToolTipService.ToolTip="Set Album" />
+                </ContentControl>
+            </Grid>
+
         </Grid>
     </StackPanel>
 </UserControl>

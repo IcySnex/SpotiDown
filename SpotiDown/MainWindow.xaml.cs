@@ -22,6 +22,7 @@ public sealed partial class MainWindow : Window
         Navigate((NavigationViewItem)Navigation.MenuItems[0]);
     }
 
+
     private void Navigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args) => 
         Navigate((NavigationViewItem)args.SelectedItemContainer);
 
@@ -45,8 +46,14 @@ public sealed partial class MainWindow : Window
         catch { }
     }
 
+
     private void Window_Closed(object sender, WindowEventArgs args)
     {
+        //Check for current downloads and ask if really close???
         Helpers.Local.Config.Save();
     }
+
+
+    private void Notifcation_Close(object sender, RoutedEventArgs e) =>
+        Notification_FadeOut.Begin();
 }
