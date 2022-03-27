@@ -35,6 +35,9 @@ public class Local
     public static async Task<string> DownloadString(string Url) =>
         await Client.GetStringAsync(Url);
 
+    public static async Task<Stream> DownloadStream(string Url) =>
+        await Client.GetStreamAsync(Url);
+
     public static BitmapImage DownloadImage(string? Url) =>
         new(new Uri(string.IsNullOrWhiteSpace(Url) ? "ms-appx:///Assets/NoImage.png" : Url));
 
@@ -65,21 +68,23 @@ public class Local
         }
     }
 
-    public static Bitmap MakeSquarePhoto(Bitmap bmp, int size)
+    public static Bitmap MakeSquareImage(Bitmap Image, int Size)
     {
-        Bitmap res = new Bitmap(size, size);
-        using (Graphics g = Graphics.FromImage(res))
+        Bitmap Result = new Bitmap(Size, Size);
+        using (Graphics g = Graphics.FromImage(Result))
         {
-            g.FillRectangle(new SolidBrush(Color.White), 0, 0, size, size);
+            g.FillRectangle(new SolidBrush(Color.White), 0, 0, Size, Size);
             int t = 0, l = 0;
-            if (bmp.Height > bmp.Width)
-                t = (bmp.Height - bmp.Width) / 2;
+            if (Image.Height > Image.Width)
+                t = (Image.Height - Image.Width) / 2;
             else
-                l = (bmp.Width - bmp.Height) / 2;
-            g.DrawImage(bmp, new Rectangle(0, 0, size, size), new Rectangle(l, t, bmp.Width - l * 2, bmp.Height - t * 2), GraphicsUnit.Pixel);
+                l = (Image.Width - Image.Height) / 2;
+            g.DrawImage(Image, new Rectangle(0, 0, Size, Size), new Rectangle(l, t, Image.Width - l * 2, Image.Height - t * 2), GraphicsUnit.Pixel);
         };
-        return res;
+        return Result;
     }
+    public static byte[] MakeSquareImage(Stream Image, int Size) =>
+        new ImageConverter().ConvertTo(MakeSquareImage(new Bitmap(Image), Size), typeof(byte[])) is byte[] Result ? Result : Array.Empty<byte>();
 
     public static bool IsFileLocked(string Filepath)
     {

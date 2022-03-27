@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using TagLib.Id3v2;
 
 namespace SpotiDown.Helpers;
 
@@ -57,15 +58,18 @@ public class Song
         GetQuality((QualityType)Quality);
 
     public static string GetFormat(FormatType Format) =>
-        Enum.GetName(Format) is string Result ? "." + Result : ".mp3";
+        Enum.GetName(Format) is string Result ? Result : "mp3";
     public static string GetFormat(int Format) =>
         GetFormat((FormatType)Format);
-    public static string GetFilepath(Models.Song Song) =>
-        Text.MakeSafe(Path.Combine(Local.Config.Paths.Download, Local.Config.Paths.FileName.Replace("{title}", Song.Title).Replace("{artist}", Song.Artist).Replace("{album}", Song.Album).Replace("{release}", Song.Release.Year.ToString())) + GetFormat(Local.Config.YoutubePreferences.Format));
+    public static string GetFormat(string FilePath) =>
+        Path.GetExtension(FilePath) is string Result ? Result.Replace(".", "") : "mp3";
 
-    public static async Task Write(Models.Song Song, IProgress<long> Progress, CancellationToken CancellationToken)
+    public static string GetFilepath(Models.Song Song) =>
+        Text.MakeSafe(Path.Combine(Local.Config.Paths.Download, Local.Config.Paths.FileName.Replace("{title}", Song.Title).Replace("{artist}", Song.Artist).Replace("{album}", Song.Album).Replace("{release}", Song.Release.Year.ToString())) + $".{GetFormat(Local.Config.YoutubePreferences.Format)}");
+
+    public static async Task WriteStream(Models.Song Song, IProgress<long> Progress, CancellationToken CancellationToken)
     {
-        string FilePath = "";
+        string FilePath = GetFilepath(Song);
         double Quality = 160;
         long Size = 1;
         Stream Stream = new MemoryStream();
@@ -76,7 +80,6 @@ public class Song
                 Quality = GetQuality(Local.Config.SpotifyPrefernces.Quality);
                 throw new NotImplementedException();
             case SongType.YouTube:
-                FilePath = Text.MakeSafe(Path.Combine(Local.Config.Paths.Download, Local.Config.Paths.FileName.Replace("{title}", Song.Title).Replace("{artist}", Song.Artist).Replace("{album}", Song.Album).Replace("{release}", Song.Release.Year.ToString())) + GetFormat(Local.Config.YoutubePreferences.Format));
                 Quality = GetQuality(Local.Config.YoutubePreferences.Quality);
                 Stream = await Youtube.GetStream(Song.Url, Quality, CancellationToken);
                 break;
@@ -117,5 +120,38 @@ public class Song
             await Stream.CopyToAsync(Input, CancellationToken);
 
         await FFMPEG.WaitForExitAsync(CancellationToken);
+    }
+
+    public static async Task WriteMeta(Models.Song Song, string Filepath)
+    {
+        string Format = GetFormat(Filepath);
+        TagLib.File Meta = TagLib.File.Create(Filepath, Format == "webm" ? "video/" : "audio/" + Format, TagLib.ReadStyle.None);
+
+        Meta.Tag.Album = Song.Album;
+        Meta.Tag.Comment = $"Song downloaded via SpotiDoen.\nSpotiDown is created by IcySnex (https://github.com/IcySnex/SpotiDown).\nUSING THIS TOOL IS AT YOUR OWN RISK!\n\n Full copyright for this song goes to the artist(s): '{Song.Artist}'.\nTrack meta data fetched from {Song.Type}, Lyrics fetched from genius.com.\nTrack Url: {Song.Url}";
+        Meta.Tag.Copyright = Song.Type.ToString();
+        Meta.Tag.Disc = (uint)Song.Disc;
+        Meta.Tag.Track = (uint)Song.Track;
+        Meta.Tag.Lyrics = Song.Lyrics;
+        Meta.Tag.Publisher = Song.Type.ToString();
+        Meta.Tag.Title = Song.Title;
+        Meta.Tag.Year = (uint)Song.Release.Year;
+
+        if (Song.Artwork is string)
+            if (Song.Artwork.StartsWith(":::"))
+                Meta.Tag.Pictures = new[] { new TagLib.Picture(Song.Artwork.Substring(3)) };
+            else
+                Meta.Tag.Pictures = new[] { new TagLib.Picture(Local.MakeSquareImage(await Local.DownloadStream(Song.Artwork), 512)) };
+
+        if (Song.Artist is string)
+        {
+            string[] Artists = Song.Artist.Split(',');
+
+            Meta.Tag.AlbumArtists = new[] { Artists[0] };
+            Meta.Tag.Composers = Artists;
+            Meta.Tag.Performers = Artists;
+        }
+
+        Meta.Save();
     }
 }

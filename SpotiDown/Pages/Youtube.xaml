@@ -60,7 +60,7 @@
                 Minimum="1"
                 SpinButtonPlacementMode="Compact"
                 ToolTipService.ToolTip="Results count"
-                Value="{x:Bind Helpers:Local.Config.YoutubePreferences.ResultCount}" />
+                Value="{x:Bind Helpers:Local.Config.YoutubePreferences.ResultCount, Mode=TwoWay}" />
             <Button
                 Grid.Column="4"
                 HorizontalAlignment="Stretch"
@@ -72,7 +72,7 @@
                 Grid.Column="6"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
-                SelectedIndex="{x:Bind Helpers:Local.Config.YoutubePreferences.Sorting}"
+                SelectedIndex="{x:Bind Helpers:Local.Config.YoutubePreferences.Sorting, Mode=TwoWay}"
                 SelectionChanged="Sorting_SelectionChanged"
                 ToolTipService.ToolTip="Sort the results">
 

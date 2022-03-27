@@ -73,6 +73,7 @@ public sealed partial class DownloadEntry : UserControl
             UpdateFlyout(true);
 
             await Helpers.Youtube.Download(Song, Filepath, new Progress<double>(value => Progress.Value = value * 100), cts.Token);
+            await Helpers.Song.WriteMeta(Song, Filepath);
 
             Remove();
             await Helpers.Window.Notify("Song download finished!", $"{Song.Title}, by {Song.Artist}", Song.Artwork);
@@ -82,7 +83,7 @@ public sealed partial class DownloadEntry : UserControl
             UpdateFlyout(false);
 
             if (!(ex is OperationCanceledException))
-                await Helpers.Window.Alert(Content.XamlRoot, "Search failed!", ex.Message);
+                await Helpers.Window.Alert(Content.XamlRoot, "Download failed!", ex.Message);
         }
     }
     public void Cancel()
