@@ -18,6 +18,7 @@ public class Config
     public ConfigModel_Preferences SoundCloudPrefernces { get; set; } = new();
     public ConfigModel_DownloadSettings DownloadSettings { get; set; } = new();
     public ConfigModel_Paths Paths { get; set; } = new();
+    public ConfigModel_Advanced Advanced { get; set; } = new();
 }
 
 public class ConfigModel_Preferences
@@ -43,4 +44,9 @@ public class ConfigModel_Paths
     public string Download { get; set; } = "SpotiDown";
     public string FileName { get; set; } = "{title} ({artist})";
     public string FFMPEG { get; set; } = "FFMPEG.exe";
+}
+
+public class ConfigModel_Advanced
+{
+    public bool CustomDownload { get; set; } = true;
 }

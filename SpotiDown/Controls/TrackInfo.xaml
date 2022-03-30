@@ -8,92 +8,225 @@
     Width="450"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Horizontal" Spacing="10">
-
-        <Grid
-            Width="110"
-            Height="110"
-            VerticalAlignment="Center"
-            CornerRadius="8">
-            <Grid.Background>
-                <ImageBrush
-                    x:Name="Artwork"
-                    ImageSource="{x:Bind Helpers:Local.DownloadImage(Song.Artwork)}"
-                    Stretch="UniformToFill" />
-            </Grid.Background>
-
-            <Grid
-                x:Name="Image"
-                Background="{ThemeResource SystemAltMediumHighColor}"
-                Opacity="0"
-                PointerEntered="Image_PointerEntered"
-                PointerExited="Image_PointerExited">
-                <Grid.Resources>
-                    <Storyboard x:Name="Image_FadeIn">
-                        <DoubleAnimation
-                            Storyboard.TargetName="Image"
-                            Storyboard.TargetProperty="Opacity"
-                            To="1"
-                            Duration="0:0:0.2" />
-                    </Storyboard>
-                    <Storyboard x:Name="Image_FadeOut">
-                        <DoubleAnimation
-                            Storyboard.TargetName="Image"
-                            Storyboard.TargetProperty="Opacity"
-                            To="0"
-                            Duration="0:0:0.2" />
-                    </Storyboard>
-                </Grid.Resources>
-
-                <Button
-                    Width="50"
-                    Height="50"
-                    Padding="0"
-                    HorizontalAlignment="Center"
-                    CornerRadius="100"
-                    ToolTipService.ToolTip="Set local image as artwork">
-                    <SymbolIcon Symbol="Edit" />
-                </Button>
-            </Grid>
-        </Grid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="10" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-            <ContentControl
-                Width="330"
-                Tag="Title"
-                Template="{ThemeResource WithHeader}">
-                <TextBox
-                    HorizontalAlignment="Stretch"
-                    Text="{x:Bind Song.Title, Mode=TwoWay}"
-                    ToolTipService.ToolTip="Set Title" />
-            </ContentControl>
-
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="10" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <ContentControl Tag="Artist" Template="{ThemeResource WithHeader}">
-                    <TextBox Text="{x:Bind Song.Artist, Mode=TwoWay}" ToolTipService.ToolTip="Set Artist" />
-                </ContentControl>
-
-                <ContentControl
-                    Grid.Column="2"
-                    HorizontalAlignment="Stretch"
-                    Tag="Album"
-                    Template="{ThemeResource WithHeader}">
-                    <TextBox Text="{x:Bind Song.Album, Mode=TwoWay}" ToolTipService.ToolTip="Set Album" />
-                </ContentControl>
+            <Grid
+                Width="110"
+                Height="110"
+                VerticalAlignment="Center"
+                CornerRadius="8">
+                <Grid.Background>
+                    <ImageBrush
+                        x:Name="Artwork"
+                        ImageSource="{x:Bind Helpers:Local.DownloadImage(Song.Artwork)}"
+                        Stretch="UniformToFill" />
+                </Grid.Background>
+                <Grid
+                    x:Name="Image"
+                    Background="{ThemeResource SystemAltMediumHighColor}"
+                    Opacity="0"
+                    PointerEntered="Image_PointerEntered"
+                    PointerExited="Image_PointerExited">
+                    <Grid.Resources>
+                        <Storyboard x:Name="Image_FadeIn">
+                            <DoubleAnimation
+                                Storyboard.TargetName="Image"
+                                Storyboard.TargetProperty="Opacity"
+                                To="1"
+                                Duration="0:0:0.2" />
+                        </Storyboard>
+                        <Storyboard x:Name="Image_FadeOut">
+                            <DoubleAnimation
+                                Storyboard.TargetName="Image"
+                                Storyboard.TargetProperty="Opacity"
+                                To="0"
+                                Duration="0:0:0.2" />
+                        </Storyboard>
+                    </Grid.Resources>
+                    <Button
+                        Width="50"
+                        Height="50"
+                        Padding="0"
+                        HorizontalAlignment="Center"
+                        Click="Edit_Click"
+                        CornerRadius="100"
+                        ToolTipService.ToolTip="Set local image as Song Artwork">
+                        <SymbolIcon Symbol="Edit" />
+                    </Button>
+                </Grid>
             </Grid>
 
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <ContentControl Tag="Title" Template="{ThemeResource WithHeader}">
+                    <TextBox Text="{x:Bind Song.Title, Mode=TwoWay}" ToolTipService.ToolTip="Set Song Title" />
+                </ContentControl>
+
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <ContentControl Tag="Artist" Template="{ThemeResource WithHeader}">
+                        <TextBox Text="{x:Bind Song.Artist, Mode=TwoWay}" ToolTipService.ToolTip="Set Song Artist" />
+                    </ContentControl>
+
+                    <ContentControl
+                        Grid.Column="2"
+                        Tag="Album"
+                        Template="{ThemeResource WithHeader}">
+                        <TextBox Text="{x:Bind Song.Album, Mode=TwoWay}" ToolTipService.ToolTip="Set Song Album" />
+                    </ContentControl>
+                </Grid>
+            </Grid>
         </Grid>
-    </StackPanel>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="64" />
+                <ColumnDefinition Width="64" />
+            </Grid.ColumnDefinitions>
+
+            <ContentControl Tag="Duration" Template="{ThemeResource WithHeader}">
+                <TextBox
+                    IsHitTestVisible="False"
+                    Text="{x:Bind Helpers:Text.FormatTime(Song.Duration, x:True)}"
+                    ToolTipService.ToolTip="Song Duration" />
+            </ContentControl>
+
+            <ContentControl
+                Grid.Column="2"
+                Tag="Release Date"
+                Template="{ThemeResource WithHeader}">
+                <CalendarDatePicker
+                    HorizontalAlignment="Stretch"
+                    Date="{x:Bind Song.Release, Mode=TwoWay}"
+                    ToolTipService.ToolTip="Set Song Release Date" />
+            </ContentControl>
+
+            <ContentControl
+                Grid.Column="4"
+                Tag="Disc"
+                Template="{ThemeResource WithHeader}">
+                <NumberBox
+                    CornerRadius="4,0,0,4"
+                    Maximum="99"
+                    Minimum="1"
+                    SpinButtonPlacementMode="Compact"
+                    ToolTipService.ToolTip="Set Song Disc"
+                    Value="{x:Bind Song.Disc, Mode=TwoWay}" />
+            </ContentControl>
+
+            <ContentControl
+                Grid.Column="5"
+                Tag="Track"
+                Template="{ThemeResource WithHeader}">
+                <NumberBox
+                    CornerRadius="0,4,4,0"
+                    Maximum="99"
+                    Minimum="1"
+                    SpinButtonPlacementMode="Compact"
+                    ToolTipService.ToolTip="Set Song Track Number"
+                    Value="{x:Bind Song.Track, Mode=TwoWay}" />
+            </ContentControl>
+        </Grid>
+
+        <ContentControl
+            Grid.Row="4"
+            Tag="Lyrics"
+            Template="{ThemeResource WithHeader}">
+            <TextBox
+                Name="Lyrics"
+                VerticalAlignment="Top"
+                AcceptsReturn="True"
+                CanBeScrollAnchor="True"
+                IsSpellCheckEnabled="True"
+                Loaded="Lyrics_Loaded"
+                ScrollViewer.VerticalScrollBarVisibility="Visible"
+                ScrollViewer.VerticalScrollMode="Enabled"
+                ToolTipService.ToolTip="Edit Song Lyrics"
+                Unloaded="Lyrics_Unloaded" />
+        </ContentControl>
+
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ContentControl Tag="Source" Template="{ThemeResource WithHeader}">
+                <Button
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Left"
+                    Click="OpenSource_Click"
+                    ToolTipService.ToolTip="Open Song Source in the default browser">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Viewbox MaxWidth="16" MaxHeight="16">
+                            <SymbolIcon Symbol="Play" />
+                        </Viewbox>
+                        <TextBlock Grid.Column="2" Text="{x:Bind Song.Type, Mode=TwoWay}" />
+                    </Grid>
+                </Button>
+            </ContentControl>
+
+            <ContentControl
+                Grid.Column="2"
+                Tag="Url"
+                Template="{ThemeResource WithHeader}">
+                <Button
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Left"
+                    Click="OpenUrl_Click"
+                    ToolTipService.ToolTip="Open Song Url in the default browser">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Viewbox MaxWidth="16" MaxHeight="16">
+                            <SymbolIcon Symbol="Link" />
+                        </Viewbox>
+                        <TextBlock
+                            Grid.Column="2"
+                            Text="{x:Bind Song.Url, Mode=TwoWay}"
+                            TextTrimming="CharacterEllipsis" />
+                    </Grid>
+                </Button>
+            </ContentControl>
+        </Grid>
+    </Grid>
 </UserControl>

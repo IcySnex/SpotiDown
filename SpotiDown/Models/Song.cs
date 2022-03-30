@@ -26,7 +26,7 @@ public class Song : ICloneable
     public string? Artist { get; set; }
     public TimeSpan Duration { get; set; }
     public string? Album { get; set; }
-    public DateTime Release { get; set; }
+    public DateTimeOffset Release { get; set; }
     public string? Lyrics { get; set; }
     public string? Artwork { get; set; }
     public int Track { get; set; }

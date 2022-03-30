@@ -72,7 +72,11 @@ public sealed partial class DownloadEntry : UserControl
         {
             UpdateFlyout(true);
 
-            await Helpers.Youtube.Download(Song, Filepath, new Progress<double>(value => Progress.Value = value * 100), cts.Token);
+            var ProgressReport = new Progress<double>(value => Progress.Value = value * 100);
+            if (Helpers.Local.Config.Advanced.CustomDownload)
+                await Helpers.Song.WriteStream(Song, Filepath, ProgressReport, cts.Token);
+            else
+                await Helpers.Youtube.Download(Song, Filepath, ProgressReport, cts.Token);
             await Helpers.Song.WriteMeta(Song, Filepath);
 
             Remove();

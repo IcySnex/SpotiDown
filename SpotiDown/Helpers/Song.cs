@@ -9,7 +9,6 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using TagLib.Id3v2;
 
 namespace SpotiDown.Helpers;
 
@@ -67,13 +66,10 @@ public class Song
     public static string GetFilepath(Models.Song Song) =>
         Text.MakeSafe(Path.Combine(Local.Config.Paths.Download, Local.Config.Paths.FileName.Replace("{title}", Song.Title).Replace("{artist}", Song.Artist).Replace("{album}", Song.Album).Replace("{release}", Song.Release.Year.ToString())) + $".{GetFormat(Local.Config.YoutubePreferences.Format)}");
 
-    public static async Task WriteStream(Models.Song Song, IProgress<long> Progress, CancellationToken CancellationToken)
+    public static async Task WriteStream(Models.Song Song, string Filepath, IProgress<double> Progress, CancellationToken CancellationToken)
     {
-        string FilePath = GetFilepath(Song);
-        double Quality = 160;
-        long Size = 1;
         Stream Stream = new MemoryStream();
-
+        double Quality = 160;
         switch (Song.Type)
         {
             case SongType.Spotify:
@@ -87,17 +83,18 @@ public class Song
                 Quality = GetQuality(Local.Config.SoundCloudPrefernces.Quality);
                 throw new NotImplementedException();
         }
-        Size = Stream.Length / 10000;
-        if (Path.GetDirectoryName(FilePath) is string Director)
+
+        if (Path.GetDirectoryName(Filepath) is string Director)
             Directory.CreateDirectory(Director);
-        Progress.Report(5);
+
+        Progress.Report(0.05);
 
         Process FFMPEG = new Process()
         {
             StartInfo = new ProcessStartInfo()
             {
                 FileName = "FFMPEG.exe",
-                Arguments = $"-i - -v quiet -hide_banner -stats -y -b:a {Quality}k \"{FilePath}\"",
+                Arguments = $"-i - -v quiet -hide_banner -stats -y -b:a {Quality}k \"{Filepath}\"",
                 UseShellExecute = false,
                 CreateNoWindow = true,
                 RedirectStandardInput = true,
@@ -106,10 +103,10 @@ public class Song
         };
         FFMPEG.ErrorDataReceived += (s, e) =>
         {
-            if (e.Data is string Data && Data.Contains("size="))
+            if (e.Data is string Data && Data.Contains("time="))
             {
-                int Cur = Convert.ToInt32(Data.Split('t')[0].Replace("size=", "").Replace("kB", " ").Trim());
-                Progress.Report(Cur / Size);
+                var Cur = TimeSpan.Parse(Data.Split("time=")[1].Split("bitrate=")[0].Trim());
+                Progress.Report(Cur.TotalSeconds / Song.Duration.TotalSeconds);
             }
         };
 

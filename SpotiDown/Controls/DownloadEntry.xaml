@@ -70,7 +70,7 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
             Style="{StaticResource BodyTextBlockStyle}"
-            Text="{x:Bind Helpers:Text.FormatTime(Song.Duration, '{hh}h, {mm}m, {ss}s')}"
+            Text="{x:Bind Helpers:Text.FormatTime(Song.Duration, x:False)}"
             TextAlignment="Center"
             TextWrapping="WrapWholeWords" />
 

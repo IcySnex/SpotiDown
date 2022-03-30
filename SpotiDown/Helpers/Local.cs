@@ -31,6 +31,8 @@ public class Local
             return await Launcher.LaunchUriAsync(new Uri(Url));
         return false;
     }
+    public static async Task<bool> OpenUrl(string Url) =>
+        await Launcher.LaunchUriAsync(new Uri(Url));
 
     public static async Task<string> DownloadString(string Url) =>
         await Client.GetStringAsync(Url);
@@ -39,7 +41,7 @@ public class Local
         await Client.GetStreamAsync(Url);
 
     public static BitmapImage DownloadImage(string? Url) =>
-        new(new Uri(string.IsNullOrWhiteSpace(Url) ? "ms-appx:///Assets/NoImage.png" : Url));
+        new(new Uri(string.IsNullOrWhiteSpace(Url) ? "ms-appx:///Assets/NoImage.png" : Url.StartsWith(":::") ? Url.Substring(3) : Url));
 
     public static async Task DownloadFile(string Url, string FileName, IProgress<double> Progress, CancellationToken CancellationToken)
     {

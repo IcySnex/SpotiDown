@@ -29,17 +29,25 @@
             </Style>
 
             <ControlTemplate x:Key="WithHeader">
-                <StackPanel
+                <Grid
                     Margin="0,-2,0,0"
                     HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"
-                    Spacing="2">
+                    VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="2" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
                     <TextBlock
                         Margin="3,0,0,0"
                         VerticalAlignment="Center"
                         Text="{TemplateBinding Tag}" />
-                    <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                </StackPanel>
+                    <ContentPresenter
+                        Grid.Row="2"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center" />
+                </Grid>
             </ControlTemplate>
         </ResourceDictionary>
     </Application.Resources>

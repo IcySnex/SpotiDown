@@ -44,6 +44,6 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
             Style="{StaticResource BodyTextBlockStyle}"
-            Text="{x:Bind Helpers:Text.FormatTime(YoutubeSong.Duration, '{hh}h, {mm}m, {ss}s')}" />
+            Text="{x:Bind Helpers:Text.FormatTime(YoutubeSong.Duration, x:False)}" />
     </Grid>
 </UserControl>
