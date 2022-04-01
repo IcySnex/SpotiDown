@@ -101,7 +101,7 @@ public class Window
         MainWindow.Navigation.SelectedItem = Nav;
     }
 
-    public static async Task Notify(string Title, string Body, string? Artwork = null, int HideAfter = 4000)
+    public static async void Notify(string Title, string Body, string? Artwork = null, int HideAfter = 4000)
     {
         MainWindow MainWindow = (MainWindow)App.Window;
 

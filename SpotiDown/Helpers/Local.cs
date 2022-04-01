@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
 using SpotiDown.Models;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net.Http;
@@ -111,13 +112,13 @@ public class Local
         if (IsFileLocked(Filepath))
             throw new("Could not delete file", new("File is locked"));
 
-        using (var fw = new FileSystemWatcher(Filepath))
+        using (var fw = new FileSystemWatcher(Path.GetDirectoryName(Filepath)!))
         {
             bool done = false;
             int timeout = 0;
 
             fw.EnableRaisingEvents = true;
-            fw.Deleted += (object sender, FileSystemEventArgs e) => done = true;
+            fw.Deleted += (object sender, FileSystemEventArgs e) => done = e.Name == Path.GetFileName(Filepath);
 
             File.Delete(Filepath);
             
@@ -126,7 +127,7 @@ public class Local
                 if (timeout >= 12)
                     throw new("Could not delete file", new("Timeout has been exceeded"));
                 timeout += 1;
-                await Task.Delay(5000);
+                await Task.Delay(1);
             }
         }
     }

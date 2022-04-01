@@ -5,6 +5,7 @@ using System;
 using System.Threading;
 using System.IO;
 using SpotiDown.Pages;
+using System.Threading.Tasks;
 
 namespace SpotiDown.Controls;
 
@@ -17,7 +18,7 @@ public sealed partial class DownloadEntry : UserControl
 
         CancelDownload.Click += (s, e) => Cancel();
 
-        DownloadNow.Click += (s, e) => Download();
+        DownloadNow.Click += async (s, e) => await Download();
         TrackInfo.Click += async (s, e) => 
         {
             var cd = new ContentDialog
@@ -50,20 +51,29 @@ public sealed partial class DownloadEntry : UserControl
         UpdateFlyout(false);
     }
 
-    public async void Download()
+    public async Task Download(CancellationToken? CancellationToken = null)
     {
         if (!File.Exists(Helpers.Local.Config.Paths.FFMPEG))
         {
             if (await Helpers.Window.Alert(Content.XamlRoot, "Download failed!", $"It looks like FFMPEG is not installed in the config path ({Helpers.Local.Config.Paths.FFMPEG}). Do you want to download it?", "No", "Yes") != ContentDialogResult.Primary)
+            {
+                Skip = true;
                 return;
+            }
 ;
             if (!await Downloads.Instance!.DownloadFFMPEG())
+            {
+                Skip = true;
                 return;
+            }
         }
 
         string Filepath = Helpers.Song.GetFilepath(Song);
         if (File.Exists(Filepath) && await Helpers.Window.Alert(Content.XamlRoot, "Song already downloaded!", $"It looks like a song with the same filename already exists in the download path ({Helpers.Local.Config.Paths.Download}). Do you want to overwrite it or cancel the download?", "Cancel", "Overwrite") == ContentDialogResult.None)
+        {
+            Skip = true;
             return;
+        }
 
         cts.Dispose();
         cts = new CancellationTokenSource();
@@ -74,17 +84,19 @@ public sealed partial class DownloadEntry : UserControl
 
             var ProgressReport = new Progress<double>(value => Progress.Value = value * 100);
             if (Helpers.Local.Config.Advanced.CustomDownload)
-                await Helpers.Song.WriteStream(Song, Filepath, ProgressReport, cts.Token);
+                await Helpers.Song.WriteStream(Song, Filepath, ProgressReport, CancellationToken is CancellationToken ctsToken ? ctsToken : cts.Token);
             else
-                await Helpers.Youtube.Download(Song, Filepath, ProgressReport, cts.Token);
+                await Helpers.Youtube.Download(Song, Filepath, ProgressReport, CancellationToken is CancellationToken ctsToken ? ctsToken : cts.Token);
             await Helpers.Song.WriteMeta(Song, Filepath);
 
             Remove();
-            await Helpers.Window.Notify("Song download finished!", $"{Song.Title}, by {Song.Artist}", Song.Artwork);
+            Helpers.Window.Notify("Song download finished!", $"{Song.Title}, by {Song.Artist}", Song.Artwork);
         }
         catch (Exception ex)
         {
             UpdateFlyout(false);
+
+           await Helpers.Local.DeleteFile(Filepath);
 
             if (!(ex is OperationCanceledException))
                 await Helpers.Window.Alert(Content.XamlRoot, "Download failed!", ex.Message);
@@ -107,6 +119,7 @@ public sealed partial class DownloadEntry : UserControl
 
     public Song Song;
     CancellationTokenSource cts = new();
+    public bool Skip;
 
     private MenuFlyout Flyout = new();
     private MenuFlyoutItem CancelDownload = new() { Icon = new SymbolIcon(Symbol.Cancel), Text = "Cancel Download" };

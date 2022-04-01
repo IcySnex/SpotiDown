@@ -9,7 +9,7 @@ using System.Threading;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SpotiDown.Helpers;
-using Windows.UI.Core;
+using Microsoft.UI.Xaml.Navigation;
 
 namespace SpotiDown.Pages;
 
@@ -17,8 +17,19 @@ public sealed partial class Youtube : Page
 {
     public Youtube()
     {
-        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
+        NavigationCacheMode = NavigationCacheMode.Required;
         InitializeComponent();
+    }
+
+    protected override async void OnNavigatedTo(NavigationEventArgs e)
+    {
+        if (e.Parameter is string Query)
+        {
+            this.Query.Text = Query;
+            await Task.Delay(500);
+            Search_Click(this, null);
+        }
+
     }
 
     private void UpdateDownloadBar(bool Enabled)
@@ -88,7 +99,6 @@ public sealed partial class Youtube : Page
     }
 
 
-
     private void Container_SelectionChanged(object sender, SelectionChangedEventArgs? e) =>
         UpdateDownloadBar(Container.SelectedItems.Count > 0 ? true : false);
 
@@ -122,6 +132,7 @@ public sealed partial class Youtube : Page
             {
                 LoadingBox.Opacity = 0;
                 LoadingBox.Visibility = Visibility.Collapsed;
+                Container.Items.Clear();
                 await Helpers.Window.Alert(Content.XamlRoot, "Search failed!", "Could not find any songs based on the given query.");
                 return;
             }

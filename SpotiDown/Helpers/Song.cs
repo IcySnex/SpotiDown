@@ -14,10 +14,10 @@ namespace SpotiDown.Helpers;
 
 public class Song
 {
-    public async Task<List<Genius_Response_Hit>> SearchLyrics(string Title, string Artist) =>
-        Text.Deserialize<Genius>(await Local.DownloadString($"https://api.genius.com/search?q={Title} {Artist}&access_token=7lBNcWe_5ljK10TnPh7q3j31clowVoGLN9IEYFbO9AcKsngZ49Iz7aeZ0D9W4H1j")) is Genius Search ? Search.response.hits : new();
-    
-    public async Task<string> GetLyrics(Genius_Response_Hit_Result Song)
+    public static async Task<List<Genius_Response_Hit>> SearchLyrics(string Title, string? Artist) =>
+        Text.Deserialize<Genius>(await Local.DownloadString($"https://api.genius.com/search?q={Title} {Artist}&access_token=7lBNcWe_5ljK10TnPh7q3j31clowVoGLN9IEYFbO9AcKsngZ49Iz7aeZ0D9W4H1j"), false) is Genius Search ? Search.response.hits : new();
+
+    public static async Task<string> GetLyrics(Genius_Response_Hit_Result Song)
     {
         var Html = new HtmlDocument();
         Html.LoadHtml((await Local.DownloadString(Song.Url)).Replace("https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js", ""));
@@ -32,7 +32,7 @@ public class Song
                 Node.Remove();
 
         var Nodes = Html.DocumentNode.SelectNodes("//div[@data-lyrics-container]");
-        return WebUtility.HtmlDecode(string.Join("", Nodes.Select(Node => Node.InnerHtml)).Replace("<br>", "\n"));
+        return $"[{Song.Title} - {Song.Artist} | {Song.Url}]\n\n{WebUtility.HtmlDecode(string.Join("", Nodes.Select(Node => Node.InnerHtml)).Replace("<br>", "\n"))} | SpotiDown]";
     }
 
     public static double GetQuality(QualityType Quality)

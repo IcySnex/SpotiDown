@@ -28,6 +28,9 @@ public class Text
             return Format.Replace("{hh}h, ", "").Replace("{mm}m, ", "").Replace("{ss}s", "");
     }
 
+    public static string FormatString(string Format, string First, string Second) =>
+        Format.Replace("{1}", First).Replace("{2}", Second).Replace("#quot#", "\"");
+
     public static string NaIfEmpty(string? Input) =>
         string.IsNullOrEmpty(Input) ? "N/A" : Input;
 

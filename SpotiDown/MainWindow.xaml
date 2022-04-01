@@ -34,7 +34,7 @@
                     Tag="SpotiDown.Pages.Spotify"
                     ToolTipService.ToolTip="Search on Spotify" />
                 <NavigationViewItem
-                    Content="Youtube"
+                    Content="YouTube"
                     Icon="Video"
                     Tag="SpotiDown.Pages.Youtube"
                     ToolTipService.ToolTip="Search on YouTube" />

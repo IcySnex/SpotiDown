@@ -80,7 +80,11 @@
                 </Grid.RowDefinitions>
 
                 <ContentControl Tag="Title" Template="{ThemeResource WithHeader}">
-                    <TextBox Text="{x:Bind Song.Title, Mode=TwoWay}" ToolTipService.ToolTip="Set Song Title" />
+                    <TextBox
+                        Name="SongTitle"
+                        Text="{x:Bind Song.Title, Mode=TwoWay}"
+                        TextChanged="TitleArtist_TextChanged"
+                        ToolTipService.ToolTip="Set Song Title" />
                 </ContentControl>
 
                 <Grid Grid.Row="2">
@@ -91,7 +95,11 @@
                     </Grid.ColumnDefinitions>
 
                     <ContentControl Tag="Artist" Template="{ThemeResource WithHeader}">
-                        <TextBox Text="{x:Bind Song.Artist, Mode=TwoWay}" ToolTipService.ToolTip="Set Song Artist" />
+                        <TextBox
+                            Name="SongArtist"
+                            Text="{x:Bind Song.Artist, Mode=TwoWay}"
+                            TextChanged="TitleArtist_TextChanged"
+                            ToolTipService.ToolTip="Set Song Artist" />
                     </ContentControl>
 
                     <ContentControl
@@ -162,17 +170,76 @@
             Grid.Row="4"
             Tag="Lyrics"
             Template="{ThemeResource WithHeader}">
-            <TextBox
-                Name="Lyrics"
-                VerticalAlignment="Top"
-                AcceptsReturn="True"
-                CanBeScrollAnchor="True"
-                IsSpellCheckEnabled="True"
-                Loaded="Lyrics_Loaded"
-                ScrollViewer.VerticalScrollBarVisibility="Visible"
-                ScrollViewer.VerticalScrollMode="Enabled"
-                ToolTipService.ToolTip="Edit Song Lyrics"
-                Unloaded="Lyrics_Unloaded" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button
+                        Name="LyricsSearch"
+                        HorizontalAlignment="Stretch"
+                        Click="LyricsSearch_Click"
+                        ToolTipService.ToolTip="{x:Bind Helpers:Text.FormatString('Search on genius.com with the query #quot#{1} {2}#quot#', Song.Title, Song.Artist)}">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Search Lyrics Online" />
+                            <SymbolIcon Grid.Column="2" Symbol="Zoom" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button
+                        Name="LyricsBack"
+                        Grid.Column="2"
+                        Padding="4"
+                        Click="LyricsBack_Click"
+                        IsEnabled="False"
+                        ToolTipService.ToolTip="Load last lyrics">
+                        <SymbolIcon Symbol="Back" />
+                    </Button>
+                    <TextBlock
+                        Name="LyricsCount"
+                        Grid.Column="3"
+                        Margin="5,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Text="0/0" />
+                    <Button
+                        Name="LyricsNext"
+                        Grid.Column="4"
+                        Padding="4"
+                        Click="LyricsNext_Click"
+                        IsEnabled="False"
+                        ToolTipService.ToolTip="Load next lyrics">
+                        <SymbolIcon Symbol="Forward" />
+                    </Button>
+                </Grid>
+
+                <TextBox
+                    Name="Lyrics"
+                    Grid.Row="2"
+                    VerticalAlignment="Top"
+                    AcceptsReturn="True"
+                    CanBeScrollAnchor="True"
+                    IsSpellCheckEnabled="True"
+                    Loaded="Lyrics_Loaded"
+                    ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                    ScrollViewer.HorizontalScrollMode="Enabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    ScrollViewer.VerticalScrollMode="Enabled"
+                    ToolTipService.ToolTip="Edit Song Lyrics"
+                    Unloaded="Lyrics_Unloaded" />
+            </Grid>
         </ContentControl>
 
         <Grid Grid.Row="6">

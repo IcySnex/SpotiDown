@@ -24,4 +24,8 @@ public sealed partial class Home : Page
 
     private async void Youtube_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) =>
         await Helpers.Local.AskUrl(Content.XamlRoot, "View YouTube Channel", "https://www.youtube.com/channel/UCkAQG8OkLKgi_WAR526pd9w");
+
+
+    private void YoutubeSearch_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) =>
+        Helpers.Window.Navigate("YouTube", Query.Text);
 }

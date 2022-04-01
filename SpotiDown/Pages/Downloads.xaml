@@ -53,6 +53,8 @@
                 <ColumnDefinition Width="292" />
                 <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="35" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="35" />
             </Grid.ColumnDefinitions>
 
             <TextBox
@@ -113,7 +115,34 @@
                 Style="{StaticResource Spliter}" />
 
             <Button
+                Name="Download"
                 Grid.Column="6"
+                Width="35"
+                Height="35"
+                Padding="0"
+                VerticalAlignment="Center"
+                Background="{ThemeResource SystemAccentColorLight2}"
+                Click="Download_Click"
+                Foreground="White"
+                ToolTipService.ToolTip="Download entire queue">
+                <SymbolIcon Symbol="Download" />
+            </Button>
+            <Button
+                Name="Cancel"
+                Grid.Column="6"
+                Width="35"
+                Height="35"
+                Padding="0"
+                VerticalAlignment="Center"
+                Background="{ThemeResource SystemAccentColorLight2}"
+                Click="CancelDownload_Click"
+                Foreground="White"
+                ToolTipService.ToolTip="Cancel queue download"
+                Visibility="Collapsed">
+                <SymbolIcon Symbol="Cancel" />
+            </Button>
+            <Button Name="Clear"
+                Grid.Column="8"
                 Width="35"
                 Height="35"
                 Padding="0"

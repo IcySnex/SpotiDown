@@ -31,7 +31,7 @@ public sealed partial class MainWindow : Window
         if (item is null || item.Tag is null)
             return;
 
-        NavigationFrame.Navigate(Type.GetType(item.Tag.ToString()!), item.Content);
+        NavigationFrame.Navigate(Type.GetType(item.Tag.ToString()!));
         Navigation.SelectedItem = item;
     }
 

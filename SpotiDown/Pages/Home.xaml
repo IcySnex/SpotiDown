@@ -34,6 +34,7 @@
 
                 <StackPanel Margin="50,50,50,0" Spacing="5">
                     <TextBox
+                        Name="Query"
                         Margin="50,0,50,0"
                         PlaceholderText="Query here..."
                         ToolTipService.ToolTip="Input a song, artist, album etc. and search for it on any platform" />
@@ -47,7 +48,10 @@
                         Spacing="5">
                         <Button Content="URL" ToolTipService.ToolTip="Search by URL" />
                         <Button Content="Spotify" ToolTipService.ToolTip="Search on Spotify" />
-                        <Button Content="YouTube" ToolTipService.ToolTip="Search on YouTube" />
+                        <Button
+                            Click="YoutubeSearch_Click"
+                            Content="YouTube"
+                            ToolTipService.ToolTip="Search on YouTube" />
                         <Button Content="SoundCloud" ToolTipService.ToolTip="Search on SoundCloud" />
                     </StackPanel>
                 </StackPanel>
