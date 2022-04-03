@@ -88,6 +88,9 @@ public sealed partial class Downloads : Page
     private void Search_TextChanged(object sender, TextChangedEventArgs e) =>
         UpdateList();
 
+    private void SearchBy_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
+        UpdateList();
+
     private void Show_Changed(object sender, RoutedEventArgs e) =>
         UpdateList();
 
@@ -138,14 +141,7 @@ public sealed partial class Downloads : Page
     private async void Cancel_Click(object sender, RoutedEventArgs e)
     {
         ctsff.Cancel();
-        int timeout = 0;
-        while (Helpers.Local.IsFileLocked(Helpers.Local.Config.Paths.FFMPEG))
-        {
-            if (timeout >= 12)
-                return;
-            timeout += 1;
-            await Task.Delay(5000);
-        }
+        await Helpers.Local.WaitFileLock(Helpers.Local.Config.Paths.FFMPEG);
         File.Delete(Helpers.Local.Config.Paths.FFMPEG);
     }
 
@@ -179,8 +175,8 @@ public sealed partial class Downloads : Page
             Download.Visibility = Visibility.Visible;
             Clear.IsEnabled = true;
 
-            if (await Helpers.Window.Alert(Content.XamlRoot, "Downloads finished!", $"All songs in the queue have been downloaded successfully! Do you want to view them in the Libary?", "No", "Yes") == ContentDialogResult.Primary)
-                Helpers.Window.Navigate("Libary");
+            if (await Helpers.Window.Alert(Content.XamlRoot, "Downloads finished!", $"All songs in the queue have been downloaded successfully! Do you want to view them in the Library?", "No", "Yes") == ContentDialogResult.Primary)
+                Helpers.Window.Navigate("Library");
         }
         catch (Exception ex)
         {
@@ -190,8 +186,8 @@ public sealed partial class Downloads : Page
 
             if (ex is InvalidOperationException)
             {
-                if (await Helpers.Window.Alert(Content.XamlRoot, "Downloads finished!", $"All songs in the queue have been downloaded successfully! Do you want to view them in the Libary?", "No", "Yes") == ContentDialogResult.Primary)
-                    Helpers.Window.Navigate("Libary");
+                if (await Helpers.Window.Alert(Content.XamlRoot, "Downloads finished!", $"All songs in the queue have been downloaded successfully! Do you want to view them in the Library?", "No", "Yes") == ContentDialogResult.Primary)
+                    Helpers.Window.Navigate("Library");
                 return;
             }
             if (!(ex is OperationCanceledException))

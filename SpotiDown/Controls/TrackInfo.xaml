@@ -141,15 +141,15 @@
 
             <ContentControl
                 Grid.Column="4"
-                Tag="Disc"
+                Tag="Total"
                 Template="{ThemeResource WithHeader}">
                 <NumberBox
                     CornerRadius="4,0,0,4"
                     Maximum="99"
                     Minimum="1"
                     SpinButtonPlacementMode="Compact"
-                    ToolTipService.ToolTip="Set Song Disc"
-                    Value="{x:Bind Song.Disc, Mode=TwoWay}" />
+                    ToolTipService.ToolTip="Set Song Total"
+                    Value="{x:Bind Song.Total, Mode=TwoWay}" />
             </ContentControl>
 
             <ContentControl
@@ -277,7 +277,7 @@
                     HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Left"
                     Click="OpenUrl_Click"
-                    ToolTipService.ToolTip="Open Song Url in the default browser">
+                    ToolTipService.ToolTip="Open Song Url in the default browser/media player">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />

@@ -7,9 +7,11 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net.Http;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.Storage.Streams;
 using Windows.System;
 
 namespace SpotiDown.Helpers;
@@ -43,6 +45,21 @@ public class Local
 
     public static BitmapImage DownloadImage(string? Url) =>
         new(new Uri(string.IsNullOrWhiteSpace(Url) ? "ms-appx:///Assets/NoImage.png" : Url.StartsWith(":::") ? Url.Substring(3) : Url));
+
+    public static BitmapImage? BytesToImage(byte[] Data)
+    {
+        BitmapImage Result = new();
+        using (InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
+        {
+            stream.WriteAsync(Data.AsBuffer()).GetAwaiter().GetResult();
+            stream.Seek(0);
+            Result.SetSource(stream);
+        }
+        return Result;
+    }
+
+    public static BitmapImage LoadImage(BitmapImage? Image) =>
+        Image is null ? new(new Uri("ms-appx:///Assets/NoImage.png")) : Image;
 
     public static async Task DownloadFile(string Url, string FileName, IProgress<double> Progress, CancellationToken CancellationToken)
     {
@@ -107,9 +124,22 @@ public class Local
         }
     }
 
+    public static async Task<bool> WaitFileLock(string Filepath, int Timeout = 60000)
+    {
+        int timeout = 0;
+        while (IsFileLocked(Filepath))
+        {
+            if (timeout >= Timeout / 5000)
+                return false;
+            timeout += 1;
+            await Task.Delay(5000);
+        }
+        return true;
+    }
+
     public async static Task DeleteFile(string Filepath)
     {
-        if (IsFileLocked(Filepath))
+        if (!await WaitFileLock(Filepath, 30000))
             throw new("Could not delete file", new("File is locked"));
 
         using (var fw = new FileSystemWatcher(Path.GetDirectoryName(Filepath)!))
@@ -130,5 +160,28 @@ public class Local
                 await Task.Delay(1);
             }
         }
+    }
+
+    public static string RunCommand(string File, string Command)
+    {
+        Process FILE = new Process()
+        {
+            StartInfo = new ProcessStartInfo()
+            {
+                FileName = File,
+                Arguments = Command,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            },
+            EnableRaisingEvents = true
+        };
+
+        FILE.Start();
+        string oust = FILE.StandardError.ReadToEnd();
+        FILE.WaitForExit();
+
+        return oust;
     }
 }

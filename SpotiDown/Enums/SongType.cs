@@ -4,5 +4,6 @@ public enum SongType
 {
     Spotify,
     YouTube,
-    SoundCloud
+    SoundCloud,
+    Local
 }

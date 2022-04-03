@@ -22,10 +22,13 @@
 	  <None Remove="Assets\share.png" />
 	  <None Remove="Assets\youtube.png" />
 	  <None Remove="Controls\DownloadEntry.xaml" />
+	  <None Remove="Controls\LibraryEntry.xaml" />
+	  <None Remove="Controls\Library\LibraryContainer.xaml" />
 	  <None Remove="Controls\TrackInfo.xaml" />
 	  <None Remove="Controls\YoutubeEntry.xaml" />
 	  <None Remove="Pages\Downloads.xaml" />
 	  <None Remove="Pages\Home.xaml" />
+	  <None Remove="Pages\Library.xaml" />
 	  <None Remove="Pages\Spotify.xaml" />
 	  <None Remove="Pages\YouTube.xaml" />
 	</ItemGroup>
@@ -44,6 +47,7 @@
 		<PackageReference Include="PInvoke.User32" Version="0.7.104" />
 		<PackageReference Include="System.Drawing.Common" Version="6.0.0" />
 		<PackageReference Include="TagLibSharp" Version="2.2.0" />
+		<PackageReference Include="WinCopies.WindowsAPICodePack.Shell" Version="2.10.2" />
 		<PackageReference Include="YoutubeExplode" Version="6.1.0" />
 		<PackageReference Include="YoutubeExplode.Converter" Version="6.1.0" />
 		<Manifest Include="$(ApplicationManifest)" />
@@ -56,6 +60,13 @@
 		<ProjectCapability Include="Msix" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Page Update="Controls\Library\LibraryContainer.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
+	  <Page Update="Controls\Library\LibraryEntry.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	  </Page>
 	  <Page Update="Controls\TrackInfo.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </Page>
@@ -63,6 +74,9 @@
 	<ItemGroup>
 	  <Page Update="Controls\DownloadEntry.xaml">
 	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Update="Pages\Library.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 	  </Page>
 	</ItemGroup>
 	<ItemGroup>

@@ -37,7 +37,7 @@
             CornerRadius="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="2" />
                 <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="80" />
@@ -149,7 +149,6 @@
                     <ComboBoxItem Content="ogg" />
                     <ComboBoxItem Content="pcm" />
                     <ComboBoxItem Content="flac" />
-                    <ComboBoxItem Content="webm" />
                 </ComboBox>
             </ContentControl>
 

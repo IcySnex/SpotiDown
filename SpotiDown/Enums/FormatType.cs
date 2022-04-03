@@ -8,6 +8,5 @@ public enum FormatType
     aac,
     ogg,
     pcm,
-    flac,
-    webm
+    flac
 }

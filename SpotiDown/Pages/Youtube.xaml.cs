@@ -79,7 +79,7 @@ public sealed partial class Youtube : Page
                 foreach (YoutubeEntry Entry in Result.Select(Song => new YoutubeEntry(Song)))
                     Container.Items.Add(Entry);
                 break;
-            case SortingType.Default_Rev:
+            case SortingType.Default_Inv:
                 foreach (YoutubeEntry Entry in Result.Reverse().Select(Song => new YoutubeEntry(Song)))
                     Container.Items.Add(Entry);
                 break;

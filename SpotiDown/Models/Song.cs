@@ -1,11 +1,12 @@
-﻿using SpotiDown.Enums;
+﻿using Microsoft.UI.Xaml.Media.Imaging;
+using SpotiDown.Enums;
 using System;
 
 namespace SpotiDown.Models;
 
 public class Song : ICloneable
 {
-    public Song(SongType Type, string Url, string Title, string? Artist, TimeSpan Duration, string? Album, DateTime Release, string? Lyrics, string? Artwork, int Track, int Disc)
+    public Song(SongType Type, string Url, string Title, string? Artist, TimeSpan Duration, string? Album, DateTime Release, string? Lyrics, string? Artwork, BitmapImage? ArtworkSource, int Track, int Total)
     {
         this.Type = Type;
         this.Url = Url;
@@ -16,8 +17,9 @@ public class Song : ICloneable
         this.Release = Release;
         this.Lyrics = Lyrics;
         this.Artwork = Artwork;
+        this.ArtworkSource = ArtworkSource;
         this.Track = Track;
-        this.Disc = Disc;
+        this.Total = Total;
     }
 
     public SongType Type { get; set; }
@@ -29,8 +31,9 @@ public class Song : ICloneable
     public DateTimeOffset Release { get; set; }
     public string? Lyrics { get; set; }
     public string? Artwork { get; set; }
+    public BitmapImage? ArtworkSource { get; set; }
     public int Track { get; set; }
-    public int Disc { get; set; }
+    public int Total { get; set; }
 
     public object Clone() =>
         MemberwiseClone();

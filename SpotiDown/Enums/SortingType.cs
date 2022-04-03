@@ -3,7 +3,7 @@
 public enum SortingType
 {
     Default,
-    Default_Rev,
+    Default_Inv,
     Title,
     Artist,
     Duration

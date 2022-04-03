@@ -17,6 +17,7 @@ public class Config
     public ConfigModel_Preferences YoutubePreferences { get; set; } = new();
     public ConfigModel_Preferences SoundCloudPrefernces { get; set; } = new();
     public ConfigModel_DownloadSettings DownloadSettings { get; set; } = new();
+    public ConfigModel_LibrarySettings LibrarySettings { get; set; } = new();
     public ConfigModel_Paths Paths { get; set; } = new();
     public ConfigModel_Advanced Advanced { get; set; } = new();
 }
@@ -36,7 +37,11 @@ public class ConfigModel_DownloadSettings
     public bool ShowSpotify { get; set; } = true;
     public bool ShowYoutube { get; set; } = true;
     public bool ShowSoundcloud { get; set; } = true;
-    public int MaxDownloads { get; set; } = 1;
+}
+
+public class ConfigModel_LibrarySettings
+{
+    public int Sorting { get; set; } = (int)SortingType.Default;
 }
 
 public class ConfigModel_Paths

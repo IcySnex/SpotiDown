@@ -63,6 +63,7 @@ public class Youtube
             Video.UploadDate.UtcDateTime,
             Lyrics ? Video.Description : null,
             Artwork ? Song.Thumbnail : null,
+            null,
             0,
             0));
     }

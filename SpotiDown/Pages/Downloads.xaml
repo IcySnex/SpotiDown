@@ -70,6 +70,7 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
                 SelectedIndex="0"
+                SelectionChanged="SearchBy_SelectionChanged"
                 ToolTipService.ToolTip="Search by">
                 <ComboBoxItem Content="Title" />
                 <ComboBoxItem Content="Artist" />
@@ -141,7 +142,8 @@
                 Visibility="Collapsed">
                 <SymbolIcon Symbol="Cancel" />
             </Button>
-            <Button Name="Clear"
+            <Button
+                Name="Clear"
                 Grid.Column="8"
                 Width="35"
                 Height="35"

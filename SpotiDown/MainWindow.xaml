@@ -41,7 +41,7 @@
                 <NavigationViewItem
                     Content="SoundCloud"
                     Icon="MusicInfo"
-                    Tag="SoundCloud"
+                    Tag="SpotiDown.Pages.SoundCloud"
                     ToolTipService.ToolTip="Search on SoundCloud" />
 
                 <NavigationViewItemHeader Content="Local" />
@@ -52,14 +52,14 @@
                     Tag="SpotiDown.Pages.Downloads"
                     ToolTipService.ToolTip="View the download queue" />
                 <NavigationViewItem
-                    Content="Libary"
+                    Content="Library"
                     Icon="Library"
-                    Tag="Libary"
+                    Tag="SpotiDown.Pages.Library"
                     ToolTipService.ToolTip="View downloaded songs" />
                 <NavigationViewItem
                     Content="FFMPEG"
                     Icon="Admin"
-                    Tag="FFMPEG"
+                    Tag="SpotiDown.Pages.FFMPEG"
                     ToolTipService.ToolTip="(DEBUG) Input FFMPEG commands" />
 
             </NavigationView.MenuItems>
