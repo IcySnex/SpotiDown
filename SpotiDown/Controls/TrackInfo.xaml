@@ -34,7 +34,7 @@
                 <Grid.Background>
                     <ImageBrush
                         x:Name="Artwork"
-                        ImageSource="{x:Bind Helpers:Local.DownloadImage(Song.Artwork)}"
+                        ImageSource="{x:Bind Helpers:Local.GetImage(Song.Artwork, Song.ArtworkSource)}"
                         Stretch="UniformToFill" />
                 </Grid.Background>
                 <Grid
@@ -141,28 +141,28 @@
 
             <ContentControl
                 Grid.Column="4"
-                Tag="Total"
-                Template="{ThemeResource WithHeader}">
-                <NumberBox
-                    CornerRadius="4,0,0,4"
-                    Maximum="99"
-                    Minimum="1"
-                    SpinButtonPlacementMode="Compact"
-                    ToolTipService.ToolTip="Set Song Total"
-                    Value="{x:Bind Song.Total, Mode=TwoWay}" />
-            </ContentControl>
-
-            <ContentControl
-                Grid.Column="5"
                 Tag="Track"
                 Template="{ThemeResource WithHeader}">
                 <NumberBox
                     CornerRadius="0,4,4,0"
                     Maximum="99"
-                    Minimum="1"
+                    Minimum="0"
                     SpinButtonPlacementMode="Compact"
                     ToolTipService.ToolTip="Set Song Track Number"
                     Value="{x:Bind Song.Track, Mode=TwoWay}" />
+            </ContentControl>
+
+            <ContentControl
+                Grid.Column="5"
+                Tag="Total"
+                Template="{ThemeResource WithHeader}">
+                <NumberBox
+                    CornerRadius="4,0,0,4"
+                    Maximum="99"
+                    Minimum="0"
+                    SpinButtonPlacementMode="Compact"
+                    ToolTipService.ToolTip="Set Song Total"
+                    Value="{x:Bind Song.Total, Mode=TwoWay}" />
             </ContentControl>
         </Grid>
 
@@ -238,7 +238,7 @@
                     ScrollViewer.VerticalScrollBarVisibility="Visible"
                     ScrollViewer.VerticalScrollMode="Enabled"
                     ToolTipService.ToolTip="Edit Song Lyrics"
-                    Unloaded="Lyrics_Unloaded" />
+                    LostFocus="Lyrics_LostFocus" />
             </Grid>
         </ContentControl>
 

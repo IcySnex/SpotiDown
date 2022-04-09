@@ -122,7 +122,7 @@ public class Song
     public static async Task WriteMeta(Models.Song Song, string Filepath)
     {
         string Format = GetFormat(Filepath);
-        TagLib.File Meta = TagLib.File.Create(Filepath, $"audio/{Format}", TagLib.ReadStyle.None);
+        TagLib.File Meta = TagLib.File.Create(Filepath, $"{(Format == "webm" ? "video" : "audio")}/{Format}", TagLib.ReadStyle.None);
 
         Meta.Tag.Album = Song.Album;
         Meta.Tag.Comment = $"Song downloaded via SpotiDoen.\nSpotiDown is created by IcySnex (https://github.com/IcySnex/SpotiDown).\nUSING THIS TOOL IS AT YOUR OWN RISK!\n\n Full copyright for this song goes to the artist(s): '{Song.Artist}'.\nTrack meta data fetched from {Song.Type}, Lyrics fetched from genius.com.\nTrack Url: {Song.Url}";
@@ -157,9 +157,9 @@ public class Song
         
         FileInfo File = new(Filepath);
         string Format = string.IsNullOrWhiteSpace(File.Extension) ? "mp3" : File.Extension.Replace(".", "");
-        TagLib.File Meta = TagLib.File.Create(Filepath, $"audio/{Format}", TagLib.ReadStyle.None);
+        TagLib.File Meta = TagLib.File.Create(Filepath, $"{(Format == "webm" ? "video" : "audio")}/{Format}", TagLib.ReadStyle.None);
         TimeSpan Duration;
-        try{ Duration = TimeSpan.FromMilliseconds((double)Microsoft.WindowsAPICodePack.Shell.ShellFile.FromFilePath(Filepath).Properties.System.Media.Duration.Value! / 10000); } 
+        try { Duration = TimeSpan.FromMilliseconds((double)Microsoft.WindowsAPICodePack.Shell.ShellFile.FromFilePath(Filepath).Properties.System.Media.Duration.Value! / 10000); } 
         catch { Duration = TimeSpan.Zero; }
 
         return new(
@@ -171,7 +171,7 @@ public class Song
             Meta.Tag.Album,
             Meta.Tag.Year == 0 ? File.CreationTime : new((int)Meta.Tag.Year, 1, 1),
             Meta.Tag.Lyrics,
-            Meta.Tag.Pictures.Length > 0 ? "?" : null,
+            null,
             Meta.Tag.Pictures.Length > 0 ? Local.BytesToImage(Meta.Tag.Pictures[0].Data.Data) : null,
             (int)Meta.Tag.Track,
             (int)Meta.Tag.TrackCount);

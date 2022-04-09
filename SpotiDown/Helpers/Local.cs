@@ -61,6 +61,9 @@ public class Local
     public static BitmapImage LoadImage(BitmapImage? Image) =>
         Image is null ? new(new Uri("ms-appx:///Assets/NoImage.png")) : Image;
 
+    public static BitmapImage GetImage(string? Url, BitmapImage? Image) =>
+        string.IsNullOrWhiteSpace(Url) ? LoadImage(Image) : new (new Uri(Url.StartsWith(":::") ? Url.Substring(3) : Url));
+
     public static async Task DownloadFile(string Url, string FileName, IProgress<double> Progress, CancellationToken CancellationToken)
     {
         using (HttpResponseMessage response = Client.GetAsync(Url, HttpCompletionOption.ResponseHeadersRead, CancellationToken).Result)
@@ -140,7 +143,7 @@ public class Local
     public async static Task DeleteFile(string Filepath)
     {
         if (!await WaitFileLock(Filepath, 30000))
-            throw new("Could not delete file", new("File is locked"));
+            throw new("Could not delete file. File is locked.");
 
         using (var fw = new FileSystemWatcher(Path.GetDirectoryName(Filepath)!))
         {
@@ -155,7 +158,7 @@ public class Local
             while (!done)
             {
                 if (timeout >= 12)
-                    throw new("Could not delete file", new("Timeout has been exceeded"));
+                    throw new("Could not delete file. Timeout has been exceeded.");
                 timeout += 1;
                 await Task.Delay(1);
             }

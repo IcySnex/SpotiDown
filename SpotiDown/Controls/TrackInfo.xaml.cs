@@ -70,7 +70,7 @@ public sealed partial class TrackInfo : UserControl
     private void Lyrics_Loaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) =>
         Lyrics.Text = Song.Lyrics;
 
-    private void Lyrics_Unloaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) =>
+    private void Lyrics_LostFocus(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) =>
         Song.Lyrics = Lyrics.Text;
 
     private async void LyricsSearch_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)

@@ -144,11 +144,10 @@
                     ToolTipService.ToolTip="Set the format of all YouTube songs">
                     <ComboBoxItem Content="mp3" />
                     <ComboBoxItem Content="wav" />
-                    <ComboBoxItem Content="m4a" />
                     <ComboBoxItem Content="aac" />
                     <ComboBoxItem Content="ogg" />
-                    <ComboBoxItem Content="pcm" />
                     <ComboBoxItem Content="flac" />
+                    <ComboBoxItem Content="webm" />
                 </ComboBox>
             </ContentControl>
 

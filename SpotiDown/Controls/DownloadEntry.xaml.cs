@@ -90,7 +90,7 @@ public sealed partial class DownloadEntry : UserControl
             await Helpers.Song.WriteMeta(Song, Filepath);
 
             Remove();
-            Helpers.Window.Notify("Song download finished!", $"{Song.Title}, by {Song.Artist}", Song.Artwork);
+            Helpers.Window.Notify("Song download finished!", $"{Helpers.Text.NaIfEmpty(Song.Title)}, by {Helpers.Text.NaIfEmpty(Song.Artist)}", Song.Artwork);
         }
         catch (Exception ex)
         {

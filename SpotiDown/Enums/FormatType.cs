@@ -4,9 +4,8 @@ public enum FormatType
 {
     mp3,
     wav,
-    m4a,
     aac,
     ogg,
-    pcm,
-    flac
+    flac,
+    webm
 }

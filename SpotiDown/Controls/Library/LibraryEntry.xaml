@@ -24,6 +24,8 @@
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="10" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="35" />
         </Grid.ColumnDefinitions>
         <Grid
             Width="40"
@@ -66,5 +68,32 @@
             Text="{x:Bind Helpers:Text.FormatTime(Song.Duration, x:False)}"
             TextAlignment="Center"
             TextWrapping="WrapWholeWords" />
+        <Button
+            Grid.Column="10"
+            Height="35"
+            Padding="0"
+            HorizontalAlignment="Stretch"
+            ToolTipService.ToolTip="Show more options">
+            <Button.Flyout>
+                <MenuFlyout>
+                    <MenuFlyoutItem Click="Play_Click" Text="Play">
+                        <MenuFlyoutItem.Icon>
+                            <SymbolIcon Symbol="Play" />
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem Click="TrackInfo_Click" Text="Track Info">
+                        <MenuFlyoutItem.Icon>
+                            <SymbolIcon Symbol="MusicInfo" />
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem Click="Delete_Click" Text="Delete">
+                        <MenuFlyoutItem.Icon>
+                            <SymbolIcon Symbol="Delete" />
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                </MenuFlyout>
+            </Button.Flyout>
+            <SymbolIcon Symbol="More" />
+        </Button>
     </Grid>
 </UserControl>
