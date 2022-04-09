@@ -47,7 +47,7 @@
             CornerRadius="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="2" />
+                <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="90" />
                 <ColumnDefinition Width="26" />
                 <ColumnDefinition Width="292" />

@@ -120,14 +120,8 @@ public class Local
             fs.Close();
             return false;
         }
-        catch (IOException)
-        {
-            return true;
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        catch (IOException) { return true; }
+        catch (Exception) { throw; }
     }
 
     public static async Task<bool> WaitFileLock(string Filepath, int Timeout = 60000)

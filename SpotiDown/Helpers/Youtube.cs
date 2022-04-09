@@ -36,9 +36,9 @@ public class Youtube
 
     public static async Task<string> GetMaxThumbnail(string Id)
     {
-        string Url = $"https://i3.ytimg.com/vi/{Id}/maxresdefault.jpg";
         try
         {
+            string Url = $"https://i3.ytimg.com/vi/{Id}/maxresdefault.jpg";
             var s = await Local.DownloadData(Url);
             return Url;
         } catch { return $"https://i3.ytimg.com/vi/{Id}/hqdefault.jpg"; }

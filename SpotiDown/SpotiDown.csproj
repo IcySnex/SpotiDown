@@ -27,6 +27,7 @@
 	  <None Remove="Controls\TrackInfo.xaml" />
 	  <None Remove="Controls\YoutubeEntry.xaml" />
 	  <None Remove="Pages\Downloads.xaml" />
+	  <None Remove="Pages\FFMPEG.xaml" />
 	  <None Remove="Pages\Home.xaml" />
 	  <None Remove="Pages\Library.xaml" />
 	  <None Remove="Pages\Spotify.xaml" />
@@ -74,6 +75,9 @@
 	<ItemGroup>
 	  <Page Update="Controls\DownloadEntry.xaml">
 	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Update="Pages\FFMPEG.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 	  </Page>
 	  <Page Update="Pages\Library.xaml">
 	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
