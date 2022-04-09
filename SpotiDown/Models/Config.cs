@@ -37,6 +37,7 @@ public class ConfigModel_DownloadSettings
     public bool ShowSpotify { get; set; } = true;
     public bool ShowYoutube { get; set; } = true;
     public bool ShowSoundcloud { get; set; } = true;
+    public int ArtworkQuality = 512;
 }
 
 public class ConfigModel_LibrarySettings

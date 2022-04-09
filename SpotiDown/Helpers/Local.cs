@@ -43,6 +43,9 @@ public class Local
     public static async Task<Stream> DownloadStream(string Url) =>
         await Client.GetStreamAsync(Url);
 
+    public static async Task<byte[]> DownloadData(string Url) =>
+        await Client.GetByteArrayAsync(Url);
+
     public static BitmapImage DownloadImage(string? Url) =>
         new(new Uri(string.IsNullOrWhiteSpace(Url) ? "ms-appx:///Assets/NoImage.png" : Url.StartsWith(":::") ? Url.Substring(3) : Url));
 

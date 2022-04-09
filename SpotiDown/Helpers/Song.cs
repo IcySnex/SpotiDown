@@ -138,7 +138,7 @@ public class Song
             if (Song.Artwork.StartsWith(":::"))
                 Meta.Tag.Pictures = new[] { new TagLib.Picture(Song.Artwork.Substring(3)) };
             else
-                Meta.Tag.Pictures = new[] { new TagLib.Picture(Local.MakeSquareImage(await Local.DownloadStream(Song.Artwork), 512)) };
+                Meta.Tag.Pictures = new[] { new TagLib.Picture(Local.MakeSquareImage(await Local.DownloadStream(Song.Artwork), Local.Config.DownloadSettings.ArtworkQuality)) };
 
         if (Song.Artist is string)
         {

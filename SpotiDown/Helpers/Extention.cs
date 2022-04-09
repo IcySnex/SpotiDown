@@ -18,13 +18,4 @@ static class Extention
             yield return item;
         }
     }
-
-    public static string? IndexIfExists(this IEnumerable<Thumbnail> en, int Index)
-    {
-        int C = en.Count();
-        if (C >= Index)
-            return en.ElementAt(1).Url;
-        else 
-            return en.IndexIfExists(Index - 1);
-    }
 }
