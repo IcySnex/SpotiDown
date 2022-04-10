@@ -1,4 +1,4 @@
-![ad](https://github.com/IcySnex/SpotiDown/raw/main/other/ad.png)
+Please notice: Development for the mobile app has been discontinued. I am not working on the android version no longer, instead the Windows version is in focus.
 
 # Download
 [Android (APK)](https://github.com/IcySnex/SpotiDown/releases/download/1.1/spotidown-android-1.1.apk) / 
