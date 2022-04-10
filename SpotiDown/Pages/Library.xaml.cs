@@ -27,14 +27,25 @@ public sealed partial class Library : Page
         Watcher.Deleted += async (s, e) => await UpdateFileSystem(e.FullPath);
         Watcher.Renamed += async (s, e) => await UpdateFileSystem(e.FullPath);
 
-        GetContent(Helpers.Local.Config.Paths.Download, ref Entries);
+        try
+        {
+            GetContent(Helpers.Local.Config.Paths.Download, ref Entries);
+            UpdateList(false);
+        } catch (Exception ex)
+        {
+            Helpers.Window.Notify("Updating Library failed!", ex.Message, "ms-appx:///Assets/Error.png");
+        }
     }
 
 
     private void UpdateList(bool Performance = true)
     {
         if (Entries.Count == 0)
+        {
+            Container.Items.Clear();
+            Nothing.Visibility = Visibility.Visible;
             return;
+        }
 
         IEnumerable<ILibrary> Filtered = Entries.Where(Library => Library.NameContains(Search.Text));
 
@@ -66,8 +77,18 @@ public sealed partial class Library : Page
 
     public async Task UpdateFileSystem(string Reason)
     {
-        if (!File.Exists(Reason) || await Helpers.Local.WaitFileLock(Reason, 120000))
-            Sync.Post(val => { Entries.Clear(); GetContent(Helpers.Local.Config.Paths.Download, ref Entries); }, null);
+        try
+        {
+            if (!File.Exists(Reason) || !Helpers.Local.IsFileLocked(Reason))
+                Sync.Post(val => { 
+                    Entries.Clear();
+                    GetContent(Helpers.Local.Config.Paths.Download, ref Entries);
+                    UpdateList();
+                }, null);
+        } catch (Exception ex)
+        {
+            Helpers.Window.Notify("Updating Library failed!", ex.Message, "ms-appx:///Assets/Error.png");
+        }
     }
 
 
@@ -83,21 +104,17 @@ public sealed partial class Library : Page
     private List<ILibrary> Entries = new();
 
 
-    private void GetContent(string Filepath, ref List<ILibrary> Result, bool Update = true)
+    private void GetContent(string Filepath, ref List<ILibrary> Result)
     {
         foreach (string Directory in Directory.GetDirectories(Filepath))
         {
             List<ILibrary> InnerResult = new();
-            GetContent(Directory, ref InnerResult, false);
+            GetContent(Directory, ref InnerResult);
             if (InnerResult.Count > 0)
                 Result.Add(new LibraryContainer(new(Path.GetFileName(Directory) is string Name ? Name : "N/A", "", InnerResult)));
         }
 
         foreach (string File in Directory.GetFiles(Filepath).Where(Path => Helpers.Text.EndsWithAny(Path, ".mp3", ".wav", ".m4a", ".aac", ".ogg", ".pcm", ".flac")))
             Result.Add(new LibraryEntry(Helpers.Song.LoadFile(File)));
-
-        if (Update)
-            UpdateList();
     }
-
 }

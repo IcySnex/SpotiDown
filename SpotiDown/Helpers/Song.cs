@@ -154,7 +154,6 @@ public class Song
 
     public static Models.Song LoadFile(string Filepath)
     {
-        
         FileInfo File = new(Filepath);
         string Format = string.IsNullOrWhiteSpace(File.Extension) ? "mp3" : File.Extension.Replace(".", "");
         TagLib.File Meta = TagLib.File.Create(Filepath, $"{(Format == "webm" ? "video" : "audio")}/{Format}", TagLib.ReadStyle.None);

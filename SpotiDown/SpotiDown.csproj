@@ -16,6 +16,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="Assets\discord.png" />
+	  <None Remove="Assets\Error.png" />
 	  <None Remove="Assets\github.png" />
 	  <None Remove="Assets\icon.png" />
 	  <None Remove="Assets\NoImage.png" />
