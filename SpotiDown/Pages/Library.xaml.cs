@@ -79,8 +79,9 @@ public sealed partial class Library : Page
     {
         try
         {
-            if (!File.Exists(Reason) || !Helpers.Local.IsFileLocked(Reason))
-                Sync.Post(val => { 
+            if (!File.Exists(Reason) || await Helpers.Local.WaitFileLock(Reason, 10000))
+                Sync.Post(async val => { 
+                    await Task.Delay(1000);
                     Entries.Clear();
                     GetContent(Helpers.Local.Config.Paths.Download, ref Entries);
                     UpdateList();

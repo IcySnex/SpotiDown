@@ -119,20 +119,24 @@ public class Song
         await FFMPEG.WaitForExitAsync(CancellationToken);
     }
 
-    public static async Task WriteMeta(Models.Song Song, string Filepath)
+    public static async Task WriteMeta(Models.Song Song, string Filepath, bool WritePublisherCopyright = true)
     {
         string Format = GetFormat(Filepath);
         TagLib.File Meta = TagLib.File.Create(Filepath, $"{(Format == "webm" ? "video" : "audio")}/{Format}", TagLib.ReadStyle.None);
 
         Meta.Tag.Album = Song.Album;
-        Meta.Tag.Comment = $"Song downloaded via SpotiDoen.\nSpotiDown is created by IcySnex (https://github.com/IcySnex/SpotiDown).\nUSING THIS TOOL IS AT YOUR OWN RISK!\n\n Full copyright for this song goes to the artist(s): '{Song.Artist}'.\nTrack meta data fetched from {Song.Type}, Lyrics fetched from genius.com.\nTrack Url: {Song.Url}";
-        Meta.Tag.Copyright = Song.Type.ToString();
         Meta.Tag.TrackCount = (uint)Song.Total;
         Meta.Tag.Track = (uint)Song.Track;
         Meta.Tag.Lyrics = Song.Lyrics;
-        Meta.Tag.Publisher = Song.Type.ToString();
         Meta.Tag.Title = Song.Title;
         Meta.Tag.Year = (uint)Song.Release.Year;
+
+        if (WritePublisherCopyright)
+        {
+            Meta.Tag.Comment = $"Song downloaded via SpotiDoen.\nSpotiDown is created by IcySnex (https://github.com/IcySnex/SpotiDown).\nUSING THIS TOOL IS AT YOUR OWN RISK!\n\n Full copyright for this song goes to the artist(s): '{Song.Artist}'.\nTrack meta data fetched from {Song.Type}, Lyrics fetched from genius.com.\nTrack Url: {Song.Url}";
+            Meta.Tag.Copyright = $"{Song.Artist} - {Song.Type}";
+            Meta.Tag.Publisher = Song.Type.ToString();
+        }
 
         if (Song.Artwork is string)
             if (Song.Artwork.StartsWith(":::"))

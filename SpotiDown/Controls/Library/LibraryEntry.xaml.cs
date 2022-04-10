@@ -43,7 +43,7 @@ public sealed partial class LibraryEntry : UserControl, ILibrary
         {
             try
             {
-                await Helpers.Song.WriteMeta(((TrackInfo)cd.Content).Song, Song.Url);
+                await Helpers.Song.WriteMeta(((TrackInfo)cd.Content).Song, Song.Url, false);
             }
             catch (Exception ex)
             {
