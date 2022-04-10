@@ -14,8 +14,9 @@ using YoutubeExplode.Converter;
 using SpotiDown.Controls;
 using System.IO;
 using YoutubeExplode.Videos.Streams;
-using System.Drawing;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace SpotiDown.Helpers;
 
@@ -39,7 +40,9 @@ public class Youtube
         try
         {
             string Url = $"https://i3.ytimg.com/vi/{Id}/maxresdefault.jpg";
-            var s = await Local.DownloadData(Url);
+
+            await Local.Client.GetByteArrayAsync(Url);
+
             return Url;
         } catch { return $"https://i3.ytimg.com/vi/{Id}/hqdefault.jpg"; }
     }
@@ -53,11 +56,11 @@ public class Youtube
                 return new List<YoutubeSong> { new(Video.Id, Video.Title, Video.Author.Title, null, Video.Duration is TimeSpan d ? d : new(0), await GetMaxThumbnail(Video.Id)) };
             case YoutubeSearchType.Playlist:
                 string PlaylistName = (await Client.Playlists.GetAsync(Query, CancellationToken)).Title;
-                return (await Client.Playlists.GetVideosAsync(Query, CancellationToken).CollectAsync(ResultCount)).Select(async Video => new YoutubeSong(Video.Id, Video.Title, Video.Author.Title, PlaylistName, Video.Duration is TimeSpan d ? d : new(0), await GetMaxThumbnail(Video.Id))).Select(Result => Result.Result);
+                return await Task.WhenAll((await Client.Playlists.GetVideosAsync(Query, CancellationToken).CollectAsync(ResultCount)).Select(async Video => new YoutubeSong(Video.Id, Video.Title, Video.Author.Title, PlaylistName, Video.Duration is TimeSpan d ? d : new(0), await GetMaxThumbnail(Video.Id))));
             case YoutubeSearchType.Channel:
-                return (await Client.Channels.GetUploadsAsync(Query, CancellationToken).CollectAsync(ResultCount)).Select(async Video => new YoutubeSong(Video.Id, Video.Title, Video.Author.Title, Video.Author.Title, Video.Duration is TimeSpan d ? d : new(0), await GetMaxThumbnail(Video.Id))).Select(Result => Result.Result);
+                return await Task.WhenAll((await Client.Channels.GetUploadsAsync(Query, CancellationToken).CollectAsync(ResultCount)).Select(async Video => new YoutubeSong(Video.Id, Video.Title, Video.Author.Title, Video.Author.Title, Video.Duration is TimeSpan d ? d : new(0), await GetMaxThumbnail(Video.Id))));
             default:
-                return (await Client.Search.GetVideosAsync(Query, CancellationToken).CollectAsync(ResultCount)).Select(async Video => new YoutubeSong(Video.Id, Video.Title, Video.Author.Title, null, Video.Duration is TimeSpan d ? d : new(0), await GetMaxThumbnail(Video.Id))).Select(Result => Result.Result);
+                return await Task.WhenAll((await Client.Search.GetVideosAsync(Query, CancellationToken).CollectAsync(ResultCount)).Select(async Video => new YoutubeSong(Video.Id, Video.Title, Video.Author.Title, null, Video.Duration is TimeSpan d ? d : new(0), await GetMaxThumbnail(Video.Id))));
         }
     }
 
