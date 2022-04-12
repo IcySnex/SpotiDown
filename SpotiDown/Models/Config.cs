@@ -55,4 +55,12 @@ public class ConfigModel_Paths
 public class ConfigModel_Advanced
 {
     public bool CustomDownload { get; set; } = true;
+    public bool SavePlaylistAsAlbum { get; set; } = true;
+    public ConfigModel_Advanced_SpotifyAuth SpotifyAuth { get; set; } = new();
+}
+
+public class ConfigModel_Advanced_SpotifyAuth
+{
+    public string Id { get; set; } = "bd6035158be648b695451636f2e311f2";
+    public string Secret { get; set; } = "0dd522b08dc646559e5fc7ef092fa9d7";
 }

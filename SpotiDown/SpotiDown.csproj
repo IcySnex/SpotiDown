@@ -88,13 +88,13 @@
 	  <Page Update="Pages\Downloads.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </Page>
-	</ItemGroup>
-	<ItemGroup>
-	  <Page Update="Pages\Youtube.xaml">
+	  <Page Update="Pages\Spotify.xaml">
 	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 	    <SubType>Designer</SubType>
 	  </Page>
-	  <Page Update="Pages\Spotify.xaml">
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="Pages\Youtube.xaml">
 	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 	    <SubType>Designer</SubType>
 	  </Page>
