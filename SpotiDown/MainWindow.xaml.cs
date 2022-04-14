@@ -20,6 +20,8 @@ public sealed partial class MainWindow : Window
 
         InitializeComponent();
         Navigate((NavigationViewItem)Navigation.MenuItems[0]);
+
+        Helpers.Spotify.Initialize();
     }
 
 

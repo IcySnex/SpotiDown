@@ -25,9 +25,6 @@ namespace SpotiDown.Helpers;
 
 public class Spotify
 {
-    public Spotify() =>
-        Initialize();
-
     public static async void Initialize()
     {
         var Token = (await new OAuthClient().RequestToken(new ClientCredentialsRequest(Local.Config.Advanced.SpotifyAuth.Id, Local.Config.Advanced.SpotifyAuth.Secret))).AccessToken;

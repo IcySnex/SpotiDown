@@ -19,7 +19,6 @@ public sealed partial class Spotify : Page
     {
         NavigationCacheMode = NavigationCacheMode.Required;
         InitializeComponent();
-        Helpers.Spotify.Initialize();
     }
 
     protected override async void OnNavigatedTo(NavigationEventArgs e)

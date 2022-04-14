@@ -162,7 +162,10 @@ public sealed partial class Downloads : Page
 
         try
         {
-            while (Container.Items.Count > 0)
+            while (Container.Items.Where(Entry => {
+                DownloadEntry Entr = (DownloadEntry)Entry;
+                return Entr.Progress.IsIndeterminate && !Entr.Skip;
+            }).Count() > 0)
             {
                 cts.Token.ThrowIfCancellationRequested();
                 await ((DownloadEntry)Container.Items.First(Entry => {
