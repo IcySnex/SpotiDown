@@ -56,6 +56,8 @@ public class ConfigModel_Advanced
 {
     public bool CustomDownload { get; set; } = true;
     public bool SavePlaylistAsAlbum { get; set; } = true;
+    public string YoutubeSearchAlgorithm { get; set; } = "{title} {artist}";
+    public string SearchMarketCode { get; set; } = "US";
     public ConfigModel_Advanced_SpotifyAuth SpotifyAuth { get; set; } = new();
 }
 

@@ -47,7 +47,10 @@
                         Orientation="Horizontal"
                         Spacing="5">
                         <Button Content="URL" ToolTipService.ToolTip="Search by URL" />
-                        <Button Content="Spotify" ToolTipService.ToolTip="Search on Spotify" />
+                        <Button
+                            Click="SpotifySearch_Click"
+                            Content="Spotify"
+                            ToolTipService.ToolTip="Search on Spotify" />
                         <Button
                             Click="YoutubeSearch_Click"
                             Content="YouTube"

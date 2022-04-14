@@ -25,6 +25,7 @@
 	  <None Remove="Controls\DownloadEntry.xaml" />
 	  <None Remove="Controls\LibraryEntry.xaml" />
 	  <None Remove="Controls\Library\LibraryContainer.xaml" />
+	  <None Remove="Controls\SpotifyEntry.xaml" />
 	  <None Remove="Controls\TrackInfo.xaml" />
 	  <None Remove="Controls\YoutubeEntry.xaml" />
 	  <None Remove="Pages\Downloads.xaml" />
@@ -47,6 +48,7 @@
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.197" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="PInvoke.User32" Version="0.7.104" />
+		<PackageReference Include="SpotifyAPI.Web" Version="6.2.2" />
 		<PackageReference Include="System.Drawing.Common" Version="6.0.0" />
 		<PackageReference Include="TagLibSharp" Version="2.2.0" />
 		<PackageReference Include="WinCopies.WindowsAPICodePack.Shell" Version="2.10.2" />
@@ -76,6 +78,9 @@
 	<ItemGroup>
 	  <Page Update="Controls\DownloadEntry.xaml">
 	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Update="Controls\SpotifyEntry.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 	  </Page>
 	  <Page Update="Pages\FFMPEG.xaml">
 	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>

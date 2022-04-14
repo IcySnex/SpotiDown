@@ -55,6 +55,19 @@ public class Song
     }
     public static double GetQuality(int Quality) =>
         GetQuality((QualityType)Quality);
+    public static double GetQuality(Models.Song Song)
+    {
+        switch (Song.Type)
+        {
+            case SongType.YouTube:
+                return GetQuality(Local.Config.YoutubePreferences.Quality);
+            case SongType.Spotify:
+                return GetQuality(Local.Config.SpotifyPrefernces.Quality);
+            case SongType.SoundCloud:
+                return GetQuality(Local.Config.SoundCloudPrefernces.Quality);
+        }
+        return 160;
+    }
 
     public static string GetFormat(FormatType Format) =>
         Enum.GetName(Format) is string Result ? Result : "mp3";
@@ -63,26 +76,28 @@ public class Song
     public static string GetFormat(string FilePath) =>
         Path.GetExtension(FilePath) is string Result ? Result.Replace(".", "") : "mp3";
 
-    public static string GetFilepath(Models.Song Song) =>
-        Text.MakeSafe(Path.Combine(Local.Config.Paths.Download, Local.Config.Paths.FileName.Replace("{title}", Song.Title).Replace("{artist}", Song.Artist).Replace("{album}", Song.Album).Replace("{release}", Song.Release.Year.ToString())) + $".{GetFormat(Local.Config.YoutubePreferences.Format)}");
+    public static string GetFilepath(Models.Song Song)
+    {
+        int Format = 0;
+        switch (Song.Type)
+        {
+            case SongType.YouTube:
+                Format = Local.Config.YoutubePreferences.Format;
+                break;
+            case SongType.Spotify:
+                Format = Local.Config.SpotifyPrefernces.Format;
+                break;
+            case SongType.SoundCloud:
+                Format = Local.Config.SoundCloudPrefernces.Format;
+                break;
+        }
+        return Text.MakeSafe(Path.Combine(Local.Config.Paths.Download, Local.Config.Paths.FileName.Replace("{title}", Song.Title).Replace("{artist}", Song.Artist).Replace("{album}", Song.Album).Replace("{release}", Song.Release.Year.ToString())) + $".{GetFormat(Format)}");
+    }
 
     public static async Task WriteStream(Models.Song Song, string Filepath, IProgress<double> Progress, CancellationToken CancellationToken)
     {
-        Stream Stream = new MemoryStream();
-        double Quality = 160;
-        switch (Song.Type)
-        {
-            case SongType.Spotify:
-                Quality = GetQuality(Local.Config.SpotifyPrefernces.Quality);
-                throw new NotImplementedException();
-            case SongType.YouTube:
-                Quality = GetQuality(Local.Config.YoutubePreferences.Quality);
-                Stream = await Youtube.GetStream(Song.Url, Quality, CancellationToken);
-                break;
-            case SongType.SoundCloud:
-                Quality = GetQuality(Local.Config.SoundCloudPrefernces.Quality);
-                throw new NotImplementedException();
-        }
+        double Quality = GetQuality(Song);
+        Stream Stream = await Youtube.GetStream(Song.Url, Quality, CancellationToken);
 
         if (Path.GetDirectoryName(Filepath) is string Director)
             Directory.CreateDirectory(Director);

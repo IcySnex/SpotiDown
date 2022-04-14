@@ -19,6 +19,7 @@ public sealed partial class Spotify : Page
     {
         NavigationCacheMode = NavigationCacheMode.Required;
         InitializeComponent();
+        Helpers.Spotify.Initialize();
     }
 
     protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -52,7 +53,7 @@ public sealed partial class Spotify : Page
             DownloadBar.Visibility = Visibility.Collapsed;
     }
 
-    private void UpdateLoading(bool Enabled, string Type = "Searching on YouTube...")
+    private void UpdateLoading(bool Enabled, string Type = "Searching on Spotify...")
     {
         if (Enabled)
         {
@@ -76,23 +77,23 @@ public sealed partial class Spotify : Page
         switch ((SortingType)Sorting.SelectedIndex)
         {
             case SortingType.Default:
-                foreach (YoutubeEntry Entry in Result.Select(Song => new YoutubeEntry(Song)))
+                foreach (SpotifyEntry Entry in Result.Select(Song => new SpotifyEntry(Song)))
                     Container.Items.Add(Entry);
                 break;
             case SortingType.Default_Inv:
-                foreach (YoutubeEntry Entry in Result.Reverse().Select(Song => new YoutubeEntry(Song)))
+                foreach (SpotifyEntry Entry in Result.Reverse().Select(Song => new SpotifyEntry(Song)))
                     Container.Items.Add(Entry);
                 break;
             case SortingType.Title:
-                foreach (YoutubeEntry Entry in Result.OrderBy(r => r.Title).Select(Song => new YoutubeEntry(Song)))
+                foreach (SpotifyEntry Entry in Result.OrderBy(r => r.Title).Select(Song => new SpotifyEntry(Song)))
                     Container.Items.Add(Entry);
                 break;
             case SortingType.Artist:
-                foreach (YoutubeEntry Entry in Result.OrderBy(r => r.Channel).Select(Song => new YoutubeEntry(Song)))
+                foreach (SpotifyEntry Entry in Result.OrderBy(r => r.Artist).Select(Song => new SpotifyEntry(Song)))
                     Container.Items.Add(Entry);
                 break;
             case SortingType.Duration:
-                foreach (YoutubeEntry Entry in Result.OrderBy(r => r.Duration).Select(Song => new YoutubeEntry(Song)))
+                foreach (SpotifyEntry Entry in Result.OrderBy(r => r.Duration).Select(Song => new SpotifyEntry(Song)))
                     Container.Items.Add(Entry);
                 break;
         }
@@ -107,7 +108,7 @@ public sealed partial class Spotify : Page
 
 
     CancellationTokenSource cts = new();
-    IEnumerable<YoutubeSong> Result = Enumerable.Empty<YoutubeSong>();
+    IEnumerable<SpotifySong> Result = Enumerable.Empty<SpotifySong>();
 
     private async void Search_Click(object sender, RoutedEventArgs? e)
     {
@@ -123,8 +124,8 @@ public sealed partial class Spotify : Page
         {
             UpdateLoading(true);
 
-            YoutubeSearchType Type = Helpers.Youtube.GetSearchType(Query.Text);
-            Result = await Helpers.Youtube.Search(Query.Text, Type, (int)ResultCount.Value, cts.Token);
+            SpotifySearchType Type = Helpers.Spotify.GetSearchType(Query.Text);
+            Result = await Helpers.Spotify.Search(Query.Text, Type, cts.Token);
 
             Nothing.Visibility = Visibility.Visible;
 
@@ -139,7 +140,7 @@ public sealed partial class Spotify : Page
 
             UpdateList();
 
-            if (Type != YoutubeSearchType.Query)
+            if (Type != SpotifySearchType.Query)
                 Container.SelectAll();
 
             Nothing.Visibility = Visibility.Collapsed;
@@ -174,7 +175,7 @@ public sealed partial class Spotify : Page
             var Parameter = await Task.WhenAll(
              Container.SelectedItems
              .WithCancellation(ctsdl.Token)
-             .Select(async Entry => await Helpers.Youtube.Convert(((YoutubeEntry)Entry).YoutubeSong, Text.GetBool(SaveLyrics.IsChecked), Text.GetBool(SaveArtwork.IsChecked), ctsdl.Token)));
+             .Select(async Entry => await Helpers.Spotify.Convert(((SpotifyEntry)Entry).SpotifySong, Text.GetBool(SaveLyrics.IsChecked), Text.GetBool(SaveArtwork.IsChecked), ctsdl.Token)));
 
             UpdateLoading(false);
 

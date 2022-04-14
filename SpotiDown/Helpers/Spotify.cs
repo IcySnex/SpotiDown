@@ -19,6 +19,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using SpotifyAPI.Web;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace SpotiDown.Helpers;
 
@@ -27,7 +28,7 @@ public class Spotify
     public Spotify() =>
         Initialize();
 
-    public async void Initialize()
+    public static async void Initialize()
     {
         var Token = (await new OAuthClient().RequestToken(new ClientCredentialsRequest(Local.Config.Advanced.SpotifyAuth.Id, Local.Config.Advanced.SpotifyAuth.Secret))).AccessToken;
         Client = new(Token);
@@ -52,69 +53,57 @@ public class Spotify
     public static string GetIdByUrl(string Url) =>
         Url.Split('?')[0].Split('/').Last();
 
+    public static DateTime GetDate(string Input)
+    {
+        if (Input.Length == 4)
+            return new(int.Parse(Input), 1, 1);
+        return DateTime.Parse(Input);
+    }
+
     public static async Task<IEnumerable<SpotifySong>> Search(string Query, SpotifySearchType Type, CancellationToken CancellationToken = default)
     {
         switch (Type)
         {
             case SpotifySearchType.Track:
-                var Track = await Client!.Tracks.Get(Query);
-                return new List<SpotifySong> { new(Track.Name, string.Join(", ", Track.Artists), Track.Album.Name, TimeSpan.FromMilliseconds(Track.DurationMs), Track.Album.Images.Count > 0 ? Track.Album.Images[0].Url : null) };
+                var Track = await Client!.Tracks.Get(GetIdByUrl(Query));
+                return new List<SpotifySong> { new(Track.Name, string.Join(", ", Track.Artists.Select(Artist => Artist.Name)), Track.Album.Name, TimeSpan.FromMilliseconds(Track.DurationMs), GetDate(Track.Album.ReleaseDate), Track.Album.Images.Count > 0 ? Track.Album.Images[0].Url : null) };
             case SpotifySearchType.Playlist:
-                var Playlist = await Client!.Playlists.Get(Query);
+                var Playlist = await Client!.Playlists.Get(GetIdByUrl(Query));
                 if (Playlist.Tracks is null || Playlist.Tracks.Total < 1)
                     return new List<SpotifySong>();
                 return (await Client.PaginateAll(Playlist.Tracks)).Where(Track => Track.Track.Type == ItemType.Track).Select(Item => 
                 {
                     var Track = (FullTrack)Item.Track;
-                    return new SpotifySong(Track.Name, string.Join(", ", Track.Artists), Local.Config.Advanced.SavePlaylistAsAlbum ? Playlist.Name : Track.Album.Name, TimeSpan.FromMilliseconds(Track.DurationMs), Track.Album.Images.Count > 0 ? Track.Album.Images[0].Url : null);
+                    return new SpotifySong(Track.Name, string.Join(", ", Track.Artists.Select(Artist => Artist.Name)), Local.Config.Advanced.SavePlaylistAsAlbum ? Playlist.Name : Track.Album.Name, TimeSpan.FromMilliseconds(Track.DurationMs), GetDate(Track.Album.ReleaseDate), Track.Album.Images.Count > 0 ? Track.Album.Images[0].Url : null);
                 });
             case SpotifySearchType.Album:
-                var Album = await Client!.Albums.Get(Query);
-                return (await Client.PaginateAll(Album.Tracks)).Select(Track => new SpotifySong(Track.Name, string.Join(", ", Track.Artists), Album.Name, TimeSpan.FromMilliseconds(Track.DurationMs), Album.Images.Count > 0 ? Album.Images[0].Url : null));
+                var Album = await Client!.Albums.Get(GetIdByUrl(Query));
+                return (await Client.PaginateAll(Album.Tracks)).Select(Track => new SpotifySong(Track.Name, string.Join(", ", Track.Artists.Select(Artist => Artist.Name)), Album.Name, TimeSpan.FromMilliseconds(Track.DurationMs), GetDate(Album.ReleaseDate), Album.Images.Count > 0 ? Album.Images[0].Url : null));
             default:
-                var SearchResult = (await Client!.Search.Item(new(SearchRequest.Types.Track, Query))).Tracks.Items;
+                var SearchResult = (await Client!.Search.Item(new(SearchRequest.Types.Track, Query) { Market = Local.Config.Advanced.SearchMarketCode })).Tracks.Items;
                 if (SearchResult is null || SearchResult.Count < 1)
                     return new List<SpotifySong>();
-                return SearchResult.Select(Track => new SpotifySong(Track.Name, string.Join(", ", Track.Artists), Track.Album.Name, TimeSpan.FromMilliseconds(Track.DurationMs), Track.Album.Images.Count > 0 ? Track.Album.Images[0].Url : null));
+                return SearchResult.Select(Track => new SpotifySong(Track.Name, string.Join(", ", Track.Artists.Select(Artist => Artist.Name)), Track.Album.Name, TimeSpan.FromMilliseconds(Track.DurationMs), GetDate(Track.Album.ReleaseDate), Track.Album.Images.Count > 0 ? Track.Album.Images[0].Url : null));
         }
     }
 
-    public static async Task<DownloadEntry> Convert(YoutubeSong Song, bool Lyrics, bool Artwork, CancellationToken CancellationToken = default)
+    public static async Task<DownloadEntry> Convert(SpotifySong Song, bool Lyrics, bool Artwork, CancellationToken CancellationToken = default)
     {
-        Video Video = await Client.Videos.GetAsync(Song.Id, CancellationToken);
+        string Query = Local.Config.Advanced.YoutubeSearchAlgorithm.Replace("{title}", Song.Title).Replace("{artist}", Song.Artist).Replace("{album}", Song.Album);
+        var Video = (await Youtube.Client.Search.GetVideosAsync(Query, CancellationToken).CollectAsync(1)).First();
 
         return new(new(
-            SongType.YouTube,
-            $"https://www.youtube.com/watch?v={Song.Id}",
+            SongType.Spotify,
+            $"https://www.youtube.com/watch?v={Video.Id}",
             Song.Title,
-            Song.Channel,
-            Song.Duration,
-            Song.Playlist,
-            Video.UploadDate.UtcDateTime,
-            Lyrics ? Video.Description : null,
-            Artwork ? Song.Thumbnail : null,
+            Song.Artist,
+            Video.Duration!.Value,
+            Song.Album,
+            Song.Release,
+            Lyrics ? await Helpers.Song.SearchLyrics(Song.Title, Song.Artist) is List<Genius_Response_Hit> res && res.Count > 0 ? await Helpers.Song.GetLyrics(res.First().result) : null : null,
+            Artwork ? Song.Artwork : null,
             null,
             0,
             0));
-    }
-
-    public static async Task<Stream> GetStream(string Input, double Quality, CancellationToken CancellationToken = default)
-    {
-        var Avaiable = (await Client.Videos.Streams.GetManifestAsync(Input, CancellationToken)).GetAudioOnlyStreams();
-        var Info = Avaiable.First(n => Math.Abs(Quality - n.Bitrate.KiloBitsPerSecond) == Avaiable.Min(n => Math.Abs(Quality - n.Bitrate.KiloBitsPerSecond)));
-        return await Client.Videos.Streams.GetAsync(Info, CancellationToken);
-    }
-
-    public static async Task Download(Models.Song Song, string Filepath, Progress<double> Progress, CancellationToken CancellationToken = default)
-    {
-        double Quality = Helpers.Song.GetQuality(Local.Config.YoutubePreferences.Quality);
-        
-        if (Path.GetDirectoryName(Filepath) is string Director)
-            Directory.CreateDirectory(Director);
-
-        var Avaiable = (await Client.Videos.Streams.GetManifestAsync(Song.Url, CancellationToken)).GetAudioOnlyStreams();
-        var Info = new IStreamInfo[] { Avaiable.First(n => Math.Abs(Quality - n.Bitrate.KiloBitsPerSecond) == Avaiable.Min(n => Math.Abs(Quality - n.Bitrate.KiloBitsPerSecond))) };
-
-        await Client.Videos.DownloadAsync(Info, new ConversionRequestBuilder(Filepath).SetFFmpegPath(Local.Config.Paths.FFMPEG).Build(), Progress, CancellationToken);
     }
 }

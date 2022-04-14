@@ -28,4 +28,7 @@ public sealed partial class Home : Page
 
     private void YoutubeSearch_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) =>
         Helpers.Window.Navigate("YouTube", Query.Text);
+
+    private void SpotifySearch_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) =>
+        Helpers.Window.Navigate("Spotify", Query.Text);
 }

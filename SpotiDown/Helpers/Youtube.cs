@@ -22,7 +22,7 @@ namespace SpotiDown.Helpers;
 
 public class Youtube
 {
-    private static YoutubeClient Client = new();
+    public static YoutubeClient Client = new();
 
     public static YoutubeSearchType GetSearchType(string Query)
     {
@@ -92,7 +92,7 @@ public class Youtube
 
     public static async Task Download(Models.Song Song, string Filepath, Progress<double> Progress, CancellationToken CancellationToken = default)
     {
-        double Quality = Helpers.Song.GetQuality(Local.Config.YoutubePreferences.Quality);
+        double Quality = Helpers.Song.GetQuality(Song);
         
         if (Path.GetDirectoryName(Filepath) is string Director)
             Directory.CreateDirectory(Director);
