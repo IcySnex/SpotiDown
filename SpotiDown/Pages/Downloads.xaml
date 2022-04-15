@@ -50,7 +50,7 @@
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="90" />
                 <ColumnDefinition Width="26" />
-                <ColumnDefinition Width="292" />
+                <ColumnDefinition Width="175" />
                 <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="35" />
                 <ColumnDefinition Width="10" />
@@ -98,14 +98,6 @@
                         Content="YouTube"
                         IsChecked="{x:Bind Helpers:Local.Config.DownloadSettings.ShowYoutube, Mode=TwoWay}"
                         ToolTipService.ToolTip="Show YouTube songs"
-                        Unchecked="Show_Changed" />
-                    <CheckBox
-                        Name="ShowSoundcloud"
-                        Margin="184,0,0,0"
-                        Checked="Show_Changed"
-                        Content="SoundCloud"
-                        IsChecked="{x:Bind Helpers:Local.Config.DownloadSettings.ShowSoundcloud, Mode=TwoWay}"
-                        ToolTipService.ToolTip="Show SoundCloud songs"
                         Unchecked="Show_Changed" />
                 </Grid>
             </ContentControl>

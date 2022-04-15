@@ -56,9 +56,6 @@ public sealed partial class TrackInfo : UserControl
             case Enums.SongType.YouTube:
                 await Helpers.Local.OpenUrl("https://www.youtube.com/");
                 break;
-            case Enums.SongType.SoundCloud:
-                await Helpers.Local.OpenUrl("https://soundcloud.com/");
-                break;
         }
     }
 

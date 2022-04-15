@@ -35,7 +35,7 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
                 KeyDown="Command_KeyDown"
-                PlaceholderText="Type in a command..."
+                PlaceholderText="Type in a command (e.g. -version)..."
                 ToolTipService.ToolTip="Test any FFMPEG command here" />
 
             <Button

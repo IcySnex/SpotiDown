@@ -63,8 +63,6 @@ public class Song
                 return GetQuality(Local.Config.YoutubePreferences.Quality);
             case SongType.Spotify:
                 return GetQuality(Local.Config.SpotifyPrefernces.Quality);
-            case SongType.SoundCloud:
-                return GetQuality(Local.Config.SoundCloudPrefernces.Quality);
         }
         return 160;
     }
@@ -86,9 +84,6 @@ public class Song
                 break;
             case SongType.Spotify:
                 Format = Local.Config.SpotifyPrefernces.Format;
-                break;
-            case SongType.SoundCloud:
-                Format = Local.Config.SoundCloudPrefernces.Format;
                 break;
         }
         return Text.MakeSafe(Path.Combine(Local.Config.Paths.Download, Local.Config.Paths.FileName.Replace("{title}", Song.Title).Replace("{artist}", Song.Artist).Replace("{album}", Song.Album).Replace("{release}", Song.Release.Year.ToString())) + $".{GetFormat(Format)}");

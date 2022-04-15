@@ -27,7 +27,7 @@ public sealed partial class FFMPEG : Page
 
     private async void Run_Click(object sender, RoutedEventArgs? e)
     {
-        Output.Text = "FFMPEG PROCESSING STARTED!\n";
+        Output.Text = "FFMPEG PROCESSING STARTED!\n\n";
 
         Process FFMPEG = new Process()
         {
@@ -53,7 +53,7 @@ public sealed partial class FFMPEG : Page
 
         await FFMPEG.WaitForExitAsync();
 
-        Output.Text += $"\nFFMPEG PROCESSING FINISHED!";
+        Output.Text += $"\n\nFFMPEG PROCESSING FINISHED!";
     }
     private void Command_KeyDown(object sender, Microsoft.UI.Xaml.Input.KeyRoutedEventArgs e)
     {

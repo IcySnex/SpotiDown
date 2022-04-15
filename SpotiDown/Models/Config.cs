@@ -15,7 +15,6 @@ public class Config
 
     public ConfigModel_Preferences SpotifyPrefernces { get; set; } = new();
     public ConfigModel_Preferences YoutubePreferences { get; set; } = new();
-    public ConfigModel_Preferences SoundCloudPrefernces { get; set; } = new();
     public ConfigModel_DownloadSettings DownloadSettings { get; set; } = new();
     public ConfigModel_LibrarySettings LibrarySettings { get; set; } = new();
     public ConfigModel_Paths Paths { get; set; } = new();
@@ -34,10 +33,10 @@ public class ConfigModel_Preferences
 
 public class ConfigModel_DownloadSettings
 {
+    public int DefaultIfExists { get; set; } = (int)DefaultIfExistsType.Ask;
+    public int ArtworkQuality = 512;
     public bool ShowSpotify { get; set; } = true;
     public bool ShowYoutube { get; set; } = true;
-    public bool ShowSoundcloud { get; set; } = true;
-    public int ArtworkQuality = 512;
 }
 
 public class ConfigModel_LibrarySettings
@@ -47,7 +46,7 @@ public class ConfigModel_LibrarySettings
 
 public class ConfigModel_Paths
 {
-    public string Download { get; set; } = "SpotiDown";
+    public string Download { get; set; } = "SpotiDown\\";
     public string FileName { get; set; } = "{title} ({artist})";
     public string FFMPEG { get; set; } = "FFMPEG.exe";
 }
@@ -55,14 +54,14 @@ public class ConfigModel_Paths
 public class ConfigModel_Advanced
 {
     public bool CustomDownload { get; set; } = true;
+    public ConfigModel_Advanced_Spotify Spotify { get; set; } = new();
+}
+
+public class ConfigModel_Advanced_Spotify
+{
     public bool SavePlaylistAsAlbum { get; set; } = true;
     public string YoutubeSearchAlgorithm { get; set; } = "{title} {artist}";
     public string SearchMarketCode { get; set; } = "US";
-    public ConfigModel_Advanced_SpotifyAuth SpotifyAuth { get; set; } = new();
-}
-
-public class ConfigModel_Advanced_SpotifyAuth
-{
     public string Id { get; set; } = "bd6035158be648b695451636f2e311f2";
     public string Secret { get; set; } = "0dd522b08dc646559e5fc7ef092fa9d7";
 }

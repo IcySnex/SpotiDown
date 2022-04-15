@@ -1,0 +1,877 @@
+﻿<Page
+    x:Class="SpotiDown.Pages.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="using:SpotiDown.Controls"
+    xmlns:Helpers="using:SpotiDown.Helpers"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Margin="20" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer
+            CanContentRenderOutsideBounds="True"
+            VerticalScrollBarVisibility="Auto"
+            VerticalScrollMode="Auto">
+
+            <StackPanel Spacing="8">
+
+                <Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <Expander.Header>
+                        <Grid Padding="11,15">
+                            <SymbolIcon HorizontalAlignment="Left" Symbol="Audio" />
+                            <TextBlock
+                                Margin="44,0,0,23"
+                                FontSize="18"
+                                Style="{ThemeResource BaseTextBlockStyle}"
+                                Text="Spotify Preferences" />
+                            <TextBlock
+                                Margin="44,23,0,0"
+                                FontSize="14"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Quality, Format, Save Artwork &amp; Lyrics, Sorting" />
+                        </Grid>
+                    </Expander.Header>
+
+                    <StackPanel Spacing="4">
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Quality" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Quality songs get downloaded in" />
+                            <ComboBox
+                                Margin="0,0,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                SelectedIndex="{x:Bind Helpers:Local.Config.SpotifyPrefernces.Quality, Mode=TwoWay}">
+                                <ComboBoxItem Content="32 kbps" />
+                                <ComboBoxItem Content="64 kbps" />
+                                <ComboBoxItem Content="128 kbps" />
+                                <ComboBoxItem Content="160 kbps" />
+                                <ComboBoxItem Content="256 kbps" />
+                                <ComboBoxItem Content="320 kbps" />
+                            </ComboBox>
+                        </Grid>
+
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Format" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Format songs get downloaded in" />
+                            <ComboBox
+                                Margin="0,0,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                SelectedIndex="{x:Bind Helpers:Local.Config.SpotifyPrefernces.Format, Mode=TwoWay}">
+                                <ComboBoxItem Content="mp3" />
+                                <ComboBoxItem Content="wav" />
+                                <ComboBoxItem Content="aac" />
+                                <ComboBoxItem Content="ogg" />
+                                <ComboBoxItem Content="flac" />
+                                <ComboBoxItem Content="webm" />
+                            </ComboBox>
+                        </Grid>
+
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Lyrics" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Automatically search for lyrics online and save them in the meta tags" />
+                            <ToggleSwitch
+                                Margin="0,0,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                FlowDirection="RightToLeft"
+                                IsOn="{x:Bind Helpers:Local.Config.SpotifyPrefernces.Lyrics, Mode=TwoWay}" />
+                        </Grid>
+
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Artwork" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Download the artwork image and and save it in the meta tags" />
+                            <ToggleSwitch
+                                Margin="0,0,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                FlowDirection="RightToLeft"
+                                IsOn="{x:Bind Helpers:Local.Config.SpotifyPrefernces.Artwork, Mode=TwoWay}" />
+                        </Grid>
+
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Sorting" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Sorting of the search results" />
+                            <ComboBox
+                                Margin="0,0,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                SelectedIndex="{x:Bind Helpers:Local.Config.SpotifyPrefernces.Sorting, Mode=TwoWay}">
+                                <ComboBoxItem Content="Default" />
+                                <ComboBoxItem Content="Default Inv." />
+                                <ComboBoxItem Content="Title" />
+                                <ComboBoxItem Content="Artist" />
+                                <ComboBoxItem Content="Duration" />
+                            </ComboBox>
+                        </Grid>
+                    </StackPanel>
+
+                </Expander>
+
+                <Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <Expander.Header>
+                        <Grid Padding="11,15">
+                            <SymbolIcon HorizontalAlignment="Left" Symbol="Video" />
+                            <TextBlock
+                                Margin="44,0,0,23"
+                                FontSize="18"
+                                Style="{ThemeResource BaseTextBlockStyle}"
+                                Text="YouTube Preferences" />
+                            <TextBlock
+                                Margin="44,23,0,0"
+                                FontSize="14"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Quality, Format, Save Thumbnail &amp; Lyrics, Sorting, Result count" />
+                        </Grid>
+                    </Expander.Header>
+
+                    <StackPanel Spacing="4">
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Quality" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Quality songs get downloaded in" />
+                            <ComboBox
+                                Margin="0,0,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                SelectedIndex="{x:Bind Helpers:Local.Config.YoutubePreferences.Quality, Mode=TwoWay}">
+                                <ComboBoxItem Content="32 kbps" />
+                                <ComboBoxItem Content="64 kbps" />
+                                <ComboBoxItem Content="128 kbps" />
+                                <ComboBoxItem Content="160 kbps" />
+                                <ComboBoxItem Content="256 kbps" />
+                                <ComboBoxItem Content="320 kbps" />
+                            </ComboBox>
+                        </Grid>
+
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Format" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Format songs get downloaded in" />
+                            <ComboBox
+                                Margin="0,0,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                SelectedIndex="{x:Bind Helpers:Local.Config.YoutubePreferences.Format, Mode=TwoWay}">
+                                <ComboBoxItem Content="mp3" />
+                                <ComboBoxItem Content="wav" />
+                                <ComboBoxItem Content="aac" />
+                                <ComboBoxItem Content="ogg" />
+                                <ComboBoxItem Content="flac" />
+                                <ComboBoxItem Content="webm" />
+                            </ComboBox>
+                        </Grid>
+
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Description" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Save the video description in the (lyrics-) meta tags" />
+                            <ToggleSwitch
+                                Margin="0,0,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                FlowDirection="RightToLeft"
+                                IsOn="{x:Bind Helpers:Local.Config.YoutubePreferences.Lyrics, Mode=TwoWay}" />
+                        </Grid>
+
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Thumbnail" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Download the thumbnail and and save it in the meta tags" />
+                            <ToggleSwitch
+                                Margin="0,0,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                FlowDirection="RightToLeft"
+                                IsOn="{x:Bind Helpers:Local.Config.YoutubePreferences.Artwork, Mode=TwoWay}" />
+                        </Grid>
+
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Sorting" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Sorting of the search results" />
+                            <ComboBox
+                                Margin="0,0,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                SelectedIndex="{x:Bind Helpers:Local.Config.YoutubePreferences.Sorting, Mode=TwoWay}">
+                                <ComboBoxItem Content="Default" />
+                                <ComboBoxItem Content="Default Inv." />
+                                <ComboBoxItem Content="Title" />
+                                <ComboBoxItem Content="Channel" />
+                                <ComboBoxItem Content="Duration" />
+                            </ComboBox>
+                        </Grid>
+
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Result count" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="How many songs sould get be in the search result" />
+                            <NumberBox
+                                Margin="0,0,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Maximum="500"
+                                Minimum="1"
+                                SpinButtonPlacementMode="Compact"
+                                Value="{x:Bind Helpers:Local.Config.YoutubePreferences.ResultCount, Mode=TwoWay}" />
+                        </Grid>
+                    </StackPanel>
+
+                </Expander>
+
+                <Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <Expander.Header>
+                        <Grid Padding="11,15">
+                            <SymbolIcon HorizontalAlignment="Left" Symbol="Download" />
+                            <TextBlock
+                                Margin="44,0,0,23"
+                                FontSize="18"
+                                Style="{ThemeResource BaseTextBlockStyle}"
+                                Text="Downloads" />
+                            <TextBlock
+                                Margin="44,23,0,0"
+                                FontSize="14"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Default behavior, Artwork Quality, Show Spotify &amp; YouTube" />
+                        </Grid>
+                    </Expander.Header>
+
+                    <StackPanel Spacing="4">
+
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Default behaivor" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="What happens when trying to download a song which already exists" />
+                            <ComboBox
+                                Margin="0,0,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                SelectedIndex="{x:Bind Helpers:Local.Config.DownloadSettings.DefaultIfExists, Mode=TwoWay}">
+                                <ComboBoxItem Content="Ask" />
+                                <ComboBoxItem Content="Skip" />
+                                <ComboBoxItem Content="Overwrite" />
+                            </ComboBox>
+                        </Grid>
+
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Artwork Quality" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Quality artworks get downloaded in (NxN)" />
+                            <NumberBox
+                                Margin="0,0,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Maximum="2048"
+                                Minimum="64"
+                                SpinButtonPlacementMode="Compact"
+                                Value="{x:Bind Helpers:Local.Config.DownloadSettings.ArtworkQuality, Mode=TwoWay}" />
+                        </Grid>
+
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Show Spotify" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Show Spotify songs in the download queue" />
+                            <ToggleSwitch
+                                Margin="0,0,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                FlowDirection="RightToLeft"
+                                IsOn="{x:Bind Helpers:Local.Config.DownloadSettings.ShowSpotify, Mode=TwoWay}" />
+                        </Grid>
+
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Show YouTube" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Show YouTube songs in the download queue" />
+                            <ToggleSwitch
+                                Margin="0,0,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                FlowDirection="RightToLeft"
+                                IsOn="{x:Bind Helpers:Local.Config.DownloadSettings.ShowYoutube, Mode=TwoWay}" />
+                        </Grid>
+
+                    </StackPanel>
+
+                </Expander>
+
+                <Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <Expander.Header>
+                        <Grid Padding="11,15">
+                            <SymbolIcon HorizontalAlignment="Left" Symbol="Library" />
+                            <TextBlock
+                                Margin="44,0,0,23"
+                                FontSize="18"
+                                Style="{ThemeResource BaseTextBlockStyle}"
+                                Text="Library" />
+                            <TextBlock
+                                Margin="44,23,0,0"
+                                FontSize="14"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Sorting" />
+                        </Grid>
+                    </Expander.Header>
+
+                    <Grid
+                        Height="65"
+                        Background="{ThemeResource ExpanderHeaderBackground}"
+                        CornerRadius="4">
+                        <TextBlock
+                            Margin="12,0,0,17"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Text="Sorting" />
+                        <TextBlock
+                            Margin="12,17,0,0"
+                            VerticalAlignment="Center"
+                            FontSize="12"
+                            Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Text="Sorting of the songs in library" />
+                        <ComboBox
+                            Margin="0,0,12,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            SelectedIndex="{x:Bind Helpers:Local.Config.DownloadSettings.DefaultIfExists, Mode=TwoWay}">
+                            <ComboBoxItem Content="Default" />
+                            <ComboBoxItem Content="Default Inv." />
+                            <ComboBoxItem Content="Name" />
+                        </ComboBox>
+                    </Grid>
+
+                </Expander>
+
+                <Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <Expander.Header>
+                        <Grid Padding="11,15">
+                            <SymbolIcon HorizontalAlignment="Left" Symbol="Folder" />
+                            <TextBlock
+                                Margin="44,0,0,23"
+                                FontSize="18"
+                                Style="{ThemeResource BaseTextBlockStyle}"
+                                Text="Paths" />
+                            <TextBlock
+                                Margin="44,23,0,0"
+                                FontSize="14"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Download, FIlename, FFMPEG" />
+                        </Grid>
+                    </Expander.Header>
+
+                    <StackPanel Spacing="4">
+
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Download" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Path where all songs get downloaded in" />
+                            <TextBox
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Text="{x:Bind Helpers:Local.Config.Paths.Download, Mode=TwoWay}" />
+                        </Grid>
+
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="330" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Filename" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Replacements: {title}, {artist}, {album}, {release}" />
+                            <TextBox
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Text="{x:Bind Helpers:Local.Config.Paths.FileName, Mode=TwoWay}" />
+                        </Grid>
+
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="FFMPEG" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Path to the FFMPEG executable" />
+                            <TextBox
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Text="{x:Bind Helpers:Local.Config.Paths.FFMPEG, Mode=TwoWay}" />
+                        </Grid>
+
+                    </StackPanel>
+
+                </Expander>
+
+                <Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <Expander.Header>
+                        <Grid Padding="11,15">
+                            <SymbolIcon HorizontalAlignment="Left" Symbol="Scan" />
+                            <TextBlock
+                                Margin="44,0,0,23"
+                                FontSize="18"
+                                Style="{ThemeResource BaseTextBlockStyle}"
+                                Text="Advanced" />
+                            <TextBlock
+                                Margin="44,23,0,0"
+                                FontSize="14"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Technical stuff..." />
+                        </Grid>
+                    </Expander.Header>
+
+                    <StackPanel Spacing="4">
+
+                        <Grid
+                            Height="65"
+                            Background="{ThemeResource ExpanderHeaderBackground}"
+                            CornerRadius="4">
+                            <TextBlock
+                                Margin="12,0,0,17"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Custom Download" />
+                            <TextBlock
+                                Margin="12,17,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Text="Use custom written download method (faster, more accurate progress)" />
+                            <ToggleSwitch
+                                Margin="0,0,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                FlowDirection="RightToLeft"
+                                IsOn="{x:Bind Helpers:Local.Config.Advanced.CustomDownload, Mode=TwoWay}" />
+                        </Grid>
+
+
+                        <Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                            <Expander.Header>
+                                <Grid Padding="0,11">
+                                    <SymbolIcon HorizontalAlignment="Left" Symbol="Scan" />
+                                    <TextBlock
+                                        Margin="36,0,0,17"
+                                        FontSize="16"
+                                        Style="{ThemeResource BodyTextBlockStyle}"
+                                        Text="Spotify" />
+                                    <TextBlock
+                                        Margin="36,17,0,0"
+                                        FontSize="12"
+                                        Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                        Style="{ThemeResource BodyTextBlockStyle}"
+                                        Text="Save Playlist As Album, Youtube Search Algorithm, Search Market, Client ID &amp; Secret" />
+                                </Grid>
+                            </Expander.Header>
+
+                            <StackPanel Spacing="4">
+
+                                <Grid
+                                    Height="65"
+                                    Background="{ThemeResource ExpanderHeaderBackground}"
+                                    CornerRadius="4">
+                                    <TextBlock
+                                        Margin="12,0,0,17"
+                                        VerticalAlignment="Center"
+                                        FontSize="16"
+                                        Style="{ThemeResource BodyTextBlockStyle}"
+                                        Text="Save Playlist As Album" />
+                                    <TextBlock
+                                        Margin="12,17,0,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="12"
+                                        Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                        Style="{ThemeResource BodyTextBlockStyle}"
+                                        Text="Saves playlist name instead of album name on songs fectched from a playlist" />
+                                    <ToggleSwitch
+                                        Margin="0,0,12,0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        FlowDirection="RightToLeft"
+                                        IsOn="{x:Bind Helpers:Local.Config.Advanced.Spotify.SavePlaylistAsAlbum, Mode=TwoWay}" />
+                                </Grid>
+
+                                <Grid
+                                    Height="65"
+                                    Background="{ThemeResource ExpanderHeaderBackground}"
+                                    CornerRadius="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="500" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="12" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Margin="12,0,0,17"
+                                        VerticalAlignment="Center"
+                                        FontSize="16"
+                                        Style="{ThemeResource BodyTextBlockStyle}"
+                                        Text="YouTube Search Algorithm" />
+                                    <TextBlock
+                                        Margin="12,17,0,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="12"
+                                        Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                        Style="{ThemeResource BodyTextBlockStyle}"
+                                        Text="Query to get video on YouTube to download (Replacements: {title}, {artist})" />
+                                    <TextBox
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Text="{x:Bind Helpers:Local.Config.Advanced.Spotify.YoutubeSearchAlgorithm, Mode=TwoWay}" />
+                                </Grid>
+
+                                <Grid
+                                    Height="65"
+                                    Background="{ThemeResource ExpanderHeaderBackground}"
+                                    CornerRadius="4">
+                                    <TextBlock
+                                        Margin="12,0,0,17"
+                                        VerticalAlignment="Center"
+                                        FontSize="16"
+                                        Style="{ThemeResource BodyTextBlockStyle}"
+                                        Text="Search Market" />
+                                    <TextBlock
+                                        Margin="12,17,0,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="12"
+                                        Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                        Style="{ThemeResource BodyTextBlockStyle}"
+                                        Text="Region code in which Spotify searches (wikipedia.org/wiki/ISO_3166-1_alpha-2)" />
+                                    <TextBox
+                                        Grid.Column="1"
+                                        Width="100"
+                                        Margin="0,0,12,0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        CharacterCasing="Upper"
+                                        MaxLength="2"
+                                        Text="{x:Bind Helpers:Local.Config.Advanced.Spotify.SearchMarketCode, Mode=TwoWay}" />
+                                </Grid>
+
+                                <Grid
+                                    Height="65"
+                                    Background="{ThemeResource ExpanderHeaderBackground}"
+                                    CornerRadius="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="330" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="12" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Margin="12,0,0,17"
+                                        VerticalAlignment="Center"
+                                        FontSize="16"
+                                        Style="{ThemeResource BodyTextBlockStyle}"
+                                        Text="Client ID" />
+                                    <TextBlock
+                                        Margin="12,17,0,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="12"
+                                        Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                        Style="{ThemeResource BodyTextBlockStyle}"
+                                        Text="Spotify developer application client ID" />
+                                    <TextBox
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Text="{x:Bind Helpers:Local.Config.Advanced.Spotify.Id, Mode=TwoWay}" />
+                                </Grid>
+
+                                <Grid
+                                    Height="65"
+                                    Background="{ThemeResource ExpanderHeaderBackground}"
+                                    CornerRadius="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="330" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="12" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Margin="12,0,0,17"
+                                        VerticalAlignment="Center"
+                                        FontSize="16"
+                                        Style="{ThemeResource BodyTextBlockStyle}"
+                                        Text="Client Secret" />
+                                    <TextBlock
+                                        Margin="12,17,0,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="12"
+                                        Foreground="{StaticResource ComboBoxPressedHighlightThemeBrush}"
+                                        Style="{ThemeResource BodyTextBlockStyle}"
+                                        Text="Spotify developer application client secret" />
+                                    <TextBox
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Text="{x:Bind Helpers:Local.Config.Advanced.Spotify.Secret, Mode=TwoWay}" />
+                                </Grid>
+
+                            </StackPanel>
+
+                        </Expander>
+
+                    </StackPanel>
+
+                </Expander>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -27,7 +27,7 @@ public class Spotify
 {
     public static async void Initialize()
     {
-        var Token = (await new OAuthClient().RequestToken(new ClientCredentialsRequest(Local.Config.Advanced.SpotifyAuth.Id, Local.Config.Advanced.SpotifyAuth.Secret))).AccessToken;
+        var Token = (await new OAuthClient().RequestToken(new ClientCredentialsRequest(Local.Config.Advanced.Spotify.Id, Local.Config.Advanced.Spotify.Secret))).AccessToken;
         Client = new(Token);
     }
 
@@ -71,13 +71,13 @@ public class Spotify
                 return (await Client.PaginateAll(Playlist.Tracks)).Where(Track => Track.Track.Type == ItemType.Track).Select(Item => 
                 {
                     var Track = (FullTrack)Item.Track;
-                    return new SpotifySong(Track.Name, string.Join(", ", Track.Artists.Select(Artist => Artist.Name)), Local.Config.Advanced.SavePlaylistAsAlbum ? Playlist.Name : Track.Album.Name, TimeSpan.FromMilliseconds(Track.DurationMs), GetDate(Track.Album.ReleaseDate), Track.Album.Images.Count > 0 ? Track.Album.Images[0].Url : null);
+                    return new SpotifySong(Track.Name, string.Join(", ", Track.Artists.Select(Artist => Artist.Name)), Local.Config.Advanced.Spotify.SavePlaylistAsAlbum ? Playlist.Name : Track.Album.Name, TimeSpan.FromMilliseconds(Track.DurationMs), GetDate(Track.Album.ReleaseDate), Track.Album.Images.Count > 0 ? Track.Album.Images[0].Url : null);
                 });
             case SpotifySearchType.Album:
                 var Album = await Client!.Albums.Get(GetIdByUrl(Query));
                 return (await Client.PaginateAll(Album.Tracks)).Select(Track => new SpotifySong(Track.Name, string.Join(", ", Track.Artists.Select(Artist => Artist.Name)), Album.Name, TimeSpan.FromMilliseconds(Track.DurationMs), GetDate(Album.ReleaseDate), Album.Images.Count > 0 ? Album.Images[0].Url : null));
             default:
-                var SearchResult = (await Client!.Search.Item(new(SearchRequest.Types.Track, Query) { Market = Local.Config.Advanced.SearchMarketCode })).Tracks.Items;
+                var SearchResult = (await Client!.Search.Item(new(SearchRequest.Types.Track, Query) { Market = Local.Config.Advanced.Spotify.SearchMarketCode })).Tracks.Items;
                 if (SearchResult is null || SearchResult.Count < 1)
                     return new List<SpotifySong>();
                 return SearchResult.Select(Track => new SpotifySong(Track.Name, string.Join(", ", Track.Artists.Select(Artist => Artist.Name)), Track.Album.Name, TimeSpan.FromMilliseconds(Track.DurationMs), GetDate(Track.Album.ReleaseDate), Track.Album.Images.Count > 0 ? Track.Album.Images[0].Url : null));
@@ -86,7 +86,7 @@ public class Spotify
 
     public static async Task<DownloadEntry> Convert(SpotifySong Song, bool Lyrics, bool Artwork, CancellationToken CancellationToken = default)
     {
-        string Query = Local.Config.Advanced.YoutubeSearchAlgorithm.Replace("{title}", Song.Title).Replace("{artist}", Song.Artist).Replace("{album}", Song.Album);
+        string Query = Local.Config.Advanced.Spotify.YoutubeSearchAlgorithm.Replace("{title}", Song.Title).Replace("{artist}", Song.Artist).Replace("{album}", Song.Album);
         var Video = (await Youtube.Client.Search.GetVideosAsync(Query, CancellationToken).CollectAsync(1)).First();
 
         return new(new(

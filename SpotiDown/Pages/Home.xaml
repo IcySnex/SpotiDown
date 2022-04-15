@@ -46,7 +46,10 @@
                         HorizontalAlignment="Center"
                         Orientation="Horizontal"
                         Spacing="5">
-                        <Button Content="URL" ToolTipService.ToolTip="Search by URL" />
+                        <Button
+                            Click="Search_Click"
+                            Content="Auto"
+                            ToolTipService.ToolTip="Automatically detect platform and search" />
                         <Button
                             Click="SpotifySearch_Click"
                             Content="Spotify"
@@ -55,7 +58,6 @@
                             Click="YoutubeSearch_Click"
                             Content="YouTube"
                             ToolTipService.ToolTip="Search on YouTube" />
-                        <Button Content="SoundCloud" ToolTipService.ToolTip="Search on SoundCloud" />
                     </StackPanel>
                 </StackPanel>
             </Grid>

@@ -71,8 +71,6 @@ public sealed partial class Downloads : Page
             Filtered = Filtered.Where(Entry => Entry.Song.Type != Enums.SongType.Spotify);
         if (!Helpers.Text.GetBool(ShowYoutube.IsChecked))
             Filtered = Filtered.Where(Entry => Entry.Song.Type != Enums.SongType.YouTube);
-        if (!Helpers.Text.GetBool(ShowSoundcloud.IsChecked))
-            Filtered = Filtered.Where(Entry => Entry.Song.Type != Enums.SongType.SoundCloud);
 
         if (Performance && Container.Items.SequenceEqual(Filtered))
             return;

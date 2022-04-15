@@ -32,6 +32,7 @@
 	  <None Remove="Pages\FFMPEG.xaml" />
 	  <None Remove="Pages\Home.xaml" />
 	  <None Remove="Pages\Library.xaml" />
+	  <None Remove="Pages\Settings.xaml" />
 	  <None Remove="Pages\Spotify.xaml" />
 	  <None Remove="Pages\YouTube.xaml" />
 	</ItemGroup>
@@ -80,6 +81,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </Page>
 	  <Page Update="Controls\SpotifyEntry.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	  </Page>
+	  <Page Update="Pages\Settings.xaml">
 	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 	  </Page>
 	  <Page Update="Pages\FFMPEG.xaml">

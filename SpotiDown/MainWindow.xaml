@@ -16,6 +16,7 @@
             x:FieldModifier="public"
             BackRequested="Navigation_BackRequested"
             IsBackEnabled="{Binding ElementName=NavigationFrame, Path=CanGoBack, Mode=TwoWay}"
+            IsSettingsVisible="False"
             OpenPaneLength="200"
             SelectionChanged="Navigation_SelectionChanged">
             <NavigationView.MenuItems>
@@ -38,11 +39,6 @@
                     Icon="Video"
                     Tag="SpotiDown.Pages.Youtube"
                     ToolTipService.ToolTip="Search on YouTube" />
-                <NavigationViewItem
-                    Content="SoundCloud"
-                    Icon="MusicInfo"
-                    Tag="SpotiDown.Pages.SoundCloud"
-                    ToolTipService.ToolTip="Search on SoundCloud" />
 
                 <NavigationViewItemHeader Content="Local" />
 
@@ -61,6 +57,14 @@
                     Icon="Admin"
                     Tag="SpotiDown.Pages.FFMPEG"
                     ToolTipService.ToolTip="(DEBUG) Input FFMPEG commands" />
+
+                <NavigationViewItemHeader Content="SpotiDown" />
+
+                <NavigationViewItem
+                    Content="Settings"
+                    Icon="Setting"
+                    Tag="SpotiDown.Pages.Settings"
+                    ToolTipService.ToolTip="Change all default SpotiDown settings" />
 
             </NavigationView.MenuItems>
 
