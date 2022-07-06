@@ -13,12 +13,19 @@
 		<WindowsPackageType>None</WindowsPackageType>
 		<ApplicationIcon>ico.ico</ApplicationIcon>
 		<Nullable>enable</Nullable>
+		<Description>SpotiDown is an app that is designed to download music from Spotify &amp; YouTube directly to the local drive..</Description>
+		<Copyright>IcySnex 2022</Copyright>
+		<PackageProjectUrl>https://github.com/IcySnex/SpotiDown</PackageProjectUrl>
+		<PackageIcon>icon.png</PackageIcon>
+		<RepositoryUrl>https://github.com/IcySnex/SpotiDown</RepositoryUrl>
+		<AssemblyVersion>2.0.0.0</AssemblyVersion>
+		<FileVersion>2.0.0.0</FileVersion>
+		<Version>2.0.0</Version>
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="Assets\discord.png" />
 	  <None Remove="Assets\Error.png" />
 	  <None Remove="Assets\github.png" />
-	  <None Remove="Assets\icon.png" />
 	  <None Remove="Assets\NoImage.png" />
 	  <None Remove="Assets\share.png" />
 	  <None Remove="Assets\youtube.png" />
@@ -45,16 +52,16 @@
 
 	<ItemGroup>
 		<PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
-		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.1" />
-		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.197" />
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.0-preview3" />
+		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="PInvoke.User32" Version="0.7.104" />
 		<PackageReference Include="SpotifyAPI.Web" Version="6.2.2" />
 		<PackageReference Include="System.Drawing.Common" Version="6.0.0" />
 		<PackageReference Include="TagLibSharp" Version="2.2.0" />
 		<PackageReference Include="WinCopies.WindowsAPICodePack.Shell" Version="2.10.2" />
-		<PackageReference Include="YoutubeExplode" Version="6.1.0" />
-		<PackageReference Include="YoutubeExplode.Converter" Version="6.1.0" />
+		<PackageReference Include="YoutubeExplode" Version="6.1.1" />
+		<PackageReference Include="YoutubeExplode.Converter" Version="6.1.1" />
 		<Manifest Include="$(ApplicationManifest)" />
 	</ItemGroup>
 
@@ -63,6 +70,12 @@
        package has not yet been restored -->
 	<ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnablePreviewMsixTooling)'=='true'">
 		<ProjectCapability Include="Msix" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Update="Assets\icon.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	</ItemGroup>
 	<ItemGroup>
 	  <Page Update="Controls\Library\LibraryContainer.xaml">
