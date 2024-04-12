@@ -1,3 +1,9 @@
+### Info: This repository is archived.
+This project was rewritten & rebranded as [IcySnex/Musify](https://github.com/IcySnex/Musify). All development & support will go to the new project.
+This code was written by me when I just started learning C#, thus it is not very readable nor efficient. I would suggest not using this any longer.
+
+---
+
 # SpotiDown - A moderrn music downloader
 ![Previw](https://github.com/IcySnex/SpotiDown/raw/main/other/preview.png)
 SpotiDown is an app that is designed to download music from Spotify & YouTube directly to the local drive.
